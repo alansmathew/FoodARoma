@@ -64,7 +64,7 @@
                         <viewLayoutGuide key="safeArea" id="j7O-au-3BD"/>
                         <color key="backgroundColor" red="0.94509803920000002" green="0.85490196080000003" blue="0.69411764710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Build Own" id="Pol-4z-PDp"/>
+                    <tabBarItem key="tabBarItem" title="Build Own" image="BuildOwn" id="Pol-4z-PDp"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HBE-1l-VCQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -138,7 +138,7 @@
                         <viewLayoutGuide key="safeArea" id="NC2-BN-4fE"/>
                         <color key="backgroundColor" red="0.94509803920000002" green="0.85490196080000003" blue="0.69411764710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Menu" id="Cmf-ct-FJS"/>
+                    <tabBarItem key="tabBarItem" title="Menu" image="ellipsis" catalog="system" id="Cmf-ct-FJS"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QeH-Rc-fBc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -154,7 +154,7 @@
                         <viewLayoutGuide key="safeArea" id="kau-7S-vhd"/>
                         <color key="backgroundColor" red="0.94509803920000002" green="0.85490196080000003" blue="0.69411764710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Order" id="z4s-xR-DU8"/>
+                    <tabBarItem key="tabBarItem" title="Order" image="order" id="z4s-xR-DU8"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dsz-cG-tjQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -162,8 +162,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BuildOwn" width="26" height="24.5"/>
         <image name="LaunchIcon" width="270" height="270"/>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="house.fill" catalog="system" width="128" height="106"/>
+        <image name="order" width="27" height="27"/>
     </resources>
 </document>
