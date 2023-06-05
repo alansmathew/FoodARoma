@@ -101,10 +101,10 @@
 			children = (
 				991C28D02A2D2DD900201DE7 /* AppDelegate.swift */,
 				991C28D22A2D2DD900201DE7 /* SceneDelegate.swift */,
-				991C28D42A2D2DD900201DE7 /* ViewController.swift */,
-				991C28D62A2D2DD900201DE7 /* Main.storyboard */,
+				991C29022A2D77E900201DE7 /* Model */,
+				991C29012A2D77D200201DE7 /* Controller */,
+				991C29002A2D77BA00201DE7 /* View */,
 				991C28D92A2D2DDF00201DE7 /* Assets.xcassets */,
-				991C28DB2A2D2DDF00201DE7 /* LaunchScreen.storyboard */,
 				991C28DE2A2D2DDF00201DE7 /* Info.plist */,
 			);
 			path = FoodARoma;
@@ -125,6 +125,30 @@
 				991C28F32A2D2DE000201DE7 /* FoodARomaUITestsLaunchTests.swift */,
 			);
 			path = FoodARomaUITests;
+			sourceTree = "<group>";
+		};
+		991C29002A2D77BA00201DE7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				991C28D62A2D2DD900201DE7 /* Main.storyboard */,
+				991C28DB2A2D2DDF00201DE7 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		991C29012A2D77D200201DE7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				991C28D42A2D2DD900201DE7 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		991C29022A2D77E900201DE7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
