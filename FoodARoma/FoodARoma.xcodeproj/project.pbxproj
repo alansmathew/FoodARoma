@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		991C28D12A2D2DD900201DE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C28D02A2D2DD900201DE7 /* AppDelegate.swift */; };
 		991C28D32A2D2DD900201DE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C28D22A2D2DD900201DE7 /* SceneDelegate.swift */; };
-		991C28D52A2D2DD900201DE7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C28D42A2D2DD900201DE7 /* ViewController.swift */; };
+		991C28D52A2D2DD900201DE7 /* InitalAuthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C28D42A2D2DD900201DE7 /* InitalAuthScreen.swift */; };
 		991C28D82A2D2DD900201DE7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 991C28D62A2D2DD900201DE7 /* Main.storyboard */; };
 		991C28DA2A2D2DDF00201DE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 991C28D92A2D2DDF00201DE7 /* Assets.xcassets */; };
 		991C28DD2A2D2DDF00201DE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 991C28DB2A2D2DDF00201DE7 /* LaunchScreen.storyboard */; };
 		991C28E82A2D2DE000201DE7 /* FoodARomaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C28E72A2D2DE000201DE7 /* FoodARomaTests.swift */; };
 		991C28F22A2D2DE000201DE7 /* FoodARomaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C28F12A2D2DE000201DE7 /* FoodARomaUITests.swift */; };
 		991C28F42A2D2DE000201DE7 /* FoodARomaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C28F32A2D2DE000201DE7 /* FoodARomaUITestsLaunchTests.swift */; };
+		991C29042A2D7B6C00201DE7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C29032A2D7B6C00201DE7 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +40,7 @@
 		991C28CD2A2D2DD900201DE7 /* FoodARoma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodARoma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		991C28D02A2D2DD900201DE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		991C28D22A2D2DD900201DE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		991C28D42A2D2DD900201DE7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		991C28D42A2D2DD900201DE7 /* InitalAuthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitalAuthScreen.swift; sourceTree = "<group>"; };
 		991C28D72A2D2DD900201DE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		991C28D92A2D2DDF00201DE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		991C28DC2A2D2DDF00201DE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +50,7 @@
 		991C28ED2A2D2DE000201DE7 /* FoodARomaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoodARomaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		991C28F12A2D2DE000201DE7 /* FoodARomaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodARomaUITests.swift; sourceTree = "<group>"; };
 		991C28F32A2D2DE000201DE7 /* FoodARomaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodARomaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		991C29032A2D7B6C00201DE7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,7 +141,8 @@
 		991C29012A2D77D200201DE7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				991C28D42A2D2DD900201DE7 /* ViewController.swift */,
+				991C28D42A2D2DD900201DE7 /* InitalAuthScreen.swift */,
+				991C29032A2D7B6C00201DE7 /* HomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -282,9 +285,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				991C28D52A2D2DD900201DE7 /* ViewController.swift in Sources */,
+				991C28D52A2D2DD900201DE7 /* InitalAuthScreen.swift in Sources */,
 				991C28D12A2D2DD900201DE7 /* AppDelegate.swift in Sources */,
 				991C28D32A2D2DD900201DE7 /* SceneDelegate.swift in Sources */,
+				991C29042A2D7B6C00201DE7 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
