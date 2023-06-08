@@ -15,9 +15,7 @@ class InitalAuthScreen: UIViewController {
         
     }
     override func viewDidAppear(_ animated: Bool) {
-        print(1)
         self.performSegue(withIdentifier: "InitialHomeScreenSegue", sender: nil)
-        print(2)
     }
 }
 
