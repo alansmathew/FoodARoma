@@ -342,7 +342,7 @@
         <!--Menu-->
         <scene sceneID="JhW-Wh-xLZ">
             <objects>
-                <viewController id="iyj-PY-HBW" sceneMemberID="viewController">
+                <viewController id="iyj-PY-HBW" customClass="MoreViewController" customModule="FoodARoma" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qD5-5f-PVm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

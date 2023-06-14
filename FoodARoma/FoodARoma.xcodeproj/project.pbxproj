@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		991736B62A379FD800824B14 /* LoginScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 991736B52A379FD800824B14 /* LoginScreen.storyboard */; };
+		991736B82A37CFF700824B14 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991736B72A37CFF700824B14 /* LoginViewController.swift */; };
+		991736BA2A37D00B00824B14 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991736B92A37D00B00824B14 /* SignupViewController.swift */; };
+		991736BD2A37D16700824B14 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991736BC2A37D16700824B14 /* MoreViewController.swift */; };
 		991C28D12A2D2DD900201DE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C28D02A2D2DD900201DE7 /* AppDelegate.swift */; };
 		991C28D32A2D2DD900201DE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C28D22A2D2DD900201DE7 /* SceneDelegate.swift */; };
 		991C28D52A2D2DD900201DE7 /* InitalAuthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C28D42A2D2DD900201DE7 /* InitalAuthScreen.swift */; };
@@ -41,6 +45,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		991736B52A379FD800824B14 /* LoginScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginScreen.storyboard; sourceTree = "<group>"; };
+		991736B72A37CFF700824B14 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		991736B92A37D00B00824B14 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		991736BC2A37D16700824B14 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		991C28CD2A2D2DD900201DE7 /* FoodARoma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodARoma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		991C28D02A2D2DD900201DE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		991C28D22A2D2DD900201DE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +94,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		991736BB2A37D0A600824B14 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				991736B72A37CFF700824B14 /* LoginViewController.swift */,
+				991736B92A37D00B00824B14 /* SignupViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		991736BE2A37D17300824B14 /* MenuView */ = {
+			isa = PBXGroup;
+			children = (
+				991736BC2A37D16700824B14 /* MoreViewController.swift */,
+			);
+			path = MenuView;
+			sourceTree = "<group>";
+		};
 		991C28C42A2D2DD900201DE7 = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +168,7 @@
 				991C28D62A2D2DD900201DE7 /* Main.storyboard */,
 				99BE23132A313D000014DC89 /* HomeVew */,
 				991C28DB2A2D2DDF00201DE7 /* LaunchScreen.storyboard */,
+				991736B52A379FD800824B14 /* LoginScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -150,7 +176,9 @@
 		991C29012A2D77D200201DE7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				991736BB2A37D0A600824B14 /* Login */,
 				992781DD2A311CA500F10E5D /* HomeVIew */,
+				991736BE2A37D17300824B14 /* MenuView */,
 				991C28D42A2D2DD900201DE7 /* InitalAuthScreen.swift */,
 			);
 			path = Controller;
@@ -290,6 +318,7 @@
 				991C28DD2A2D2DDF00201DE7 /* LaunchScreen.storyboard in Resources */,
 				991C28DA2A2D2DDF00201DE7 /* Assets.xcassets in Resources */,
 				99A623B42A3239D6003BF199 /* BeverageMenuCollectionViewCell.xib in Resources */,
+				991736B62A379FD800824B14 /* LoginScreen.storyboard in Resources */,
 				991C28D82A2D2DD900201DE7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -315,7 +344,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				991736BD2A37D16700824B14 /* MoreViewController.swift in Sources */,
+				991736B82A37CFF700824B14 /* LoginViewController.swift in Sources */,
 				991C28D52A2D2DD900201DE7 /* InitalAuthScreen.swift in Sources */,
+				991736BA2A37D00B00824B14 /* SignupViewController.swift in Sources */,
 				991C28D12A2D2DD900201DE7 /* AppDelegate.swift in Sources */,
 				99A623B32A3239D6003BF199 /* BeverageMenuCollectionViewCell.swift in Sources */,
 				991C28D32A2D2DD900201DE7 /* SceneDelegate.swift in Sources */,
