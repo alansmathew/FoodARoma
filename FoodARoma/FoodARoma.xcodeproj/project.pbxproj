@@ -23,6 +23,14 @@
 		991C29042A2D7B6C00201DE7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991C29032A2D7B6C00201DE7 /* HomeViewController.swift */; };
 		992781DB2A311C8A00F10E5D /* HomeMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992781D92A311C8A00F10E5D /* HomeMenuCollectionViewCell.swift */; };
 		992781DC2A311C8A00F10E5D /* HomeMenuCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 992781DA2A311C8A00F10E5D /* HomeMenuCollectionViewCell.xib */; };
+		992ECBD72A3B662700B8745A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 992ECBD62A3B662700B8745A /* Alamofire */; };
+		992ECBD92A3B689300B8745A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992ECBD82A3B689300B8745A /* Constants.swift */; };
+		992ECBDC2A3B6E6300B8745A /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992ECBDB2A3B6E6200B8745A /* LoginModel.swift */; };
+		992ECBDE2A3B77B600B8745A /* ResturentMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 992ECBDD2A3B77B600B8745A /* ResturentMain.storyboard */; };
+		992ECBE52A3B7FBD00B8745A /* ResturentOrderscell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992ECBE32A3B7FBD00B8745A /* ResturentOrderscell.swift */; };
+		992ECBE62A3B7FBD00B8745A /* ResturentOrderscell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 992ECBE42A3B7FBD00B8745A /* ResturentOrderscell.xib */; };
+		992ECBE82A3B8DCE00B8745A /* ResturentNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992ECBE72A3B8DCE00B8745A /* ResturentNavigationView.swift */; };
+		992ECBEA2A3B91BC00B8745A /* ResturentOrdersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992ECBE92A3B91BC00B8745A /* ResturentOrdersController.swift */; };
 		99A623B32A3239D6003BF199 /* BeverageMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A623B12A3239D6003BF199 /* BeverageMenuCollectionViewCell.swift */; };
 		99A623B42A3239D6003BF199 /* BeverageMenuCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99A623B22A3239D6003BF199 /* BeverageMenuCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -65,6 +73,13 @@
 		991C29032A2D7B6C00201DE7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		992781D92A311C8A00F10E5D /* HomeMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		992781DA2A311C8A00F10E5D /* HomeMenuCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeMenuCollectionViewCell.xib; sourceTree = "<group>"; };
+		992ECBD82A3B689300B8745A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		992ECBDB2A3B6E6200B8745A /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		992ECBDD2A3B77B600B8745A /* ResturentMain.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ResturentMain.storyboard; sourceTree = "<group>"; };
+		992ECBE32A3B7FBD00B8745A /* ResturentOrderscell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResturentOrderscell.swift; sourceTree = "<group>"; };
+		992ECBE42A3B7FBD00B8745A /* ResturentOrderscell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResturentOrderscell.xib; sourceTree = "<group>"; };
+		992ECBE72A3B8DCE00B8745A /* ResturentNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResturentNavigationView.swift; sourceTree = "<group>"; };
+		992ECBE92A3B91BC00B8745A /* ResturentOrdersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResturentOrdersController.swift; sourceTree = "<group>"; };
 		99A623B12A3239D6003BF199 /* BeverageMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeverageMenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		99A623B22A3239D6003BF199 /* BeverageMenuCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BeverageMenuCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				992ECBD72A3B662700B8745A /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +155,7 @@
 				991C29022A2D77E900201DE7 /* Model */,
 				991C29012A2D77D200201DE7 /* Controller */,
 				991C29002A2D77BA00201DE7 /* View */,
+				992ECBDA2A3B689B00B8745A /* Constants */,
 				991C28D92A2D2DDF00201DE7 /* Assets.xcassets */,
 				991C28DE2A2D2DDF00201DE7 /* Info.plist */,
 			);
@@ -166,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				991C28D62A2D2DD900201DE7 /* Main.storyboard */,
+				992ECBDF2A3B77C100B8745A /* Resturent */,
 				99BE23132A313D000014DC89 /* HomeVew */,
 				991C28DB2A2D2DDF00201DE7 /* LaunchScreen.storyboard */,
 				991736B52A379FD800824B14 /* LoginScreen.storyboard */,
@@ -180,6 +198,7 @@
 				992781DD2A311CA500F10E5D /* HomeVIew */,
 				991736BE2A37D17300824B14 /* MenuView */,
 				991C28D42A2D2DD900201DE7 /* InitalAuthScreen.swift */,
+				992ECBE02A3B7F5900B8745A /* Resturent */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -187,6 +206,7 @@
 		991C29022A2D77E900201DE7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				992ECBDB2A3B6E6200B8745A /* LoginModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -199,6 +219,49 @@
 				99A623B12A3239D6003BF199 /* BeverageMenuCollectionViewCell.swift */,
 			);
 			path = HomeVIew;
+			sourceTree = "<group>";
+		};
+		992ECBDA2A3B689B00B8745A /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				992ECBD82A3B689300B8745A /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		992ECBDF2A3B77C100B8745A /* Resturent */ = {
+			isa = PBXGroup;
+			children = (
+				992ECBDD2A3B77B600B8745A /* ResturentMain.storyboard */,
+				992ECBE22A3B7F8E00B8745A /* ResturentOrders */,
+			);
+			path = Resturent;
+			sourceTree = "<group>";
+		};
+		992ECBE02A3B7F5900B8745A /* Resturent */ = {
+			isa = PBXGroup;
+			children = (
+				992ECBE12A3B7F6600B8745A /* ResturentOrders */,
+				992ECBE72A3B8DCE00B8745A /* ResturentNavigationView.swift */,
+			);
+			path = Resturent;
+			sourceTree = "<group>";
+		};
+		992ECBE12A3B7F6600B8745A /* ResturentOrders */ = {
+			isa = PBXGroup;
+			children = (
+				992ECBE32A3B7FBD00B8745A /* ResturentOrderscell.swift */,
+				992ECBE92A3B91BC00B8745A /* ResturentOrdersController.swift */,
+			);
+			path = ResturentOrders;
+			sourceTree = "<group>";
+		};
+		992ECBE22A3B7F8E00B8745A /* ResturentOrders */ = {
+			isa = PBXGroup;
+			children = (
+				992ECBE42A3B7FBD00B8745A /* ResturentOrderscell.xib */,
+			);
+			path = ResturentOrders;
 			sourceTree = "<group>";
 		};
 		99BE23132A313D000014DC89 /* HomeVew */ = {
@@ -226,6 +289,9 @@
 			dependencies = (
 			);
 			name = FoodARoma;
+			packageProductDependencies = (
+				992ECBD62A3B662700B8745A /* Alamofire */,
+			);
 			productName = FoodARoma;
 			productReference = 991C28CD2A2D2DD900201DE7 /* FoodARoma.app */;
 			productType = "com.apple.product-type.application";
@@ -298,6 +364,9 @@
 				Base,
 			);
 			mainGroup = 991C28C42A2D2DD900201DE7;
+			packageReferences = (
+				992ECBD52A3B662700B8745A /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 991C28CE2A2D2DD900201DE7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -315,7 +384,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				992781DC2A311C8A00F10E5D /* HomeMenuCollectionViewCell.xib in Resources */,
+				992ECBDE2A3B77B600B8745A /* ResturentMain.storyboard in Resources */,
 				991C28DD2A2D2DDF00201DE7 /* LaunchScreen.storyboard in Resources */,
+				992ECBE62A3B7FBD00B8745A /* ResturentOrderscell.xib in Resources */,
 				991C28DA2A2D2DDF00201DE7 /* Assets.xcassets in Resources */,
 				99A623B42A3239D6003BF199 /* BeverageMenuCollectionViewCell.xib in Resources */,
 				991736B62A379FD800824B14 /* LoginScreen.storyboard in Resources */,
@@ -347,12 +418,17 @@
 				991736BD2A37D16700824B14 /* MoreViewController.swift in Sources */,
 				991736B82A37CFF700824B14 /* LoginViewController.swift in Sources */,
 				991C28D52A2D2DD900201DE7 /* InitalAuthScreen.swift in Sources */,
+				992ECBDC2A3B6E6300B8745A /* LoginModel.swift in Sources */,
 				991736BA2A37D00B00824B14 /* SignupViewController.swift in Sources */,
+				992ECBEA2A3B91BC00B8745A /* ResturentOrdersController.swift in Sources */,
 				991C28D12A2D2DD900201DE7 /* AppDelegate.swift in Sources */,
+				992ECBD92A3B689300B8745A /* Constants.swift in Sources */,
 				99A623B32A3239D6003BF199 /* BeverageMenuCollectionViewCell.swift in Sources */,
 				991C28D32A2D2DD900201DE7 /* SceneDelegate.swift in Sources */,
 				992781DB2A311C8A00F10E5D /* HomeMenuCollectionViewCell.swift in Sources */,
 				991C29042A2D7B6C00201DE7 /* HomeViewController.swift in Sources */,
+				992ECBE52A3B7FBD00B8745A /* ResturentOrderscell.swift in Sources */,
+				992ECBE82A3B8DCE00B8745A /* ResturentNavigationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -694,6 +770,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		992ECBD52A3B662700B8745A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = exactVersion;
+				version = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		992ECBD62A3B662700B8745A /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 992ECBD52A3B662700B8745A /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 991C28C52A2D2DD900201DE7 /* Project object */;
 }

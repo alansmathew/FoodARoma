@@ -375,11 +375,11 @@
     <resources>
         <image name="BuildOwn" width="26" height="24.5"/>
         <image name="LaunchIcon" width="270" height="270"/>
-        <image name="ellipsis" catalog="system" width="128" height="37"/>
-        <image name="house" catalog="system" width="128" height="106"/>
-        <image name="house.fill" catalog="system" width="128" height="106"/>
-        <image name="location.fill" catalog="system" width="128" height="121"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="ellipsis" catalog="system" width="32" height="32"/>
+        <image name="house" catalog="system" width="32" height="32"/>
+        <image name="house.fill" catalog="system" width="32" height="32"/>
+        <image name="location.fill" catalog="system" width="32" height="32"/>
+        <image name="magnifyingglass" catalog="system" width="32" height="32"/>
         <image name="order" width="27" height="27"/>
     </resources>
 </document>

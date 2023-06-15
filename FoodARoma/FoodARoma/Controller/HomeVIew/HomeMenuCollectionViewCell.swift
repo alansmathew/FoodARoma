@@ -14,7 +14,6 @@ class HomeMenuCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundCustomView.layer.cornerRadius = 29
-//        amoundView.layer.cornerRadius = 20
         // Initialization code
         
         

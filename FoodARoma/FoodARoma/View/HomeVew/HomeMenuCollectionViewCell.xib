@@ -20,7 +20,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eGN-8A-3Oz">
                         <rect key="frame" x="0.0" y="0.0" width="335" height="163"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="x0y-Ek-VSK">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pizza2" translatesAutoresizingMaskIntoConstraints="NO" id="x0y-Ek-VSK">
                                 <rect key="frame" x="10" y="25.5" width="112" height="112"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="112" id="PDU-Xe-dGg"/>
@@ -160,8 +160,9 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="clock" catalog="system" width="128" height="121"/>
-        <image name="star.fill" catalog="system" width="128" height="116"/>
+        <image name="clock" catalog="system" width="32" height="32"/>
+        <image name="pizza2" width="256" height="256"/>
+        <image name="star.fill" catalog="system" width="32" height="32"/>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

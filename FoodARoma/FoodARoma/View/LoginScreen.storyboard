@@ -66,9 +66,9 @@
                                                                 <rect key="frame" x="0.0" y="33.5" width="374" height="54"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="**********" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R63-fn-oTr">
-                                                                        <rect key="frame" x="10" y="16" width="364" height="22.5"/>
+                                                                        <rect key="frame" x="10" y="16.5" width="364" height="21"/>
                                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                                     </textField>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="0.50604264814775068" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -284,6 +284,9 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Continue">
                                     <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="20"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="continueButtonPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="uyc-1V-EgV"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -302,7 +305,9 @@
                         <outlet property="GoogleView" destination="oa2-Wp-T9Z" id="pHb-wm-K7f"/>
                         <outlet property="appleView" destination="Rf4-CQ-tje" id="bzm-fO-BHX"/>
                         <outlet property="continueButton" destination="BxU-JX-yMz" id="qSI-z4-OyN"/>
+                        <outlet property="passwordText" destination="R63-fn-oTr" id="K8w-dw-XfY"/>
                         <outlet property="passwordView" destination="jnW-p7-OLK" id="UQs-q2-XJA"/>
+                        <outlet property="usernameText" destination="2pc-r8-djc" id="2Wy-iD-xUq"/>
                         <outlet property="usernameView" destination="Q7u-s4-46W" id="iFS-Lr-7pU"/>
                     </connections>
                 </viewController>
@@ -528,8 +533,8 @@
         <image name="apple" width="17" height="20"/>
         <image name="backarrow" width="22" height="21.5"/>
         <image name="line1" width="86.5" height="0.5"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
-        <image name="person.badge.plus" catalog="system" width="128" height="124"/>
+        <image name="magnifyingglass" catalog="system" width="32" height="32"/>
+        <image name="person.badge.plus" catalog="system" width="32" height="32"/>
         <namedColor name="Custom black">
             <color red="0.11400000005960464" green="0.11400000005960464" blue="0.11800000071525574" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

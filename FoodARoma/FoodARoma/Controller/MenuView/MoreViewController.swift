@@ -16,14 +16,13 @@ class MoreViewController: UIViewController {
     
 
     override func viewDidAppear(_ animated: Bool) {
-        if !UserDefaults.standard.bool(forKey: "UserID"){
+        if let userType = UserDefaults.standard.string(forKey: "USERTYPE"){
+            print("user found")
+        }
+        else{
             let storyboard = UIStoryboard(name: "LoginScreen", bundle: nil)
                 let viewC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                 present(viewC, animated: true)
-//                navigationController?.pushViewController(viewC, animated: true)
-        }
-        else{
-            print("user found")
         }
     }
 }
