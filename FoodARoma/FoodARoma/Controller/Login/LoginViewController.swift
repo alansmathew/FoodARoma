@@ -52,21 +52,28 @@ class LoginViewController: UIViewController {
                 let decoder = JSONDecoder()
                 do{
                     let jsonData = try decoder.decode(LoginModel.self, from: data)
-                    
-                    if let parsedData = jsonData.userType {
-                        if parsedData == "customer"{
-                            UserDefaults.standard.set("customer", forKey: "USERTYPE")
-                            UserDefaults.standard.set(jsonData.userID!, forKey: "USERID")
-                            self.dismiss(animated: true)
-                        }
-                        else if parsedData == "restaurant"{
-                            UserDefaults.standard.set("restaurant", forKey: "USERTYPE")
-                            UserDefaults.standard.set(jsonData.userID!, forKey: "USERID")
-                            let storyboard = UIStoryboard(name: "ResturentMain", bundle: nil)
-                            let viewC = storyboard.instantiateViewController(withIdentifier: "ResturentNavigationView") as! ResturentNavigationView
-                            UIApplication.shared.windows.first!.rootViewController = viewC
+                    if jsonData.Auth == "sucess" {
+                        if let parsedData = jsonData.userType {
+                            if parsedData == "customer"{
+                                UserDefaults.standard.set("customer", forKey: "USERTYPE")
+                                UserDefaults.standard.set(jsonData.userID!, forKey: "USERID")
+                                UserDefaults.standard.set(username, forKey: "USEREMAIL")
+                                self.dismiss(animated: true)
+                            }
+                            else if parsedData == "restaurant"{
+                                UserDefaults.standard.set("restaurant", forKey: "USERTYPE")
+                                UserDefaults.standard.set(jsonData.userID!, forKey: "USERID")
+                                UserDefaults.standard.set(username, forKey: "USEREMAIL")
+                                let storyboard = UIStoryboard(name: "ResturentMain", bundle: nil)
+                                let viewC = storyboard.instantiateViewController(withIdentifier: "ResturentNavigationView") as! ResturentNavigationView
+                                UIApplication.shared.windows.first!.rootViewController = viewC
+                            }
                         }
                     }
+                    else{
+                        self.showAlert(title: "Invalid Credentials", content: jsonData.message)
+                    }
+                    
                     let usertype = UserDefaults.standard.string(forKey: "USERTYPE")
                     let userid = UserDefaults.standard.string(forKey: "USERID")
                     print(usertype)
@@ -77,8 +84,24 @@ class LoginViewController: UIViewController {
                 }
                 
             case .failure(let error):
+                self.showAlert(title: "network intrepsion", content: "Something went wrong! please try again after some time")
                 print(error)
             }
         }
+    }
+    
+    
+    
+    func showAlert(title : String, content : String) {
+        let alert = UIAlertController(title: title, message: content, preferredStyle: .alert)
+          
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in
+            self.dismiss(animated: true)
+        }))
+         
+        DispatchQueue.main.async {
+            self.present(alert, animated: false, completion: nil)
+        }
+          
     }
 }

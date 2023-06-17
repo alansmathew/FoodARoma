@@ -346,10 +346,34 @@
                     <view key="view" contentMode="scaleToFill" id="qD5-5f-PVm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No user" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4g-Ba-hRC">
+                                <rect key="frame" x="177.5" y="438" width="59.5" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xsh-CE-bjR">
+                                <rect key="frame" x="169" y="478" width="78" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Sign out"/>
+                                <connections>
+                                    <action selector="signoutCLick:" destination="iyj-PY-HBW" eventType="touchUpInside" id="9cO-ca-qYf"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="NC2-BN-4fE"/>
                         <color key="backgroundColor" red="0.94509803920000002" green="0.85490196080000003" blue="0.69411764710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="v4g-Ba-hRC" firstAttribute="centerY" secondItem="qD5-5f-PVm" secondAttribute="centerY" id="46W-vC-bGh"/>
+                            <constraint firstItem="v4g-Ba-hRC" firstAttribute="centerX" secondItem="qD5-5f-PVm" secondAttribute="centerX" id="QP8-z7-GW0"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Menu" image="ellipsis" catalog="system" id="Cmf-ct-FJS"/>
+                    <connections>
+                        <outlet property="userLabel" destination="v4g-Ba-hRC" id="IMu-dD-vUT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QeH-Rc-fBc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -375,11 +399,11 @@
     <resources>
         <image name="BuildOwn" width="26" height="24.5"/>
         <image name="LaunchIcon" width="270" height="270"/>
-        <image name="ellipsis" catalog="system" width="32" height="32"/>
-        <image name="house" catalog="system" width="32" height="32"/>
-        <image name="house.fill" catalog="system" width="32" height="32"/>
-        <image name="location.fill" catalog="system" width="32" height="32"/>
-        <image name="magnifyingglass" catalog="system" width="32" height="32"/>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
+        <image name="house" catalog="system" width="128" height="106"/>
+        <image name="house.fill" catalog="system" width="128" height="106"/>
+        <image name="location.fill" catalog="system" width="128" height="121"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="order" width="27" height="27"/>
     </resources>
 </document>

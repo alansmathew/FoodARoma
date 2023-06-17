@@ -9,6 +9,7 @@ import UIKit
 
 class MoreViewController: UIViewController {
 
+    @IBOutlet weak var userLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,5 +25,20 @@ class MoreViewController: UIViewController {
                 let viewC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                 present(viewC, animated: true)
         }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        let useremail = UserDefaults.standard.string(forKey: "USEREMAIL")
+        if let email = useremail{
+            userLabel.text = email
+        }
+        else{
+            userLabel.text = "No user"
+        }
+        
+    }
+    @IBAction func signoutCLick(_ sender: Any) {
+        UserDefaults.standard.removeObject(forKey: "USERTYPE")
+        UserDefaults.standard.removeObject(forKey: "USERID")
+        UserDefaults.standard.removeObject(forKey: "USEREMAIL")
     }
 }

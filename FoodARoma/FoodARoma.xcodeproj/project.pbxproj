@@ -184,7 +184,7 @@
 			children = (
 				991C28D62A2D2DD900201DE7 /* Main.storyboard */,
 				992ECBDF2A3B77C100B8745A /* Resturent */,
-				99BE23132A313D000014DC89 /* HomeVew */,
+				99F821442A3E2C34004CC154 /* Customer */,
 				991C28DB2A2D2DDF00201DE7 /* LaunchScreen.storyboard */,
 				991736B52A379FD800824B14 /* LoginScreen.storyboard */,
 			);
@@ -271,6 +271,14 @@
 				99A623B22A3239D6003BF199 /* BeverageMenuCollectionViewCell.xib */,
 			);
 			path = HomeVew;
+			sourceTree = "<group>";
+		};
+		99F821442A3E2C34004CC154 /* Customer */ = {
+			isa = PBXGroup;
+			children = (
+				99BE23132A313D000014DC89 /* HomeVew */,
+			);
+			path = Customer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
