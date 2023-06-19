@@ -353,9 +353,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xsh-CE-bjR">
-                                <rect key="frame" x="169" y="478" width="78" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xsh-CE-bjR">
+                                <rect key="frame" x="162" y="478" width="90" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="hpV-iD-lZx"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Sign out"/>
                                 <connections>
@@ -368,6 +370,8 @@
                         <constraints>
                             <constraint firstItem="v4g-Ba-hRC" firstAttribute="centerY" secondItem="qD5-5f-PVm" secondAttribute="centerY" id="46W-vC-bGh"/>
                             <constraint firstItem="v4g-Ba-hRC" firstAttribute="centerX" secondItem="qD5-5f-PVm" secondAttribute="centerX" id="QP8-z7-GW0"/>
+                            <constraint firstItem="xsh-CE-bjR" firstAttribute="top" secondItem="v4g-Ba-hRC" secondAttribute="bottom" constant="20" id="UA8-Dv-GKF"/>
+                            <constraint firstItem="xsh-CE-bjR" firstAttribute="centerX" secondItem="qD5-5f-PVm" secondAttribute="centerX" id="qaI-95-7Qz"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Menu" image="ellipsis" catalog="system" id="Cmf-ct-FJS"/>

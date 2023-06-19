@@ -21,6 +21,11 @@ class LoginViewController: UIViewController {
         setupUI()
 
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            super.touchesBegan(touches, with: event)
+            self.view.endEditing(true)
+        }
 
     func setupUI(){
         usernameView.layer.cornerRadius = 12
@@ -42,7 +47,8 @@ class LoginViewController: UIViewController {
         
         let params : [String : String] = [
               "Username": username,
-              "Password": psd
+              "Password": psd,
+              "Mode": "Login"
               ]
         
         AF.request((Constants().BASEURL + Constants.APIPaths().loginPath), method: .post, parameters:params, encoder: .json).responseData { response in
@@ -96,7 +102,6 @@ class LoginViewController: UIViewController {
         let alert = UIAlertController(title: title, message: content, preferredStyle: .alert)
           
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in
-            self.dismiss(animated: true)
         }))
          
         DispatchQueue.main.async {

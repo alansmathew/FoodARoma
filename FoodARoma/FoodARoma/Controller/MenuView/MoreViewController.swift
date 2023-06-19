@@ -37,6 +37,7 @@ class MoreViewController: UIViewController {
         
     }
     @IBAction func signoutCLick(_ sender: Any) {
+        userLabel.text = "No user"
         UserDefaults.standard.removeObject(forKey: "USERTYPE")
         UserDefaults.standard.removeObject(forKey: "USERID")
         UserDefaults.standard.removeObject(forKey: "USEREMAIL")

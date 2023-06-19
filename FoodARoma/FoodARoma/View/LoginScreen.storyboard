@@ -393,9 +393,9 @@
                                                                 <rect key="frame" x="0.0" y="33.5" width="374" height="54"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="**********" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MHH-xc-4fr">
-                                                                        <rect key="frame" x="10" y="16" width="364" height="22.5"/>
+                                                                        <rect key="frame" x="10" y="16.5" width="364" height="21"/>
                                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="name"/>
                                                                     </textField>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="0.50604264809999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -421,9 +421,9 @@
                                                                 <rect key="frame" x="0.0" y="33.5" width="374" height="54"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="**********" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eTp-Qa-gN0">
-                                                                        <rect key="frame" x="10" y="16" width="364" height="22.5"/>
+                                                                        <rect key="frame" x="10" y="16.5" width="364" height="21"/>
                                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                                                        <textInputTraits key="textInputTraits"/>
+                                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="name"/>
                                                                     </textField>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="0.50604264809999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -509,6 +509,9 @@
                                                 <buttonConfiguration key="configuration" style="filled" title="Sign up">
                                                     <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="20"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="signupButtonPress:" destination="3yi-Do-PHe" eventType="touchUpInside" id="BQz-Mh-Ul4"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -539,10 +542,13 @@
                     <connections>
                         <outlet property="backbutton" destination="Qjg-Q6-8y7" id="kjo-wW-Ovv"/>
                         <outlet property="confirmPassword" destination="7Ob-bS-hsE" id="WXp-hg-TDg"/>
+                        <outlet property="confirmPasswordTextField" destination="eTp-Qa-gN0" id="xSl-dY-43o"/>
                         <outlet property="continueButton" destination="OQO-9H-DXl" id="eea-jI-k83"/>
                         <outlet property="emailVIew" destination="sGL-pr-Cra" id="QQR-zN-HvA"/>
+                        <outlet property="passwordTextfield" destination="MHH-xc-4fr" id="zl9-Rm-fmm"/>
                         <outlet property="passwordView" destination="lSj-Bp-sPC" id="6hQ-AN-744"/>
                         <outlet property="testView" destination="03W-Ok-VgA" id="zHh-A5-J0W"/>
+                        <outlet property="usernameTextField" destination="WJf-d1-obu" id="8MN-O2-Uzb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FHH-CS-ug7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
