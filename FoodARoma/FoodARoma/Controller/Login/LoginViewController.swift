@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 import Alamofire
 
 class LoginViewController: UIViewController {
@@ -16,16 +17,18 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var usernameText: UITextField!
     @IBOutlet weak var passwordText: UITextField!
+    var loading : (NVActivityIndicatorView,UIView)?
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        self.hideKeyboardWhenTappedAround()
 
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-            super.touchesBegan(touches, with: event)
-            self.view.endEditing(true)
-        }
+    override func viewDidLayoutSubviews() {
+        loading = customAnimation()
+        loadingProtocol(with: loading! ,true)
+    }
 
     func setupUI(){
         usernameView.layer.cornerRadius = 12
@@ -50,6 +53,7 @@ class LoginViewController: UIViewController {
               "Password": psd,
               "Mode": "Login"
               ]
+
         
         AF.request((Constants().BASEURL + Constants.APIPaths().loginPath), method: .post, parameters:params, encoder: .json).responseData { response in
             switch response.result{
@@ -108,5 +112,17 @@ class LoginViewController: UIViewController {
             self.present(alert, animated: false, completion: nil)
         }
           
+    }
+}
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

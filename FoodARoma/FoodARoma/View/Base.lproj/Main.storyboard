@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WGM-Qd-Y0R">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WGM-Qd-Y0R">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -57,14 +58,28 @@
         <!--Build Own-->
         <scene sceneID="uQV-Mc-hb6">
             <objects>
-                <viewController id="xjZ-31-cid" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BuildOwnViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xjZ-31-cid" customClass="BuildOwnViewController" customModule="FoodARoma" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UWE-qb-XOj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <arView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcJ-1Q-jf1">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </arView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="j7O-au-3BD"/>
-                        <color key="backgroundColor" red="0.94509803920000002" green="0.85490196080000003" blue="0.69411764710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="hcJ-1Q-jf1" firstAttribute="leading" secondItem="j7O-au-3BD" secondAttribute="leading" id="MXe-mD-lCH"/>
+                            <constraint firstItem="j7O-au-3BD" firstAttribute="trailing" secondItem="hcJ-1Q-jf1" secondAttribute="trailing" id="SBW-d5-9nm"/>
+                            <constraint firstAttribute="bottom" secondItem="hcJ-1Q-jf1" secondAttribute="bottom" id="Uty-UK-YUS"/>
+                            <constraint firstItem="hcJ-1Q-jf1" firstAttribute="top" secondItem="UWE-qb-XOj" secondAttribute="top" id="rLr-ph-Dgb"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Build Own" image="BuildOwn" id="Pol-4z-PDp"/>
+                    <connections>
+                        <outlet property="arView" destination="hcJ-1Q-jf1" id="J8K-A1-yLV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HBE-1l-VCQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -75,7 +90,7 @@
             <objects>
                 <navigationController id="HXe-XV-aVW" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="J79-Nb-c9D">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -95,7 +110,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dkm-h5-HWZ">
-                                <rect key="frame" x="15" y="88" width="384" height="45"/>
+                                <rect key="frame" x="15" y="44" width="384" height="45"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1oL-My-5M3">
                                         <rect key="frame" x="58" y="0.0" width="324" height="43"/>
@@ -123,7 +138,7 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="UTr-x9-zy2">
-                                <rect key="frame" x="15" y="149" width="20" height="18.5"/>
+                                <rect key="frame" x="15" y="105" width="20" height="18.5"/>
                                 <color key="tintColor" red="0.24313725489999999" green="0.24313725489999999" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="P8E-JQ-Agl"/>
@@ -131,13 +146,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waterloo, ontario, CA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgP-Mk-gG1">
-                                <rect key="frame" x="45" y="148" width="144" height="17.5"/>
+                                <rect key="frame" x="45" y="104" width="144" height="17.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" red="0.24313725490196078" green="0.24313725490196078" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Sr-L4-dvG">
-                                <rect key="frame" x="0.0" y="168" width="414" height="728"/>
+                                <rect key="frame" x="0.0" y="124" width="414" height="772"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="eIM-2d-5hy">
                                         <rect key="frame" x="0.0" y="20" width="414" height="836"/>
@@ -323,7 +338,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mwS-QJ-eSu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.94509803920000002" green="0.85490196080000003" blue="0.69411764710000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.050980392159999999" green="0.36862745099999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.050980392159999999" green="0.36862745099999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="selectedImageTintColor" red="0.050980392159999999" green="0.36862745099999999" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -354,7 +369,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xsh-CE-bjR">
-                                <rect key="frame" x="162" y="478" width="90" height="31"/>
+                                <rect key="frame" x="162" y="478" width="90" height="34.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="90" id="hpV-iD-lZx"/>
                                 </constraints>
@@ -404,10 +419,10 @@
         <image name="BuildOwn" width="26" height="24.5"/>
         <image name="LaunchIcon" width="270" height="270"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
-        <image name="house" catalog="system" width="128" height="106"/>
-        <image name="house.fill" catalog="system" width="128" height="106"/>
-        <image name="location.fill" catalog="system" width="128" height="121"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="house" catalog="system" width="128" height="104"/>
+        <image name="house.fill" catalog="system" width="128" height="104"/>
+        <image name="location.fill" catalog="system" width="128" height="119"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="order" width="27" height="27"/>
     </resources>
 </document>

@@ -13,6 +13,7 @@ class BeverageMenuCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var moneyView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundCellView.layer.cornerRadius = 16
         moneyView.layer.cornerRadius = 10
 //        moneyView.layer.borderWidth = 1
 //        moneyView.layer.borderColor = UIColor.red.cgColor

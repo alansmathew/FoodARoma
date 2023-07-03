@@ -19,6 +19,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         uiUpdate()
+        self.hideKeyboardWhenTappedAround()
 
         specialCollectionVew.delegate = self
         specialCollectionVew.dataSource = self
@@ -81,6 +82,27 @@ extension HomeViewController : UICollectionViewDataSource {
 }
 
 extension HomeViewController : UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch collectionView {
+        case specialCollectionVew:
+            let storyboard = UIStoryboard(name: "HomeOrder", bundle: nil)
+            let viewC = storyboard.instantiateViewController(withIdentifier: "OrderDetailsViewController") as! OrderDetailsViewController
+            navigationController?.pushViewController(viewC, animated: true)
+            
+        case BeverageCollctionView:
+//            still have to work on this
+            let storyboard = UIStoryboard(name: "HomeOrder", bundle: nil)
+            let viewC = storyboard.instantiateViewController(withIdentifier: "OrderDetailsViewController") as! OrderDetailsViewController
+            navigationController?.pushViewController(viewC, animated: true)
+            
+        default:
+            let storyboard = UIStoryboard(name: "HomeOrder", bundle: nil)
+            let viewC = storyboard.instantiateViewController(withIdentifier: "OrderDetailsViewController") as! OrderDetailsViewController
+            navigationController?.pushViewController(viewC, animated: true)
+        }
+    
+        
+    }
     
 }
 

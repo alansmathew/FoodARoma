@@ -34,6 +34,14 @@
 		996089AD2A3FFA3100C89866 /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996089AC2A3FFA3100C89866 /* RegistrationModel.swift */; };
 		99A623B32A3239D6003BF199 /* BeverageMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A623B12A3239D6003BF199 /* BeverageMenuCollectionViewCell.swift */; };
 		99A623B42A3239D6003BF199 /* BeverageMenuCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99A623B22A3239D6003BF199 /* BeverageMenuCollectionViewCell.xib */; };
+		E75279332A44C7E000AF3EA2 /* customLoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75279322A44C7E000AF3EA2 /* customLoadingAnimation.swift */; };
+		E75279372A44C87200AF3EA2 /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = E75279362A44C87200AF3EA2 /* NVActivityIndicatorView */; };
+		E75279392A44C87200AF3EA2 /* NVActivityIndicatorViewExtended in Frameworks */ = {isa = PBXBuildFile; productRef = E75279382A44C87200AF3EA2 /* NVActivityIndicatorViewExtended */; };
+		E7BFD10C2A5240000016445A /* OrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BFD10B2A5240000016445A /* OrderDetailsViewController.swift */; };
+		E7BFD10E2A5240350016445A /* HomeOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7BFD10D2A5240350016445A /* HomeOrder.storyboard */; };
+		E7C0D61F2A4A4B8F00AB9CD3 /* MyScene.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = E7C0D61E2A4A4B8F00AB9CD3 /* MyScene.rcproject */; };
+		E7C0D6212A4A4BBF00AB9CD3 /* BuildOwnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C0D6202A4A4BBF00AB9CD3 /* BuildOwnViewController.swift */; };
+		E7C0D6232A4A4C2C00AB9CD3 /* title1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E7C0D6222A4A4C2C00AB9CD3 /* title1.usdz */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +92,12 @@
 		996089AC2A3FFA3100C89866 /* RegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationModel.swift; sourceTree = "<group>"; };
 		99A623B12A3239D6003BF199 /* BeverageMenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeverageMenuCollectionViewCell.swift; sourceTree = "<group>"; };
 		99A623B22A3239D6003BF199 /* BeverageMenuCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BeverageMenuCollectionViewCell.xib; sourceTree = "<group>"; };
+		E75279322A44C7E000AF3EA2 /* customLoadingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customLoadingAnimation.swift; sourceTree = "<group>"; };
+		E7BFD10B2A5240000016445A /* OrderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsViewController.swift; sourceTree = "<group>"; };
+		E7BFD10D2A5240350016445A /* HomeOrder.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeOrder.storyboard; sourceTree = "<group>"; };
+		E7C0D61E2A4A4B8F00AB9CD3 /* MyScene.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = MyScene.rcproject; sourceTree = "<group>"; };
+		E7C0D6202A4A4BBF00AB9CD3 /* BuildOwnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildOwnViewController.swift; sourceTree = "<group>"; };
+		E7C0D6222A4A4C2C00AB9CD3 /* title1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = title1.usdz; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +105,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E75279392A44C87200AF3EA2 /* NVActivityIndicatorViewExtended in Frameworks */,
+				E75279372A44C87200AF3EA2 /* NVActivityIndicatorView in Frameworks */,
 				992ECBD72A3B662700B8745A /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -160,6 +176,7 @@
 				992ECBDA2A3B689B00B8745A /* Constants */,
 				991C28D92A2D2DDF00201DE7 /* Assets.xcassets */,
 				991C28DE2A2D2DDF00201DE7 /* Info.plist */,
+				E75279342A44C7E700AF3EA2 /* CustomFiles */,
 			);
 			path = FoodARoma;
 			sourceTree = "<group>";
@@ -184,9 +201,9 @@
 		991C29002A2D77BA00201DE7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				991C28D62A2D2DD900201DE7 /* Main.storyboard */,
-				992ECBDF2A3B77C100B8745A /* Resturent */,
 				99F821442A3E2C34004CC154 /* Customer */,
+				992ECBDF2A3B77C100B8745A /* Resturent */,
+				991C28D62A2D2DD900201DE7 /* Main.storyboard */,
 				991C28DB2A2D2DDF00201DE7 /* LaunchScreen.storyboard */,
 				991736B52A379FD800824B14 /* LoginScreen.storyboard */,
 			);
@@ -196,10 +213,11 @@
 		991C29012A2D77D200201DE7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				991C28D42A2D2DD900201DE7 /* InitalAuthScreen.swift */,
 				991736BB2A37D0A600824B14 /* Login */,
 				992781DD2A311CA500F10E5D /* HomeVIew */,
+				E7C0D61D2A4A4B6700AB9CD3 /* BuildOwn */,
 				991736BE2A37D17300824B14 /* MenuView */,
-				991C28D42A2D2DD900201DE7 /* InitalAuthScreen.swift */,
 				992ECBE02A3B7F5900B8745A /* Resturent */,
 			);
 			path = Controller;
@@ -217,6 +235,7 @@
 		992781DD2A311CA500F10E5D /* HomeVIew */ = {
 			isa = PBXGroup;
 			children = (
+				E7BFD10B2A5240000016445A /* OrderDetailsViewController.swift */,
 				992781D92A311C8A00F10E5D /* HomeMenuCollectionViewCell.swift */,
 				991C29032A2D7B6C00201DE7 /* HomeViewController.swift */,
 				99A623B12A3239D6003BF199 /* BeverageMenuCollectionViewCell.swift */,
@@ -272,6 +291,7 @@
 			children = (
 				992781DA2A311C8A00F10E5D /* HomeMenuCollectionViewCell.xib */,
 				99A623B22A3239D6003BF199 /* BeverageMenuCollectionViewCell.xib */,
+				E7BFD10D2A5240350016445A /* HomeOrder.storyboard */,
 			);
 			path = HomeVew;
 			sourceTree = "<group>";
@@ -282,6 +302,24 @@
 				99BE23132A313D000014DC89 /* HomeVew */,
 			);
 			path = Customer;
+			sourceTree = "<group>";
+		};
+		E75279342A44C7E700AF3EA2 /* CustomFiles */ = {
+			isa = PBXGroup;
+			children = (
+				E75279322A44C7E000AF3EA2 /* customLoadingAnimation.swift */,
+			);
+			path = CustomFiles;
+			sourceTree = "<group>";
+		};
+		E7C0D61D2A4A4B6700AB9CD3 /* BuildOwn */ = {
+			isa = PBXGroup;
+			children = (
+				E7C0D6222A4A4C2C00AB9CD3 /* title1.usdz */,
+				E7C0D61E2A4A4B8F00AB9CD3 /* MyScene.rcproject */,
+				E7C0D6202A4A4BBF00AB9CD3 /* BuildOwnViewController.swift */,
+			);
+			path = BuildOwn;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,6 +340,8 @@
 			name = FoodARoma;
 			packageProductDependencies = (
 				992ECBD62A3B662700B8745A /* Alamofire */,
+				E75279362A44C87200AF3EA2 /* NVActivityIndicatorView */,
+				E75279382A44C87200AF3EA2 /* NVActivityIndicatorViewExtended */,
 			);
 			productName = FoodARoma;
 			productReference = 991C28CD2A2D2DD900201DE7 /* FoodARoma.app */;
@@ -377,6 +417,7 @@
 			mainGroup = 991C28C42A2D2DD900201DE7;
 			packageReferences = (
 				992ECBD52A3B662700B8745A /* XCRemoteSwiftPackageReference "Alamofire" */,
+				E75279352A44C87200AF3EA2 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
 			);
 			productRefGroup = 991C28CE2A2D2DD900201DE7 /* Products */;
 			projectDirPath = "";
@@ -396,6 +437,8 @@
 			files = (
 				992781DC2A311C8A00F10E5D /* HomeMenuCollectionViewCell.xib in Resources */,
 				992ECBDE2A3B77B600B8745A /* ResturentMain.storyboard in Resources */,
+				E7BFD10E2A5240350016445A /* HomeOrder.storyboard in Resources */,
+				E7C0D6232A4A4C2C00AB9CD3 /* title1.usdz in Resources */,
 				991C28DD2A2D2DDF00201DE7 /* LaunchScreen.storyboard in Resources */,
 				992ECBE62A3B7FBD00B8745A /* ResturentOrderscell.xib in Resources */,
 				991C28DA2A2D2DDF00201DE7 /* Assets.xcassets in Resources */,
@@ -426,8 +469,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E75279332A44C7E000AF3EA2 /* customLoadingAnimation.swift in Sources */,
+				E7C0D61F2A4A4B8F00AB9CD3 /* MyScene.rcproject in Sources */,
+				E7BFD10C2A5240000016445A /* OrderDetailsViewController.swift in Sources */,
 				991736BD2A37D16700824B14 /* MoreViewController.swift in Sources */,
 				991736B82A37CFF700824B14 /* LoginViewController.swift in Sources */,
+				E7C0D6212A4A4BBF00AB9CD3 /* BuildOwnViewController.swift in Sources */,
 				991C28D52A2D2DD900201DE7 /* InitalAuthScreen.swift in Sources */,
 				992ECBDC2A3B6E6300B8745A /* LoginModel.swift in Sources */,
 				991736BA2A37D00B00824B14 /* SignupViewController.swift in Sources */,
@@ -792,6 +839,14 @@
 				version = 5.7.1;
 			};
 		};
+		E75279352A44C87200AF3EA2 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView.git";
+			requirement = {
+				kind = exactVersion;
+				version = 5.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -799,6 +854,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 992ECBD52A3B662700B8745A /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		E75279362A44C87200AF3EA2 /* NVActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E75279352A44C87200AF3EA2 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
+			productName = NVActivityIndicatorView;
+		};
+		E75279382A44C87200AF3EA2 /* NVActivityIndicatorViewExtended */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E75279352A44C87200AF3EA2 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
+			productName = NVActivityIndicatorViewExtended;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

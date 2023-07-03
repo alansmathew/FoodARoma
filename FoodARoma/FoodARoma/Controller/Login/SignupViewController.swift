@@ -23,6 +23,7 @@ class SignupViewController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
+        self.hideKeyboardWhenTappedAround()
         // Do any additional setup after loading the view.
     }
     
