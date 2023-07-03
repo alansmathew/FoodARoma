@@ -40,6 +40,7 @@ class HomeViewController: UIViewController {
             self.view.endEditing(true)
         }
     
+    
     func uiUpdate(){
         searchView.layer.cornerRadius = 18
     }

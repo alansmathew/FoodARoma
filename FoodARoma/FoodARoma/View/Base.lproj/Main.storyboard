@@ -88,7 +88,7 @@
         <!--Navigation Controller-->
         <scene sceneID="MRq-pt-doH">
             <objects>
-                <navigationController id="HXe-XV-aVW" sceneMemberID="viewController">
+                <navigationController hidesBottomBarWhenPushed="YES" hidesBarsOnSwipe="YES" hidesBarsWhenKeyboardAppears="YES" id="HXe-XV-aVW" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="J79-Nb-c9D">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
