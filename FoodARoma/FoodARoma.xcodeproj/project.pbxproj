@@ -42,6 +42,7 @@
 		E7C0D61F2A4A4B8F00AB9CD3 /* MyScene.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = E7C0D61E2A4A4B8F00AB9CD3 /* MyScene.rcproject */; };
 		E7C0D6212A4A4BBF00AB9CD3 /* BuildOwnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C0D6202A4A4BBF00AB9CD3 /* BuildOwnViewController.swift */; };
 		E7C0D6232A4A4C2C00AB9CD3 /* title1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E7C0D6222A4A4C2C00AB9CD3 /* title1.usdz */; };
+		E7D042F22A53A11300AEDC5E /* RatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D042F12A53A11300AEDC5E /* RatingsViewController.swift */; };
 		E7F437732A534F5600B3D4CD /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F437722A534F5600B3D4CD /* CommentsViewController.swift */; };
 		E7F437782A53502800B3D4CD /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F437762A53502800B3D4CD /* CommentTableViewCell.swift */; };
 		E7F437792A53502800B3D4CD /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7F437772A53502800B3D4CD /* CommentTableViewCell.xib */; };
@@ -101,6 +102,7 @@
 		E7C0D61E2A4A4B8F00AB9CD3 /* MyScene.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = MyScene.rcproject; sourceTree = "<group>"; };
 		E7C0D6202A4A4BBF00AB9CD3 /* BuildOwnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildOwnViewController.swift; sourceTree = "<group>"; };
 		E7C0D6222A4A4C2C00AB9CD3 /* title1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = title1.usdz; sourceTree = "<group>"; };
+		E7D042F12A53A11300AEDC5E /* RatingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsViewController.swift; sourceTree = "<group>"; };
 		E7F437722A534F5600B3D4CD /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		E7F437762A53502800B3D4CD /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		E7F437772A53502800B3D4CD /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				992781D92A311C8A00F10E5D /* HomeMenuCollectionViewCell.swift */,
 				991C29032A2D7B6C00201DE7 /* HomeViewController.swift */,
 				99A623B12A3239D6003BF199 /* BeverageMenuCollectionViewCell.swift */,
+				E7D042F12A53A11300AEDC5E /* RatingsViewController.swift */,
 			);
 			path = HomeVIew;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				E7BFD10C2A5240000016445A /* OrderDetailsViewController.swift in Sources */,
 				991736BD2A37D16700824B14 /* MoreViewController.swift in Sources */,
 				E7F437782A53502800B3D4CD /* CommentTableViewCell.swift in Sources */,
+				E7D042F22A53A11300AEDC5E /* RatingsViewController.swift in Sources */,
 				991736B82A37CFF700824B14 /* LoginViewController.swift in Sources */,
 				E7C0D6212A4A4BBF00AB9CD3 /* BuildOwnViewController.swift in Sources */,
 				991C28D52A2D2DD900201DE7 /* InitalAuthScreen.swift in Sources */,
