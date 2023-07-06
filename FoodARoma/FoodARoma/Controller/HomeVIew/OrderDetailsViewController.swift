@@ -9,6 +9,18 @@ import UIKit
 
 class OrderDetailsViewController: UIViewController {
 
+    @IBOutlet weak var totalNumberReview: UILabel!
+    @IBOutlet weak var RStar5: UIImageView!
+    @IBOutlet weak var RStar4: UIImageView!
+    @IBOutlet weak var rStar3: UIImageView!
+    @IBOutlet weak var rStar2: UIImageView!
+    @IBOutlet weak var rStar1: UIImageView!
+    @IBOutlet weak var menuRating: UILabel!
+    @IBOutlet weak var menuTime: UILabel!
+    @IBOutlet weak var menuPrice: UILabel!
+    @IBOutlet weak var menuDec: UILabel!
+    @IBOutlet weak var menuName: UILabel!
+    
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var contentHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -17,12 +29,16 @@ class OrderDetailsViewController: UIViewController {
     @IBOutlet weak var bevCollectionView: UICollectionView!
     @IBOutlet weak var topView: UIView!
     
+    var SelectedOrder : allMenu?
+    
     var quantity = 1
     var cellHeight = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         quantityLabel.text = "\(quantity)"
+        print(SelectedOrder)
         
         bevCollectionView.delegate = self
         bevCollectionView.dataSource = self
@@ -42,8 +58,25 @@ class OrderDetailsViewController: UIViewController {
 //        commentsTable.layoutIfNeeded()
 //        print(commentsTable.contentSize.height)
 //        print(cellHeight)
+        setupUI()
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
+    }
+    
+    private func setupUI(){
+        if let selectedOrder = SelectedOrder {
+            menuName.text = selectedOrder.menu_Name
+            menuDec.text = selectedOrder.menu_Dec
+            menuPrice.text = "$ "+selectedOrder.menu_Price
+            menuTime.text = selectedOrder.menu_Time + " Min"
+            menuRating.text = "#>^"
+            totalNumberReview.text = "@#$%"
+        }
+    }
+    
     @IBAction func plusButton(_ sender: UIButton) {
         quantity += 1
         quantityLabel.text = "\(quantity)"

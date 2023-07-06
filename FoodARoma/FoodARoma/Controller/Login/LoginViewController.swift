@@ -25,12 +25,12 @@ class LoginViewController: UIViewController {
 
     }
     
-    override func viewDidLayoutSubviews() {
-        loading = customAnimation()
-        loadingProtocol(with: loading! ,true)
-    }
+//    override func viewDidLayoutSubviews() {
+//        loading = customAnimation()
+//        loadingProtocol(with: loading! ,true)
+//    }
 
-    func setupUI(){
+    private func setupUI(){
         usernameView.layer.cornerRadius = 12
         passwordView.layer.cornerRadius = 12
         appleView.layer.cornerRadius = 12
@@ -43,6 +43,9 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func continueButtonPressed(_ sender: UIButton) {
+        loading = customAnimation()
+        loadingProtocol(with: loading! ,true)
+        
         let username = usernameText.text!
         let psd = passwordText.text!
 //        let username = "alansmathew@icloud.com"
@@ -79,9 +82,11 @@ class LoginViewController: UIViewController {
                                 UIApplication.shared.windows.first!.rootViewController = viewC
                             }
                         }
+                        self.loadingProtocol(with: self.loading! ,false)
                     }
                     else{
                         self.showAlert(title: "Invalid Credentials", content: jsonData.message)
+                        self.loadingProtocol(with: self.loading! ,false)
                     }
                     
                     let usertype = UserDefaults.standard.string(forKey: "USERTYPE")
@@ -91,28 +96,17 @@ class LoginViewController: UIViewController {
                 }
                 catch{
                     print("decoder error")
+                    self.loadingProtocol(with: self.loading! ,false)
                 }
                 
             case .failure(let error):
                 self.showAlert(title: "network intrepsion", content: "Something went wrong! please try again after some time")
                 print(error)
+                self.loadingProtocol(with: self.loading! ,false)
             }
         }
     }
     
-    
-    
-    func showAlert(title : String, content : String) {
-        let alert = UIAlertController(title: title, message: content, preferredStyle: .alert)
-          
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in
-        }))
-         
-        DispatchQueue.main.async {
-            self.present(alert, animated: false, completion: nil)
-        }
-          
-    }
 }
 
 extension UIViewController {

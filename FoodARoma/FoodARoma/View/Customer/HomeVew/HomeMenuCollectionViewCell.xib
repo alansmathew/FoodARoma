@@ -29,7 +29,7 @@
                                     <constraint firstAttribute="width" constant="112" id="wJb-tB-6KA"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBr-jM-x2Q">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zBr-jM-x2Q">
                                 <rect key="frame" x="152" y="15" width="163" height="26.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="22"/>
                                 <nil key="textColor"/>
@@ -157,6 +157,12 @@
             <connections>
                 <outlet property="amoundView" destination="OB4-Rh-hMl" id="6Ku-YG-PEH"/>
                 <outlet property="backgroundCustomView" destination="eGN-8A-3Oz" id="lq1-3j-1zD"/>
+                <outlet property="descLabel" destination="JCL-l8-lmj" id="SKV-hT-HX6"/>
+                <outlet property="menuImageView" destination="x0y-Ek-VSK" id="SDN-XC-4Dy"/>
+                <outlet property="menuNameLabel" destination="zBr-jM-x2Q" id="gds-VN-LUL"/>
+                <outlet property="priceLabel" destination="Q9L-nv-7Jb" id="uE9-iK-gAy"/>
+                <outlet property="ratingLabel" destination="5p4-Ez-Tvc" id="tKj-eA-w48"/>
+                <outlet property="timeLabel" destination="Llw-M0-jRI" id="wme-Xi-2Ze"/>
             </connections>
             <point key="canvasLocation" x="200.72463768115944" y="172.43303571428569"/>
         </collectionViewCell>

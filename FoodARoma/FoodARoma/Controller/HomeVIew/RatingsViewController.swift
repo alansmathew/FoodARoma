@@ -16,6 +16,12 @@ class RatingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Register for keyboard notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        reviewTextView.delegate = self
+        
         self.hideKeyboardWhenTappedAround()
         
         
@@ -34,11 +40,56 @@ class RatingsViewController: UIViewController {
         reviewTextView.layer.cornerRadius = 10
         reviewTextView.layer.borderWidth = 1
         reviewTextView.layer.borderColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.10).cgColor
-
-
+        
+        reviewTextView.text = "Write your honest review here."
+        reviewTextView.textColor = UIColor.lightGray
+        
+        
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func backButtonAction(_ sender: UIButton) {
+        self.dismiss(animated: true)
+    }
+    
+    @IBAction func postReplayButton(_ sender: UIButton) {
+        if !reviewTextView.text.isEmpty {
+            if reviewTextView.text == "Write your honest review here." {
+                showAlert(title: "Empty fields", content: "Please enter some honest review inorder to post your comment.")
+            }
+        }
+    }
+    
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            self.view.frame.origin.y -= keyboardFrame.size.height
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        self.view.frame.origin.y = 0
+    }
+    
+    
+}
+
+extension RatingsViewController : UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        reviewTextView.scrollRangeToVisible(textView.selectedRange)
+        if reviewTextView.textColor == UIColor.lightGray {
+            reviewTextView.text = nil
+            reviewTextView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if reviewTextView.text.isEmpty {
+            reviewTextView.text = "Write your honest review here."
+            reviewTextView.textColor = UIColor.lightGray
+        }
+    }
     
 }
 

@@ -50,12 +50,12 @@ class BuildOwnViewController: UIViewController {
         print(anchor)
         let entity = try! ModelEntity.load(named: entityName)
         
-//        entity.generateCollisionShapes(recursive: true)
+        entity.generateCollisionShapes(recursive: true)
 //        arView.installGestures([.rotation,.translation], for: entity as! Entity & HasCollision)
         
-//        let anchorEntity = AnchorEntity(anchor: anchor)
-//        anchorEntity.addChild(entity)
-//        arView.scene.addAnchor((anchorEntity))
+        let anchorEntity = AnchorEntity(anchor: anchor)
+        anchorEntity.addChild(entity)
+        arView.scene.addAnchor((anchorEntity))
     }
 
 }

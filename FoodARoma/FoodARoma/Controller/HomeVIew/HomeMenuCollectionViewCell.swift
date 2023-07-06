@@ -9,6 +9,12 @@ import UIKit
 
 class HomeMenuCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var menuImageView: UIImageView!
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var descLabel: UILabel!
+    @IBOutlet weak var menuNameLabel: UILabel!
     @IBOutlet weak var backgroundCustomView: UIView!
     @IBOutlet weak var amoundView: UIView!
     override func awakeFromNib() {

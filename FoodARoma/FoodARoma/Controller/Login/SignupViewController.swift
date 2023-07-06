@@ -10,6 +10,9 @@ import Alamofire
 
 class SignupViewController: UIViewController {
 
+    @IBOutlet weak var Vcpsd: UILabel!
+    @IBOutlet weak var Vpsd: UILabel!
+    @IBOutlet weak var Vusername: UILabel!
     @IBOutlet weak var emailVIew: UIView!
     @IBOutlet weak var passwordView: UIView!
     @IBOutlet weak var confirmPassword: UIView!
@@ -24,7 +27,14 @@ class SignupViewController: UIViewController {
 
         setupUI()
         self.hideKeyboardWhenTappedAround()
-        // Do any additional setup after loading the view.
+        
+        Vcpsd.isHidden = true
+        Vpsd.isHidden = true
+        Vusername.isHidden = true
+        
+        usernameTextField.delegate = self
+        passwordTextfield.delegate = self
+        confirmPasswordTextField.delegate = self
     }
     
     @IBAction func BackButtonAction(_ sender: UIButton) {
@@ -53,15 +63,56 @@ class SignupViewController: UIViewController {
         testView.layer.shadowRadius = 10;
 
     }
+    
+    func validateEmail(_ email: String) -> Bool {
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: email)
+    }
+    
+    func validatePassword(_ password: String) -> Bool {
+        let passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}$"
+        let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+        return passwordPredicate.evaluate(with: password)
+    }
+
+
+    
     @IBAction func signupButtonPress(_ sender: UIButton) {
         let username = usernameTextField.text!
-        let psd = passwordTextfield.text!
+        var psd = passwordTextfield.text!
         let cpsd = confirmPasswordTextField.text!
         
-        if psd != cpsd {
-            showAlert(title: "Password dosent match", content: "Both the password entered are not matching. Please double check and try again.")
+        var userV = false
+        var psdV = false
+        var cpsdV = false
+        
+        
+        // validation
+        if validateEmail(username) {
+            userV = true
+        } else {
+            userV = false
+            Vusername.isHidden = false
+        }
+        
+        if validatePassword(psd) {
+            psdV = true
+        } else {
+            psdV = false
+            Vpsd.isHidden = false
+        }
+
+        if psd == cpsd {
+            cpsdV = true
         }
         else{
+            cpsdV = false
+            Vcpsd.isHidden = false
+        }
+        
+        if (userV == true) && (psdV == true) && (cpsdV == true){
+            
             let params : [String : String] = [
                   "Username": username,
                   "Password": psd,
@@ -103,18 +154,13 @@ class SignupViewController: UIViewController {
 
     }
     
-    
-    func showAlert(title : String, content : String) {
-        let alert = UIAlertController(title: title, message: content, preferredStyle: .alert)
-          
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in
-        }))
-         
-        DispatchQueue.main.async {
-            self.present(alert, animated: false, completion: nil)
-        }
-          
-    }
 }
 
+extension SignupViewController : UITextFieldDelegate{
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        Vcpsd.isHidden = true
+        Vpsd.isHidden = true
+        Vusername.isHidden = true
+    }
+}
 

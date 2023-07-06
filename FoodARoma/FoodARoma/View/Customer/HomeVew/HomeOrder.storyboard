@@ -448,13 +448,24 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="RStar4" destination="cWZ-gE-UU2" id="oTg-bR-Igb"/>
+                        <outlet property="RStar5" destination="bh0-RF-Oa9" id="Num-2F-b91"/>
                         <outlet property="bevCollectionView" destination="SUW-vd-AZ9" id="1Gu-uL-vnd"/>
                         <outlet property="commentView" destination="hsK-Zo-fB1" id="xnk-Ki-VeR"/>
                         <outlet property="commentsTable" destination="6Mx-iB-ZcS" id="YcL-tP-mXB"/>
                         <outlet property="contentHeight" destination="87U-ER-h4F" id="YHh-x0-X6h"/>
+                        <outlet property="menuDec" destination="QvX-ks-Or9" id="2HJ-UU-54T"/>
+                        <outlet property="menuName" destination="fZc-w4-z6T" id="WyP-37-uqg"/>
+                        <outlet property="menuPrice" destination="YNR-PL-r3f" id="xtS-OJ-V1M"/>
+                        <outlet property="menuRating" destination="d05-Bs-xbR" id="JQA-gu-IRg"/>
+                        <outlet property="menuTime" destination="Gsp-eP-jlD" id="h9s-uk-1Gf"/>
                         <outlet property="quantityLabel" destination="cZP-dA-65c" id="YYF-tG-Cae"/>
+                        <outlet property="rStar1" destination="jAA-F7-vfj" id="4iB-ig-lev"/>
+                        <outlet property="rStar2" destination="Rft-VS-EOP" id="IPu-7H-srE"/>
+                        <outlet property="rStar3" destination="IAX-vN-cUz" id="E6G-hX-gCw"/>
                         <outlet property="scrollView" destination="Go6-39-TrC" id="rOz-dB-JdY"/>
                         <outlet property="topView" destination="0RW-QD-gIS" id="nfY-8O-Wtc"/>
+                        <outlet property="totalNumberReview" destination="C85-VH-xft" id="0mR-hG-97W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0qd-g7-mrX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -636,9 +647,9 @@
                                                             </imageView>
                                                         </subviews>
                                                     </stackView>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="DSDFSADF" translatesAutoresizingMaskIntoConstraints="NO" id="VjP-eH-yAM">
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VjP-eH-yAM">
                                                         <rect key="frame" x="0.0" y="100" width="353" height="190"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="textColor" name="Custom black"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -703,6 +714,9 @@
                                                 <buttonConfiguration key="configuration" style="filled" image="backarrow">
                                                     <color key="baseForegroundColor" name="Custom black"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="backButtonAction:" destination="6KE-eq-d0Q" eventType="touchUpInside" id="e0c-Db-fhI"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -725,6 +739,9 @@
                                                 <buttonConfiguration key="configuration" style="filled" image="plus.message" catalog="system" title="Post Review" imagePadding="10">
                                                     <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="16"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="postReplayButton:" destination="6KE-eq-d0Q" eventType="touchUpInside" id="VrY-dh-waH"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -764,9 +781,53 @@
             </objects>
             <point key="canvasLocation" x="1296.9465648854962" y="729.57746478873241"/>
         </scene>
+        <!--Search View Controller-->
+        <scene sceneID="E2k-Dd-cgn">
+            <objects>
+                <viewController restorationIdentifier="SearchViewController" storyboardIdentifier="SearchViewController" id="L70-xC-LmH" customClass="SearchViewController" customModule="FoodARoma" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pCh-II-puu">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="CCm-wR-auA">
+                                <rect key="frame" x="0.0" y="115" width="393" height="737"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                            </tableView>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="icB-jX-Bqv">
+                                <rect key="frame" x="0.0" y="59" width="393" height="56"/>
+                                <color key="barTintColor" name="homeBackgroundColor"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="L70-xC-LmH" id="kaY-mc-iqy"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="NdE-zH-IkF"/>
+                        <color key="backgroundColor" name="homeBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="icB-jX-Bqv" firstAttribute="trailing" secondItem="NdE-zH-IkF" secondAttribute="trailing" id="294-Uu-X6a"/>
+                            <constraint firstItem="CCm-wR-auA" firstAttribute="trailing" secondItem="NdE-zH-IkF" secondAttribute="trailing" id="4aU-r2-Db4"/>
+                            <constraint firstItem="CCm-wR-auA" firstAttribute="top" secondItem="icB-jX-Bqv" secondAttribute="bottom" id="HrT-4V-j8h"/>
+                            <constraint firstAttribute="bottom" secondItem="CCm-wR-auA" secondAttribute="bottom" id="OuG-2n-u67"/>
+                            <constraint firstItem="CCm-wR-auA" firstAttribute="leading" secondItem="NdE-zH-IkF" secondAttribute="leading" id="PLV-WG-LuQ"/>
+                            <constraint firstItem="icB-jX-Bqv" firstAttribute="top" secondItem="NdE-zH-IkF" secondAttribute="top" id="UGI-mb-mJc"/>
+                            <constraint firstItem="icB-jX-Bqv" firstAttribute="leading" secondItem="NdE-zH-IkF" secondAttribute="leading" id="xBw-OE-ELo"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="UyB-An-w1s"/>
+                    <connections>
+                        <outlet property="search" destination="icB-jX-Bqv" id="Tzk-jP-370"/>
+                        <outlet property="searchTableView" destination="CCm-wR-auA" id="aWQ-8a-Tqe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ff5-89-dTH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1795" y="-807"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ode-HH-0uN"/>
+        <segue reference="oyc-Lo-oDl"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.right" catalog="system" width="128" height="104"/>
@@ -791,6 +852,9 @@
         </namedColor>
         <namedColor name="customorange">
             <color red="0.95300000905990601" green="0.36100000143051147" blue="0.12200000137090683" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="homeBackgroundColor">
+            <color red="0.96100002527236938" green="0.94599997997283936" blue="0.9179999828338623" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>
