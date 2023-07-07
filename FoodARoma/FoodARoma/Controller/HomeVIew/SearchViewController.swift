@@ -9,18 +9,24 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
-    var AllMenuData : AllMenuModel?
+    var AllMenuData : [allMenu]?
+    var searchMenuData : [allMenu]? = [allMenu]()
 
     @IBOutlet weak var searchTableView: UITableView!
     @IBOutlet weak var search: UISearchBar!
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.hideKeyboardWhenTappedAround()
+        
         search.delegate = self
         searchTableView.dataSource = self
         searchTableView.delegate = self
         
-        searchTableView.register(UINib(nibName: "HomeMenuCollectionViewCell", bundle: nil), forCellReuseIdentifier: "HomeMenuCelliIdentifier")
+        searchTableView.register(UINib(nibName: "HomeMenuTableViewCell", bundle: nil), forCellReuseIdentifier: "homeTableViewidentifier")
+        
+        searchMenuData = AllMenuData
+        print(searchMenuData?.count)
 
         
     }
@@ -31,19 +37,19 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return AllMenuData?.AllMenu.count ?? 0
+        return searchMenuData?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell : HomeMenuCollectionViewCell = searchTableView.dequeueReusableCell(withIdentifier: "HomeMenuCelliIdentifier", for: indexPath) as! HomeMenuCollectionViewCell
+        let cell : HomeMenuTableViewCell = searchTableView.dequeueReusableCell(withIdentifier: "homeTableViewidentifier", for: indexPath) as! HomeMenuTableViewCell
 
-//        if let menuitem = AllMenuData?.AllMenu {
-//            cell.menuNameLabel.text = menuitem[indexPath.row].menu_Name
-//            cell.priceLabel.text = "$ "+menuitem[indexPath.row].menu_Price
-//            cell.ratingLabel.text = "4.5"
-//            cell.timeLabel.text = menuitem[indexPath.row].menu_Time + " Min"
-//            cell.descLabel.text = menuitem[indexPath.row].menu_Dec
-//        }
+        if let menuitem = searchMenuData, menuitem.count > indexPath.row {
+            cell.menuName.text = menuitem[indexPath.row].menu_Name
+            cell.menuPrice.text = "$ "+menuitem[indexPath.row].menu_Price
+            cell.menuRating.text = "4.5"
+            cell.menuTime.text = menuitem[indexPath.row].menu_Time + " Min"
+            cell.menuDec.text = menuitem[indexPath.row].menu_Dec
+        }
         return cell
     }
     
@@ -56,6 +62,20 @@ extension SearchViewController : UITableViewDelegate{
 
 extension SearchViewController : UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
+        if searchText.count > 1 {
+            searchMenuData?.removeAll()
+            if let menuData = AllMenuData {
+                for x in menuData{
+                    if x.menu_Name.lowercased().contains(searchText.lowercased()) {
+                        searchMenuData?.append(x)
+                    }
+                }
+            }
+        }
+        else{
+            searchMenuData = AllMenuData
+        }
+        searchTableView.reloadData()
+        
     }
 }

@@ -55,9 +55,8 @@ class HomeViewController: UIViewController {
     func populateCollectionViews(){
         if let allmenuitems = AllMenuItems {
             for x in allmenuitems.AllMenu{
-                let tempModel : allMenu = allMenu(menu_Time: x.menu_Time, menu_Cat: x.menu_Cat, menu_Price: x.menu_Price, menu_Name: x.menu_Name, menu_Dec: x.menu_Dec, menu_Photo: x.menu_Photo)
                 if (x.menu_Cat == "special"){
-                    specialMenu?.append(tempModel)
+                    specialMenu?.append(x)
                 }
                 else if (x.menu_Cat == "menu"){
                     regMenu?.append(x)
@@ -75,7 +74,7 @@ class HomeViewController: UIViewController {
     @IBAction func searchclick(_ sender: Any) {
         let storyboard = UIStoryboard(name: "HomeOrder", bundle: nil)
         let viewC = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
-        viewC.AllMenuData = AllMenuItems
+        viewC.AllMenuData = AllMenuItems?.AllMenu
         navigationController?.pushViewController(viewC, animated: true)
     }
     
