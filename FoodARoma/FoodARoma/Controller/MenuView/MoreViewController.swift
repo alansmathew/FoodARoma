@@ -9,14 +9,42 @@ import UIKit
 
 class MoreViewController: UIViewController {
 
+    @IBOutlet weak var nouserView: UIView!
+    @IBOutlet weak var arrowBackground: UIImageView!
+    @IBOutlet weak var settingsBackground: UIStackView!
+    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var accounbackgroundView: UIView!
+    @IBOutlet weak var useremailLabel: UILabel!
     @IBOutlet weak var userLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        userImageView.layer.cornerRadius = userImageView.frame.width / 2
+        accounbackgroundView.layer.cornerRadius = 14
+        arrowBackground.layer.cornerRadius = 8
+        
+        accounbackgroundView.layer.shadowColor = UIColor.black.cgColor;
+        accounbackgroundView.layer.shadowOffset = CGSize(width: 0, height: 4)
+        accounbackgroundView.layer.shadowOpacity = 0.13;
+        accounbackgroundView.layer.shadowRadius = 10.0;
+        
+        settingsBackground.layer.cornerRadius = 14
+        nouserView.isHidden = false
+        
     }
     
+    override func viewDidLayoutSubviews() {
+        if let userType = UserDefaults.standard.string(forKey: "USERTYPE"){
+            nouserView.isHidden = true
+        }
+        else{
+            nouserView.isHidden = false
+        }
+        
+    }
 
     override func viewDidAppear(_ animated: Bool) {
+        print(1)
         if let userType = UserDefaults.standard.string(forKey: "USERTYPE"){
             print("user found")
         }
@@ -26,20 +54,39 @@ class MoreViewController: UIViewController {
                 present(viewC, animated: true)
         }
     }
+    
     override func viewWillAppear(_ animated: Bool) {
+        print(2)
         let useremail = UserDefaults.standard.string(forKey: "USEREMAIL")
         if let email = useremail{
-            userLabel.text = email
+            nouserView.isHidden = true
+            useremailLabel.text = email
+            let components = email.components(separatedBy: "@")
+            userLabel.text = components.first
         }
         else{
+            nouserView.isHidden = false
             userLabel.text = "No user"
         }
         
     }
-    @IBAction func signoutCLick(_ sender: Any) {
-        userLabel.text = "No user"
+    
+    @IBAction func notificationClick(_ sender: Any) {
+    }
+    
+    @IBAction func termsClick(_ sender: Any) {
+    }
+    
+    @IBAction func logoutClick(_ sender: Any) {
         UserDefaults.standard.removeObject(forKey: "USERTYPE")
         UserDefaults.standard.removeObject(forKey: "USERID")
         UserDefaults.standard.removeObject(forKey: "USEREMAIL")
+        nouserView.isHidden = false
     }
+    @IBAction func loginClick(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "LoginScreen", bundle: nil)
+            let viewC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            present(viewC, animated: true)
+    }
+    
 }
