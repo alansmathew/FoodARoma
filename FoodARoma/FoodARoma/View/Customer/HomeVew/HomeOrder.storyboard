@@ -789,7 +789,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="CCm-wR-auA">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="CCm-wR-auA">
                                 <rect key="frame" x="0.0" y="115" width="393" height="737"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
@@ -806,13 +806,13 @@
                         <viewLayoutGuide key="safeArea" id="NdE-zH-IkF"/>
                         <color key="backgroundColor" name="homeBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="icB-jX-Bqv" firstAttribute="trailing" secondItem="NdE-zH-IkF" secondAttribute="trailing" id="294-Uu-X6a"/>
+                            <constraint firstItem="icB-jX-Bqv" firstAttribute="trailing" secondItem="pCh-II-puu" secondAttribute="trailing" id="294-Uu-X6a"/>
                             <constraint firstItem="CCm-wR-auA" firstAttribute="trailing" secondItem="NdE-zH-IkF" secondAttribute="trailing" id="4aU-r2-Db4"/>
                             <constraint firstItem="CCm-wR-auA" firstAttribute="top" secondItem="icB-jX-Bqv" secondAttribute="bottom" id="HrT-4V-j8h"/>
                             <constraint firstAttribute="bottom" secondItem="CCm-wR-auA" secondAttribute="bottom" id="OuG-2n-u67"/>
                             <constraint firstItem="CCm-wR-auA" firstAttribute="leading" secondItem="NdE-zH-IkF" secondAttribute="leading" id="PLV-WG-LuQ"/>
                             <constraint firstItem="icB-jX-Bqv" firstAttribute="top" secondItem="NdE-zH-IkF" secondAttribute="top" id="UGI-mb-mJc"/>
-                            <constraint firstItem="icB-jX-Bqv" firstAttribute="leading" secondItem="NdE-zH-IkF" secondAttribute="leading" id="xBw-OE-ELo"/>
+                            <constraint firstItem="icB-jX-Bqv" firstAttribute="leading" secondItem="NdE-zH-IkF" secondAttribute="leading" id="yVt-Qf-JiQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="UyB-An-w1s"/>

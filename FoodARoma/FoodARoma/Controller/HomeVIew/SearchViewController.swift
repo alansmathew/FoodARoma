@@ -57,7 +57,12 @@ extension SearchViewController : UITableViewDataSource{
 }
 
 extension SearchViewController : UITableViewDelegate{
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "HomeOrder", bundle: nil)
+        let viewC = storyboard.instantiateViewController(withIdentifier: "OrderDetailsViewController") as! OrderDetailsViewController
+        viewC.SelectedOrder = searchMenuData![indexPath.row]
+        navigationController?.pushViewController(viewC, animated: true)
+    }
 }
 
 extension SearchViewController : UISearchBarDelegate {

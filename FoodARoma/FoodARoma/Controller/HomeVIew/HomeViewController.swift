@@ -85,7 +85,11 @@ class HomeViewController: UIViewController {
         }
         else{
             
-            AF.request((Constants().BASEURL + Constants.APIPaths().fetchMenu), parameters: nil, headers: nil).responseData { response in
+            let params : [String : String] = [
+                    "Mode" : "fetchMenu"
+                ]
+            
+            AF.request((Constants().BASEURL + Constants.APIPaths().fetchMenu), method: .post, parameters:params, encoder: .json).responseData { response in
                 switch response.result{
                 case .success(let data):
                     //                print(JSON(data))

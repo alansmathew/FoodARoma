@@ -8,6 +8,7 @@
 import Foundation
 
 struct AllMenuModel : Codable {
+    var Message : String
     var AllMenu: [allMenu]
 }
 
