@@ -29,6 +29,7 @@ class MoreViewController: UIViewController {
         accounbackgroundView.layer.shadowRadius = 10.0;
         
         settingsBackground.layer.cornerRadius = 14
+        settingsBackground.layer.masksToBounds = true
         nouserView.isHidden = false
         
     }
@@ -36,15 +37,20 @@ class MoreViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         if let userType = UserDefaults.standard.string(forKey: "USERTYPE"){
             nouserView.isHidden = true
+            let useremail = UserDefaults.standard.string(forKey: "USEREMAIL")
+            if let email = useremail{
+                nouserView.isHidden = true
+                useremailLabel.text = email
+                let components = email.components(separatedBy: "@")
+                userLabel.text = components.first
+            }
         }
         else{
             nouserView.isHidden = false
         }
-        
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
-        print(1)
         if let userType = UserDefaults.standard.string(forKey: "USERTYPE"){
             print("user found")
         }
@@ -56,7 +62,6 @@ class MoreViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print(2)
         let useremail = UserDefaults.standard.string(forKey: "USEREMAIL")
         if let email = useremail{
             nouserView.isHidden = true
@@ -68,7 +73,6 @@ class MoreViewController: UIViewController {
             nouserView.isHidden = false
             userLabel.text = "No user"
         }
-        
     }
     
     @IBAction func notificationClick(_ sender: Any) {

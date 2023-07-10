@@ -8,6 +8,7 @@
 import UIKit
 import NVActivityIndicatorView
 import Alamofire
+import SwiftyJSON
 
 class LoginViewController: UIViewController {
     @IBOutlet weak var usernameView: UIView!
@@ -54,23 +55,28 @@ class LoginViewController: UIViewController {
         let params : [String : String] = [
               "Username": username,
               "Password": psd,
-              "Mode": "Login"
+              "Mode": "Login",
+              "Phone": "",
+              "Photo": ""
               ]
 
-        
+        print(params)
+        print((Constants().BASEURL + Constants.APIPaths().loginPath))
         AF.request((Constants().BASEURL + Constants.APIPaths().loginPath), method: .post, parameters:params, encoder: .json).responseData { response in
             switch response.result{
             case .success(let data):
                 
                 let decoder = JSONDecoder()
                 do{
+                    print(JSON(data))
                     let jsonData = try decoder.decode(LoginModel.self, from: data)
-                    if jsonData.Auth == "sucess" {
+                    if jsonData.Auth == "success" {
                         if let parsedData = jsonData.userType {
                             if parsedData == "customer"{
                                 UserDefaults.standard.set("customer", forKey: "USERTYPE")
                                 UserDefaults.standard.set(jsonData.userID!, forKey: "USERID")
                                 UserDefaults.standard.set(username, forKey: "USEREMAIL")
+                                
                                 self.dismiss(animated: true)
                             }
                             else if parsedData == "restaurant"{

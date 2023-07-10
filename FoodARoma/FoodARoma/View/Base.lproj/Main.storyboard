@@ -87,10 +87,10 @@
             </objects>
             <point key="canvasLocation" x="1641" y="-298"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Main Navigation View Controller-->
         <scene sceneID="MRq-pt-doH">
             <objects>
-                <navigationController hidesBottomBarWhenPushed="YES" hidesBarsOnSwipe="YES" hidesBarsWhenKeyboardAppears="YES" id="HXe-XV-aVW" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="MainNavigationViewController" storyboardIdentifier="MainNavigationViewController" hidesBottomBarWhenPushed="YES" hidesBarsOnSwipe="YES" hidesBarsWhenKeyboardAppears="YES" id="HXe-XV-aVW" customClass="MainNavigationViewController" customModule="FoodARoma" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="J79-Nb-c9D">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -445,6 +445,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oDX-48-2vF">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="55"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="55" id="upg-Xc-1rl"/>
                                         </constraints>
@@ -562,7 +563,7 @@
                         <outlet property="accounbackgroundView" destination="v0M-N1-BfV" id="EKg-Kv-0Ci"/>
                         <outlet property="arrowBackground" destination="Tvy-P8-6SW" id="sgS-nm-bYG"/>
                         <outlet property="nouserView" destination="1df-yu-Y56" id="u1D-B2-Yp4"/>
-                        <outlet property="settingsBackground" destination="ID3-mb-Aqs" id="vxA-Sb-emf"/>
+                        <outlet property="settingsBackground" destination="9by-Xf-QVi" id="Kmq-3Y-w1b"/>
                         <outlet property="userImageView" destination="NVN-Cq-5Z2" id="QOr-LU-aHx"/>
                         <outlet property="userLabel" destination="afP-qc-4bO" id="y7k-d7-l5t"/>
                         <outlet property="useremailLabel" destination="RrT-8V-Avb" id="7hH-YF-fxO"/>
@@ -614,7 +615,7 @@
             <color red="0.95300000905990601" green="0.36100000143051147" blue="0.12200000137090683" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="homeBackgroundColor">
-            <color red="0.90570938590000005" green="0.88683885340000002" blue="0.85489630699999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.90600001811981201" green="0.88700002431869507" blue="0.85500001907348633" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>

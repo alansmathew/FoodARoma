@@ -1,8 +1,8 @@
 //
-//  HomeViewController.swift
+//  ResturentMenuViewController.swift
 //  FoodARoma
 //
-//  Created by Alan S Mathew on 2023-06-04.
+//  Created by alan on 2023-07-09.
 //
 
 import UIKit
@@ -10,11 +10,11 @@ import Alamofire
 import SwiftyJSON
 import NVActivityIndicatorView
 
-class HomeViewController: UIViewController {
+class ResturentMenuViewController: UIViewController {
 
-    @IBOutlet weak var specialCollectionVew: UICollectionView!
-    @IBOutlet weak var regularMenuCollectionVew: UICollectionView!
-    @IBOutlet weak var BeverageCollctionView: UICollectionView!
+    @IBOutlet weak var ResturentspecialCollectionVew: UICollectionView!
+    @IBOutlet weak var ResturentregularMenuCollectionVew: UICollectionView!
+    @IBOutlet weak var ResturentBeverageCollctionView: UICollectionView!
     
     private var loading : (NVActivityIndicatorView,UIView)?
     
@@ -28,31 +28,29 @@ class HomeViewController: UIViewController {
         
         self.hideKeyboardWhenTappedAround()
 
-        specialCollectionVew.delegate = self
-        specialCollectionVew.dataSource = self
-        regularMenuCollectionVew.dataSource = self
-        regularMenuCollectionVew.delegate = self
-        BeverageCollctionView.dataSource = self
-        BeverageCollctionView.delegate = self
+        ResturentspecialCollectionVew.delegate = self
+        ResturentspecialCollectionVew.dataSource = self
+        ResturentregularMenuCollectionVew.dataSource = self
+        ResturentregularMenuCollectionVew.delegate = self
+        ResturentBeverageCollctionView.dataSource = self
+        ResturentBeverageCollctionView.delegate = self
         
-        
-        specialCollectionVew.register(UINib(nibName: "HomeMenuCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HomeMenuCelliIdentifier")
-        regularMenuCollectionVew.register(UINib(nibName: "HomeMenuCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HomeMenuCelliIdentifier")
-        BeverageCollctionView.register(UINib(nibName: "BeverageMenuCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HomeBeverageIdentifier")
-        
+        ResturentspecialCollectionVew.register(UINib(nibName: "HomeMenuCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HomeMenuCelliIdentifier")
+        ResturentregularMenuCollectionVew.register(UINib(nibName: "HomeMenuCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HomeMenuCelliIdentifier")
+        ResturentBeverageCollctionView.register(UINib(nibName: "BeverageMenuCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HomeBeverageIdentifier")
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
-    }
-
-    override func viewDidLayoutSubviews() {
         loading = customAnimation()
         loadingProtocol(with: loading! ,true)
         fetchAllMenu()
     }
     
     func populateCollectionViews(){
+//        print(AllMenuItems)
+//        print(regMenu)
         if let allmenuitems = AllMenuItems {
             for x in allmenuitems.AllMenu{
                 if (x.menu_Cat == "special"){
@@ -65,26 +63,17 @@ class HomeViewController: UIViewController {
                     bevMenu?.append(x)
                 }
             }
-            specialCollectionVew.reloadData()
-            regularMenuCollectionVew.reloadData()
-            BeverageCollctionView.reloadData()
+            ResturentspecialCollectionVew.reloadData()
+            ResturentregularMenuCollectionVew.reloadData()
+            ResturentBeverageCollctionView.reloadData()
         }
     }
     
-    @IBAction func searchclick(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "HomeOrder", bundle: nil)
-        let viewC = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
-        viewC.AllMenuData = AllMenuItems?.AllMenu
-        navigationController?.pushViewController(viewC, animated: true)
-    }
-    
-    func fetchAllMenu(){
-        
+    private func fetchAllMenu(){
         if let allmenuitem = AllMenuItems {
             self.loadingProtocol(with: self.loading! ,false)
         }
         else{
-            
             let params : [String : String] = [
                     "Mode" : "fetchMenu"
                 ]
@@ -115,23 +104,24 @@ class HomeViewController: UIViewController {
             }
         }
     }
+
+    @IBAction func addmenuClick(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "ResturentAddOrderStoryboard", bundle: nil)
+        let viewC = storyboard.instantiateViewController(withIdentifier: "ResturentAddNewOrderViewController") as! ResturentAddNewOrderViewController
+        navigationController?.pushViewController(viewC, animated: true)
+    }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-            super.touchesBegan(touches, with: event)
-            self.view.endEditing(true)
-        }
 
 }
 
-
-extension HomeViewController : UICollectionViewDataSource {
+extension ResturentMenuViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
-        case specialCollectionVew:
+        case ResturentspecialCollectionVew:
             return specialMenu?.count ?? 0
-        case regularMenuCollectionVew:
+        case ResturentregularMenuCollectionVew:
             return regMenu?.count ?? 0
-        case BeverageCollctionView:
+        case ResturentBeverageCollctionView:
             return bevMenu?.count ?? 0
         default:
             return 0
@@ -143,8 +133,8 @@ extension HomeViewController : UICollectionViewDataSource {
         var cell = UICollectionViewCell()
         
         switch collectionView {
-            case specialCollectionVew:
-                let cell1 = specialCollectionVew.dequeueReusableCell(withReuseIdentifier: "HomeMenuCelliIdentifier", for: indexPath) as! HomeMenuCollectionViewCell
+            case ResturentspecialCollectionVew:
+                let cell1 = ResturentspecialCollectionVew.dequeueReusableCell(withReuseIdentifier: "HomeMenuCelliIdentifier", for: indexPath) as! HomeMenuCollectionViewCell
                 if let specialmenuitem = specialMenu {
                     cell1.menuNameLabel.text = specialmenuitem[indexPath.row].menu_Name
                     cell1.priceLabel.text = "$ "+specialmenuitem[indexPath.row].menu_Price
@@ -154,8 +144,8 @@ extension HomeViewController : UICollectionViewDataSource {
                 }
                 return cell1
                 
-            case regularMenuCollectionVew:
-                let cell2 = regularMenuCollectionVew.dequeueReusableCell(withReuseIdentifier: "HomeMenuCelliIdentifier", for: indexPath) as! HomeMenuCollectionViewCell
+            case ResturentregularMenuCollectionVew:
+                let cell2 = ResturentregularMenuCollectionVew.dequeueReusableCell(withReuseIdentifier: "HomeMenuCelliIdentifier", for: indexPath) as! HomeMenuCollectionViewCell
                 if let regularMenu = regMenu {
                     cell2.menuNameLabel.text = regularMenu[indexPath.row].menu_Name
                     cell2.priceLabel.text = "$ "+regularMenu[indexPath.row].menu_Price
@@ -166,27 +156,26 @@ extension HomeViewController : UICollectionViewDataSource {
                 
                 return cell2
             
-            case BeverageCollctionView:
-                cell = BeverageCollctionView.dequeueReusableCell(withReuseIdentifier: "HomeBeverageIdentifier", for: indexPath) as! BeverageMenuCollectionViewCell
+            case ResturentBeverageCollctionView:
+                cell = ResturentBeverageCollctionView.dequeueReusableCell(withReuseIdentifier: "HomeBeverageIdentifier", for: indexPath) as! BeverageMenuCollectionViewCell
             default:
-                cell = specialCollectionVew.dequeueReusableCell(withReuseIdentifier: "HomeMenuCelliIdentifier", for: indexPath) as! HomeMenuCollectionViewCell
+                cell = ResturentspecialCollectionVew.dequeueReusableCell(withReuseIdentifier: "HomeMenuCelliIdentifier", for: indexPath) as! HomeMenuCollectionViewCell
         }
-        
         return cell
     }
     
 }
 
-extension HomeViewController : UICollectionViewDelegate {
+extension ResturentMenuViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
-        case specialCollectionVew:
+        case ResturentspecialCollectionVew:
             let storyboard = UIStoryboard(name: "HomeOrder", bundle: nil)
             let viewC = storyboard.instantiateViewController(withIdentifier: "OrderDetailsViewController") as! OrderDetailsViewController
             viewC.SelectedOrder = specialMenu![indexPath.row]
             navigationController?.pushViewController(viewC, animated: true)
             
-        case BeverageCollctionView:
+        case ResturentBeverageCollctionView:
 //            still have to work on this
             let storyboard = UIStoryboard(name: "HomeOrder", bundle: nil)
             let viewC = storyboard.instantiateViewController(withIdentifier: "OrderDetailsViewController") as! OrderDetailsViewController
@@ -203,5 +192,3 @@ extension HomeViewController : UICollectionViewDelegate {
         
     }
 }
-
-
