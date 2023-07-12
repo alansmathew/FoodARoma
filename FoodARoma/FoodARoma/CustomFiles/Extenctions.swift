@@ -4,7 +4,7 @@
 //
 //  Created by alan on 2023-07-04.
 //
-
+import Foundation
 import UIKit
 
 
@@ -20,3 +20,4 @@ extension UIViewController {
         }
     }
 }
+

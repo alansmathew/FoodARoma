@@ -28,11 +28,16 @@ class OrderDetailsViewController: UIViewController {
     @IBOutlet weak var commentsTable: UITableView!
     @IBOutlet weak var bevCollectionView: UICollectionView!
     @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var moreCommentsbutton: UIButton!
+    
+    
     
     var SelectedOrder : allMenu?
     
     var quantity = 1
     var cellHeight = 0.0
+    
+    var ratingStars : [UIImageView] = [UIImageView]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,12 +53,15 @@ class OrderDetailsViewController: UIViewController {
         commentsTable.dataSource = self
         
         commentsTable.register(UINib(nibName: "CommentTableViewCell", bundle: nil), forCellReuseIdentifier: "commentReusableidentifier")
+        commentsTable.register(UINib(nibName: "EmptyTableViewCell", bundle: nil), forCellReuseIdentifier: "emptyCellIdentifier")
         
         topView.layer.cornerRadius = 20
         topView.layer.shadowColor = UIColor.black.cgColor;
         topView.layer.shadowOffset = CGSize(width: 0, height: 3)
         topView.layer.shadowOpacity = 0.12;
         topView.layer.shadowRadius = 20;
+        
+        ratingStars = [rStar1,rStar2,rStar3,RStar4,RStar5]
         
 //        commentsTable.layoutIfNeeded()
 //        print(commentsTable.contentSize.height)
@@ -72,8 +80,26 @@ class OrderDetailsViewController: UIViewController {
             menuDec.text = selectedOrder.menu_Dec
             menuPrice.text = "$ "+selectedOrder.menu_Price
             menuTime.text = selectedOrder.menu_Time + " Min"
-            menuRating.text = "#>^"
-            totalNumberReview.text = "@#$%"
+            menuRating.text = selectedOrder.avg_Rating
+            totalNumberReview.text = selectedOrder.total_Ratings
+
+            for x in 0...4{
+                
+                if Double(x) < Double(selectedOrder.avg_Rating) ?? 0{
+                    ratingStars[x].image = UIImage(systemName: "star.fill")
+                }
+                else{
+                    ratingStars[x].image = UIImage(systemName: "star")
+                }
+            }
+            
+            if Double(selectedOrder.total_Ratings) ?? 0.0 > 3.0 {
+                moreCommentsbutton.isHidden = false
+                moreCommentsbutton.setTitle(selectedOrder.total_Ratings + " more", for: .normal)
+            }
+            else{
+                moreCommentsbutton.isHidden = true
+            }
         }
     }
     
@@ -111,23 +137,45 @@ extension OrderDetailsViewController : UICollectionViewDelegate{
 
 extension OrderDetailsViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        if Int(SelectedOrder?.total_Ratings ?? "0") ?? 1 == 0 {
+            return 1
+        }else{
+            return Int(SelectedOrder?.total_Ratings ?? "0") ?? 1
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = commentsTable.dequeueReusableCell(withIdentifier: "commentReusableidentifier", for: indexPath) as! CommentTableViewCell
-        if indexPath.row == 1{
-            cell.commentLable.text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+        
+        
+        if let ratings = SelectedOrder?.ratings, ratings.count > 0{
+            let cell = commentsTable.dequeueReusableCell(withIdentifier: "commentReusableidentifier", for: indexPath) as! CommentTableViewCell
+            cell.commentLable.text = ratings[indexPath.row].comment
             
+            let cellRatingimages = [cell.star1image,cell.star2image,cell.star3image,cell.star4image,cell.star5image]
+            for x in 0...4{
+                
+                if Double(x) < Double(ratings[indexPath.row].rating) ?? 0{
+                    cellRatingimages[x]!.image = UIImage(systemName: "star.fill")
+                }
+                else{
+                    cellRatingimages[x]!.image = UIImage(systemName: "star")
+                }
+            }
+            
+            cellHeight += cell.layer.frame.height
+            contentHeight.constant = cellHeight
+            return cell
         }
-        if indexPath.row == 2 {
-            cell.commentLable.text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,"
+        else{
+            print("comes here")
+            let cell = commentsTable.dequeueReusableCell(withIdentifier: "emptyCellIdentifier", for: indexPath) as! EmptyTableViewCell
+            cellHeight += cell.layer.frame.height
+            contentHeight.constant = cellHeight
+            return cell
         }
-        cellHeight += cell.layer.frame.height
-        contentHeight.constant = cellHeight * 0.83
         
         
-        return cell
     }
     
 }

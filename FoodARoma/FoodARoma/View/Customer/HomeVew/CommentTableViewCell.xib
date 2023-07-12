@@ -110,6 +110,13 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="commentLable" destination="dLo-Cw-jS2" id="wtg-aV-qId"/>
+                <outlet property="customerNameLabel" destination="8LP-Fi-Vbl" id="VtB-bG-tHf"/>
+                <outlet property="star1image" destination="IxM-og-qo0" id="NfI-Gf-fJd"/>
+                <outlet property="star2image" destination="G8h-aA-N7U" id="90c-2o-ZGN"/>
+                <outlet property="star3image" destination="8vz-hN-6Oq" id="Oux-oQ-dew"/>
+                <outlet property="star4image" destination="8C5-0F-ijM" id="OmK-yO-dHZ"/>
+                <outlet property="star5image" destination="e1e-FO-Iyp" id="2gT-Qt-rpv"/>
+                <outlet property="timeLabel" destination="LJM-GP-LZP" id="tuD-d8-wnO"/>
             </connections>
             <point key="canvasLocation" x="157.25190839694656" y="62.676056338028175"/>
         </tableViewCell>

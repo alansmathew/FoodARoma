@@ -285,7 +285,7 @@
                                                         </constraints>
                                                         <color key="tintColor" name="GreenColor"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="tinted" image="message" catalog="system" imagePlacement="leading" title="Add Comment &amp; Review" imagePadding="10">
+                                                        <buttonConfiguration key="configuration" style="tinted" image="pencil.line" catalog="system" imagePlacement="leading" title="Add Comment &amp; Review" imagePadding="10">
                                                             <backgroundConfiguration key="background">
                                                                 <color key="backgroundColor" red="0.075000002979999994" green="0.3650000095" blue="0.1840000004" alpha="0.16796753740000001" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </backgroundConfiguration>
@@ -459,6 +459,7 @@
                         <outlet property="menuPrice" destination="YNR-PL-r3f" id="xtS-OJ-V1M"/>
                         <outlet property="menuRating" destination="d05-Bs-xbR" id="JQA-gu-IRg"/>
                         <outlet property="menuTime" destination="Gsp-eP-jlD" id="h9s-uk-1Gf"/>
+                        <outlet property="moreCommentsbutton" destination="Plb-my-ddN" id="kl8-9b-uC7"/>
                         <outlet property="quantityLabel" destination="cZP-dA-65c" id="YYF-tG-Cae"/>
                         <outlet property="rStar1" destination="jAA-F7-vfj" id="4iB-ig-lev"/>
                         <outlet property="rStar2" destination="Rft-VS-EOP" id="IPu-7H-srE"/>
@@ -493,7 +494,7 @@
                                 </constraints>
                                 <color key="tintColor" name="GreenColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" image="message" catalog="system" imagePlacement="leading" title="Add Comment &amp; Review" imagePadding="10">
+                                <buttonConfiguration key="configuration" style="tinted" image="pencil.line" catalog="system" imagePlacement="leading" title="Add Comment &amp; Review" imagePadding="10">
                                     <backgroundConfiguration key="background" cornerRadius="10">
                                         <color key="backgroundColor" red="0.075000002980232239" green="0.36500000953674316" blue="0.18400000035762787" alpha="0.16796753738100165" colorSpace="custom" customColorSpace="sRGB"/>
                                     </backgroundConfiguration>
@@ -647,6 +648,71 @@
                                                             </imageView>
                                                         </subviews>
                                                     </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EMD-U8-8Sa">
+                                                        <rect key="frame" x="111.66666666666666" y="33" width="130" height="34"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NzM-BK-cPO">
+                                                                <rect key="frame" x="0.0" y="0.0" width="30" height="34"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="30" id="vxO-jE-Dck"/>
+                                                                </constraints>
+                                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="1"/>
+                                                                <connections>
+                                                                    <action selector="ratingButtonClick:" destination="6KE-eq-d0Q" eventType="touchUpInside" id="dpM-ok-Fu1"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NqA-Qu-5iQ">
+                                                                <rect key="frame" x="30" y="0.0" width="25" height="34"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="25" id="NsD-mL-FUq"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="2"/>
+                                                                <connections>
+                                                                    <action selector="ratingButtonClick:" destination="6KE-eq-d0Q" eventType="touchUpInside" id="89k-Cb-Lwc"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HWp-1Q-qXS">
+                                                                <rect key="frame" x="55" y="0.0" width="25" height="34"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="25" id="mL2-hd-rOU"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="3"/>
+                                                                <connections>
+                                                                    <action selector="ratingButtonClick:" destination="6KE-eq-d0Q" eventType="touchUpInside" id="cX1-BJ-Ycf"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0mR-eG-cTJ">
+                                                                <rect key="frame" x="80" y="0.0" width="25" height="34"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="25" id="pal-bR-Atv"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="4"/>
+                                                                <connections>
+                                                                    <action selector="ratingButtonClick:" destination="6KE-eq-d0Q" eventType="touchUpInside" id="pOj-hh-tgm"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K3r-4x-mSJ">
+                                                                <rect key="frame" x="105" y="0.0" width="25" height="34"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="25" id="PPm-qh-rfY"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="5"/>
+                                                                <connections>
+                                                                    <action selector="ratingButtonClick:" destination="6KE-eq-d0Q" eventType="touchUpInside" id="gki-rW-7GR"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VjP-eH-yAM">
                                                         <rect key="frame" x="0.0" y="100" width="353" height="190"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -664,6 +730,9 @@
                                                     <constraint firstAttribute="trailing" secondItem="VjP-eH-yAM" secondAttribute="trailing" id="NaV-UZ-fHh"/>
                                                     <constraint firstAttribute="height" constant="300" id="RPW-fh-1sJ"/>
                                                     <constraint firstItem="s3d-95-D6e" firstAttribute="centerX" secondItem="wFt-Rt-dzN" secondAttribute="centerX" id="SKF-CE-731"/>
+                                                    <constraint firstItem="EMD-U8-8Sa" firstAttribute="centerX" secondItem="wFt-Rt-dzN" secondAttribute="centerX" id="cPd-Ie-RqA"/>
+                                                    <constraint firstItem="EMD-U8-8Sa" firstAttribute="top" secondItem="wTv-UA-rXX" secondAttribute="top" constant="23" id="f6N-d3-W93"/>
+                                                    <constraint firstItem="wTv-UA-rXX" firstAttribute="bottom" secondItem="EMD-U8-8Sa" secondAttribute="bottom" constant="23" id="ge6-g8-1wK"/>
                                                     <constraint firstItem="VjP-eH-yAM" firstAttribute="leading" secondItem="wFt-Rt-dzN" secondAttribute="leading" id="mRX-i7-TJS"/>
                                                     <constraint firstItem="wTv-UA-rXX" firstAttribute="bottom" secondItem="s3d-95-D6e" secondAttribute="bottom" constant="27.5" id="raT-ow-kw2"/>
                                                     <constraint firstItem="VjP-eH-yAM" firstAttribute="top" secondItem="wTv-UA-rXX" secondAttribute="bottom" constant="10" id="wRW-f4-4m0"/>
@@ -775,6 +844,16 @@
                         <outlet property="backofbackbuttomView" destination="EHH-iT-dsy" id="EX7-9k-Z29"/>
                         <outlet property="postButton" destination="h4S-K7-JsT" id="6TW-hL-sqU"/>
                         <outlet property="reviewTextView" destination="VjP-eH-yAM" id="FWv-Cp-bMV"/>
+                        <outlet property="sButton1" destination="NzM-BK-cPO" id="3sh-r6-xVj"/>
+                        <outlet property="sButton2" destination="NqA-Qu-5iQ" id="JTf-Wp-A9e"/>
+                        <outlet property="sButton3" destination="HWp-1Q-qXS" id="YQd-n9-x7o"/>
+                        <outlet property="sButton4" destination="0mR-eG-cTJ" id="LnF-fr-F6z"/>
+                        <outlet property="sButton5" destination="K3r-4x-mSJ" id="nds-MC-xIZ"/>
+                        <outlet property="star1" destination="5S3-LZ-qHP" id="zlm-AJ-WWD"/>
+                        <outlet property="star2" destination="9hV-sT-jh1" id="QLa-jw-kBg"/>
+                        <outlet property="star3" destination="WP0-bY-5ra" id="D40-UT-gXn"/>
+                        <outlet property="star4" destination="REq-fC-xjq" id="oET-gW-HPZ"/>
+                        <outlet property="star5" destination="51v-1L-i7x" id="efP-1P-Td0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0r-Au-1D8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -836,8 +915,8 @@
         <image name="backofRatings" width="325" height="115"/>
         <image name="customButtonDetails" width="310" height="114"/>
         <image name="imagebackground" width="407" height="403"/>
-        <image name="message" catalog="system" width="128" height="116"/>
         <image name="minusbutton" width="68" height="75"/>
+        <image name="pencil.line" catalog="system" width="128" height="98"/>
         <image name="pizza1" width="150" height="150"/>
         <image name="plus.message" catalog="system" width="128" height="116"/>
         <image name="plusbutton" width="68" height="75"/>
@@ -855,7 +934,7 @@
             <color red="0.95300000905990601" green="0.36100000143051147" blue="0.12200000137090683" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="homeBackgroundColor">
-            <color red="0.96100002527236938" green="0.94599997997283936" blue="0.9179999828338623" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.90600001811981201" green="0.88700002431869507" blue="0.85500001907348633" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>

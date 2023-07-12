@@ -13,6 +13,21 @@ class RatingsViewController: UIViewController {
     @IBOutlet weak var backbutton: UIButton!
     @IBOutlet weak var backofbackbuttomView: UIView!
     @IBOutlet weak var postButton: UIButton!
+    
+    @IBOutlet weak var star1: UIImageView!
+    @IBOutlet weak var star2: UIImageView!
+    @IBOutlet weak var star3: UIImageView!
+    @IBOutlet weak var star4: UIImageView!
+    @IBOutlet weak var star5: UIImageView!
+    
+    @IBOutlet weak var sButton1: UIButton!
+    @IBOutlet weak var sButton2: UIButton!
+    @IBOutlet weak var sButton3: UIButton!
+    @IBOutlet weak var sButton4: UIButton!
+    @IBOutlet weak var sButton5: UIButton!
+    
+    var ratingStars : [UIImageView] = [UIImageView]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +38,8 @@ class RatingsViewController: UIViewController {
         reviewTextView.delegate = self
         
         self.hideKeyboardWhenTappedAround()
+        
+        ratingStars = [star1,star2,star3,star4,star5]
         
         
         postButton.layer.cornerRadius = 12
@@ -46,6 +63,17 @@ class RatingsViewController: UIViewController {
         
         
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func ratingButtonClick(_ sender: UIButton) {
+        for x in 0...4{
+            if Double(sender.titleLabel?.text ?? "0") ?? 0 > Double(x) {
+                ratingStars[x].image = UIImage(systemName: "star.fill")
+            }
+            else{
+                ratingStars[x].image = UIImage(systemName: "star")
+            }
+        }
     }
     
     @IBAction func backButtonAction(_ sender: UIButton) {

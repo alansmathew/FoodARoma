@@ -40,6 +40,8 @@
 		E75279332A44C7E000AF3EA2 /* customLoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75279322A44C7E000AF3EA2 /* customLoadingAnimation.swift */; };
 		E75279372A44C87200AF3EA2 /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = E75279362A44C87200AF3EA2 /* NVActivityIndicatorView */; };
 		E75279392A44C87200AF3EA2 /* NVActivityIndicatorViewExtended in Frameworks */ = {isa = PBXBuildFile; productRef = E75279382A44C87200AF3EA2 /* NVActivityIndicatorViewExtended */; };
+		E76933612A5E569700C31184 /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769335F2A5E569700C31184 /* EmptyTableViewCell.swift */; };
+		E76933622A5E569700C31184 /* EmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E76933602A5E569700C31184 /* EmptyTableViewCell.xib */; };
 		E78AF08A2A57BC3F00B40B18 /* HomeMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78AF0882A57BC3F00B40B18 /* HomeMenuTableViewCell.swift */; };
 		E78AF08B2A57BC3F00B40B18 /* HomeMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E78AF0892A57BC3F00B40B18 /* HomeMenuTableViewCell.xib */; };
 		E79F8FD52A5BA23C00482CE1 /* ResturentAddNewOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79F8FD42A5BA23C00482CE1 /* ResturentAddNewOrderViewController.swift */; };
@@ -111,6 +113,8 @@
 		E7377C152A5B5EB700F5C29F /* ResturentSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResturentSettingsViewController.swift; sourceTree = "<group>"; };
 		E7377C182A5B609A00F5C29F /* MainNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationViewController.swift; sourceTree = "<group>"; };
 		E75279322A44C7E000AF3EA2 /* customLoadingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customLoadingAnimation.swift; sourceTree = "<group>"; };
+		E769335F2A5E569700C31184 /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
+		E76933602A5E569700C31184 /* EmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyTableViewCell.xib; sourceTree = "<group>"; };
 		E78AF0882A57BC3F00B40B18 /* HomeMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMenuTableViewCell.swift; sourceTree = "<group>"; };
 		E78AF0892A57BC3F00B40B18 /* HomeMenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeMenuTableViewCell.xib; sourceTree = "<group>"; };
 		E79F8FD42A5BA23C00482CE1 /* ResturentAddNewOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResturentAddNewOrderViewController.swift; sourceTree = "<group>"; };
@@ -267,6 +271,7 @@
 		992781DD2A311CA500F10E5D /* HomeVIew */ = {
 			isa = PBXGroup;
 			children = (
+				E769335F2A5E569700C31184 /* EmptyTableViewCell.swift */,
 				E7BFD10B2A5240000016445A /* OrderDetailsViewController.swift */,
 				E7F437722A534F5600B3D4CD /* CommentsViewController.swift */,
 				E7F437762A53502800B3D4CD /* CommentTableViewCell.swift */,
@@ -334,6 +339,7 @@
 				E7BFD10D2A5240350016445A /* HomeOrder.storyboard */,
 				E7F437772A53502800B3D4CD /* CommentTableViewCell.xib */,
 				E78AF0892A57BC3F00B40B18 /* HomeMenuTableViewCell.xib */,
+				E76933602A5E569700C31184 /* EmptyTableViewCell.xib */,
 			);
 			path = HomeVew;
 			sourceTree = "<group>";
@@ -504,6 +510,7 @@
 				991C28DD2A2D2DDF00201DE7 /* LaunchScreen.storyboard in Resources */,
 				992ECBE62A3B7FBD00B8745A /* ResturentOrderscell.xib in Resources */,
 				991C28DA2A2D2DDF00201DE7 /* Assets.xcassets in Resources */,
+				E76933622A5E569700C31184 /* EmptyTableViewCell.xib in Resources */,
 				99A623B42A3239D6003BF199 /* BeverageMenuCollectionViewCell.xib in Resources */,
 				E7F437792A53502800B3D4CD /* CommentTableViewCell.xib in Resources */,
 				991736B62A379FD800824B14 /* LoginScreen.storyboard in Resources */,
@@ -543,6 +550,7 @@
 				E7D042F22A53A11300AEDC5E /* RatingsViewController.swift in Sources */,
 				E79F8FD52A5BA23C00482CE1 /* ResturentAddNewOrderViewController.swift in Sources */,
 				991736B82A37CFF700824B14 /* LoginViewController.swift in Sources */,
+				E76933612A5E569700C31184 /* EmptyTableViewCell.swift in Sources */,
 				E7C0D6212A4A4BBF00AB9CD3 /* BuildOwnViewController.swift in Sources */,
 				991C28D52A2D2DD900201DE7 /* InitalAuthScreen.swift in Sources */,
 				E7D034112A5458B5008D8BDF /* Extenctions.swift in Sources */,

@@ -148,7 +148,7 @@ extension HomeViewController : UICollectionViewDataSource {
                 if let specialmenuitem = specialMenu {
                     cell1.menuNameLabel.text = specialmenuitem[indexPath.row].menu_Name
                     cell1.priceLabel.text = "$ "+specialmenuitem[indexPath.row].menu_Price
-                    cell1.ratingLabel.text = "4.5"
+                    cell1.ratingLabel.text = specialmenuitem[indexPath.row].avg_Rating == "None" ? "0" : specialmenuitem[indexPath.row].avg_Rating
                     cell1.timeLabel.text = specialmenuitem[indexPath.row].menu_Time + " Min"
                     cell1.descLabel.text = specialmenuitem[indexPath.row].menu_Dec
                 }
@@ -159,7 +159,7 @@ extension HomeViewController : UICollectionViewDataSource {
                 if let regularMenu = regMenu {
                     cell2.menuNameLabel.text = regularMenu[indexPath.row].menu_Name
                     cell2.priceLabel.text = "$ "+regularMenu[indexPath.row].menu_Price
-                    cell2.ratingLabel.text = "4.5"
+                    cell2.ratingLabel.text = regularMenu[indexPath.row].avg_Rating == "None" ? "0" : regularMenu[indexPath.row].avg_Rating
                     cell2.timeLabel.text = regularMenu[indexPath.row].menu_Time + " Min"
                     cell2.descLabel.text = regularMenu[indexPath.row].menu_Dec
                 }
