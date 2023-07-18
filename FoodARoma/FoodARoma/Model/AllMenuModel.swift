@@ -14,6 +14,7 @@ struct AllMenuModel : Codable {
 
 // MARK: - AllMenu
 struct allMenu : Codable {
+    var menu_id : Int
     var menu_Time, menu_Cat, menu_Price,menu_Name,menu_Dec,avg_Rating,total_Ratings: String
     var menu_Photo: String?
     var ratings : [Ratings]

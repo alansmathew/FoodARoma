@@ -73,21 +73,34 @@
                                                             <constraint firstAttribute="width" constant="365" id="yNB-SR-Yj1"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pizza1" translatesAutoresizingMaskIntoConstraints="NO" id="OTb-E2-79s">
-                                                        <rect key="frame" x="51.666666666666657" y="25" width="290" height="290"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="OTb-E2-79s">
+                                                        <rect key="frame" x="51.666666666666657" y="26" width="290" height="288.66666666666669"/>
+                                                        <color key="tintColor" red="0.82355898620000001" green="0.86327809099999997" blue="0.83136898280000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="290" id="g23-rK-41l"/>
                                                             <constraint firstAttribute="height" constant="290" id="gKb-vn-8hM"/>
                                                         </constraints>
                                                     </imageView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEj-aB-JbP">
+                                                        <rect key="frame" x="20" y="20" width="353" height="300"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <connections>
+                                                            <action selector="imagepickerButtonClick:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="TCu-e0-0e1"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="hEj-aB-JbP" secondAttribute="trailing" constant="20" id="8nj-GW-dPd"/>
                                                     <constraint firstItem="oH9-y2-GkS" firstAttribute="centerX" secondItem="O7M-En-eVZ" secondAttribute="centerX" id="ATO-f2-CPa"/>
+                                                    <constraint firstItem="hEj-aB-JbP" firstAttribute="top" secondItem="O7M-En-eVZ" secondAttribute="top" constant="20" id="E7i-mQ-Fkf"/>
                                                     <constraint firstItem="oH9-y2-GkS" firstAttribute="centerY" secondItem="O7M-En-eVZ" secondAttribute="centerY" id="Vi0-lb-NwK"/>
                                                     <constraint firstItem="OTb-E2-79s" firstAttribute="centerX" secondItem="O7M-En-eVZ" secondAttribute="centerX" id="YwN-JF-icc"/>
                                                     <constraint firstItem="OTb-E2-79s" firstAttribute="centerY" secondItem="O7M-En-eVZ" secondAttribute="centerY" id="f6X-Vf-1zp"/>
                                                     <constraint firstAttribute="height" constant="340" id="tZC-Ni-nhI"/>
+                                                    <constraint firstAttribute="bottom" secondItem="hEj-aB-JbP" secondAttribute="bottom" constant="20" id="zYJ-lv-1Oy"/>
+                                                    <constraint firstItem="hEj-aB-JbP" firstAttribute="leading" secondItem="O7M-En-eVZ" secondAttribute="leading" constant="20" id="zpl-XY-avQ"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5I-ba-v3M" userLabel="lastView">
@@ -261,6 +274,7 @@
                         <outlet property="addbuttonClick" destination="6N0-1D-Ikd" id="dRh-tR-tcb"/>
                         <outlet property="discriptionView" destination="g09-er-ZUg" id="tiz-Ib-JXW"/>
                         <outlet property="menuName" destination="WVp-mj-Yxc" id="jwC-4Q-j6E"/>
+                        <outlet property="pizzaImage" destination="OTb-E2-79s" id="JJL-RE-qd1"/>
                         <outlet property="prerTime" destination="e9e-Kt-Tan" id="gso-4B-D8u"/>
                         <outlet property="priceTExt" destination="aJG-dz-diG" id="0PX-wb-sPb"/>
                         <outlet property="selectCat" destination="rlW-Gb-LWq" id="O4l-Sq-tK9"/>
@@ -273,7 +287,7 @@
     </scenes>
     <resources>
         <image name="imagebackground" width="407" height="403"/>
-        <image name="pizza1" width="150" height="150"/>
+        <image name="photo.circle" catalog="system" width="128" height="123"/>
         <image name="plus.square.on.square" catalog="system" width="128" height="116"/>
         <namedColor name="Custom black">
             <color red="0.11400000005960464" green="0.11400000005960464" blue="0.11800000071525574" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

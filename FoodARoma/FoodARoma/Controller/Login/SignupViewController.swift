@@ -10,6 +10,9 @@ import Alamofire
 
 class SignupViewController: UIViewController {
 
+    @IBOutlet weak var Vname: UILabel!
+    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var nameView: UIView!
     @IBOutlet weak var Vcpsd: UILabel!
     @IBOutlet weak var Vpsd: UILabel!
     @IBOutlet weak var Vusername: UILabel!
@@ -28,6 +31,7 @@ class SignupViewController: UIViewController {
         setupUI()
         self.hideKeyboardWhenTappedAround()
         
+        Vname.isHidden = true
         Vcpsd.isHidden = true
         Vpsd.isHidden = true
         Vusername.isHidden = true
@@ -47,6 +51,7 @@ class SignupViewController: UIViewController {
         }
     
     func setupUI(){
+        nameView.layer.cornerRadius = 12
         emailVIew.layer.cornerRadius = 12
         passwordView.layer.cornerRadius = 12
         confirmPassword.layer.cornerRadius = 12
@@ -82,13 +87,23 @@ class SignupViewController: UIViewController {
         let username = usernameTextField.text!
         var psd = passwordTextfield.text!
         let cpsd = confirmPasswordTextField.text!
+        let name = nameField.text!
         
+        var NameV = false
         var userV = false
         var psdV = false
         var cpsdV = false
         
         
         // validation
+        if name.isEmpty{
+            NameV = false
+            Vusername.isHidden = false
+        } else {
+            NameV = true
+            Vusername.isHidden = true
+        }
+        
         if validateEmail(username) {
             userV = true
         } else {
@@ -111,14 +126,15 @@ class SignupViewController: UIViewController {
             Vcpsd.isHidden = false
         }
         
-        if (userV == true) && (psdV == true) && (cpsdV == true){
+        if (userV == true) && (psdV == true) && (cpsdV == true) && (NameV == true){
             
             let params : [String : String] = [
                   "Username": username,
                   "Password": psd,
                   "Mode": "Registration",
                   "Phone": "",
-                  "Photo": ""
+                  "Photo": "",
+                  "Name" : name
                 ]
             AF.request((Constants().BASEURL + Constants.APIPaths().loginPath), method: .post, parameters:params, encoder: .json).responseData { response in
                 switch response.result{
@@ -127,11 +143,12 @@ class SignupViewController: UIViewController {
                     let decoder = JSONDecoder()
                     do{
                         let jsonData = try decoder.decode(RegistrationModel.self, from: data)
-                        if jsonData.message == "sucess" {
+                        if jsonData.message == "success" {
                         
                             UserDefaults.standard.set("customer", forKey: "USERTYPE")
                             UserDefaults.standard.set(jsonData.userID!, forKey: "USERID")
                             UserDefaults.standard.set(username, forKey: "USEREMAIL")
+                            UserDefaults.standard.set(name, forKey: "NAME")
                             self.dismiss(animated: true)
                             self.navigationController?.popToRootViewController(animated: true)
             
@@ -158,6 +175,7 @@ class SignupViewController: UIViewController {
 
 extension SignupViewController : UITextFieldDelegate{
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        Vname.isHidden = true
         Vcpsd.isHidden = true
         Vpsd.isHidden = true
         Vusername.isHidden = true

@@ -40,7 +40,6 @@ class ResturentMenuViewController: UIViewController {
         ResturentBeverageCollctionView.register(UINib(nibName: "BeverageMenuCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HomeBeverageIdentifier")
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
         loading = customAnimation()
@@ -111,7 +110,27 @@ class ResturentMenuViewController: UIViewController {
         navigationController?.pushViewController(viewC, animated: true)
     }
     
-
+    @IBAction func shoeMoreBev(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "HomeOrder", bundle: nil)
+        let viewC = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
+        viewC.commingPlatform = "Beverages"
+        viewC.AllMenuData = bevMenu
+        navigationController?.pushViewController(viewC, animated: true)
+    }
+    @IBAction func showMoreMenu(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "HomeOrder", bundle: nil)
+        let viewC = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
+        viewC.AllMenuData = regMenu
+        viewC.commingPlatform = "Menu"
+        navigationController?.pushViewController(viewC, animated: true)
+    }
+    @IBAction func ShowMoreSpecial(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "HomeOrder", bundle: nil)
+        let viewC = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
+        viewC.commingPlatform = "Special Menus"
+        viewC.AllMenuData = specialMenu
+        navigationController?.pushViewController(viewC, animated: true)
+    }
 }
 
 extension ResturentMenuViewController : UICollectionViewDataSource {

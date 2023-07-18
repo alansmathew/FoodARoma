@@ -13,6 +13,7 @@ struct LoginModel : Codable {
     var message : String
     var userID : Int?
     var userType : String?
+    var name : String?
 }
 
 struct AddMenuModel : Codable {

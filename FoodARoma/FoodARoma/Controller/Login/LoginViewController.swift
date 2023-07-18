@@ -76,6 +76,12 @@ class LoginViewController: UIViewController {
                                 UserDefaults.standard.set("customer", forKey: "USERTYPE")
                                 UserDefaults.standard.set(jsonData.userID!, forKey: "USERID")
                                 UserDefaults.standard.set(username, forKey: "USEREMAIL")
+                                if let name = jsonData.name{
+                                    UserDefaults.standard.set(name, forKey: "NAME")
+                                }
+                                else{
+                                    UserDefaults.standard.set("unknown", forKey: "NAME")
+                                }
                                 
                                 self.dismiss(animated: true)
                             }

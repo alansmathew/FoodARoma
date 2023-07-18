@@ -16,12 +16,16 @@ class ResturentAddNewOrderViewController: UIViewController {
     let categories = ["special", "beverage", "menu"]
     let pickerView = UIPickerView()
 
+    @IBOutlet weak var pizzaImage: UIImageView!
     @IBOutlet weak var prerTime: PaddedTextField!
     @IBOutlet weak var priceTExt: PaddedTextField!
     @IBOutlet weak var selectCat: PaddedTextField!
     @IBOutlet weak var addbuttonClick: UIButton!
     @IBOutlet weak var discriptionView: UITextView!
     @IBOutlet weak var menuName: UITextField!
+    
+    var imageData : UIImage? = UIImage()
+    var imageName = ""
     
     var loading : (NVActivityIndicatorView,UIView)?
     
@@ -33,6 +37,7 @@ class ResturentAddNewOrderViewController: UIViewController {
        // Assign the data source and delegate of the UIPickerView
         pickerView.dataSource = self
         pickerView.delegate = self
+        discriptionView.delegate = self
         
         selectCat.inputView = pickerView
         
@@ -53,7 +58,6 @@ class ResturentAddNewOrderViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
 
-
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
             self.view.frame.origin.y = 0
@@ -65,61 +69,127 @@ class ResturentAddNewOrderViewController: UIViewController {
         self.view.frame.origin.y = 0
     }
     
+    
     @IBAction func AddMenuClick(_ sender: Any) {
         
         loading = customAnimation()
         loadingProtocol(with: loading! ,true)
         
-        let params : [String : String] = [
-                    "Mode" : "addMenu",
-
-                    "MenuName" : menuName.text!,
-
-                    "Photo" : "xyz.jpg",
-
-                    "PrepTime" : prerTime.text!,
-
-                    "Price" : priceTExt.text!,
-
-                    "Desc" : discriptionView.text!,
-
-                    "Cat" : selectCat.text!
-              ]
-
-        print(params)
-        AF.request((Constants().BASEURL + Constants.APIPaths().fetchMenu), method: .post, parameters:params, encoder: .json).responseData { response in
-            switch response.result{
-            case .success(let data):
-                
-                let decoder = JSONDecoder()
-                do{
-                    print(JSON(data))
-                    let jsonData = try decoder.decode(AddMenuModel.self, from: data)
-                    if jsonData.Message == "sucess"{
-                        self.loadingProtocol(with: self.loading! ,false)
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                    else{
-                        self.loadingProtocol(with: self.loading! ,false)
-                        self.showAlert(title: "Failed", content: jsonData.Message)
-                    }
+        
+        let image = imageData
+        
+        print(imageName)
+        
+        let urlString = Constants().IMAGEUPLOADURL+imageName
+        let headers: HTTPHeaders = [
+            "Content-Type": "image/png"
+        ]
+        
+        let pngImageData = image!.pngData()
+        
+        if let imageData = pngImageData{
+            
+            
+            AF.upload(imageData, to: urlString, method: .put, headers: headers)
+                .responseJSON { response in
+                    print(response)
                     
+                    let imageurl = Constants().IMAGEURL+self.imageName
+                    AF.request( imageurl ,method: .get).response{ response in
+
+                     switch response.result {
+                      case .success(let responseData):
+                        
+                         if (JSON(responseData)["message"]=="Internal server error"){
+                             self.loadingProtocol(with: self.loading! ,false)
+                             self.showAlert(title: "Failed", content: "There was some problem while trying to upload the image. Please try again!")
+                         }
+                         else{
+                             
+                             let params : [String : String] = [
+                                 "Mode" : "addMenu",
+                                 "MenuName" : self.menuName.text!,
+                                 "Photo" : self.imageName,
+                                 "PrepTime" : self.prerTime.text!,
+                                 "Price" : self.priceTExt.text!,
+                                 "Desc" : self.discriptionView.text!,
+                                 "Cat" : self.selectCat.text!
+                           ]
+                             
+                             print(params)
+                             AF.request((Constants().BASEURL + Constants.APIPaths().fetchMenu), method: .post, parameters:params, encoder: .json).responseData { response in
+                                 switch response.result{
+                                 case .success(let data):
+                     
+                                     let decoder = JSONDecoder()
+                                     do{
+                                         print(JSON(data))
+                                         let jsonData = try decoder.decode(AddMenuModel.self, from: data)
+                                         if jsonData.Message == "sucess"{
+                                             self.loadingProtocol(with: self.loading! ,false)
+                                             self.navigationController?.popViewController(animated: true)
+                                         }
+                                         else{
+                                             self.loadingProtocol(with: self.loading! ,false)
+                                             self.showAlert(title: "Failed", content: jsonData.Message)
+                                         }
+                     
+                                     }
+                                     catch{
+                                         print("decoder error")
+                                         self.loadingProtocol(with: self.loading! ,false)
+                                     }
+                     
+                                 case .failure(let error):
+                                     self.showAlert(title: "network intrepsion", content: "Something went wrong! please try again after some time")
+                                     print(error)
+                                     self.loadingProtocol(with: self.loading! ,false)
+                                 }
+                             }
+                             
+                         }
+                      case .failure(let error):
+                          print("error--->",error)
+                      }
+                    }
                 }
-                catch{
-                    print("decoder error")
-                    self.loadingProtocol(with: self.loading! ,false)
-                }
-                
-            case .failure(let error):
-                self.showAlert(title: "network intrepsion", content: "Something went wrong! please try again after some time")
-                print(error)
-                self.loadingProtocol(with: self.loading! ,false)
-            }
+        }
+        else{
+            self.loadingProtocol(with: self.loading! ,false)
+            
+            showAlert(title: "Select Image", content: "Please select an image to continue. There is no selection of image available in this context. Please select an image inorder to upload the images to the server and display it for the users")
         }
         
     }
     
+    @IBAction func imagepickerButtonClick(_ sender: UIButton) {
+        let vc = UIImagePickerController()
+        vc.sourceType = .photoLibrary
+        vc.delegate = self
+        vc.allowsEditing = true
+        present(vc,animated: true)
+        
+    }
     
+}
+
+extension ResturentAddNewOrderViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print("\(info)")
+        if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
+            pizzaImage.image = image
+            imageData = image
+            if let imageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+                imageName = imageURL.lastPathComponent
+                print("Image Name: \(imageName)")
+            }
+        }
+        picker.dismiss(animated: true)
+        
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
 }
 
 extension ResturentAddNewOrderViewController : UITextViewDelegate{
@@ -156,7 +226,6 @@ class PaddedTextField: UITextField {
             layer.masksToBounds = true
     }
 }
-
 
 extension ResturentAddNewOrderViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

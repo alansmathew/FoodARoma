@@ -47,6 +47,7 @@
 		E79F8FD52A5BA23C00482CE1 /* ResturentAddNewOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79F8FD42A5BA23C00482CE1 /* ResturentAddNewOrderViewController.swift */; };
 		E7A2096A2A55D4D2002FF49E /* AllMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A209692A55D4D2002FF49E /* AllMenuModel.swift */; };
 		E7A2096D2A55DFC5002FF49E /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = E7A2096C2A55DFC5002FF49E /* SwiftyJSON */; };
+		E7A226732A630D2800015015 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = E7A226722A630D2800015015 /* AlamofireImage */; };
 		E7BD30A92A5B424700FC288E /* ResturentMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BD30A82A5B424700FC288E /* ResturentMenuViewController.swift */; };
 		E7BDA9722A562A31008097CA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BDA9712A562A31008097CA /* SearchViewController.swift */; };
 		E7BFD10C2A5240000016445A /* OrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BFD10B2A5240000016445A /* OrderDetailsViewController.swift */; };
@@ -140,6 +141,7 @@
 			files = (
 				E75279392A44C87200AF3EA2 /* NVActivityIndicatorViewExtended in Frameworks */,
 				E75279372A44C87200AF3EA2 /* NVActivityIndicatorView in Frameworks */,
+				E7A226732A630D2800015015 /* AlamofireImage in Frameworks */,
 				E7A2096D2A55DFC5002FF49E /* SwiftyJSON in Frameworks */,
 				992ECBD72A3B662700B8745A /* Alamofire in Frameworks */,
 			);
@@ -208,9 +210,9 @@
 				991C29012A2D77D200201DE7 /* Controller */,
 				991C29002A2D77BA00201DE7 /* View */,
 				992ECBDA2A3B689B00B8745A /* Constants */,
+				E75279342A44C7E700AF3EA2 /* CustomFiles */,
 				991C28D92A2D2DDF00201DE7 /* Assets.xcassets */,
 				991C28DE2A2D2DDF00201DE7 /* Info.plist */,
-				E75279342A44C7E700AF3EA2 /* CustomFiles */,
 			);
 			path = FoodARoma;
 			sourceTree = "<group>";
@@ -409,6 +411,7 @@
 				E75279362A44C87200AF3EA2 /* NVActivityIndicatorView */,
 				E75279382A44C87200AF3EA2 /* NVActivityIndicatorViewExtended */,
 				E7A2096C2A55DFC5002FF49E /* SwiftyJSON */,
+				E7A226722A630D2800015015 /* AlamofireImage */,
 			);
 			productName = FoodARoma;
 			productReference = 991C28CD2A2D2DD900201DE7 /* FoodARoma.app */;
@@ -486,6 +489,7 @@
 				992ECBD52A3B662700B8745A /* XCRemoteSwiftPackageReference "Alamofire" */,
 				E75279352A44C87200AF3EA2 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
 				E7A2096B2A55DFC5002FF49E /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				E7A226712A630D2800015015 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 			);
 			productRefGroup = 991C28CE2A2D2DD900201DE7 /* Products */;
 			projectDirPath = "";
@@ -939,6 +943,14 @@
 				version = 5.0.1;
 			};
 		};
+		E7A226712A630D2800015015 /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/AlamofireImage.git";
+			requirement = {
+				kind = exactVersion;
+				version = 4.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -961,6 +973,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E7A2096B2A55DFC5002FF49E /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
+		};
+		E7A226722A630D2800015015 /* AlamofireImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E7A226712A630D2800015015 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
+			productName = AlamofireImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

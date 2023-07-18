@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
+import NVActivityIndicatorView
 
 class RatingsViewController: UIViewController {
 
@@ -26,6 +29,11 @@ class RatingsViewController: UIViewController {
     @IBOutlet weak var sButton4: UIButton!
     @IBOutlet weak var sButton5: UIButton!
     
+    var ratingData = 4
+    var SelectedOrder : allMenu?
+    
+    var loading : (NVActivityIndicatorView,UIView)?
+    
     var ratingStars : [UIImageView] = [UIImageView]()
     
     override func viewDidLoad() {
@@ -40,7 +48,6 @@ class RatingsViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
         
         ratingStars = [star1,star2,star3,star4,star5]
-        
         
         postButton.layer.cornerRadius = 12
         postButton.layer.shadowColor = UIColor(red: 0.07, green: 0.36, blue: 0.18, alpha: 1).cgColor;
@@ -66,6 +73,7 @@ class RatingsViewController: UIViewController {
     }
     
     @IBAction func ratingButtonClick(_ sender: UIButton) {
+        ratingData = Int(Double(sender.titleLabel?.text ?? "0") ?? 0)
         for x in 0...4{
             if Double(sender.titleLabel?.text ?? "0") ?? 0 > Double(x) {
                 ratingStars[x].image = UIImage(systemName: "star.fill")
@@ -80,10 +88,70 @@ class RatingsViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
+    func sendRatingData(usrID : String){
+        
+        loading = customAnimation()
+        loadingProtocol(with: loading! ,true)
+        
+        let name =  UserDefaults.standard.string(forKey: "NAME")!
+        
+        let params : [String : String] = [
+            "Mode": "addRating",
+            "Name" : name,
+            "MenuId": "\(SelectedOrder!.menu_id)",
+            "RegId": usrID,
+            "Comments": reviewTextView.text!,
+            "Rating": "\(ratingData)"
+        ]
+        
+        print(params)
+        
+        
+        AF.request((Constants().BASEURL + Constants.APIPaths().fetchMenu), method: .post, parameters:params, encoder: .json).responseData { response in
+            switch response.result{
+            case .success(let data):
+
+                let decoder = JSONDecoder()
+                do{
+                    print(JSON(data))
+                    let jsonData = try decoder.decode(AddMenuModel.self, from: data)
+                    if jsonData.Message == "success" {
+                        self.loadingProtocol(with: self.loading! ,false)
+                        self.dismiss(animated: true)
+                    }
+                    else{
+                        self.showAlert(title: "Failed", content: jsonData.Message)
+                        self.loadingProtocol(with: self.loading! ,false)
+                    }
+
+                }
+                catch{
+                    print("decoder error")
+                    self.loadingProtocol(with: self.loading! ,false)
+                }
+
+            case .failure(let error):
+                self.showAlert(title: "network intrepsion", content: "Something went wrong! please try again after some time")
+                print(error)
+                self.loadingProtocol(with: self.loading! ,false)
+            }
+        }
+    }
+    
     @IBAction func postReplayButton(_ sender: UIButton) {
         if !reviewTextView.text.isEmpty {
             if reviewTextView.text == "Write your honest review here." {
                 showAlert(title: "Empty fields", content: "Please enter some honest review inorder to post your comment.")
+            }
+            else{
+                if let userID = UserDefaults.standard.string(forKey: "USERID"){
+                    sendRatingData(usrID: userID)
+                }
+                else{
+                    let storyboard = UIStoryboard(name: "LoginScreen", bundle: nil)
+                    let viewC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                    present(viewC, animated: true)
+                }
             }
         }
     }

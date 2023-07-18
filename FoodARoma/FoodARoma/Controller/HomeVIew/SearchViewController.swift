@@ -12,8 +12,12 @@ class SearchViewController: UIViewController {
     var AllMenuData : [allMenu]?
     var searchMenuData : [allMenu]? = [allMenu]()
 
+    @IBOutlet weak var headingLAbel: UILabel!
     @IBOutlet weak var searchTableView: UITableView!
     @IBOutlet weak var search: UISearchBar!
+    
+    var commingPlatform = "Search"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,6 +31,8 @@ class SearchViewController: UIViewController {
         
         searchMenuData = AllMenuData
         print(searchMenuData?.count)
+        
+        headingLAbel.text = commingPlatform
 
         
     }
@@ -63,6 +69,33 @@ extension SearchViewController : UITableViewDelegate{
         viewC.SelectedOrder = searchMenuData![indexPath.row]
         navigationController?.pushViewController(viewC, animated: true)
     }
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+            let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+                
+                if self.search.text?.count ?? 0 > 1 {
+                    let x = self.searchMenuData![indexPath.row]
+                    if let menudata = self.AllMenuData {
+                        var count = 0
+                        for y in menudata {
+                            if y.menu_Name == x.menu_Name {
+                                self.AllMenuData?.remove(at: count)
+                                self.searchMenuData = self.AllMenuData
+                                self.search.text = ""
+                                self.searchTableView.reloadData()
+                            }
+                            count += 1
+                        }
+                    }
+                }
+                else{
+                    self.AllMenuData?.remove(at: indexPath.row)
+                    self.searchMenuData = self.AllMenuData
+                    self.searchTableView.reloadData()
+                    self.search.text = ""
+                }
+            }
+            return UISwipeActionsConfiguration(actions: [action])
+        }
 }
 
 extension SearchViewController : UISearchBarDelegate {

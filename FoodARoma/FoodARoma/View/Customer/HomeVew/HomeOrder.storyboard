@@ -33,8 +33,9 @@
                                                             <constraint firstAttribute="height" constant="375" id="e7i-eg-5r3"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pizza1" translatesAutoresizingMaskIntoConstraints="NO" id="tIV-30-xXh">
-                                                        <rect key="frame" x="51.666666666666657" y="80" width="290" height="290"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="tIV-30-xXh">
+                                                        <rect key="frame" x="51.666666666666657" y="81" width="290" height="288.66666666666669"/>
+                                                        <color key="tintColor" red="0.82352941180000006" green="0.86274509799999999" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="290" id="Cp9-kf-OtY"/>
                                                             <constraint firstAttribute="height" constant="290" id="QtG-jZ-NWn"/>
@@ -292,7 +293,8 @@
                                                             <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="large"/>
                                                         </buttonConfiguration>
                                                         <connections>
-                                                            <segue destination="6KE-eq-d0Q" kind="showDetail" id="ode-HH-0uN"/>
+                                                            <action selector="AddCommentClick:" destination="MVM-ha-jve" eventType="touchUpInside" id="om1-uq-O2Q"/>
+                                                            <segue destination="6KE-eq-d0Q" kind="showDetail" identifier="addcommentIdentifier" id="ode-HH-0uN"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -460,6 +462,7 @@
                         <outlet property="menuRating" destination="d05-Bs-xbR" id="JQA-gu-IRg"/>
                         <outlet property="menuTime" destination="Gsp-eP-jlD" id="h9s-uk-1Gf"/>
                         <outlet property="moreCommentsbutton" destination="Plb-my-ddN" id="kl8-9b-uC7"/>
+                        <outlet property="pitzzaImageView" destination="tIV-30-xXh" id="YVM-1v-Bf2"/>
                         <outlet property="quantityLabel" destination="cZP-dA-65c" id="YYF-tG-Cae"/>
                         <outlet property="rStar1" destination="jAA-F7-vfj" id="4iB-ig-lev"/>
                         <outlet property="rStar2" destination="Rft-VS-EOP" id="IPu-7H-srE"/>
@@ -868,14 +871,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eye-zU-L7l">
+                                <rect key="frame" x="20" y="59" width="353" height="36"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Csr-RC-bjN">
+                                        <rect key="frame" x="0.0" y="0.0" width="353" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="mIs-hZ-AVt"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
+                                        <color key="textColor" name="Custom black"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="CCm-wR-auA">
-                                <rect key="frame" x="0.0" y="115" width="393" height="737"/>
+                                <rect key="frame" x="0.0" y="156" width="393" height="696"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                             </tableView>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="icB-jX-Bqv">
-                                <rect key="frame" x="0.0" y="59" width="393" height="56"/>
+                                <rect key="frame" x="0.0" y="100" width="393" height="56"/>
                                 <color key="barTintColor" name="homeBackgroundColor"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -887,27 +904,31 @@
                         <color key="backgroundColor" name="homeBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="icB-jX-Bqv" firstAttribute="trailing" secondItem="pCh-II-puu" secondAttribute="trailing" id="294-Uu-X6a"/>
+                            <constraint firstAttribute="bottom" secondItem="CCm-wR-auA" secondAttribute="bottom" id="2z8-bu-c9E"/>
                             <constraint firstItem="CCm-wR-auA" firstAttribute="trailing" secondItem="NdE-zH-IkF" secondAttribute="trailing" id="4aU-r2-Db4"/>
-                            <constraint firstItem="CCm-wR-auA" firstAttribute="top" secondItem="icB-jX-Bqv" secondAttribute="bottom" id="HrT-4V-j8h"/>
-                            <constraint firstAttribute="bottom" secondItem="CCm-wR-auA" secondAttribute="bottom" id="OuG-2n-u67"/>
+                            <constraint firstItem="CCm-wR-auA" firstAttribute="top" secondItem="icB-jX-Bqv" secondAttribute="bottom" id="6IT-jE-qcW"/>
+                            <constraint firstItem="eye-zU-L7l" firstAttribute="leading" secondItem="NdE-zH-IkF" secondAttribute="leading" constant="20" id="Bnl-En-Sug"/>
                             <constraint firstItem="CCm-wR-auA" firstAttribute="leading" secondItem="NdE-zH-IkF" secondAttribute="leading" id="PLV-WG-LuQ"/>
-                            <constraint firstItem="icB-jX-Bqv" firstAttribute="top" secondItem="NdE-zH-IkF" secondAttribute="top" id="UGI-mb-mJc"/>
+                            <constraint firstItem="NdE-zH-IkF" firstAttribute="trailing" secondItem="eye-zU-L7l" secondAttribute="trailing" constant="20" id="qEk-XZ-50I"/>
+                            <constraint firstItem="icB-jX-Bqv" firstAttribute="top" secondItem="eye-zU-L7l" secondAttribute="bottom" constant="5" id="xJw-Ev-HeU"/>
+                            <constraint firstItem="eye-zU-L7l" firstAttribute="top" secondItem="NdE-zH-IkF" secondAttribute="top" id="xsq-mS-B13"/>
                             <constraint firstItem="icB-jX-Bqv" firstAttribute="leading" secondItem="NdE-zH-IkF" secondAttribute="leading" id="yVt-Qf-JiQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="UyB-An-w1s"/>
                     <connections>
+                        <outlet property="headingLAbel" destination="Csr-RC-bjN" id="U4Z-qb-Dic"/>
                         <outlet property="search" destination="icB-jX-Bqv" id="Tzk-jP-370"/>
                         <outlet property="searchTableView" destination="CCm-wR-auA" id="aWQ-8a-Tqe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ff5-89-dTH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1795" y="-807"/>
+            <point key="canvasLocation" x="1794.6564885496182" y="-807.04225352112678"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="oyc-Lo-oDl"/>
+        <segue reference="ode-HH-0uN"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.right" catalog="system" width="128" height="104"/>
@@ -917,6 +938,7 @@
         <image name="imagebackground" width="407" height="403"/>
         <image name="minusbutton" width="68" height="75"/>
         <image name="pencil.line" catalog="system" width="128" height="98"/>
+        <image name="photo.circle" catalog="system" width="128" height="123"/>
         <image name="pizza1" width="150" height="150"/>
         <image name="plus.message" catalog="system" width="128" height="116"/>
         <image name="plusbutton" width="68" height="75"/>

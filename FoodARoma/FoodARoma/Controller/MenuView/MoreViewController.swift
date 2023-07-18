@@ -38,11 +38,11 @@ class MoreViewController: UIViewController {
         if let userType = UserDefaults.standard.string(forKey: "USERTYPE"){
             nouserView.isHidden = true
             let useremail = UserDefaults.standard.string(forKey: "USEREMAIL")
-            if let email = useremail{
+            let nameData =  UserDefaults.standard.string(forKey: "NAME")
+            if let email = useremail, let name = nameData{
                 nouserView.isHidden = true
                 useremailLabel.text = email
-                let components = email.components(separatedBy: "@")
-                userLabel.text = components.first
+                userLabel.text = name
             }
         }
         else{
@@ -63,11 +63,11 @@ class MoreViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         let useremail = UserDefaults.standard.string(forKey: "USEREMAIL")
-        if let email = useremail{
+        let nameData =  UserDefaults.standard.string(forKey: "NAME")
+        if let email = useremail, let name = nameData{
             nouserView.isHidden = true
             useremailLabel.text = email
-            let components = email.components(separatedBy: "@")
-            userLabel.text = components.first
+            userLabel.text = name
         }
         else{
             nouserView.isHidden = false
@@ -85,6 +85,7 @@ class MoreViewController: UIViewController {
         UserDefaults.standard.removeObject(forKey: "USERTYPE")
         UserDefaults.standard.removeObject(forKey: "USERID")
         UserDefaults.standard.removeObject(forKey: "USEREMAIL")
+        UserDefaults.standard.removeObject(forKey: "NAME")
         nouserView.isHidden = false
     }
     @IBAction func loginClick(_ sender: Any) {

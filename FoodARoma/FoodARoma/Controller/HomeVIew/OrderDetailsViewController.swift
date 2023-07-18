@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
+import SwiftyJSON
 
 class OrderDetailsViewController: UIViewController {
 
+    @IBOutlet weak var pitzzaImageView: UIImageView!
     @IBOutlet weak var totalNumberReview: UILabel!
     @IBOutlet weak var RStar5: UIImageView!
     @IBOutlet weak var RStar4: UIImageView!
@@ -29,8 +33,6 @@ class OrderDetailsViewController: UIViewController {
     @IBOutlet weak var bevCollectionView: UICollectionView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var moreCommentsbutton: UIButton!
-    
-    
     
     var SelectedOrder : allMenu?
     
@@ -67,6 +69,8 @@ class OrderDetailsViewController: UIViewController {
 //        print(commentsTable.contentSize.height)
 //        print(cellHeight)
         setupUI()
+    
+        
         
     }
     
@@ -82,6 +86,29 @@ class OrderDetailsViewController: UIViewController {
             menuTime.text = selectedOrder.menu_Time + " Min"
             menuRating.text = selectedOrder.avg_Rating
             totalNumberReview.text = selectedOrder.total_Ratings
+            
+            if let imageName = selectedOrder.menu_Photo {
+                AF.request( Constants().IMAGEURL+imageName,method: .get).response{ response in
+
+                 switch response.result {
+                  case .success(let responseData):
+                    
+                     if (JSON(responseData)["message"]=="Internal server error"){
+                         print("NO data comming")
+                         self.pitzzaImageView.image = UIImage(systemName: "photo.circle")
+                         
+                     }
+                     else{
+                         self.pitzzaImageView.image = UIImage(data: responseData!, scale:1)
+                     }
+                
+                  case .failure(let error):
+                      print("error--->",error)
+                  }
+              }
+            }
+            
+            
 
             for x in 0...4{
                 
@@ -95,7 +122,8 @@ class OrderDetailsViewController: UIViewController {
             
             if Double(selectedOrder.total_Ratings) ?? 0.0 > 3.0 {
                 moreCommentsbutton.isHidden = false
-                moreCommentsbutton.setTitle(selectedOrder.total_Ratings + " more", for: .normal)
+                let total = (Int(selectedOrder.total_Ratings) ?? 0) - 3
+                moreCommentsbutton.setTitle("\(total)" + " more", for: .normal)
             }
             else{
                 moreCommentsbutton.isHidden = true
@@ -108,6 +136,7 @@ class OrderDetailsViewController: UIViewController {
         quantityLabel.text = "\(quantity)"
         
     }
+    
     @IBAction func minusButton(_ sender: Any) {
         if quantity != 1 {
             quantity -= 1
@@ -115,7 +144,15 @@ class OrderDetailsViewController: UIViewController {
         }
     }
     
-
+    @IBAction func AddCommentClick(_ sender: UIButton) {
+        performSegue(withIdentifier: "addcommentIdentifier", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        if segue.identifier == "addcommentIdentifier", let nextViewController = segue.destination as? RatingsViewController {
+            nextViewController.SelectedOrder = SelectedOrder
+        }
+    }
 }
 
 extension OrderDetailsViewController : UICollectionViewDataSource{
@@ -137,10 +174,10 @@ extension OrderDetailsViewController : UICollectionViewDelegate{
 
 extension OrderDetailsViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if Int(SelectedOrder?.total_Ratings ?? "0") ?? 1 == 0 {
+        if Int(SelectedOrder?.ratings.count ?? 0) ?? 1 == 0 {
             return 1
         }else{
-            return Int(SelectedOrder?.total_Ratings ?? "0") ?? 1
+            return Int(SelectedOrder?.ratings.count ?? 0) ?? 1
         }
         
     }
