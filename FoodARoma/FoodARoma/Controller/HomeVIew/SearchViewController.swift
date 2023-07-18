@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
+import SwiftyJSON
 
 class SearchViewController: UIViewController {
     
@@ -36,8 +39,32 @@ class SearchViewController: UIViewController {
 
         
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
+    }
+    
+    func loadImageInCell(cellData : HomeMenuTableViewCell, cellImageName : String?){
+        if let imageName = cellImageName {
+            AF.request( Constants().IMAGEURL+imageName,method: .get).response{ response in
+
+             switch response.result {
+              case .success(let responseData):
+                
+                 if (JSON(responseData)["message"]=="Internal server error"){
+                     print("NO data comming")
+                     cellData.menuImage.image = UIImage(named: "imagebackground")
+                     
+                 }
+                 else{
+                     cellData.menuImage.image = UIImage(data: responseData!, scale:1)
+                 }
+            
+              case .failure(let error):
+                  print("error--->",error)
+              }
+          }
+        }
     }
 }
 
@@ -55,6 +82,7 @@ extension SearchViewController : UITableViewDataSource{
             cell.menuRating.text = "4.5"
             cell.menuTime.text = menuitem[indexPath.row].menu_Time + " Min"
             cell.menuDec.text = menuitem[indexPath.row].menu_Dec
+            loadImageInCell(cellData: cell, cellImageName: menuitem[indexPath.row].menu_Photo)
         }
         return cell
     }

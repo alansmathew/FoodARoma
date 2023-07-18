@@ -68,6 +68,30 @@ class ResturentMenuViewController: UIViewController {
         }
     }
     
+    private  func loadImageInCell(cellData : HomeMenuCollectionViewCell, cellImageName : String?){
+        print(cellImageName)
+        if let imageName = cellImageName {
+            AF.request( Constants().IMAGEURL+imageName,method: .get).response{ response in
+
+             switch response.result {
+              case .success(let responseData):
+                
+                 if (JSON(responseData)["message"]=="Internal server error"){
+                     print("NO data comming")
+                     cellData.menuImageView.image = UIImage(named: "imagebackground")
+                     
+                 }
+                 else{
+                     cellData.menuImageView.image = UIImage(data: responseData!, scale:1)
+                 }
+            
+              case .failure(let error):
+                  print("error--->",error)
+              }
+          }
+        }
+    }
+    
     private func fetchAllMenu(){
         if let allmenuitem = AllMenuItems {
             self.loadingProtocol(with: self.loading! ,false)
@@ -117,6 +141,7 @@ class ResturentMenuViewController: UIViewController {
         viewC.AllMenuData = bevMenu
         navigationController?.pushViewController(viewC, animated: true)
     }
+    
     @IBAction func showMoreMenu(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "HomeOrder", bundle: nil)
         let viewC = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
@@ -124,6 +149,7 @@ class ResturentMenuViewController: UIViewController {
         viewC.commingPlatform = "Menu"
         navigationController?.pushViewController(viewC, animated: true)
     }
+    
     @IBAction func ShowMoreSpecial(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "HomeOrder", bundle: nil)
         let viewC = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
@@ -160,6 +186,7 @@ extension ResturentMenuViewController : UICollectionViewDataSource {
                     cell1.ratingLabel.text = "4.5"
                     cell1.timeLabel.text = specialmenuitem[indexPath.row].menu_Time + " Min"
                     cell1.descLabel.text = specialmenuitem[indexPath.row].menu_Dec
+                    loadImageInCell(cellData: cell1, cellImageName: specialmenuitem[indexPath.row].menu_Photo)
                 }
                 return cell1
                 
@@ -171,6 +198,7 @@ extension ResturentMenuViewController : UICollectionViewDataSource {
                     cell2.ratingLabel.text = "4.5"
                     cell2.timeLabel.text = regularMenu[indexPath.row].menu_Time + " Min"
                     cell2.descLabel.text = regularMenu[indexPath.row].menu_Dec
+                    loadImageInCell(cellData: cell2, cellImageName: regularMenu[indexPath.row].menu_Photo)
                 }
                 
                 return cell2
