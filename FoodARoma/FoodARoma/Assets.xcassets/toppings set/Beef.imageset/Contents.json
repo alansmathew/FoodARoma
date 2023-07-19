@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "pngimg.com - beef_PNG5.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "pngimg.com - beef_PNG5@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "pngimg.com - beef_PNG5@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

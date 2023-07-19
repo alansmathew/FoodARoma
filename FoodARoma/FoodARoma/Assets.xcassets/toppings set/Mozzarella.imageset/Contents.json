@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "png-transparent-beyaz-peynir-mozzarella-galbani-blog-cheese-mozzarella-cheese-cheese-film-internet-thumbnail-removebg-preview.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "png-transparent-beyaz-peynir-mozzarella-galbani-blog-cheese-mozzarella-cheese-cheese-film-internet-thumbnail-removebg-preview@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "png-transparent-beyaz-peynir-mozzarella-galbani-blog-cheese-mozzarella-cheese-cheese-film-internet-thumbnail-removebg-preview@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

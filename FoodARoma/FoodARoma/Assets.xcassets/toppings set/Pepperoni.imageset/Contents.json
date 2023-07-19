@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "kisspng-salami-pepperoni-pizza-bacon-ham-5af201730053d5.6924092615258095230013-removebg-preview.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "kisspng-salami-pepperoni-pizza-bacon-ham-5af201730053d5.6924092615258095230013-removebg-preview@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "kisspng-salami-pepperoni-pizza-bacon-ham-5af201730053d5.6924092615258095230013-removebg-preview@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

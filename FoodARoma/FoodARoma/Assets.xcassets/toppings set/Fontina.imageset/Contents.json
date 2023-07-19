@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "264-2649504_fontina-cheese.png-removebg-preview.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "264-2649504_fontina-cheese.png-removebg-preview@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "264-2649504_fontina-cheese.png-removebg-preview@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -42,6 +42,9 @@
 		E75279392A44C87200AF3EA2 /* NVActivityIndicatorViewExtended in Frameworks */ = {isa = PBXBuildFile; productRef = E75279382A44C87200AF3EA2 /* NVActivityIndicatorViewExtended */; };
 		E76933612A5E569700C31184 /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769335F2A5E569700C31184 /* EmptyTableViewCell.swift */; };
 		E76933622A5E569700C31184 /* EmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E76933602A5E569700C31184 /* EmptyTableViewCell.xib */; };
+		E76944A52A67969000F9904B /* title1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E76944A42A67968F00F9904B /* title1.usdz */; };
+		E76944A82A684BDD00F9904B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = E76944A72A684BDD00F9904B /* Lottie */; };
+		E76944AB2A684CA000F9904B /* move.json in Resources */ = {isa = PBXBuildFile; fileRef = E76944AA2A684CA000F9904B /* move.json */; };
 		E78AF08A2A57BC3F00B40B18 /* HomeMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78AF0882A57BC3F00B40B18 /* HomeMenuTableViewCell.swift */; };
 		E78AF08B2A57BC3F00B40B18 /* HomeMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E78AF0892A57BC3F00B40B18 /* HomeMenuTableViewCell.xib */; };
 		E79F8FD52A5BA23C00482CE1 /* ResturentAddNewOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79F8FD42A5BA23C00482CE1 /* ResturentAddNewOrderViewController.swift */; };
@@ -54,7 +57,6 @@
 		E7BFD10E2A5240350016445A /* HomeOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7BFD10D2A5240350016445A /* HomeOrder.storyboard */; };
 		E7C0D61F2A4A4B8F00AB9CD3 /* MyScene.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = E7C0D61E2A4A4B8F00AB9CD3 /* MyScene.rcproject */; };
 		E7C0D6212A4A4BBF00AB9CD3 /* BuildOwnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C0D6202A4A4BBF00AB9CD3 /* BuildOwnViewController.swift */; };
-		E7C0D6232A4A4C2C00AB9CD3 /* title1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E7C0D6222A4A4C2C00AB9CD3 /* title1.usdz */; };
 		E7D034112A5458B5008D8BDF /* Extenctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D034102A5458B5008D8BDF /* Extenctions.swift */; };
 		E7D042F22A53A11300AEDC5E /* RatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D042F12A53A11300AEDC5E /* RatingsViewController.swift */; };
 		E7F437732A534F5600B3D4CD /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F437722A534F5600B3D4CD /* CommentsViewController.swift */; };
@@ -116,6 +118,8 @@
 		E75279322A44C7E000AF3EA2 /* customLoadingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customLoadingAnimation.swift; sourceTree = "<group>"; };
 		E769335F2A5E569700C31184 /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
 		E76933602A5E569700C31184 /* EmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyTableViewCell.xib; sourceTree = "<group>"; };
+		E76944A42A67968F00F9904B /* title1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = title1.usdz; sourceTree = "<group>"; };
+		E76944AA2A684CA000F9904B /* move.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = move.json; sourceTree = "<group>"; };
 		E78AF0882A57BC3F00B40B18 /* HomeMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMenuTableViewCell.swift; sourceTree = "<group>"; };
 		E78AF0892A57BC3F00B40B18 /* HomeMenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeMenuTableViewCell.xib; sourceTree = "<group>"; };
 		E79F8FD42A5BA23C00482CE1 /* ResturentAddNewOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResturentAddNewOrderViewController.swift; sourceTree = "<group>"; };
@@ -126,7 +130,6 @@
 		E7BFD10D2A5240350016445A /* HomeOrder.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeOrder.storyboard; sourceTree = "<group>"; };
 		E7C0D61E2A4A4B8F00AB9CD3 /* MyScene.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = MyScene.rcproject; sourceTree = "<group>"; };
 		E7C0D6202A4A4BBF00AB9CD3 /* BuildOwnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildOwnViewController.swift; sourceTree = "<group>"; };
-		E7C0D6222A4A4C2C00AB9CD3 /* title1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = title1.usdz; sourceTree = "<group>"; };
 		E7D034102A5458B5008D8BDF /* Extenctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extenctions.swift; sourceTree = "<group>"; };
 		E7D042F12A53A11300AEDC5E /* RatingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsViewController.swift; sourceTree = "<group>"; };
 		E7F437722A534F5600B3D4CD /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +147,7 @@
 				E7A226732A630D2800015015 /* AlamofireImage in Frameworks */,
 				E7A2096D2A55DFC5002FF49E /* SwiftyJSON in Frameworks */,
 				992ECBD72A3B662700B8745A /* Alamofire in Frameworks */,
+				E76944A82A684BDD00F9904B /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +214,7 @@
 				991C29012A2D77D200201DE7 /* Controller */,
 				991C29002A2D77BA00201DE7 /* View */,
 				992ECBDA2A3B689B00B8745A /* Constants */,
+				E76944A92A684C7800F9904B /* LotiAnimation */,
 				E75279342A44C7E700AF3EA2 /* CustomFiles */,
 				991C28D92A2D2DDF00201DE7 /* Assets.xcassets */,
 				991C28DE2A2D2DDF00201DE7 /* Info.plist */,
@@ -307,9 +312,9 @@
 		992ECBE02A3B7F5900B8745A /* Resturent */ = {
 			isa = PBXGroup;
 			children = (
+				992ECBE72A3B8DCE00B8745A /* ResturentNavigationView.swift */,
 				992ECBE12A3B7F6600B8745A /* ResturentOrders */,
 				E7BD30AA2A5B425200FC288E /* ResturentMenu */,
-				992ECBE72A3B8DCE00B8745A /* ResturentNavigationView.swift */,
 				E7377C172A5B5EBD00F5C29F /* ResturentSettings */,
 			);
 			path = Resturent;
@@ -371,6 +376,14 @@
 			path = CustomFiles;
 			sourceTree = "<group>";
 		};
+		E76944A92A684C7800F9904B /* LotiAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				E76944AA2A684CA000F9904B /* move.json */,
+			);
+			path = LotiAnimation;
+			sourceTree = "<group>";
+		};
 		E7BD30AA2A5B425200FC288E /* ResturentMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -383,7 +396,7 @@
 		E7C0D61D2A4A4B6700AB9CD3 /* BuildOwn */ = {
 			isa = PBXGroup;
 			children = (
-				E7C0D6222A4A4C2C00AB9CD3 /* title1.usdz */,
+				E76944A42A67968F00F9904B /* title1.usdz */,
 				E7C0D61E2A4A4B8F00AB9CD3 /* MyScene.rcproject */,
 				E7C0D6202A4A4BBF00AB9CD3 /* BuildOwnViewController.swift */,
 			);
@@ -412,6 +425,7 @@
 				E75279382A44C87200AF3EA2 /* NVActivityIndicatorViewExtended */,
 				E7A2096C2A55DFC5002FF49E /* SwiftyJSON */,
 				E7A226722A630D2800015015 /* AlamofireImage */,
+				E76944A72A684BDD00F9904B /* Lottie */,
 			);
 			productName = FoodARoma;
 			productReference = 991C28CD2A2D2DD900201DE7 /* FoodARoma.app */;
@@ -490,6 +504,7 @@
 				E75279352A44C87200AF3EA2 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
 				E7A2096B2A55DFC5002FF49E /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				E7A226712A630D2800015015 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
+				E76944A62A684BDD00F9904B /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = 991C28CE2A2D2DD900201DE7 /* Products */;
 			projectDirPath = "";
@@ -507,16 +522,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E76944A52A67969000F9904B /* title1.usdz in Resources */,
 				992781DC2A311C8A00F10E5D /* HomeMenuCollectionViewCell.xib in Resources */,
 				992ECBDE2A3B77B600B8745A /* ResturentMain.storyboard in Resources */,
 				E7BFD10E2A5240350016445A /* HomeOrder.storyboard in Resources */,
-				E7C0D6232A4A4C2C00AB9CD3 /* title1.usdz in Resources */,
 				991C28DD2A2D2DDF00201DE7 /* LaunchScreen.storyboard in Resources */,
 				992ECBE62A3B7FBD00B8745A /* ResturentOrderscell.xib in Resources */,
 				991C28DA2A2D2DDF00201DE7 /* Assets.xcassets in Resources */,
 				E76933622A5E569700C31184 /* EmptyTableViewCell.xib in Resources */,
 				99A623B42A3239D6003BF199 /* BeverageMenuCollectionViewCell.xib in Resources */,
 				E7F437792A53502800B3D4CD /* CommentTableViewCell.xib in Resources */,
+				E76944AB2A684CA000F9904B /* move.json in Resources */,
 				991736B62A379FD800824B14 /* LoginScreen.storyboard in Resources */,
 				991C28D82A2D2DD900201DE7 /* Main.storyboard in Resources */,
 				E78AF08B2A57BC3F00B40B18 /* HomeMenuTableViewCell.xib in Resources */,
@@ -935,6 +951,14 @@
 				version = 5.1.1;
 			};
 		};
+		E76944A62A684BDD00F9904B /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = exactVersion;
+				version = 4.2.0;
+			};
+		};
 		E7A2096B2A55DFC5002FF49E /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
@@ -968,6 +992,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E75279352A44C87200AF3EA2 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
 			productName = NVActivityIndicatorViewExtended;
+		};
+		E76944A72A684BDD00F9904B /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E76944A62A684BDD00F9904B /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
 		};
 		E7A2096C2A55DFC5002FF49E /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
