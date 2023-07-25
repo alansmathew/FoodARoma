@@ -12,11 +12,23 @@ import Lottie
 
 class BuildOwnViewController: UIViewController {
 
+    
+    
+    @IBOutlet weak var sidebar: UIView!
+    @IBOutlet weak var minusbutton: UIButton!
+    @IBOutlet weak var plusButton: UIButton!
+    
+    @IBOutlet weak var sideOptions: UIView!
+    @IBOutlet weak var topContentView: UIView!
+    
+    @IBOutlet weak var priceView: UIView!
+    @IBOutlet weak var baclofBlurView: UIView!
+    @IBOutlet weak var blurTopView: UIView!
     @IBOutlet weak var topingsCollectionView: UICollectionView!
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var animation_lottie: LottieAnimationView!
     
-    let topingNames = ["Size", "Mozzarella", "Cheddar", "Fontina" , "Chichen" ,"Beef", "Pepperoni", "Black olives", "Mushroom" ]
+    let topingNames = ["Size", 8"Cheddar", "Fontina" , "Chichen" ,"Beef", "Pepperoni", "Black olives", "Mushroom" ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +47,45 @@ class BuildOwnViewController: UIViewController {
         topingsCollectionView.dataSource = self
         topingsCollectionView.delegate = self
         topingsCollectionView.isHidden = true
+        
+        blurTopView.layer.cornerRadius = 14
+//        blurTopView.layer.masksToBounds = true
+        blurTopView.addBlurToView()
+        baclofBlurView.addGradient([UIColor.black, UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.00)], locations: [0.0, 1.0],frame: baclofBlurView.frame)
+        priceView.layer.cornerRadius = 6
+        
+        sidebar.layer.masksToBounds = true
+        sidebar.addblurlight()
+        plusButton.layer.cornerRadius = 12
+        minusbutton.layer.cornerRadius = 12
+        
+        sideOptions.isHidden = true
+        topContentView.isHidden = true
+        addLighting()
     }
+    
+    // Function to add lighting to the scene
+    private func addLighting() {
+        // Create an ambient light source
+        let ambientLight = SCNLight()
+        ambientLight.type = .ambient
+        ambientLight.intensity = 500
+        let ambientLightNode = SCNNode()
+        ambientLightNode.light = ambientLight
 
+        // Create a directional light source
+        let directionalLight = SCNLight()
+        directionalLight.type = .directional
+        directionalLight.intensity = 1000
+        directionalLight.castsShadow = true
+        let directionalLightNode = SCNNode()
+        directionalLightNode.light = directionalLight
+        directionalLightNode.position = SCNVector3(x: 0, y: 10, z: 0)
+
+        // Add lights to the scene
+        sceneView.scene.rootNode.addChildNode(ambientLightNode)
+        sceneView.scene.rootNode.addChildNode(directionalLightNode)
+    }
 
 }
 
@@ -107,10 +156,11 @@ extension BuildOwnViewController {
         
         DispatchQueue.main.async {
             self.topingsCollectionView.isHidden = false
+            self.topContentView.isHidden = false
+            self.sideOptions.isHidden = false
         }
         
         sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
-            print(node.name)
               if node.name == "planeNode" {
                   node.removeFromParentNode()
               }
@@ -118,7 +168,6 @@ extension BuildOwnViewController {
     }
     
     private func createYour3DObject() -> SCNNode {
-        
         
         // Load the USDZ model
         let url = Bundle.main.url(forResource: "title1", withExtension: "usdz")
@@ -151,13 +200,59 @@ extension BuildOwnViewController : UICollectionViewDelegate{
 
 class PizzaTopingsCustomCollectionViewCell : UICollectionViewCell {
     
+    @IBOutlet weak var backOfLabel: UIView!
+    @IBOutlet weak var backOfImage: UIView!
     @IBOutlet weak var contentViewBackground: UIView!
     @IBOutlet weak var topingsImage: UIImageView!
     @IBOutlet weak var topingsNameLabel: UILabel!
     override func awakeFromNib() {
-        contentViewBackground.layer.cornerRadius = 10
-        contentViewBackground.layer.borderWidth = 1
-        contentViewBackground.layer.borderColor = UIColor.orange.cgColor
+//        contentViewBackground.layer.cornerRadius = 10
+//        contentViewBackground.layer.borderWidth = 1
+//        contentViewBackground.layer.borderColor = UIColor.orange.cgColor
+        backOfImage.addblurlight()
+        backOfLabel.addBlurToView(cornerRadious: 12)
     }
+    
+}
+
+extension UIView {
+    func addBlurToView(cornerRadious: CGFloat = 14) {
+        var blurEffect: UIBlurEffect!
+        if #available(iOS 10.0, *) {
+            blurEffect = UIBlurEffect(style: .dark)
+        }else{
+            blurEffect = UIBlurEffect(style: .light)
+        }
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView.frame = self.bounds
+        blurredEffectView.alpha = 0.97
+        blurredEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurredEffectView.layer.cornerRadius = cornerRadious
+        blurredEffectView.layer.masksToBounds = true
+        self.addSubview(blurredEffectView)
+    }
+    
+    func addblurlight() {
+        var blurEffect: UIBlurEffect!
+        blurEffect = UIBlurEffect(style: .light)
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView.frame = self.bounds
+        blurredEffectView.alpha = 0.97
+        blurredEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurredEffectView.layer.cornerRadius = 12
+        blurredEffectView.layer.masksToBounds = true
+        self.addSubview(blurredEffectView)
+    }
+    
+   func addGradient(_ colors: [UIColor], locations: [NSNumber], frame: CGRect = .zero) {
+      let gradientLayer = CAGradientLayer()
+      gradientLayer.colors = colors.map{ $0.cgColor }
+      gradientLayer.locations = locations
+      gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+      gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
+      gradientLayer.frame = frame
+      layer.insertSublayer(gradientLayer, at: 0)
+   }
+
     
 }
