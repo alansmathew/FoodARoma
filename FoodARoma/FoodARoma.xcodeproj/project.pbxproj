@@ -62,6 +62,7 @@
 		E7F437732A534F5600B3D4CD /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F437722A534F5600B3D4CD /* CommentsViewController.swift */; };
 		E7F437782A53502800B3D4CD /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F437762A53502800B3D4CD /* CommentTableViewCell.swift */; };
 		E7F437792A53502800B3D4CD /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7F437772A53502800B3D4CD /* CommentTableViewCell.xib */; };
+		E7F458092A70828F00F2A912 /* CustomPizzaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F458082A70828F00F2A912 /* CustomPizzaModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,7 @@
 		E7F437722A534F5600B3D4CD /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		E7F437762A53502800B3D4CD /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		E7F437772A53502800B3D4CD /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
+		E7F458082A70828F00F2A912 /* CustomPizzaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPizzaModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +273,7 @@
 				992ECBDB2A3B6E6200B8745A /* LoginModel.swift */,
 				996089AC2A3FFA3100C89866 /* RegistrationModel.swift */,
 				E7A209692A55D4D2002FF49E /* AllMenuModel.swift */,
+				E7F458082A70828F00F2A912 /* CustomPizzaModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -572,6 +575,7 @@
 				991736B82A37CFF700824B14 /* LoginViewController.swift in Sources */,
 				E76933612A5E569700C31184 /* EmptyTableViewCell.swift in Sources */,
 				E7C0D6212A4A4BBF00AB9CD3 /* BuildOwnViewController.swift in Sources */,
+				E7F458092A70828F00F2A912 /* CustomPizzaModel.swift in Sources */,
 				991C28D52A2D2DD900201DE7 /* InitalAuthScreen.swift in Sources */,
 				E7D034112A5458B5008D8BDF /* Extenctions.swift in Sources */,
 				992ECBDC2A3B6E6300B8745A /* LoginModel.swift in Sources */,

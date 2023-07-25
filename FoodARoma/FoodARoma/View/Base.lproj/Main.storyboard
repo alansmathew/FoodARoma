@@ -142,6 +142,9 @@
                                                 <color key="backgroundColor" name="Custom black"/>
                                                 <color key="tintColor" name="browncolor"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
+                                                <connections>
+                                                    <action selector="sideOptionsClick:" destination="xjZ-31-cid" eventType="touchUpInside" id="zCp-2t-vgZ"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xei-p8-DFb">
                                                 <rect key="frame" x="0.0" y="112.5" width="60" height="67.5"/>
@@ -149,6 +152,9 @@
                                                 <color key="tintColor" name="browncolor"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="minus" catalog="system"/>
+                                                <connections>
+                                                    <action selector="sideOptionsClick:" destination="xjZ-31-cid" eventType="touchUpInside" id="aNW-pn-Rkc"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -180,7 +186,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Yl3-Jb-CMa">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Yl3-Jb-CMa">
                                 <rect key="frame" x="0.0" y="737" width="414" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -321,13 +327,15 @@
                         <outlet property="animation_lottie" destination="mzu-tr-Xw6" id="5qO-Lp-BdP"/>
                         <outlet property="baclofBlurView" destination="G7y-Lz-h7O" id="b8V-Co-p8f"/>
                         <outlet property="blurTopView" destination="9el-zd-41l" id="axZ-kE-Azo"/>
-                        <outlet property="minusbutton" destination="KHm-nd-w79" id="ZL4-19-Qq7"/>
-                        <outlet property="plusButton" destination="Xei-p8-DFb" id="8n8-lK-dOd"/>
+                        <outlet property="minusbutton" destination="Xei-p8-DFb" id="fN1-Ih-8TM"/>
+                        <outlet property="plusButton" destination="KHm-nd-w79" id="MqL-Gx-0B7"/>
                         <outlet property="priceView" destination="jg6-hC-0wZ" id="kvi-cr-PlO"/>
                         <outlet property="sceneView" destination="7th-U1-jeA" id="zre-HK-god"/>
+                        <outlet property="sideLabel" destination="Drs-4s-lZ2" id="tHr-HO-d7C"/>
                         <outlet property="sideOptions" destination="x8O-rl-IXh" id="k6F-5h-t63"/>
                         <outlet property="sidebar" destination="lic-F7-Zim" id="QrL-j3-ZWx"/>
                         <outlet property="topContentView" destination="3F2-8s-Kd4" id="G5y-fP-ym7"/>
+                        <outlet property="topTextLabel" destination="uTV-8S-Evu" id="J1v-pb-bpo"/>
                         <outlet property="topingsCollectionView" destination="Yl3-Jb-CMa" id="xr2-XM-doL"/>
                     </connections>
                 </viewController>

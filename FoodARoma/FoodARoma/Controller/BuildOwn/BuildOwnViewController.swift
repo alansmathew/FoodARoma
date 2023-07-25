@@ -12,8 +12,8 @@ import Lottie
 
 class BuildOwnViewController: UIViewController {
 
-    
-    
+    @IBOutlet weak var topTextLabel: UILabel!
+    @IBOutlet weak var sideLabel: UILabel!
     @IBOutlet weak var sidebar: UIView!
     @IBOutlet weak var minusbutton: UIButton!
     @IBOutlet weak var plusButton: UIButton!
@@ -28,7 +28,12 @@ class BuildOwnViewController: UIViewController {
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var animation_lottie: LottieAnimationView!
     
-    let topingNames = ["Size", 8"Cheddar", "Fontina" , "Chichen" ,"Beef", "Pepperoni", "Black olives", "Mushroom" ]
+    let topingNames = ["Size", "Cheddar", "Fontina" , "Chichen" ,"Beef", "Pepperoni", "Black olives", "Mushroom" ]
+    let toppingsSize = ["None", "Small", "Medium", "Large"]
+    var cellSellection = 0
+    var topingDefault = 2
+    
+    var topText = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,8 +53,11 @@ class BuildOwnViewController: UIViewController {
         topingsCollectionView.delegate = self
         topingsCollectionView.isHidden = true
         
+        topingsCollectionView.reloadData()
+        let firstIndexPath = IndexPath(item: 0, section: 0)
+        topingsCollectionView.selectItem(at: firstIndexPath, animated: true, scrollPosition: .centeredHorizontally)
+        
         blurTopView.layer.cornerRadius = 14
-//        blurTopView.layer.masksToBounds = true
         blurTopView.addBlurToView()
         baclofBlurView.addGradient([UIColor.black, UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.00)], locations: [0.0, 1.0],frame: baclofBlurView.frame)
         priceView.layer.cornerRadius = 6
@@ -62,6 +70,9 @@ class BuildOwnViewController: UIViewController {
         sideOptions.isHidden = true
         topContentView.isHidden = true
         addLighting()
+        
+        topText = "Pizza Size \(toppingsSize[topingDefault])"
+        topTextLabel.text = topText
     }
     
     // Function to add lighting to the scene
@@ -86,6 +97,28 @@ class BuildOwnViewController: UIViewController {
         sceneView.scene.rootNode.addChildNode(ambientLightNode)
         sceneView.scene.rootNode.addChildNode(directionalLightNode)
     }
+    
+    @IBAction func sideOptionsClick(_ sender: UIButton) {
+        if sender == plusButton {
+            if topingDefault < toppingsSize.count-1 {
+                topingDefault += 1
+            }
+        }
+        if sender == minusbutton {
+            if cellSellection != 0{
+                if topingDefault > 0{
+                    topingDefault -= 1
+                }
+            }else{
+                if topingDefault > 1{
+                    topingDefault -= 1
+                }
+            }
+        }
+        
+        sideLabel.text = toppingsSize[topingDefault]
+    }
+    
 
 }
 
@@ -168,7 +201,6 @@ extension BuildOwnViewController {
     }
     
     private func createYour3DObject() -> SCNNode {
-        
         // Load the USDZ model
         let url = Bundle.main.url(forResource: "title1", withExtension: "usdz")
         let scene = try? SCNScene(url: url!)
@@ -194,9 +226,19 @@ extension BuildOwnViewController : UICollectionViewDataSource{
 }
 
 extension BuildOwnViewController : UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+//        collectionView.reloadData()
+        
+        topingDefault = 2
+        sideLabel.text = toppingsSize[topingDefault]
+        
+        cellSellection = indexPath.row
+        
+    }
+    
     
 }
-
 
 class PizzaTopingsCustomCollectionViewCell : UICollectionViewCell {
     
@@ -211,6 +253,26 @@ class PizzaTopingsCustomCollectionViewCell : UICollectionViewCell {
 //        contentViewBackground.layer.borderColor = UIColor.orange.cgColor
         backOfImage.addblurlight()
         backOfLabel.addBlurToView(cornerRadious: 12)
+        backOfImage.layer.cornerRadius = 14
+        backOfLabel.layer.cornerRadius = 12
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                backOfImage.layer.borderColor = UIColor.orange.cgColor
+                backOfImage.layer.borderWidth = 1
+                
+                backOfLabel.layer.borderColor = UIColor.orange.cgColor
+                backOfLabel.layer.borderWidth = 1
+            } else {
+                backOfImage.layer.borderColor = UIColor.clear.cgColor
+                backOfImage.layer.borderWidth = 0
+                
+                backOfLabel.layer.borderColor = UIColor.clear.cgColor
+                backOfLabel.layer.borderWidth = 0
+            }
+        }
     }
     
 }
