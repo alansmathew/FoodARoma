@@ -139,7 +139,7 @@ class BuildOwnViewController: UIViewController {
             tempIndex += 1
         }
         
-        if customDataModel.count < cellSellection + 1  && shouldAdd{
+        if shouldAdd{
             let tempModel = CustomPizzaModel(Name: topingNames[cellSellection], Quantity: toppingsSize[topingDefault], didtouched: true)
             customDataModel.append(tempModel)
         }

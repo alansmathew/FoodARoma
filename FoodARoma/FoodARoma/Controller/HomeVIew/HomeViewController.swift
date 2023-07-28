@@ -47,9 +47,9 @@ class HomeViewController: UIViewController {
     }
 
     override func viewDidLayoutSubviews() {
-        loading = customAnimation()
-        loadingProtocol(with: loading! ,true)
-        fetchAllMenu()
+//        loading = customAnimation()
+//        loadingProtocol(with: loading! ,true)
+////        fetchAllMenu()
     }
     
     func populateCollectionViews(){
