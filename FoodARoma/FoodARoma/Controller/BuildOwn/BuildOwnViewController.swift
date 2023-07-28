@@ -30,10 +30,16 @@ class BuildOwnViewController: UIViewController {
     
     let topingNames = ["Size", "Cheddar", "Fontina" , "Chichen" ,"Beef", "Pepperoni", "Black olives", "Mushroom" ]
     let toppingsSize = ["None", "Small", "Medium", "Large"]
+    
     var cellSellection = 0
     var topingDefault = 2
     
+    var base = "Medium"
     var topText = ""
+    var customDataModel : [CustomPizzaModel] = [CustomPizzaModel]()
+    
+    var didAdd3dobject = false
+    var objectrootPoint : SCNVector3?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +62,7 @@ class BuildOwnViewController: UIViewController {
         topingsCollectionView.reloadData()
         let firstIndexPath = IndexPath(item: 0, section: 0)
         topingsCollectionView.selectItem(at: firstIndexPath, animated: true, scrollPosition: .centeredHorizontally)
+        dataPopulate()
         
         blurTopView.layer.cornerRadius = 14
         blurTopView.addBlurToView()
@@ -117,6 +124,106 @@ class BuildOwnViewController: UIViewController {
         }
         
         sideLabel.text = toppingsSize[topingDefault]
+        dataPopulate()
+    }
+    
+    private func dataPopulate(){
+        
+        var shouldAdd = true
+        var tempIndex = 0
+        for x in customDataModel{
+            if topingNames[cellSellection] == x.Name {
+                shouldAdd = false
+                break
+            }
+            tempIndex += 1
+        }
+        
+        if customDataModel.count < cellSellection + 1  && shouldAdd{
+            let tempModel = CustomPizzaModel(Name: topingNames[cellSellection], Quantity: toppingsSize[topingDefault], didtouched: true)
+            customDataModel.append(tempModel)
+        }
+        else{
+            let tempModel = CustomPizzaModel(Name: topingNames[cellSellection], Quantity: toppingsSize[topingDefault], didtouched: true)
+            customDataModel[tempIndex] = tempModel
+        }
+        
+        
+        var tempText = "Pizza "
+        var isfirst = true
+        for x in customDataModel{
+            if x.Quantity != "None" {
+                if isfirst {
+                    base = x.Quantity
+                    tempText += "\(x.Name) \(x.Quantity) with   "
+                }
+                else{
+                    tempText = String(tempText.dropLast(2))
+                    tempText += "\(x.Name) \(x.Quantity),   "
+                }
+            }
+            isfirst = false
+        }
+        topTextLabel.text = String(tempText.dropLast(3))
+        updateAr()
+    }
+    
+    func updateAr(){
+        
+        var url = URL(string: "")
+        
+        if let ObjectRootPoint = objectrootPoint {
+            var newPosistion = ObjectRootPoint
+            sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+                  if node.name == topingNames[cellSellection] {
+                      node.removeFromParentNode()
+                  }
+              }
+            
+            switch topingNames[cellSellection] {
+                case "Size":
+                    if topingDefault == 1 {
+                        url = Bundle.main.url(forResource: "pizzasmall", withExtension: "usdz")
+                    }
+                    else if topingDefault == 2{
+                        url = Bundle.main.url(forResource: "pizzamedium", withExtension: "usdz")
+                    }
+                    else if topingDefault == 3 {
+                        url = Bundle.main.url(forResource: "pizzaLarge", withExtension: "usdz")
+                    }
+                    break
+                case "Cheddar":
+                    if topingDefault == 1 {
+                        url = Bundle.main.url(forResource: "cheeseSmall\(base)", withExtension: "usdz")
+                        newPosistion.y -= 0.00009
+                    }
+                    else if topingDefault == 2{
+                        url = Bundle.main.url(forResource: "cheeseSmall\(base)", withExtension: "usdz")
+                        
+                    }
+                    else if topingDefault == 3 {
+                        url = Bundle.main.url(forResource: "cheeseSmall\(base)", withExtension: "usdz")
+                        newPosistion.y += 0.00005
+                    }
+                    break
+                
+                default:
+                url = URL(string: "")
+            }
+            
+            if let urlData = url{
+                let scene = try? SCNScene(url: urlData)
+                let newObject = scene!.rootNode.childNodes.first
+                newObject?.position = newPosistion
+                newObject?.name = topingNames[cellSellection]
+                
+                if let NewObject = newObject{
+                    sceneView.scene.rootNode.addChildNode(NewObject)
+                }
+            }
+        }
+    
+        
     }
     
 
@@ -179,30 +286,37 @@ extension BuildOwnViewController: ARSCNViewDelegate {
 
 extension BuildOwnViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first, let result = sceneView.hitTest(touch.location(in: sceneView), types: [.existingPlaneUsingExtent]).first else { return }
+        if !didAdd3dobject {
+            guard let touch = touches.first, let result = sceneView.hitTest(touch.location(in: sceneView), types: [.existingPlaneUsingExtent]).first else { return }
 
-        let position = SCNVector3(result.worldTransform.columns.3.x, result.worldTransform.columns.3.y, result.worldTransform.columns.3.z)
-        let objectNode = createYour3DObject() // Create your 3D object node here
-        
-        objectNode.position = position
-        sceneView.scene.rootNode.addChildNode(objectNode)
-        
-        DispatchQueue.main.async {
-            self.topingsCollectionView.isHidden = false
-            self.topContentView.isHidden = false
-            self.sideOptions.isHidden = false
+            let position = SCNVector3(result.worldTransform.columns.3.x, result.worldTransform.columns.3.y, result.worldTransform.columns.3.z)
+            objectrootPoint = position
+            let objectNode = createYour3DObject() // Create your 3D object node here
+            
+            objectNode.position = position
+            objectNode.name = topingNames[cellSellection]
+            sceneView.scene.rootNode.addChildNode(objectNode)
+            
+            DispatchQueue.main.async {
+                self.topingsCollectionView.isHidden = false
+                self.topContentView.isHidden = false
+                self.sideOptions.isHidden = false
+            }
+            
+            sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+                  if node.name == "planeNode" {
+                      node.removeFromParentNode()
+                  }
+              }
+            
+            didAdd3dobject = true
         }
         
-        sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
-              if node.name == "planeNode" {
-                  node.removeFromParentNode()
-              }
-          }
     }
     
     private func createYour3DObject() -> SCNNode {
         // Load the USDZ model
-        let url = Bundle.main.url(forResource: "title1", withExtension: "usdz")
+        let url = Bundle.main.url(forResource: "pizzamedium", withExtension: "usdz")
         let scene = try? SCNScene(url: url!)
         let objectNode = scene!.rootNode.childNodes.first
         return objectNode!
@@ -228,16 +342,21 @@ extension BuildOwnViewController : UICollectionViewDataSource{
 extension BuildOwnViewController : UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
-//        collectionView.reloadData()
         
         topingDefault = 2
+        
+        if customDataModel.count > indexPath.row{
+            if customDataModel[indexPath.row].didtouched {
+                if let indexData = toppingsSize.firstIndex(where: { $0 ==  customDataModel[indexPath.row].Quantity}) {
+                    topingDefault = indexData
+                }
+            }
+        }
+        
         sideLabel.text = toppingsSize[topingDefault]
-        
         cellSellection = indexPath.row
-        
+        dataPopulate()
     }
-    
-    
 }
 
 class PizzaTopingsCustomCollectionViewCell : UICollectionViewCell {

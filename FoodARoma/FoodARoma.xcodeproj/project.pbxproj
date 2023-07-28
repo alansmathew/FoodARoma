@@ -63,6 +63,12 @@
 		E7F437782A53502800B3D4CD /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F437762A53502800B3D4CD /* CommentTableViewCell.swift */; };
 		E7F437792A53502800B3D4CD /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7F437772A53502800B3D4CD /* CommentTableViewCell.xib */; };
 		E7F458092A70828F00F2A912 /* CustomPizzaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F458082A70828F00F2A912 /* CustomPizzaModel.swift */; };
+		E7F6A2A12A72F774001025A8 /* pizzasmall.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E7F6A2A02A72F774001025A8 /* pizzasmall.usdz */; };
+		E7F6A2A32A72F8B6001025A8 /* pizzamedium.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E7F6A2A22A72F8B6001025A8 /* pizzamedium.usdz */; };
+		E7F6A2A52A72F8BD001025A8 /* pizzaLarge.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E7F6A2A42A72F8BD001025A8 /* pizzaLarge.usdz */; };
+		E7F6A2B32A734FA2001025A8 /* cheeseSmallSmall.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E7F6A2AF2A734FA1001025A8 /* cheeseSmallSmall.usdz */; };
+		E7F6A2B42A734FA2001025A8 /* cheeseSmallLarge.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E7F6A2B02A734FA1001025A8 /* cheeseSmallLarge.usdz */; };
+		E7F6A2B52A734FA2001025A8 /* cheeseSmallMedium.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E7F6A2B12A734FA2001025A8 /* cheeseSmallMedium.usdz */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +143,12 @@
 		E7F437762A53502800B3D4CD /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		E7F437772A53502800B3D4CD /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		E7F458082A70828F00F2A912 /* CustomPizzaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPizzaModel.swift; sourceTree = "<group>"; };
+		E7F6A2A02A72F774001025A8 /* pizzasmall.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = pizzasmall.usdz; sourceTree = "<group>"; };
+		E7F6A2A22A72F8B6001025A8 /* pizzamedium.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = pizzamedium.usdz; sourceTree = "<group>"; };
+		E7F6A2A42A72F8BD001025A8 /* pizzaLarge.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = pizzaLarge.usdz; sourceTree = "<group>"; };
+		E7F6A2AF2A734FA1001025A8 /* cheeseSmallSmall.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = cheeseSmallSmall.usdz; sourceTree = "<group>"; };
+		E7F6A2B02A734FA1001025A8 /* cheeseSmallLarge.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = cheeseSmallLarge.usdz; sourceTree = "<group>"; };
+		E7F6A2B12A734FA2001025A8 /* cheeseSmallMedium.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = cheeseSmallMedium.usdz; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -399,11 +411,33 @@
 		E7C0D61D2A4A4B6700AB9CD3 /* BuildOwn */ = {
 			isa = PBXGroup;
 			children = (
+				E7F6A2B72A734FAC001025A8 /* Cheese */,
+				E7F6A2A62A72FFBB001025A8 /* pizza Size */,
 				E76944A42A67968F00F9904B /* title1.usdz */,
 				E7C0D61E2A4A4B8F00AB9CD3 /* MyScene.rcproject */,
 				E7C0D6202A4A4BBF00AB9CD3 /* BuildOwnViewController.swift */,
 			);
 			path = BuildOwn;
+			sourceTree = "<group>";
+		};
+		E7F6A2A62A72FFBB001025A8 /* pizza Size */ = {
+			isa = PBXGroup;
+			children = (
+				E7F6A2A02A72F774001025A8 /* pizzasmall.usdz */,
+				E7F6A2A22A72F8B6001025A8 /* pizzamedium.usdz */,
+				E7F6A2A42A72F8BD001025A8 /* pizzaLarge.usdz */,
+			);
+			path = "pizza Size";
+			sourceTree = "<group>";
+		};
+		E7F6A2B72A734FAC001025A8 /* Cheese */ = {
+			isa = PBXGroup;
+			children = (
+				E7F6A2B02A734FA1001025A8 /* cheeseSmallLarge.usdz */,
+				E7F6A2B12A734FA2001025A8 /* cheeseSmallMedium.usdz */,
+				E7F6A2AF2A734FA1001025A8 /* cheeseSmallSmall.usdz */,
+			);
+			path = Cheese;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -525,9 +559,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7F6A2A52A72F8BD001025A8 /* pizzaLarge.usdz in Resources */,
 				E76944A52A67969000F9904B /* title1.usdz in Resources */,
 				992781DC2A311C8A00F10E5D /* HomeMenuCollectionViewCell.xib in Resources */,
 				992ECBDE2A3B77B600B8745A /* ResturentMain.storyboard in Resources */,
+				E7F6A2A32A72F8B6001025A8 /* pizzamedium.usdz in Resources */,
+				E7F6A2A12A72F774001025A8 /* pizzasmall.usdz in Resources */,
 				E7BFD10E2A5240350016445A /* HomeOrder.storyboard in Resources */,
 				991C28DD2A2D2DDF00201DE7 /* LaunchScreen.storyboard in Resources */,
 				992ECBE62A3B7FBD00B8745A /* ResturentOrderscell.xib in Resources */,
@@ -536,10 +573,13 @@
 				99A623B42A3239D6003BF199 /* BeverageMenuCollectionViewCell.xib in Resources */,
 				E7F437792A53502800B3D4CD /* CommentTableViewCell.xib in Resources */,
 				E76944AB2A684CA000F9904B /* move.json in Resources */,
+				E7F6A2B42A734FA2001025A8 /* cheeseSmallLarge.usdz in Resources */,
 				991736B62A379FD800824B14 /* LoginScreen.storyboard in Resources */,
 				991C28D82A2D2DD900201DE7 /* Main.storyboard in Resources */,
+				E7F6A2B32A734FA2001025A8 /* cheeseSmallSmall.usdz in Resources */,
 				E78AF08B2A57BC3F00B40B18 /* HomeMenuTableViewCell.xib in Resources */,
 				E7377C142A5B5BC600F5C29F /* ResturentAddOrderStoryboard.storyboard in Resources */,
+				E7F6A2B52A734FA2001025A8 /* cheeseSmallMedium.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
