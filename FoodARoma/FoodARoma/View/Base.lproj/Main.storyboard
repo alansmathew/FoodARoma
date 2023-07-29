@@ -386,7 +386,7 @@
                                             <action selector="searchclick:" destination="23c-MA-TZM" eventType="touchUpInside" id="pm8-Xr-nVJ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fKJ-vA-EV4">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fKJ-vA-EV4" userLabel="cartbutton">
                                         <rect key="frame" x="329" y="0.0" width="50" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="Yrc-BG-4A2"/>
@@ -396,7 +396,18 @@
                                         <buttonConfiguration key="configuration" style="plain" image="cart" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="semibold"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="cartButtonClick:" destination="23c-MA-TZM" eventType="touchUpInside" id="O1p-6w-sa1"/>
+                                        </connections>
                                     </button>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rXG-U7-TjB">
+                                        <rect key="frame" x="356.5" y="0.0" width="15" height="15"/>
+                                        <color key="backgroundColor" name="customorange"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="15" id="7sa-1j-yrD"/>
+                                            <constraint firstAttribute="height" constant="15" id="Y1D-W0-b4R"/>
+                                        </constraints>
+                                    </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="UTr-x9-zy2">
                                         <rect key="frame" x="0.0" y="13.5" width="20" height="18.5"/>
                                         <color key="tintColor" red="0.24313725489999999" green="0.24313725489999999" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -417,10 +428,12 @@
                                     <constraint firstItem="bgP-Mk-gG1" firstAttribute="centerY" secondItem="dkm-h5-HWZ" secondAttribute="centerY" id="1py-FV-c65"/>
                                     <constraint firstItem="UTr-x9-zy2" firstAttribute="leading" secondItem="dkm-h5-HWZ" secondAttribute="leading" id="29y-jv-TuU"/>
                                     <constraint firstItem="UTr-x9-zy2" firstAttribute="centerY" secondItem="dkm-h5-HWZ" secondAttribute="centerY" id="5AF-UX-ObF"/>
+                                    <constraint firstItem="rXG-U7-TjB" firstAttribute="top" secondItem="fKJ-vA-EV4" secondAttribute="top" id="Mog-uQ-LNF"/>
                                     <constraint firstAttribute="height" constant="45" id="Nqq-iI-ccB"/>
                                     <constraint firstAttribute="trailing" secondItem="fKJ-vA-EV4" secondAttribute="trailing" id="UFD-m9-T1n"/>
                                     <constraint firstItem="fKJ-vA-EV4" firstAttribute="top" secondItem="dkm-h5-HWZ" secondAttribute="top" id="a16-q2-HXv"/>
                                     <constraint firstItem="bgP-Mk-gG1" firstAttribute="leading" secondItem="UTr-x9-zy2" secondAttribute="trailing" constant="10" id="f1s-mF-jdR"/>
+                                    <constraint firstItem="fKJ-vA-EV4" firstAttribute="trailing" secondItem="rXG-U7-TjB" secondAttribute="trailing" constant="7.5" id="jNy-q4-7WX"/>
                                     <constraint firstItem="BJZ-i4-obx" firstAttribute="top" secondItem="dkm-h5-HWZ" secondAttribute="top" id="rJI-hK-tgK"/>
                                     <constraint firstItem="fKJ-vA-EV4" firstAttribute="leading" secondItem="BJZ-i4-obx" secondAttribute="trailing" id="sgN-Hr-y7M"/>
                                 </constraints>
@@ -633,6 +646,7 @@
                     <connections>
                         <outlet property="BeverageCollctionView" destination="JIm-Uh-ncm" id="IU9-0R-2gb"/>
                         <outlet property="regularMenuCollectionVew" destination="Lj2-Ik-SDv" id="LmU-Re-mcP"/>
+                        <outlet property="roundedcartButton" destination="rXG-U7-TjB" id="miO-Nt-ama"/>
                         <outlet property="specialCollectionVew" destination="iqC-RA-Jsd" id="LuL-8K-8FH"/>
                     </connections>
                 </viewController>
@@ -875,18 +889,42 @@
         <!--Order-->
         <scene sceneID="F0L-J3-Biz">
             <objects>
-                <viewController id="r3u-eH-wvo" sceneMemberID="viewController">
+                <viewController restorationIdentifier="OrderHistoryViewController" storyboardIdentifier="OrderHistoryViewController" id="r3u-eH-wvo" customClass="OrderHistoryViewController" customModule="FoodARoma" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1jE-6f-qCl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Orders" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IIJ-HL-bIl">
+                                <rect key="frame" x="20" y="54" width="384" height="36"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="140" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8By-Be-5uG">
+                                <rect key="frame" x="0.0" y="100" width="414" height="747"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="kau-7S-vhd"/>
                         <color key="backgroundColor" name="homeBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="kau-7S-vhd" firstAttribute="bottom" secondItem="8By-Be-5uG" secondAttribute="bottom" id="QnF-Gs-xux"/>
+                            <constraint firstItem="8By-Be-5uG" firstAttribute="top" secondItem="IIJ-HL-bIl" secondAttribute="bottom" constant="10" id="b2G-A8-21t"/>
+                            <constraint firstItem="8By-Be-5uG" firstAttribute="leading" secondItem="kau-7S-vhd" secondAttribute="leading" id="gvc-eD-sbG"/>
+                            <constraint firstItem="IIJ-HL-bIl" firstAttribute="top" secondItem="kau-7S-vhd" secondAttribute="top" constant="10" id="n3Q-g5-OFQ"/>
+                            <constraint firstItem="kau-7S-vhd" firstAttribute="trailing" secondItem="8By-Be-5uG" secondAttribute="trailing" id="sjd-wt-kKJ"/>
+                            <constraint firstItem="IIJ-HL-bIl" firstAttribute="leading" secondItem="kau-7S-vhd" secondAttribute="leading" constant="20" id="yZV-DZ-evq"/>
+                            <constraint firstItem="kau-7S-vhd" firstAttribute="trailing" secondItem="IIJ-HL-bIl" secondAttribute="trailing" constant="10" id="ymN-6x-d0W"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Order" image="order" id="z4s-xR-DU8"/>
+                    <connections>
+                        <outlet property="orderHistoryTable" destination="8By-Be-5uG" id="2jI-ew-sTs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dsz-cG-tjQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1641" y="352"/>
+            <point key="canvasLocation" x="1640.5797101449277" y="351.5625"/>
         </scene>
     </scenes>
     <resources>

@@ -12,6 +12,7 @@ import NVActivityIndicatorView
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var roundedcartButton: UIView!
     @IBOutlet weak var specialCollectionVew: UICollectionView!
     @IBOutlet weak var regularMenuCollectionVew: UICollectionView!
     @IBOutlet weak var BeverageCollctionView: UICollectionView!
@@ -44,6 +45,7 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
+        roundedcartButton.layer.cornerRadius = roundedcartButton.frame.width / 2
     }
 
     override func viewDidLayoutSubviews() {
@@ -77,6 +79,13 @@ class HomeViewController: UIViewController {
         viewC.AllMenuData = AllMenuItems?.AllMenu
         navigationController?.pushViewController(viewC, animated: true)
     }
+    
+    @IBAction func cartButtonClick(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "OrderStoryboard", bundle: nil)
+        let viewC = storyboard.instantiateViewController(withIdentifier: "CartViewController") as! CartViewController
+        navigationController?.pushViewController(viewC, animated: true)
+    }
+    
     
     func fetchAllMenu(){
         if let allmenuitem = AllMenuItems {
