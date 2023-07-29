@@ -84,16 +84,16 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ajshdfak ahd kahs akhdka kaw dka dha kahdkhas askd alsd   lkajds" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="uTV-8S-Evu">
-                                        <rect key="frame" x="10" y="10" width="319" height="65"/>
+                                        <rect key="frame" x="10" y="10" width="309" height="65"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                         <color key="textColor" name="browncolor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jg6-hC-0wZ">
-                                        <rect key="frame" x="339" y="15" width="55" height="55"/>
+                                        <rect key="frame" x="329" y="15" width="65" height="55"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$29.99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37E-ka-pRz">
-                                                <rect key="frame" x="2" y="2" width="51" height="51"/>
+                                                <rect key="frame" x="2" y="2" width="61" height="51"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -101,7 +101,7 @@
                                         </subviews>
                                         <color key="backgroundColor" name="customorange"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="55" id="GEi-Tl-ON8"/>
+                                            <constraint firstAttribute="width" constant="65" id="GEi-Tl-ON8"/>
                                             <constraint firstItem="37E-ka-pRz" firstAttribute="centerX" secondItem="jg6-hC-0wZ" secondAttribute="centerX" id="Gcc-Cn-K0X"/>
                                             <constraint firstItem="37E-ka-pRz" firstAttribute="top" secondItem="jg6-hC-0wZ" secondAttribute="top" constant="2" id="IMw-1R-Lad"/>
                                             <constraint firstAttribute="trailing" secondItem="37E-ka-pRz" secondAttribute="trailing" constant="2" id="Kme-17-6yq"/>
@@ -335,6 +335,7 @@
                         <outlet property="sideOptions" destination="x8O-rl-IXh" id="k6F-5h-t63"/>
                         <outlet property="sidebar" destination="lic-F7-Zim" id="QrL-j3-ZWx"/>
                         <outlet property="topContentView" destination="3F2-8s-Kd4" id="G5y-fP-ym7"/>
+                        <outlet property="topPriceLabel" destination="37E-ka-pRz" id="EMb-n1-knw"/>
                         <outlet property="topTextLabel" destination="uTV-8S-Evu" id="J1v-pb-bpo"/>
                         <outlet property="topingsCollectionView" destination="Yl3-Jb-CMa" id="xr2-XM-doL"/>
                     </connections>

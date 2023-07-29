@@ -40,6 +40,24 @@
 		E75279332A44C7E000AF3EA2 /* customLoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75279322A44C7E000AF3EA2 /* customLoadingAnimation.swift */; };
 		E75279372A44C87200AF3EA2 /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = E75279362A44C87200AF3EA2 /* NVActivityIndicatorView */; };
 		E75279392A44C87200AF3EA2 /* NVActivityIndicatorViewExtended in Frameworks */ = {isa = PBXBuildFile; productRef = E75279382A44C87200AF3EA2 /* NVActivityIndicatorViewExtended */; };
+		E75E4C782A745409006463EC /* PepperoniMediumMedium.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E75E4C722A745407006463EC /* PepperoniMediumMedium.usdz */; };
+		E75E4C792A745409006463EC /* PepperoniSmallLarge.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E75E4C732A745408006463EC /* PepperoniSmallLarge.usdz */; };
+		E75E4C7A2A745409006463EC /* PepperoniMediumSmall.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E75E4C742A745408006463EC /* PepperoniMediumSmall.usdz */; };
+		E75E4C7B2A745409006463EC /* PepperoniSmallSmall.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E75E4C752A745408006463EC /* PepperoniSmallSmall.usdz */; };
+		E75E4C7C2A745409006463EC /* PepperoniMediumLarge.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E75E4C762A745408006463EC /* PepperoniMediumLarge.usdz */; };
+		E75E4C7D2A745409006463EC /* PepperoniSmallMedium.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E75E4C772A745409006463EC /* PepperoniSmallMedium.usdz */; };
+		E75E4C812A745A92006463EC /* PepperoniLargeLarge.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E75E4C7E2A745A91006463EC /* PepperoniLargeLarge.usdz */; };
+		E75E4C822A745A92006463EC /* PepperoniLargeMedium.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E75E4C7F2A745A91006463EC /* PepperoniLargeMedium.usdz */; };
+		E75E4C832A745A92006463EC /* PepperoniLargeSmall.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E75E4C802A745A92006463EC /* PepperoniLargeSmall.usdz */; };
+		E75E4C882A746C60006463EC /* blackolivesSmallSmall.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E75E4C852A746C60006463EC /* blackolivesSmallSmall.usdz */; };
+		E75E4C892A746C60006463EC /* blackolivesSmallMedium.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E75E4C862A746C60006463EC /* blackolivesSmallMedium.usdz */; };
+		E75E4C8A2A746C60006463EC /* blackolivesSmallLarge.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E75E4C872A746C60006463EC /* blackolivesSmallLarge.usdz */; };
+		E75E4C912A7475FB006463EC /* blackolivesLargeMedium.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E75E4C8B2A7475FA006463EC /* blackolivesLargeMedium.usdz */; };
+		E75E4C922A7475FB006463EC /* blackolivesMediumMedium.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E75E4C8C2A7475FA006463EC /* blackolivesMediumMedium.usdz */; };
+		E75E4C932A7475FB006463EC /* blackolivesMediumLarge.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E75E4C8D2A7475FA006463EC /* blackolivesMediumLarge.usdz */; };
+		E75E4C942A7475FB006463EC /* blackolivesLargeSmall.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E75E4C8E2A7475FA006463EC /* blackolivesLargeSmall.usdz */; };
+		E75E4C952A7475FB006463EC /* blackolivesMediumSmall.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E75E4C8F2A7475FB006463EC /* blackolivesMediumSmall.usdz */; };
+		E75E4C962A7475FB006463EC /* blackolivesLargeLarge.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E75E4C902A7475FB006463EC /* blackolivesLargeLarge.usdz */; };
 		E76933612A5E569700C31184 /* EmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E769335F2A5E569700C31184 /* EmptyTableViewCell.swift */; };
 		E76933622A5E569700C31184 /* EmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E76933602A5E569700C31184 /* EmptyTableViewCell.xib */; };
 		E76944A52A67969000F9904B /* title1.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E76944A42A67968F00F9904B /* title1.usdz */; };
@@ -123,6 +141,24 @@
 		E7377C152A5B5EB700F5C29F /* ResturentSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResturentSettingsViewController.swift; sourceTree = "<group>"; };
 		E7377C182A5B609A00F5C29F /* MainNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationViewController.swift; sourceTree = "<group>"; };
 		E75279322A44C7E000AF3EA2 /* customLoadingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customLoadingAnimation.swift; sourceTree = "<group>"; };
+		E75E4C722A745407006463EC /* PepperoniMediumMedium.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = PepperoniMediumMedium.usdz; sourceTree = "<group>"; };
+		E75E4C732A745408006463EC /* PepperoniSmallLarge.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = PepperoniSmallLarge.usdz; sourceTree = "<group>"; };
+		E75E4C742A745408006463EC /* PepperoniMediumSmall.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = PepperoniMediumSmall.usdz; sourceTree = "<group>"; };
+		E75E4C752A745408006463EC /* PepperoniSmallSmall.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = PepperoniSmallSmall.usdz; sourceTree = "<group>"; };
+		E75E4C762A745408006463EC /* PepperoniMediumLarge.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = PepperoniMediumLarge.usdz; sourceTree = "<group>"; };
+		E75E4C772A745409006463EC /* PepperoniSmallMedium.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = PepperoniSmallMedium.usdz; sourceTree = "<group>"; };
+		E75E4C7E2A745A91006463EC /* PepperoniLargeLarge.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = PepperoniLargeLarge.usdz; sourceTree = "<group>"; };
+		E75E4C7F2A745A91006463EC /* PepperoniLargeMedium.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = PepperoniLargeMedium.usdz; sourceTree = "<group>"; };
+		E75E4C802A745A92006463EC /* PepperoniLargeSmall.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = PepperoniLargeSmall.usdz; sourceTree = "<group>"; };
+		E75E4C852A746C60006463EC /* blackolivesSmallSmall.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = blackolivesSmallSmall.usdz; sourceTree = "<group>"; };
+		E75E4C862A746C60006463EC /* blackolivesSmallMedium.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = blackolivesSmallMedium.usdz; sourceTree = "<group>"; };
+		E75E4C872A746C60006463EC /* blackolivesSmallLarge.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = blackolivesSmallLarge.usdz; sourceTree = "<group>"; };
+		E75E4C8B2A7475FA006463EC /* blackolivesLargeMedium.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = blackolivesLargeMedium.usdz; sourceTree = "<group>"; };
+		E75E4C8C2A7475FA006463EC /* blackolivesMediumMedium.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = blackolivesMediumMedium.usdz; sourceTree = "<group>"; };
+		E75E4C8D2A7475FA006463EC /* blackolivesMediumLarge.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = blackolivesMediumLarge.usdz; sourceTree = "<group>"; };
+		E75E4C8E2A7475FA006463EC /* blackolivesLargeSmall.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = blackolivesLargeSmall.usdz; sourceTree = "<group>"; };
+		E75E4C8F2A7475FB006463EC /* blackolivesMediumSmall.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = blackolivesMediumSmall.usdz; sourceTree = "<group>"; };
+		E75E4C902A7475FB006463EC /* blackolivesLargeLarge.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = blackolivesLargeLarge.usdz; sourceTree = "<group>"; };
 		E769335F2A5E569700C31184 /* EmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewCell.swift; sourceTree = "<group>"; };
 		E76933602A5E569700C31184 /* EmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyTableViewCell.xib; sourceTree = "<group>"; };
 		E76944A42A67968F00F9904B /* title1.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = title1.usdz; sourceTree = "<group>"; };
@@ -391,6 +427,38 @@
 			path = CustomFiles;
 			sourceTree = "<group>";
 		};
+		E75E4C712A7453FA006463EC /* pep */ = {
+			isa = PBXGroup;
+			children = (
+				E75E4C7E2A745A91006463EC /* PepperoniLargeLarge.usdz */,
+				E75E4C7F2A745A91006463EC /* PepperoniLargeMedium.usdz */,
+				E75E4C802A745A92006463EC /* PepperoniLargeSmall.usdz */,
+				E75E4C762A745408006463EC /* PepperoniMediumLarge.usdz */,
+				E75E4C722A745407006463EC /* PepperoniMediumMedium.usdz */,
+				E75E4C742A745408006463EC /* PepperoniMediumSmall.usdz */,
+				E75E4C732A745408006463EC /* PepperoniSmallLarge.usdz */,
+				E75E4C772A745409006463EC /* PepperoniSmallMedium.usdz */,
+				E75E4C752A745408006463EC /* PepperoniSmallSmall.usdz */,
+			);
+			path = pep;
+			sourceTree = "<group>";
+		};
+		E75E4C842A746C48006463EC /* blackOlives */ = {
+			isa = PBXGroup;
+			children = (
+				E75E4C902A7475FB006463EC /* blackolivesLargeLarge.usdz */,
+				E75E4C8B2A7475FA006463EC /* blackolivesLargeMedium.usdz */,
+				E75E4C8E2A7475FA006463EC /* blackolivesLargeSmall.usdz */,
+				E75E4C8D2A7475FA006463EC /* blackolivesMediumLarge.usdz */,
+				E75E4C8C2A7475FA006463EC /* blackolivesMediumMedium.usdz */,
+				E75E4C8F2A7475FB006463EC /* blackolivesMediumSmall.usdz */,
+				E75E4C872A746C60006463EC /* blackolivesSmallLarge.usdz */,
+				E75E4C862A746C60006463EC /* blackolivesSmallMedium.usdz */,
+				E75E4C852A746C60006463EC /* blackolivesSmallSmall.usdz */,
+			);
+			path = blackOlives;
+			sourceTree = "<group>";
+		};
 		E76944A92A684C7800F9904B /* LotiAnimation */ = {
 			isa = PBXGroup;
 			children = (
@@ -411,6 +479,8 @@
 		E7C0D61D2A4A4B6700AB9CD3 /* BuildOwn */ = {
 			isa = PBXGroup;
 			children = (
+				E75E4C842A746C48006463EC /* blackOlives */,
+				E75E4C712A7453FA006463EC /* pep */,
 				E7F6A2B72A734FAC001025A8 /* Cheese */,
 				E7F6A2A62A72FFBB001025A8 /* pizza Size */,
 				E76944A42A67968F00F9904B /* title1.usdz */,
@@ -560,25 +630,43 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7F6A2A52A72F8BD001025A8 /* pizzaLarge.usdz in Resources */,
+				E75E4C7A2A745409006463EC /* PepperoniMediumSmall.usdz in Resources */,
 				E76944A52A67969000F9904B /* title1.usdz in Resources */,
 				992781DC2A311C8A00F10E5D /* HomeMenuCollectionViewCell.xib in Resources */,
 				992ECBDE2A3B77B600B8745A /* ResturentMain.storyboard in Resources */,
+				E75E4C922A7475FB006463EC /* blackolivesMediumMedium.usdz in Resources */,
 				E7F6A2A32A72F8B6001025A8 /* pizzamedium.usdz in Resources */,
 				E7F6A2A12A72F774001025A8 /* pizzasmall.usdz in Resources */,
 				E7BFD10E2A5240350016445A /* HomeOrder.storyboard in Resources */,
+				E75E4C832A745A92006463EC /* PepperoniLargeSmall.usdz in Resources */,
+				E75E4C932A7475FB006463EC /* blackolivesMediumLarge.usdz in Resources */,
 				991C28DD2A2D2DDF00201DE7 /* LaunchScreen.storyboard in Resources */,
 				992ECBE62A3B7FBD00B8745A /* ResturentOrderscell.xib in Resources */,
+				E75E4C942A7475FB006463EC /* blackolivesLargeSmall.usdz in Resources */,
+				E75E4C7D2A745409006463EC /* PepperoniSmallMedium.usdz in Resources */,
 				991C28DA2A2D2DDF00201DE7 /* Assets.xcassets in Resources */,
 				E76933622A5E569700C31184 /* EmptyTableViewCell.xib in Resources */,
+				E75E4C7B2A745409006463EC /* PepperoniSmallSmall.usdz in Resources */,
+				E75E4C7C2A745409006463EC /* PepperoniMediumLarge.usdz in Resources */,
 				99A623B42A3239D6003BF199 /* BeverageMenuCollectionViewCell.xib in Resources */,
+				E75E4C812A745A92006463EC /* PepperoniLargeLarge.usdz in Resources */,
+				E75E4C882A746C60006463EC /* blackolivesSmallSmall.usdz in Resources */,
 				E7F437792A53502800B3D4CD /* CommentTableViewCell.xib in Resources */,
 				E76944AB2A684CA000F9904B /* move.json in Resources */,
+				E75E4C8A2A746C60006463EC /* blackolivesSmallLarge.usdz in Resources */,
+				E75E4C912A7475FB006463EC /* blackolivesLargeMedium.usdz in Resources */,
 				E7F6A2B42A734FA2001025A8 /* cheeseSmallLarge.usdz in Resources */,
+				E75E4C962A7475FB006463EC /* blackolivesLargeLarge.usdz in Resources */,
+				E75E4C792A745409006463EC /* PepperoniSmallLarge.usdz in Resources */,
 				991736B62A379FD800824B14 /* LoginScreen.storyboard in Resources */,
+				E75E4C892A746C60006463EC /* blackolivesSmallMedium.usdz in Resources */,
 				991C28D82A2D2DD900201DE7 /* Main.storyboard in Resources */,
 				E7F6A2B32A734FA2001025A8 /* cheeseSmallSmall.usdz in Resources */,
+				E75E4C782A745409006463EC /* PepperoniMediumMedium.usdz in Resources */,
 				E78AF08B2A57BC3F00B40B18 /* HomeMenuTableViewCell.xib in Resources */,
+				E75E4C822A745A92006463EC /* PepperoniLargeMedium.usdz in Resources */,
 				E7377C142A5B5BC600F5C29F /* ResturentAddOrderStoryboard.storyboard in Resources */,
+				E75E4C952A7475FB006463EC /* blackolivesMediumSmall.usdz in Resources */,
 				E7F6A2B52A734FA2001025A8 /* cheeseSmallMedium.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

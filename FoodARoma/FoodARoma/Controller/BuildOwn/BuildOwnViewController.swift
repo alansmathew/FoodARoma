@@ -12,6 +12,7 @@ import Lottie
 
 class BuildOwnViewController: UIViewController {
 
+    @IBOutlet weak var topPriceLabel: UILabel!
     @IBOutlet weak var topTextLabel: UILabel!
     @IBOutlet weak var sideLabel: UILabel!
     @IBOutlet weak var sidebar: UIView!
@@ -28,8 +29,11 @@ class BuildOwnViewController: UIViewController {
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var animation_lottie: LottieAnimationView!
     
-    let topingNames = ["Size", "Cheddar", "Fontina" , "Chichen" ,"Beef", "Pepperoni", "Black olives", "Mushroom" ]
+    var basePrice = 21.99
+    
+    let topingNames = ["Size", "Cheddar", "Pepperoni", "Black olives"]
     let toppingsSize = ["None", "Small", "Medium", "Large"]
+    let priceData = [0.00, 2.99, 3.50, 4.50]
     
     var cellSellection = 0
     var topingDefault = 2
@@ -127,6 +131,17 @@ class BuildOwnViewController: UIViewController {
         dataPopulate()
     }
     
+    private func updateBasePrice(){
+        var tempPrice = basePrice
+        for xdata in customDataModel{
+            if let indexData = toppingsSize.firstIndex(where: { $0 ==  xdata.Quantity}) {
+                tempPrice += priceData[indexData]
+            }
+        }
+        topPriceLabel.text = "$\( String(format: "%.2f", tempPrice))"
+        
+    }
+    
     private func dataPopulate(){
         
         var shouldAdd = true
@@ -164,8 +179,103 @@ class BuildOwnViewController: UIViewController {
             }
             isfirst = false
         }
+        updateBasePrice()
         topTextLabel.text = String(tempText.dropLast(3))
+        
         updateAr()
+    }
+    
+    func reselctToppings(){
+        sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+            if topingNames.contains(node.name ?? "blah balh") {
+                  node.removeFromParentNode()
+              }
+          }
+        var url = URL(string: "")
+        
+        if let ObjectRootPoint = objectrootPoint {
+            var newPosistion = ObjectRootPoint
+            
+            for xToppings in customDataModel{
+                sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+                    if node.name == xToppings.Name && node.name != topingNames[0] {
+                          node.removeFromParentNode()
+                      }
+                  }
+                 
+                let qual = xToppings.Quantity
+                
+                switch xToppings.Name {
+                    case "Size":
+                        if topingDefault == 1 {
+                            url = Bundle.main.url(forResource: "pizzasmall", withExtension: "usdz")
+                        }
+                        else if topingDefault == 2{
+                            url = Bundle.main.url(forResource: "pizzamedium", withExtension: "usdz")
+                        }
+                        else if topingDefault == 3 {
+                            url = Bundle.main.url(forResource: "pizzaLarge", withExtension: "usdz")
+                        }
+                        break
+                    case "Cheddar":
+                        if qual == toppingsSize[1] {
+                            url = Bundle.main.url(forResource: "cheeseSmall\(base)", withExtension: "usdz")
+                            newPosistion.y -= 0.00009
+                        }
+                        else if qual == toppingsSize[2]{
+                            url = Bundle.main.url(forResource: "cheeseSmall\(base)", withExtension: "usdz")
+                            
+                        }
+                        else if qual == toppingsSize[3] {
+                            url = Bundle.main.url(forResource: "cheeseSmall\(base)", withExtension: "usdz")
+                            newPosistion.y += 0.00005
+                        }
+                        break
+                    case "Pepperoni":
+                        if qual == toppingsSize[1] {
+                            url = Bundle.main.url(forResource: "PepperoniSmall\(base)", withExtension: "usdz")
+                        }
+                        else if qual == toppingsSize[2]{
+                            url = Bundle.main.url(forResource: "PepperoniMedium\(base)", withExtension: "usdz")
+                        }
+                        else if qual == toppingsSize[3] {
+                            url = Bundle.main.url(forResource: "PepperoniLarge\(base)", withExtension: "usdz")
+                        }
+                        break
+                        
+                    case "Black olives":
+                        if qual == toppingsSize[1] {
+                            url = Bundle.main.url(forResource: "blackolivesSmall\(base)", withExtension: "usdz")
+                        }
+                        else if qual == toppingsSize[2]{
+                            url = Bundle.main.url(forResource: "blackolivesMedium\(base)", withExtension: "usdz")
+                            
+                        }
+                        else if qual == toppingsSize[3] {
+                            url = Bundle.main.url(forResource: "blackolivesLarge\(base)", withExtension: "usdz")
+                        }
+                        break
+                        
+                        default:
+                        url = URL(string: "")
+                }
+                
+                
+                if let urlData = url{
+                    let scene = try? SCNScene(url: urlData)
+                    let newObject = scene!.rootNode.childNodes.first
+                    newObject?.position = newPosistion
+                    newObject?.name = xToppings.Name
+                    
+                    if let NewObject = newObject{
+                        sceneView.scene.rootNode.addChildNode(NewObject)
+                    }
+                }
+                
+            }
+            
+            
+        }
     }
     
     func updateAr(){
@@ -191,6 +301,7 @@ class BuildOwnViewController: UIViewController {
                     else if topingDefault == 3 {
                         url = Bundle.main.url(forResource: "pizzaLarge", withExtension: "usdz")
                     }
+                    reselctToppings()
                     break
                 case "Cheddar":
                     if topingDefault == 1 {
@@ -206,9 +317,34 @@ class BuildOwnViewController: UIViewController {
                         newPosistion.y += 0.00005
                     }
                     break
-                
-                default:
-                url = URL(string: "")
+                case "Pepperoni":
+                    if topingDefault == 1 {
+                        url = Bundle.main.url(forResource: "PepperoniSmall\(base)", withExtension: "usdz")
+                    }
+                    else if topingDefault == 2{
+                        url = Bundle.main.url(forResource: "PepperoniMedium\(base)", withExtension: "usdz")
+                        
+                    }
+                    else if topingDefault == 3 {
+                        url = Bundle.main.url(forResource: "PepperoniLarge\(base)", withExtension: "usdz")
+                    }
+                    break
+                    
+                case "Black olives":
+                    if topingDefault == 1 {
+                        url = Bundle.main.url(forResource: "blackolivesSmall\(base)", withExtension: "usdz")
+                    }
+                    else if topingDefault == 2{
+                        url = Bundle.main.url(forResource: "blackolivesMedium\(base)", withExtension: "usdz")
+                        
+                    }
+                    else if topingDefault == 3 {
+                        url = Bundle.main.url(forResource: "blackolivesLarge\(base)", withExtension: "usdz")
+                    }
+                    break
+                    
+                    default:
+                    url = URL(string: "")
             }
             
             if let urlData = url{
@@ -222,11 +358,8 @@ class BuildOwnViewController: UIViewController {
                 }
             }
         }
-    
         
     }
-    
-
 }
 
 extension BuildOwnViewController: ARSCNViewDelegate {
@@ -434,6 +567,4 @@ extension UIView {
       gradientLayer.frame = frame
       layer.insertSublayer(gradientLayer, at: 0)
    }
-
-    
 }
