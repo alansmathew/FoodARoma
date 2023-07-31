@@ -400,7 +400,7 @@
                                             <action selector="cartButtonClick:" destination="23c-MA-TZM" eventType="touchUpInside" id="O1p-6w-sa1"/>
                                         </connections>
                                     </button>
-                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rXG-U7-TjB">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rXG-U7-TjB">
                                         <rect key="frame" x="356.5" y="0.0" width="15" height="15"/>
                                         <color key="backgroundColor" name="customorange"/>
                                         <constraints>

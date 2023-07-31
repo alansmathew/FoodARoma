@@ -70,6 +70,12 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="orderName" destination="YlS-lj-cxb" id="8h5-3T-RyC"/>
+                <outlet property="orderPrice" destination="ekl-A7-085" id="0cW-bQ-aPS"/>
+                <outlet property="orderQ" destination="uhQ-oU-Az3" id="cav-xa-mUx"/>
+                <outlet property="orderimageView" destination="OF8-mE-1Wj" id="mlO-Vm-T6s"/>
+            </connections>
             <point key="canvasLocation" x="223.66412213740458" y="32.74647887323944"/>
         </tableViewCell>
     </objects>

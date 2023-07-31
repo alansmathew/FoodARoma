@@ -19,6 +19,11 @@ class HomeViewController: UIViewController {
     
     private var loading : (NVActivityIndicatorView,UIView)?
     
+    let animationDuration: TimeInterval = 0.93
+    let messageLabel = UILabel()
+    let tickImageView = UIImageView(image: UIImage(systemName: "checkmark.seal"))
+
+    
     private var AllMenuItems : AllMenuModel?
     private var specialMenu : [allMenu]? = [allMenu]()
     private var regMenu : [allMenu]? = [allMenu]()
@@ -35,25 +40,100 @@ class HomeViewController: UIViewController {
         regularMenuCollectionVew.delegate = self
         BeverageCollctionView.dataSource = self
         BeverageCollctionView.delegate = self
-        
+        roundedcartButton.alpha = 0.0
         
         specialCollectionVew.register(UINib(nibName: "HomeMenuCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HomeMenuCelliIdentifier")
         regularMenuCollectionVew.register(UINib(nibName: "HomeMenuCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HomeMenuCelliIdentifier")
         BeverageCollctionView.register(UINib(nibName: "BeverageMenuCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HomeBeverageIdentifier")
+        
+        setupCartAnimation()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
         roundedcartButton.layer.cornerRadius = roundedcartButton.frame.width / 2
+        
+        if CartOrders?.count ?? 0 > 0 {
+            roundedcartButton.alpha = 1
+        }
+        else{
+            roundedcartButton.alpha = 0.0
+        }
     }
 
     override func viewDidLayoutSubviews() {
-//        loading = customAnimation()
-//        loadingProtocol(with: loading! ,true)
-////        fetchAllMenu()
+        loading = customAnimation()
+        loadingProtocol(with: loading! ,true)
+        fetchAllMenu()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if didAddNewItem{
+            UIView.animate(withDuration: animationDuration, animations: {
+                // Transition the label to the middle of the screen
+                self.messageLabel.center = self.view.center
+                // Fade in the label
+                self.messageLabel.alpha = 1.0
+            }) { _ in
+                // Show the tick mark with animation
+                UIView.animate(withDuration: self.animationDuration/3, animations: {
+                    self.tickImageView.alpha = 1.0
+                }) { _ in
+                    // Hide the label and tick mark with animation after the delay
+                    UIView.animate(withDuration: self.animationDuration*2/3, delay: self.animationDuration/3, animations: {
+                        // Transition the label to the top right corner
+                        self.messageLabel.center = CGPoint(x: self.view.bounds.width - self.messageLabel.bounds.width/2 - 20,
+                                                            y: self.view.safeAreaInsets.top + self.messageLabel.bounds.height/2 + 20)
+                        // Fade out the label and tick mark
+                        self.messageLabel.alpha = 0.0
+                        self.tickImageView.alpha = 0.0
+                        didAddNewItem = !didAddNewItem
+                    })
+                }
+            }
+        }
+    }
+    
+    
+    func setupCartAnimation(){
+        // Set up the label
+        messageLabel.text = "Order Added"
+        messageLabel.textAlignment = .center
+        messageLabel.font = UIFont.boldSystemFont(ofSize:19)
+        messageLabel.textColor = .white
+        messageLabel.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        messageLabel.layer.cornerRadius = 10
+        messageLabel.clipsToBounds = true
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        messageLabel.alpha = 0.0
+
+        view.addSubview(messageLabel)
+
+        NSLayoutConstraint.activate([
+            messageLabel.widthAnchor.constraint(equalToConstant: 200),
+            messageLabel.heightAnchor.constraint(equalToConstant: 100)
+        ])
+
+        // Place the label initially outside the screen on the top center
+        messageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        messageLabel.centerYAnchor.constraint(equalTo: view.topAnchor, constant: -25).isActive = true
+
+        // Set up the tick mark image view
+        tickImageView.alpha = 0.0
+        tickImageView.contentMode = .scaleAspectFit
+        tickImageView.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(tickImageView)
+
+        NSLayoutConstraint.activate([
+            tickImageView.widthAnchor.constraint(equalToConstant: 30),
+            tickImageView.heightAnchor.constraint(equalToConstant: 30),
+            tickImageView.centerXAnchor.constraint(equalTo: messageLabel.trailingAnchor, constant: 15),
+            tickImageView.centerYAnchor.constraint(equalTo: messageLabel.centerYAnchor)
+        ])
+    }
+
     func populateCollectionViews(){
         if let allmenuitems = AllMenuItems {
             for x in allmenuitems.AllMenu{
@@ -124,8 +204,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    func loadImageInCell(cellData : HomeMenuCollectionViewCell, cellImageName : String?){
-        print(cellImageName)
+    func loadImageInCell(cellData : HomeMenuCollectionViewCell, cellImageName : String?, indexOfloading : Int, model : String){
         if let imageName = cellImageName {
             AF.request( Constants().IMAGEURL+imageName,method: .get).response{ response in
 
@@ -139,6 +218,14 @@ class HomeViewController: UIViewController {
                  }
                  else{
                      cellData.menuImageView.image = UIImage(data: responseData!, scale:1)
+                     if model == "Special"{
+                         self.specialMenu?[indexOfloading].addImgeData(imageData: responseData!)
+                     }
+                     else if model == "Menu"{
+                         self.regMenu?[indexOfloading].addImgeData(imageData: responseData!)
+//                         print(self.regMenu?[indexOfloading].menu_photo_Data)
+                     }
+                     
                  }
             
               case .failure(let error):
@@ -207,7 +294,7 @@ extension HomeViewController : UICollectionViewDataSource {
                     cell1.ratingLabel.text = specialmenuitem[indexPath.row].avg_Rating == "None" ? "0" : specialmenuitem[indexPath.row].avg_Rating
                     cell1.timeLabel.text = specialmenuitem[indexPath.row].menu_Time + " Min"
                     cell1.descLabel.text = specialmenuitem[indexPath.row].menu_Dec
-                    loadImageInCell(cellData: cell1, cellImageName: specialmenuitem[indexPath.row].menu_Photo)
+                    loadImageInCell(cellData: cell1, cellImageName: specialmenuitem[indexPath.row].menu_Photo, indexOfloading: indexPath.row, model: "Special")
                 }
                 return cell1
                 
@@ -219,7 +306,7 @@ extension HomeViewController : UICollectionViewDataSource {
                     cell2.ratingLabel.text = regularMenu[indexPath.row].avg_Rating == "None" ? "0" : regularMenu[indexPath.row].avg_Rating
                     cell2.timeLabel.text = regularMenu[indexPath.row].menu_Time + " Min"
                     cell2.descLabel.text = regularMenu[indexPath.row].menu_Dec
-                    loadImageInCell(cellData: cell2, cellImageName: regularMenu[indexPath.row].menu_Photo)
+                    loadImageInCell(cellData: cell2, cellImageName: regularMenu[indexPath.row].menu_Photo, indexOfloading: indexPath.row, model: "Menu")
                 }
                 
                 return cell2

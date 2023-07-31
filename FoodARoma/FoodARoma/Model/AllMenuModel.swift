@@ -17,7 +17,16 @@ struct allMenu : Codable {
     var menu_id : Int
     var menu_Time, menu_Cat, menu_Price,menu_Name,menu_Dec,avg_Rating,total_Ratings: String
     var menu_Photo: String?
+    var menu_photo_Data : Data?
+    var menu_quantity : Int?
     var ratings : [Ratings]
+    
+    mutating func addImgeData (imageData : Data){
+        menu_photo_Data = imageData
+    }
+    mutating func addMenuQuantity (qData : Int){
+        menu_quantity = qData
+    }
 }
 
 struct Ratings : Codable{

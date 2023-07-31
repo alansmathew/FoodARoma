@@ -30,6 +30,7 @@ class BuildOwnViewController: UIViewController {
     @IBOutlet weak var animation_lottie: LottieAnimationView!
     
     var basePrice = 21.99
+    var totalPriceData = 0.00
     
     let topingNames = ["Size", "Cheddar", "Pepperoni", "Black olives"]
     let toppingsSize = ["None", "Small", "Medium", "Large"]
@@ -84,6 +85,9 @@ class BuildOwnViewController: UIViewController {
         
         topText = "Pizza Size \(toppingsSize[topingDefault])"
         topTextLabel.text = topText
+        
+        topingsCollectionView.register(UINib(nibName: "CustomOrdetCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "addtocartIdentifier")
+
     }
     
     // Function to add lighting to the scene
@@ -138,7 +142,8 @@ class BuildOwnViewController: UIViewController {
                 tempPrice += priceData[indexData]
             }
         }
-        topPriceLabel.text = "$\( String(format: "%.2f", tempPrice))"
+        totalPriceData = tempPrice
+        topPriceLabel.text = "$ "+String(format: "%.2f", tempPrice)
         
     }
     
@@ -459,16 +464,22 @@ extension BuildOwnViewController {
 
 extension BuildOwnViewController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return topingNames.count
+        return topingNames.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = topingsCollectionView.dequeueReusableCell(withReuseIdentifier: "topingsCellIdentifier", for: indexPath) as! PizzaTopingsCustomCollectionViewCell
-        cell.topingsNameLabel.text = topingNames[indexPath.row]
-        cell.topingsImage.image = UIImage(named: topingNames[indexPath.row])
-        return cell
+        if indexPath.row < topingNames.count {
+            let cell = topingsCollectionView.dequeueReusableCell(withReuseIdentifier: "topingsCellIdentifier", for: indexPath) as! PizzaTopingsCustomCollectionViewCell
+            cell.topingsNameLabel.text = topingNames[indexPath.row]
+            cell.topingsImage.image = UIImage(named: topingNames[indexPath.row])
+            return cell
+        }
+        else{
+            let cell = topingsCollectionView.dequeueReusableCell(withReuseIdentifier: "addtocartIdentifier", for: indexPath) as! CustomOrdetCollectionViewCell
+            return cell
+        }
+  
     }
-    
 
 }
 
@@ -476,19 +487,34 @@ extension BuildOwnViewController : UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
         
-        topingDefault = 2
-        
-        if customDataModel.count > indexPath.row{
-            if customDataModel[indexPath.row].didtouched {
-                if let indexData = toppingsSize.firstIndex(where: { $0 ==  customDataModel[indexPath.row].Quantity}) {
-                    topingDefault = indexData
+        if indexPath.row < topingNames.count {
+            topingDefault = 2
+            
+            if customDataModel.count > indexPath.row{
+                if customDataModel[indexPath.row].didtouched {
+                    if let indexData = toppingsSize.firstIndex(where: { $0 ==  customDataModel[indexPath.row].Quantity}) {
+                        topingDefault = indexData
+                    }
+                }
+            }
+            
+            sideLabel.text = toppingsSize[topingDefault]
+            cellSellection = indexPath.row
+            dataPopulate()
+        }
+        else{
+            
+            if let image = UIImage(named: "customPizza") {
+                if let imageData = image.pngData(){
+                    var CustomOrder = allMenu(menu_id: -1000001, menu_Time: "20", menu_Cat: "Custom", menu_Price: String(format: "%.2f", totalPriceData), menu_Name: "Custom Pizza", menu_Dec: topTextLabel.text ?? "pizzaDiscription", avg_Rating: "0.00", total_Ratings: "0.00", menu_photo_Data : imageData,menu_quantity:1, ratings: [Ratings(comment: "", rating: "")])
+                    didAddNewItem = true
+                    CartOrders?.append(CustomOrder)
+                    saveFetchCartData(fetchData: false)
+                    tabBarController?.selectedIndex = 0
                 }
             }
         }
-        
-        sideLabel.text = toppingsSize[topingDefault]
-        cellSellection = indexPath.row
-        dataPopulate()
+            
     }
 }
 

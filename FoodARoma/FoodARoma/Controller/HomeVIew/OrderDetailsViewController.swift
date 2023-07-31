@@ -153,6 +153,18 @@ class OrderDetailsViewController: UIViewController {
             nextViewController.SelectedOrder = SelectedOrder
         }
     }
+    
+    @IBAction func addToCartClick(_ sender: UIButton) {
+        let quantity = Int(quantityLabel.text ?? "0")!
+        SelectedOrder?.addMenuQuantity(qData: quantity)
+        if let order = SelectedOrder {
+            CartOrders?.append(order)
+            saveFetchCartData(fetchData: false)
+            didAddNewItem = true
+        }
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }
 
 extension OrderDetailsViewController : UICollectionViewDataSource{
@@ -205,7 +217,6 @@ extension OrderDetailsViewController : UITableViewDataSource {
             return cell
         }
         else{
-            print("comes here")
             let cell = commentsTable.dequeueReusableCell(withIdentifier: "emptyCellIdentifier", for: indexPath) as! EmptyTableViewCell
             cellHeight += cell.layer.frame.height
             contentHeight.constant = cellHeight

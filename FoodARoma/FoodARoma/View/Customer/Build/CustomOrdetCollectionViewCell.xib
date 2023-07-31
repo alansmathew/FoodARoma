@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="addtocartIdentifier" id="gTV-IL-0wX" customClass="CustomOrdetCollectionViewCell" customModule="FoodARoma" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="206" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="206" height="100"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="42t-PS-4Ow">
+                        <rect key="frame" x="3" y="15" width="200" height="70"/>
+                        <color key="backgroundColor" name="Custom black"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="200" id="ChJ-yY-uCL"/>
+                            <constraint firstAttribute="height" constant="70" id="plM-2K-cHT"/>
+                        </constraints>
+                        <color key="tintColor" name="homeBackgroundColor"/>
+                        <buttonConfiguration key="configuration" style="plain" imagePlacement="leading" imagePadding="10">
+                            <imageReference key="image" image="cart" catalog="system" symbolScale="medium"/>
+                            <attributedString key="attributedTitle">
+                                <fragment content="Add to Cart">
+                                    <attributes>
+                                        <font key="NSFont" size="16" name="HelveticaNeue"/>
+                                        <font key="NSOriginalFont" size="12" name="Helvetica"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                        </buttonConfiguration>
+                    </button>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="42t-PS-4Ow" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="9tr-Vi-lpY"/>
+                <constraint firstAttribute="bottom" secondItem="42t-PS-4Ow" secondAttribute="bottom" constant="15" id="DMz-Nj-fAb"/>
+                <constraint firstAttribute="trailing" secondItem="42t-PS-4Ow" secondAttribute="trailing" constant="3" id="UIo-md-HGv"/>
+                <constraint firstItem="42t-PS-4Ow" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="3" id="emg-JO-fSc"/>
+            </constraints>
+            <size key="customSize" width="213" height="100"/>
+            <connections>
+                <outlet property="addtocartbutton" destination="42t-PS-4Ow" id="XWb-om-Wn2"/>
+            </connections>
+            <point key="canvasLocation" x="80.152671755725194" y="6.3380281690140849"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="cart" catalog="system" width="128" height="102"/>
+        <namedColor name="Custom black">
+            <color red="0.11400000005960464" green="0.11400000005960464" blue="0.11800000071525574" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="homeBackgroundColor">
+            <color red="0.90600001811981201" green="0.88700002431869507" blue="0.85500001907348633" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
+</document>

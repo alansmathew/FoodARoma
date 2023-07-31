@@ -16,6 +16,8 @@ class InitalAuthScreen: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         
+        saveFetchCartData()
+        
         if let userType = UserDefaults.standard.string(forKey: "USERTYPE"){
             print("user found")
             if userType == "customer"{
@@ -31,7 +33,6 @@ class InitalAuthScreen: UIViewController {
             self.performSegue(withIdentifier: "InitialHomeScreenSegue", sender: nil)
         }
         
-    
         
         
 //        let storyboard = UIStoryboard(name: "ResturentMain", bundle: nil)
