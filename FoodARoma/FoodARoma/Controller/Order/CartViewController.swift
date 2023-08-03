@@ -12,6 +12,7 @@ import NVActivityIndicatorView
 
 class CartViewController: UIViewController {
 
+    @IBOutlet weak var ScrollView: UIScrollView!
     @IBOutlet weak var pickuptime: UIDatePicker!
     @IBOutlet weak var timeView: UIView!
     @IBOutlet weak var bottomView: UIView!
@@ -45,9 +46,10 @@ class CartViewController: UIViewController {
         }
         contentHeight = cartTableView.frame.height
         navigationController?.navigationBar.isHidden = false
-    }
-    override func viewDidDisappear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
+//
+//        let bottomOffset = CGPoint(x: 0, y: ScrollView.contentSize.height - ScrollView.bounds.size.height)
+//        ScrollView.setContentOffset(bottomOffset, animated: true)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -74,6 +76,7 @@ class CartViewController: UIViewController {
                 self.totalprice -= temp
                 self.totalData(price: self.totalprice)
                 CartOrders?.remove(at: indexPath.row)
+                saveFetchCartData(fetchData:false)
                 if CartOrders?.count ?? 0 > 0 {
                     self.cartTableView.deleteRows(at: [indexPath], with: .fade)
                     let caritems = CartOrders?.count ?? 1
@@ -104,22 +107,24 @@ class CartViewController: UIViewController {
     
     @IBAction func confirmOrderClick(_ sender: Any) {
         
+        
+
         loading = customAnimation()
         loadingProtocol(with: loading! ,true)
-        
+
         if let userType = UserDefaults.standard.string(forKey: "USERTYPE"){
             let nameData =  UserDefaults.standard.string(forKey: "NAME")
             let userId = UserDefaults.standard.string(forKey: "USERID")
             if let id = userId, let name = nameData{
-                
-                
+
+
                 var ordersDataTemp : [OrderData]? = [OrderData]()
                 if let orders = CartOrders {
                     for x in orders{
                         ordersDataTemp?.append(OrderData(order_type: x.menu_Cat, order_dis: "gfjhg", order_no: x.menu_id, order_qty: x.menu_quantity!))
                     }
-                    
-                    
+
+
                     // Convert the array of OrderData to an array of dictionaries
                     var ordersArray: [[String: Any]] = []
                     for orderData in ordersDataTemp! {
@@ -136,14 +141,15 @@ class CartViewController: UIViewController {
                         "Mode": "AddOrder",
                         "Orders": ordersArray,
                         "special_note": "dfgh",
-                        "is_accepted": "0",
+                        "is_accepted": "not_accepted",
                         "user_id": id,
                         "user_name": name,
+                        "pref_time" : "\(pickuptime.date)",
                         "total_price": String(format: "%.2f", 100.0 * 1.13)
                     ]
 
                     do {
-                        
+
                         let jsonData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
                         if let jsonString = String(data: jsonData, encoding: .utf8) {
                             print(jsonString)
@@ -151,30 +157,58 @@ class CartViewController: UIViewController {
                         print(Constants().BASEURL + Constants.APIPaths().AddOrder)
                         AF.request(Constants().BASEURL + Constants.APIPaths().AddOrder, method: .post, parameters: params, encoding: JSONEncoding.default).responseData {
                             (response) in
-                            print(JSON(response))
+                            
                             self.loadingProtocol(with: self.loading! ,false)
+                            
                             switch (response.result) {
                             case .success:
-                                print(JSON(response.data!))
+                                if (JSON(response.data)["Message"]=="success"){
+                                    let orderID = Int("\(JSON(response.data)["OrderId"])")
+                                    if let orderid = orderID{
+                                        ActiveOrders = ActiveOrderModel(OrderId: orderid, pickup_time: "\(self.pickuptime.date)", CartOrders: CartOrders!)
+                                        print(ActiveOrders)
+                                        CartOrders?.removeAll()
+                                        
+                                        self.timeView.isHidden = true
+                                        self.bottomView.isHidden = true
+                                        self.totalprice = 0.00
+                                        saveFetchCartData(fetchData: false)
+                                        updateActiveOrderStatus()
+                                        self.cartTableView.reloadData()
     
+                                        self.navigationController?.popViewController(animated: true)
+                                    }
+                                    else{
+                                        self.showAlert(title: "Something went wrong!", content: "unfotunatly there was something wrong with the request. please try again later.")
+                                        print("error in orderid or array")
+                                        
+                                    }
+                                   
+                                }
+                                else{
+                                    self.showAlert(title: "Something went wrong!", content: "unfotunatly there was something wrong with the request. please try again later.")
+                                    print(JSON(response.data!))
+                                }
+//                                print(JSON(response.data!))
+
                             case .failure(let error):
                                 print("error --> \(error)")
                             }
                         }
-                        
+
                     } catch {
                         print("Error converting params to JSON: \(error)")
                         self.loadingProtocol(with: self.loading! ,false)
                     }
- 
                 }
             }
-            
+
         }
         else{
             showAlert(title: "No User found", content: "In order to make a purchase, please make sure that you hava an accound and it is currently logged in !")
+            loadingProtocol(with: loading! ,false)
         }
-        
+
     }
     
 
@@ -200,7 +234,12 @@ extension CartViewController : UITableViewDelegate{
             return nil
         }
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "HomeOrder", bundle: nil)
+        let viewC = storyboard.instantiateViewController(withIdentifier: "OrderDetailsViewController") as! OrderDetailsViewController
+        viewC.SelectedOrder = CartOrders![indexPath.row]
+        navigationController?.pushViewController(viewC, animated: true)
+    }
 }
 
 
@@ -215,7 +254,6 @@ extension CartViewController : UITableViewDataSource{
                 tableheight.constant = Double(caritems * 140)
             }
             return Int(CartOrders?.count ?? 0)
-            
         }
     }
     
@@ -228,7 +266,7 @@ extension CartViewController : UITableViewDataSource{
                 cell.orderPrice.text = "$ " + orders[indexPath.row].menu_Price
                 cell.orderQ.text = "Quantity : \(orders[indexPath.row].menu_quantity!)"
                 let price = Double(orders[indexPath.row].menu_Price) ?? 0.00
-                let qun =  Double(orders[indexPath.row].menu_quantity!)
+                let qun =  Double(orders[indexPath.row].menu_quantity ?? 1)
                 totalprice += price * qun
                 totalData(price: totalprice)
                 

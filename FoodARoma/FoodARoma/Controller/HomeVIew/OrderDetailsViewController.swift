@@ -87,28 +87,31 @@ class OrderDetailsViewController: UIViewController {
             menuRating.text = selectedOrder.avg_Rating
             totalNumberReview.text = selectedOrder.total_Ratings
             
-            if let imageName = selectedOrder.menu_Photo {
-                AF.request( Constants().IMAGEURL+imageName,method: .get).response{ response in
+            if let photodata = selectedOrder.menu_photo_Data {
+                pitzzaImageView.image = UIImage(data: photodata, scale:1)
+            }else{
+                if let imageName = selectedOrder.menu_Photo {
+                    AF.request( Constants().IMAGEURL+imageName,method: .get).response{ response in
 
-                 switch response.result {
-                  case .success(let responseData):
+                     switch response.result {
+                      case .success(let responseData):
+                        
+                         if (JSON(responseData)["message"]=="Internal server error"){
+                             print("NO data comming")
+                             self.pitzzaImageView.image = UIImage(systemName: "photo.circle")
+                             
+                         }
+                         else{
+                             self.pitzzaImageView.image = UIImage(data: responseData!, scale:1)
+                         }
                     
-                     if (JSON(responseData)["message"]=="Internal server error"){
-                         print("NO data comming")
-                         self.pitzzaImageView.image = UIImage(systemName: "photo.circle")
-                         
-                     }
-                     else{
-                         self.pitzzaImageView.image = UIImage(data: responseData!, scale:1)
-                     }
-                
-                  case .failure(let error):
-                      print("error--->",error)
+                      case .failure(let error):
+                          print("error--->",error)
+                      }
                   }
-              }
+                }
             }
-            
-            
+
 
             for x in 0...4{
                 
@@ -155,15 +158,76 @@ class OrderDetailsViewController: UIViewController {
     }
     
     @IBAction func addToCartClick(_ sender: UIButton) {
-        let quantity = Int(quantityLabel.text ?? "0")!
-        SelectedOrder?.addMenuQuantity(qData: quantity)
-        if let order = SelectedOrder {
-            CartOrders?.append(order)
-            saveFetchCartData(fetchData: false)
-            didAddNewItem = true
+        
+        if let cart = CartOrders {
+            var tempIndex = 0
+            var flags = false
+            for x in cart{
+                if x.menu_id == SelectedOrder!.menu_id{
+                    flags = true
+                    let alert = UIAlertController(title: "Already in Cart", message: "The item that you wants to add is already in the cart. Do you want to replace the item or addthe quantity to the same product", preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Replace", style: .destructive, handler: { _ in
+                        let quantity = Int(self.quantityLabel.text ?? "1")!
+                        self.SelectedOrder?.addMenuQuantity(qData: quantity)
+                        CartOrders?[tempIndex] = self.SelectedOrder!
+                        didAddNewItem = true
+                        saveFetchCartData(fetchData: false)
+                        self.navigationController?.popViewController(animated: true)
+                    }))
+                    
+                    alert.addAction(UIAlertAction(title: "Add", style: UIAlertAction.Style.default, handler: { _ in
+                        let defaultQuantity = x.menu_quantity
+                        let selectedquantity = Int(self.quantityLabel.text ?? "1")!
+                        let newQuantity = defaultQuantity! + selectedquantity
+                        self.SelectedOrder?.addMenuQuantity(qData: newQuantity)
+                        CartOrders?[tempIndex] =  self.SelectedOrder!
+                        saveFetchCartData(fetchData: false)
+                        self.navigationController?.popViewController(animated: true)
+                    }))
+                     
+                    DispatchQueue.main.async {
+                        self.present(alert, animated: false, completion: nil)
+                    }
+                    
+                    break
+                }
+                else{
+                    tempIndex += 1
+                }
+               
+            }
+            if !flags{
+                let quantity = Int(quantityLabel.text ?? "1")!
+                SelectedOrder?.addMenuQuantity(qData: quantity)
+                if let order = SelectedOrder {
+                    CartOrders?.append(order)
+                    saveFetchCartData(fetchData: false)
+                    didAddNewItem = true
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
         }
-        self.navigationController?.popViewController(animated: true)
+        else{
+            let quantity = Int(quantityLabel.text ?? "1")!
+            SelectedOrder?.addMenuQuantity(qData: quantity)
+            if let order = SelectedOrder {
+                CartOrders?.append(order)
+                saveFetchCartData(fetchData: false)
+                didAddNewItem = true
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+        
     }
+    
+    @IBAction func viewArClicked(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewC = storyboard.instantiateViewController(withIdentifier: "BuildOwnViewController") as! BuildOwnViewController
+        viewC.alreadyHaveAr = true
+        navigationController?.pushViewController(viewC, animated: true)
+    }
+    
     
 }
 
@@ -191,7 +255,6 @@ extension OrderDetailsViewController : UITableViewDataSource {
         }else{
             return Int(SelectedOrder?.ratings.count ?? 0) ?? 1
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -46,6 +46,8 @@ class BuildOwnViewController: UIViewController {
     var didAdd3dobject = false
     var objectrootPoint : SCNVector3?
     
+    var alreadyHaveAr = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -90,7 +92,16 @@ class BuildOwnViewController: UIViewController {
 
     }
     
-    // Function to add lighting to the scene
+    override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+
+                sceneView.session.pause()
+                sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+                        node.removeFromParentNode()
+            }
+
+        }
+    
     private func addLighting() {
         // Create an ambient light source
         let ambientLight = SCNLight()
@@ -429,16 +440,19 @@ extension BuildOwnViewController {
 
             let position = SCNVector3(result.worldTransform.columns.3.x, result.worldTransform.columns.3.y, result.worldTransform.columns.3.z)
             objectrootPoint = position
-            let objectNode = createYour3DObject() // Create your 3D object node here
+            let objectNode = createYour3DObject()
             
             objectNode.position = position
             objectNode.name = topingNames[cellSellection]
             sceneView.scene.rootNode.addChildNode(objectNode)
             
             DispatchQueue.main.async {
-                self.topingsCollectionView.isHidden = false
-                self.topContentView.isHidden = false
-                self.sideOptions.isHidden = false
+                if !self.alreadyHaveAr {
+                    self.topingsCollectionView.isHidden = false
+                    self.topContentView.isHidden = false
+                    self.sideOptions.isHidden = false
+                }
+        
             }
             
             sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
@@ -454,7 +468,10 @@ extension BuildOwnViewController {
     
     private func createYour3DObject() -> SCNNode {
         // Load the USDZ model
-        let url = Bundle.main.url(forResource: "pizzamedium", withExtension: "usdz")
+        var url = Bundle.main.url(forResource: "pizzamedium", withExtension: "usdz")
+        if alreadyHaveAr{
+            url = Bundle.main.url(forResource: "title1", withExtension: "usdz")
+        }
         let scene = try? SCNScene(url: url!)
         let objectNode = scene!.rootNode.childNodes.first
         return objectNode!

@@ -17,6 +17,7 @@ class InitalAuthScreen: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         saveFetchCartData()
+        updateActiveOrderStatus(saveData: false)
         
         if let userType = UserDefaults.standard.string(forKey: "USERTYPE"){
             print("user found")

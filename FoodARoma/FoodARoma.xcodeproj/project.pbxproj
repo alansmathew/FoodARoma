@@ -83,6 +83,8 @@
 		E7BFD10E2A5240350016445A /* HomeOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7BFD10D2A5240350016445A /* HomeOrder.storyboard */; };
 		E7C0D61F2A4A4B8F00AB9CD3 /* MyScene.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = E7C0D61E2A4A4B8F00AB9CD3 /* MyScene.rcproject */; };
 		E7C0D6212A4A4BBF00AB9CD3 /* BuildOwnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C0D6202A4A4BBF00AB9CD3 /* BuildOwnViewController.swift */; };
+		E7C4D1F92A7996EA00913A06 /* DateExtenction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C4D1F82A7996EA00913A06 /* DateExtenction.swift */; };
+		E7C4D1FB2A7ACC9C00913A06 /* ActiveOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C4D1FA2A7ACC9C00913A06 /* ActiveOrderModel.swift */; };
 		E7D034112A5458B5008D8BDF /* Extenctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D034102A5458B5008D8BDF /* Extenctions.swift */; };
 		E7D042F22A53A11300AEDC5E /* RatingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D042F12A53A11300AEDC5E /* RatingsViewController.swift */; };
 		E7F437732A534F5600B3D4CD /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F437722A534F5600B3D4CD /* CommentsViewController.swift */; };
@@ -95,6 +97,7 @@
 		E7F6A2B32A734FA2001025A8 /* cheeseSmallSmall.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E7F6A2AF2A734FA1001025A8 /* cheeseSmallSmall.usdz */; };
 		E7F6A2B42A734FA2001025A8 /* cheeseSmallLarge.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E7F6A2B02A734FA1001025A8 /* cheeseSmallLarge.usdz */; };
 		E7F6A2B52A734FA2001025A8 /* cheeseSmallMedium.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E7F6A2B12A734FA2001025A8 /* cheeseSmallMedium.usdz */; };
+		E7FD8FE62A7B2A2400EC6E96 /* OrderHistoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FD8FE52A7B2A2400EC6E96 /* OrderHistoryDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,6 +192,8 @@
 		E7BFD10D2A5240350016445A /* HomeOrder.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeOrder.storyboard; sourceTree = "<group>"; };
 		E7C0D61E2A4A4B8F00AB9CD3 /* MyScene.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = MyScene.rcproject; sourceTree = "<group>"; };
 		E7C0D6202A4A4BBF00AB9CD3 /* BuildOwnViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildOwnViewController.swift; sourceTree = "<group>"; };
+		E7C4D1F82A7996EA00913A06 /* DateExtenction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtenction.swift; sourceTree = "<group>"; };
+		E7C4D1FA2A7ACC9C00913A06 /* ActiveOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveOrderModel.swift; sourceTree = "<group>"; };
 		E7D034102A5458B5008D8BDF /* Extenctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extenctions.swift; sourceTree = "<group>"; };
 		E7D042F12A53A11300AEDC5E /* RatingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsViewController.swift; sourceTree = "<group>"; };
 		E7F437722A534F5600B3D4CD /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +206,7 @@
 		E7F6A2AF2A734FA1001025A8 /* cheeseSmallSmall.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = cheeseSmallSmall.usdz; sourceTree = "<group>"; };
 		E7F6A2B02A734FA1001025A8 /* cheeseSmallLarge.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = cheeseSmallLarge.usdz; sourceTree = "<group>"; };
 		E7F6A2B12A734FA2001025A8 /* cheeseSmallMedium.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = cheeseSmallMedium.usdz; sourceTree = "<group>"; };
+		E7FD8FE52A7B2A2400EC6E96 /* OrderHistoryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -340,6 +346,7 @@
 				996089AC2A3FFA3100C89866 /* RegistrationModel.swift */,
 				E7A209692A55D4D2002FF49E /* AllMenuModel.swift */,
 				E7F458082A70828F00F2A912 /* CustomPizzaModel.swift */,
+				E7C4D1FA2A7ACC9C00913A06 /* ActiveOrderModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -443,6 +450,7 @@
 			children = (
 				E75279322A44C7E000AF3EA2 /* customLoadingAnimation.swift */,
 				E7D034102A5458B5008D8BDF /* Extenctions.swift */,
+				E7C4D1F82A7996EA00913A06 /* DateExtenction.swift */,
 			);
 			path = CustomFiles;
 			sourceTree = "<group>";
@@ -494,6 +502,7 @@
 				E75E4C982A757FC8006463EC /* OrderTableViewCell.swift */,
 				E75E4C9D2A758504006463EC /* OrderHistoryViewController.swift */,
 				E75E4CA32A758B12006463EC /* CartViewController.swift */,
+				E7FD8FE52A7B2A2400EC6E96 /* OrderHistoryDetailsViewController.swift */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -747,6 +756,7 @@
 				E7C0D61F2A4A4B8F00AB9CD3 /* MyScene.rcproject in Sources */,
 				E7BD30A92A5B424700FC288E /* ResturentMenuViewController.swift in Sources */,
 				E7BFD10C2A5240000016445A /* OrderDetailsViewController.swift in Sources */,
+				E7C4D1F92A7996EA00913A06 /* DateExtenction.swift in Sources */,
 				991736BD2A37D16700824B14 /* MoreViewController.swift in Sources */,
 				E7F437782A53502800B3D4CD /* CommentTableViewCell.swift in Sources */,
 				E7D042F22A53A11300AEDC5E /* RatingsViewController.swift in Sources */,
@@ -755,6 +765,7 @@
 				E76933612A5E569700C31184 /* EmptyTableViewCell.swift in Sources */,
 				E7C0D6212A4A4BBF00AB9CD3 /* BuildOwnViewController.swift in Sources */,
 				E7F458092A70828F00F2A912 /* CustomPizzaModel.swift in Sources */,
+				E7FD8FE62A7B2A2400EC6E96 /* OrderHistoryDetailsViewController.swift in Sources */,
 				991C28D52A2D2DD900201DE7 /* InitalAuthScreen.swift in Sources */,
 				E7D034112A5458B5008D8BDF /* Extenctions.swift in Sources */,
 				992ECBDC2A3B6E6300B8745A /* LoginModel.swift in Sources */,
@@ -777,6 +788,7 @@
 				E7377C162A5B5EB700F5C29F /* ResturentSettingsViewController.swift in Sources */,
 				E7377C192A5B609A00F5C29F /* MainNavigationViewController.swift in Sources */,
 				991C29042A2D7B6C00201DE7 /* HomeViewController.swift in Sources */,
+				E7C4D1FB2A7ACC9C00913A06 /* ActiveOrderModel.swift in Sources */,
 				992ECBE52A3B7FBD00B8745A /* ResturentOrderscell.swift in Sources */,
 				E75E4CA02A75880F006463EC /* Globals.swift in Sources */,
 				992ECBE82A3B8DCE00B8745A /* ResturentNavigationView.swift in Sources */,

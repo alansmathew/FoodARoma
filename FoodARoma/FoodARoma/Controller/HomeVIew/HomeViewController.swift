@@ -71,21 +71,16 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         if didAddNewItem{
             UIView.animate(withDuration: animationDuration, animations: {
-                // Transition the label to the middle of the screen
                 self.messageLabel.center = self.view.center
-                // Fade in the label
                 self.messageLabel.alpha = 1.0
             }) { _ in
-                // Show the tick mark with animation
                 UIView.animate(withDuration: self.animationDuration/3, animations: {
                     self.tickImageView.alpha = 1.0
                 }) { _ in
-                    // Hide the label and tick mark with animation after the delay
+
                     UIView.animate(withDuration: self.animationDuration*2/3, delay: self.animationDuration/3, animations: {
-                        // Transition the label to the top right corner
                         self.messageLabel.center = CGPoint(x: self.view.bounds.width - self.messageLabel.bounds.width/2 - 20,
                                                             y: self.view.safeAreaInsets.top + self.messageLabel.bounds.height/2 + 20)
-                        // Fade out the label and tick mark
                         self.messageLabel.alpha = 0.0
                         self.tickImageView.alpha = 0.0
                         didAddNewItem = !didAddNewItem
@@ -94,7 +89,6 @@ class HomeViewController: UIViewController {
             }
         }
     }
-    
     
     func setupCartAnimation(){
         // Set up the label
@@ -166,7 +160,6 @@ class HomeViewController: UIViewController {
         navigationController?.pushViewController(viewC, animated: true)
     }
     
-    
     func fetchAllMenu(){
         if let allmenuitem = AllMenuItems {
             self.loadingProtocol(with: self.loading! ,false)
@@ -185,6 +178,7 @@ class HomeViewController: UIViewController {
                     do{
                         let jsonData = try decoder.decode(AllMenuModel.self, from: data)
                         self.AllMenuItems = jsonData
+                        AllMenuDatas = jsonData
                         self.populateCollectionViews()
                         self.loadingProtocol(with: self.loading! ,false)
                         
@@ -225,9 +219,7 @@ class HomeViewController: UIViewController {
                          self.regMenu?[indexOfloading].addImgeData(imageData: responseData!)
 //                         print(self.regMenu?[indexOfloading].menu_photo_Data)
                      }
-                     
                  }
-            
               case .failure(let error):
                   print("error--->",error)
               }

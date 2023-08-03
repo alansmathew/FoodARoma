@@ -12,14 +12,11 @@ import Foundation
 var didAddNewItem = false
 var CartOrders : [allMenu]? = [allMenu]()
 
+var AllMenuDatas : AllMenuModel?
+var ActiveOrders : ActiveOrderModel?
+
 func saveFetchCartData(fetchData : Bool = true){
     if fetchData{
-//        let cartData = UserDefaults.standard.array(forKey: "CARTDATA")
-//        if case let cart as [allMenu] =  cartData {
-//            CartOrders = cart
-//        }
-//        print(CartOrders)
-        
         if let encodedData = UserDefaults.standard.data(forKey: "CARTDATA") {
             do {
                 // Create an instance of JSONDecoder
@@ -31,14 +28,10 @@ func saveFetchCartData(fetchData : Bool = true){
                 print("Error decoding model: \(error)")
             }
         } else {
-            print("No data found in UserDefaults for the key 'myModelKey'")
+            print("No data found in UserDefaults for the key 'CARTDATA'")
         }
-        
     }
     else{
-//        let nameData =  UserDefaults.standard.object(forKey: "")
-//        UserDefaults.standard.set("customer", forKey: "USERTYPE")
-//        UserDefaults.standard.set(CartOrders, forKey: "CARTDATA")
         do {
             let encoder = JSONEncoder()
             let encodedData = try encoder.encode(CartOrders)
@@ -51,5 +44,39 @@ func saveFetchCartData(fetchData : Bool = true){
         } catch {
             print("Error encoding model: \(error)")
         }
+    }
+}
+
+func updateActiveOrderStatus(saveData : Bool = true){
+    if saveData{
+        do {
+            let encoder = JSONEncoder()
+            let encodedData = try encoder.encode(ActiveOrders)
+
+            // Store the encoded data in UserDefaults
+            UserDefaults.standard.set(encodedData, forKey: "ACTIVEORDER")
+
+            // Synchronize UserDefaults to save the data immediately (optional)
+            UserDefaults.standard.synchronize()
+        } catch {
+            print("Error encoding model: \(error)")
+        }
+        
+    }else{
+        if let encodedData = UserDefaults.standard.data(forKey: "ACTIVEORDER") {
+            do {
+                // Create an instance of JSONDecoder
+                let decoder = JSONDecoder()
+
+                // Decode the data back into your model
+                ActiveOrders = try decoder.decode(ActiveOrderModel.self, from: encodedData)
+                print("initial Fetch -- >  \(ActiveOrders)")
+            } catch {
+                print("Error decoding model: \(error)")
+            }
+        } else {
+            print("No data found in UserDefaults for the key 'ACTIVEORDER'")
+        }
+  
     }
 }
