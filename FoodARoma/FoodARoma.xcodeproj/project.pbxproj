@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		681A7AD52A7758F70065FE8A /* CommentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681A7AD42A7758F70065FE8A /* CommentTest.swift */; };
+		681A7AD72A7763EA0065FE8A /* OrderDetailsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681A7AD62A7763EA0065FE8A /* OrderDetailsTest.swift */; };
+		685EC4722A71B823008EC46F /* CustomAPIManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685EC4712A71B823008EC46F /* CustomAPIManagerProtocol.swift */; };
+		685EC4742A71B859008EC46F /* MockAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685EC4732A71B859008EC46F /* MockAPIManager.swift */; };
+		685EC4762A7343EE008EC46F /* CustomAlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685EC4752A7343EE008EC46F /* CustomAlertHandler.swift */; };
+		685EC4782A73447D008EC46F /* MockLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685EC4772A73447D008EC46F /* MockLoader.swift */; };
+		685EC47A2A7347FA008EC46F /* RatingViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685EC4792A7347FA008EC46F /* RatingViewControllerTest.swift */; };
+		68C93AC82A7096A800CA0A19 /* RatingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C93AC72A7096A800CA0A19 /* RatingTest.swift */; };
 		991736B62A379FD800824B14 /* LoginScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 991736B52A379FD800824B14 /* LoginScreen.storyboard */; };
 		991736B82A37CFF700824B14 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991736B72A37CFF700824B14 /* LoginViewController.swift */; };
 		991736BA2A37D00B00824B14 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991736B92A37D00B00824B14 /* SignupViewController.swift */; };
@@ -83,6 +91,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		681A7AD42A7758F70065FE8A /* CommentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTest.swift; sourceTree = "<group>"; };
+		681A7AD62A7763EA0065FE8A /* OrderDetailsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsTest.swift; sourceTree = "<group>"; };
+		685EC4712A71B823008EC46F /* CustomAPIManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAPIManagerProtocol.swift; sourceTree = "<group>"; };
+		685EC4732A71B859008EC46F /* MockAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIManager.swift; sourceTree = "<group>"; };
+		685EC4752A7343EE008EC46F /* CustomAlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertHandler.swift; sourceTree = "<group>"; };
+		685EC4772A73447D008EC46F /* MockLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLoader.swift; sourceTree = "<group>"; };
+		685EC4792A7347FA008EC46F /* RatingViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewControllerTest.swift; sourceTree = "<group>"; };
+		68C93AC72A7096A800CA0A19 /* RatingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingTest.swift; sourceTree = "<group>"; };
 		991736B52A379FD800824B14 /* LoginScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginScreen.storyboard; sourceTree = "<group>"; };
 		991736B72A37CFF700824B14 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		991736B92A37D00B00824B14 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
@@ -228,6 +244,14 @@
 			isa = PBXGroup;
 			children = (
 				991C28E72A2D2DE000201DE7 /* FoodARomaTests.swift */,
+				68C93AC72A7096A800CA0A19 /* RatingTest.swift */,
+				685EC4712A71B823008EC46F /* CustomAPIManagerProtocol.swift */,
+				685EC4732A71B859008EC46F /* MockAPIManager.swift */,
+				685EC4752A7343EE008EC46F /* CustomAlertHandler.swift */,
+				685EC4772A73447D008EC46F /* MockLoader.swift */,
+				685EC4792A7347FA008EC46F /* RatingViewControllerTest.swift */,
+				681A7AD42A7758F70065FE8A /* CommentTest.swift */,
+				681A7AD62A7763EA0065FE8A /* OrderDetailsTest.swift */,
 			);
 			path = FoodARomaTests;
 			sourceTree = "<group>";
@@ -603,7 +627,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68C93AC82A7096A800CA0A19 /* RatingTest.swift in Sources */,
+				685EC4722A71B823008EC46F /* CustomAPIManagerProtocol.swift in Sources */,
+				685EC4782A73447D008EC46F /* MockLoader.swift in Sources */,
+				685EC4742A71B859008EC46F /* MockAPIManager.swift in Sources */,
+				685EC4762A7343EE008EC46F /* CustomAlertHandler.swift in Sources */,
+				685EC47A2A7347FA008EC46F /* RatingViewControllerTest.swift in Sources */,
 				991C28E82A2D2DE000201DE7 /* FoodARomaTests.swift in Sources */,
+				681A7AD72A7763EA0065FE8A /* OrderDetailsTest.swift in Sources */,
+				681A7AD52A7758F70065FE8A /* CommentTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -78,7 +78,7 @@ class OrderDetailsViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
     
-    private func setupUI(){
+    internal func setupUI(){
         if let selectedOrder = SelectedOrder {
             menuName.text = selectedOrder.menu_Name
             menuDec.text = selectedOrder.menu_Dec
