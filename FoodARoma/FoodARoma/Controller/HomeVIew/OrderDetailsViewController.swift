@@ -263,6 +263,7 @@ extension OrderDetailsViewController : UITableViewDataSource {
         if let ratings = SelectedOrder?.ratings, ratings.count > 0{
             let cell = commentsTable.dequeueReusableCell(withIdentifier: "commentReusableidentifier", for: indexPath) as! CommentTableViewCell
             cell.commentLable.text = ratings[indexPath.row].comment
+            cell.customerNameLabel.text = ratings[indexPath.row].customer_Name
             
             let cellRatingimages = [cell.star1image,cell.star2image,cell.star3image,cell.star4image,cell.star5image]
             for x in 0...4{

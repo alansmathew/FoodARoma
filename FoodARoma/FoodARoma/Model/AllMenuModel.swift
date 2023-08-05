@@ -33,3 +33,8 @@ struct Ratings : Codable{
     var comment, rating: String
     var date_Time, customer_Name: String?
 }
+
+struct AllRatingsModeldata : Codable {
+    var Message : String
+    var Rating : [Ratings]
+}

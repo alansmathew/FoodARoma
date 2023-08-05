@@ -286,7 +286,12 @@ extension HomeViewController : UICollectionViewDataSource {
                     cell1.ratingLabel.text = specialmenuitem[indexPath.row].avg_Rating == "None" ? "0" : specialmenuitem[indexPath.row].avg_Rating
                     cell1.timeLabel.text = specialmenuitem[indexPath.row].menu_Time + " Min"
                     cell1.descLabel.text = specialmenuitem[indexPath.row].menu_Dec
-                    loadImageInCell(cellData: cell1, cellImageName: specialmenuitem[indexPath.row].menu_Photo, indexOfloading: indexPath.row, model: "Special")
+                    if let menuPhotoData = specialmenuitem[indexPath.row].menu_photo_Data {
+                        cell1.menuImageView.image = UIImage(data: menuPhotoData, scale:1)
+                    }
+                    else{
+                        loadImageInCell(cellData: cell1, cellImageName: specialmenuitem[indexPath.row].menu_Photo, indexOfloading: indexPath.row, model: "Special")
+                    }
                 }
                 return cell1
                 
@@ -298,9 +303,13 @@ extension HomeViewController : UICollectionViewDataSource {
                     cell2.ratingLabel.text = regularMenu[indexPath.row].avg_Rating == "None" ? "0" : regularMenu[indexPath.row].avg_Rating
                     cell2.timeLabel.text = regularMenu[indexPath.row].menu_Time + " Min"
                     cell2.descLabel.text = regularMenu[indexPath.row].menu_Dec
-                    loadImageInCell(cellData: cell2, cellImageName: regularMenu[indexPath.row].menu_Photo, indexOfloading: indexPath.row, model: "Menu")
+                    if let menuPhotoData = regularMenu[indexPath.row].menu_photo_Data {
+                        cell2.menuImageView.image = UIImage(data: menuPhotoData, scale:1)
+                    }
+                    else{
+                        loadImageInCell(cellData: cell2, cellImageName: regularMenu[indexPath.row].menu_Photo, indexOfloading: indexPath.row, model: "Menu")
+                    }
                 }
-                
                 return cell2
             
             case BeverageCollctionView:

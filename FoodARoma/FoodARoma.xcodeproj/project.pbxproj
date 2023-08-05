@@ -98,6 +98,9 @@
 		E7F6A2B42A734FA2001025A8 /* cheeseSmallLarge.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E7F6A2B02A734FA1001025A8 /* cheeseSmallLarge.usdz */; };
 		E7F6A2B52A734FA2001025A8 /* cheeseSmallMedium.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E7F6A2B12A734FA2001025A8 /* cheeseSmallMedium.usdz */; };
 		E7FD8FE62A7B2A2400EC6E96 /* OrderHistoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FD8FE52A7B2A2400EC6E96 /* OrderHistoryDetailsViewController.swift */; };
+		E7FD8FE92A7D68CA00EC6E96 /* CustomOrderHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FD8FE72A7D68CA00EC6E96 /* CustomOrderHistoryTableViewCell.swift */; };
+		E7FD8FEA2A7D68CA00EC6E96 /* CustomOrderHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8FE82A7D68CA00EC6E96 /* CustomOrderHistoryTableViewCell.xib */; };
+		E7FD8FEC2A7EA69100EC6E96 /* OrderHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FD8FEB2A7EA69100EC6E96 /* OrderHistoryModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -207,6 +210,9 @@
 		E7F6A2B02A734FA1001025A8 /* cheeseSmallLarge.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = cheeseSmallLarge.usdz; sourceTree = "<group>"; };
 		E7F6A2B12A734FA2001025A8 /* cheeseSmallMedium.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = cheeseSmallMedium.usdz; sourceTree = "<group>"; };
 		E7FD8FE52A7B2A2400EC6E96 /* OrderHistoryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryDetailsViewController.swift; sourceTree = "<group>"; };
+		E7FD8FE72A7D68CA00EC6E96 /* CustomOrderHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOrderHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		E7FD8FE82A7D68CA00EC6E96 /* CustomOrderHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomOrderHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		E7FD8FEB2A7EA69100EC6E96 /* OrderHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,6 +351,7 @@
 				992ECBDB2A3B6E6200B8745A /* LoginModel.swift */,
 				996089AC2A3FFA3100C89866 /* RegistrationModel.swift */,
 				E7A209692A55D4D2002FF49E /* AllMenuModel.swift */,
+				E7FD8FEB2A7EA69100EC6E96 /* OrderHistoryModel.swift */,
 				E7F458082A70828F00F2A912 /* CustomPizzaModel.swift */,
 				E7C4D1FA2A7ACC9C00913A06 /* ActiveOrderModel.swift */,
 			);
@@ -492,6 +499,7 @@
 			children = (
 				E75E4C992A757FC8006463EC /* OrderTableViewCell.xib */,
 				E75E4CA12A758A78006463EC /* OrderStoryboard.storyboard */,
+				E7FD8FE82A7D68CA00EC6E96 /* CustomOrderHistoryTableViewCell.xib */,
 			);
 			path = orderView;
 			sourceTree = "<group>";
@@ -501,6 +509,7 @@
 			children = (
 				E75E4C982A757FC8006463EC /* OrderTableViewCell.swift */,
 				E75E4C9D2A758504006463EC /* OrderHistoryViewController.swift */,
+				E7FD8FE72A7D68CA00EC6E96 /* CustomOrderHistoryTableViewCell.swift */,
 				E75E4CA32A758B12006463EC /* CartViewController.swift */,
 				E7FD8FE52A7B2A2400EC6E96 /* OrderHistoryDetailsViewController.swift */,
 			);
@@ -708,6 +717,7 @@
 				E75E4C7B2A745409006463EC /* PepperoniSmallSmall.usdz in Resources */,
 				E75E4C7C2A745409006463EC /* PepperoniMediumLarge.usdz in Resources */,
 				99A623B42A3239D6003BF199 /* BeverageMenuCollectionViewCell.xib in Resources */,
+				E7FD8FEA2A7D68CA00EC6E96 /* CustomOrderHistoryTableViewCell.xib in Resources */,
 				E75E4C812A745A92006463EC /* PepperoniLargeLarge.usdz in Resources */,
 				E75E4C882A746C60006463EC /* blackolivesSmallSmall.usdz in Resources */,
 				E7F437792A53502800B3D4CD /* CommentTableViewCell.xib in Resources */,
@@ -752,6 +762,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7FD8FE92A7D68CA00EC6E96 /* CustomOrderHistoryTableViewCell.swift in Sources */,
 				E75279332A44C7E000AF3EA2 /* customLoadingAnimation.swift in Sources */,
 				E7C0D61F2A4A4B8F00AB9CD3 /* MyScene.rcproject in Sources */,
 				E7BD30A92A5B424700FC288E /* ResturentMenuViewController.swift in Sources */,
@@ -778,6 +789,7 @@
 				E7BDA9722A562A31008097CA /* SearchViewController.swift in Sources */,
 				991C28D12A2D2DD900201DE7 /* AppDelegate.swift in Sources */,
 				992ECBD92A3B689300B8745A /* Constants.swift in Sources */,
+				E7FD8FEC2A7EA69100EC6E96 /* OrderHistoryModel.swift in Sources */,
 				99A623B32A3239D6003BF199 /* BeverageMenuCollectionViewCell.swift in Sources */,
 				E75E4C9E2A758504006463EC /* OrderHistoryViewController.swift in Sources */,
 				E75E4CA82A77495D006463EC /* CustomOrdetCollectionViewCell.swift in Sources */,

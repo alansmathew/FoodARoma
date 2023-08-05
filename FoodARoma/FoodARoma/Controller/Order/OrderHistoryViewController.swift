@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class OrderHistoryViewController: UIViewController {
 
@@ -25,13 +27,17 @@ class OrderHistoryViewController: UIViewController {
     @IBOutlet weak var currentOrderView: UIView!
     @IBOutlet weak var orderHistoryTable: UITableView!
     
+    var allOrderHistories : OrderhistoryModel?
+    
+    var allHistoryData : [OrderHistories]? = [OrderHistories]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         orderHistoryTable.delegate = self
         orderHistoryTable.dataSource = self
         
-        orderHistoryTable.register(UINib(nibName: "OrderTableViewCell", bundle: nil), forCellReuseIdentifier: "orderHistoryIdentifier")
+        orderHistoryTable.register(UINib(nibName: "CustomOrderHistoryTableViewCell", bundle: nil), forCellReuseIdentifier: "0rderHistoryDetailsIdentifier")
         setupUIOrder()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleActiveOrderTap(_:)))
@@ -107,6 +113,110 @@ class OrderHistoryViewController: UIViewController {
         else{
             currentOrderView.isHidden = true
         }
+        
+        fetchAllOrders()
+    }
+    
+    
+    func fetchAllOrders(){
+        
+        let params : [String : String] = [
+                "Mode" : "fetchOrder",
+                "RegId": "2"
+            ]
+
+        print(params)
+        print((Constants().BASEURL + Constants.APIPaths().fetchMenu))
+
+        AF.request((Constants().BASEURL + Constants.APIPaths().AddOrder), method: .post, parameters:params, encoder: .json).responseData { response in
+            switch response.result{
+            case .success(let data):
+                print(JSON(data))
+                let decoder = JSONDecoder()
+                do{
+
+                    let jsonData = try decoder.decode(OrderhistoryModel.self, from: data)
+                    self.allOrderHistories = jsonData
+ 
+                    
+                    if let orders = self.allOrderHistories?.histories, let allMenuDAta = AllMenuDatas?.AllMenu{
+                        for x in 0..<orders.count {
+                            for y in 0..<orders[x].Orders.count{
+                                for z in 0..<allMenuDAta.count {
+                                    if orders[x].Orders[y].order_no == AllMenuDatas?.AllMenu[z].menu_id{
+                                        self.allOrderHistories?.histories[x].Orders[y].updateOrderName(orderName: AllMenuDatas?.AllMenu[z].menu_Name ?? "have to work")
+                                        if let imageDAta = AllMenuDatas?.AllMenu[z].menu_photo_Data {
+                                            self.allOrderHistories?.histories[x].Orders[y].updateOrderImage(orderImageData: imageDAta)
+                                        }
+                                        else{
+                                            if let imageDAta = self.updateWholeImageData(x: x, y: y, z: z){
+                                                self.allOrderHistories?.histories[x].Orders[y].updateOrderImage(orderImageData: imageDAta)
+//                                                AllMenuDatas?.AllMenu[z].addImgeData(imageData: imageDAta)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            if orders[x].is_accepted == "Completed"{
+                                
+                            }
+                            else{
+                                self.allHistoryData?.removeAll()
+                                self.allHistoryData?.append(orders[x])
+                                self.orderHistoryTable.reloadData()
+                            }
+                        }
+                    }
+                    
+                    print(self.allOrderHistories)
+                    
+//                    AllMenuDatas = jsonData
+//                    self.populateCollectionViews()
+//                    self.loadingProtocol(with: self.loading! ,false)
+
+                }
+                catch{
+                    print(response.result)
+//                    self.loadingProtocol(with: self.loading! ,false)
+                    print("decoder error")
+                }
+
+            case .failure(let error):
+//                self.loadingProtocol(with: self.loading! ,false)
+                self.showAlert(title: "network intrepsion", content: "Something went wrong! please try again after some time")
+                print(error)
+            }
+        }
+        
+    }
+    
+    private func updateWholeImageData(x : Int, y : Int, z : Int) -> Data?{
+        
+//        if let image = UIImage(named: "customPizza") {
+//            if let imageData = image.pngData(){
+        
+        var responseComming = Data()
+        
+        if let imageName = AllMenuDatas?.AllMenu[z].menu_Photo {
+            AF.request( Constants().IMAGEURL+imageName,method: .get).response{ response in
+
+             switch response.result {
+              case .success(let responseData):
+                
+                 if (JSON(responseData)["message"]=="Internal server error"){
+                     print("NO data comming")
+                 }
+                 else{
+                     responseComming = responseData!
+                     AllMenuDatas?.AllMenu[z].addImgeData(imageData: responseData!)
+                 }
+              case .failure(let error):
+                  print("error--->",error)
+              }
+          }
+        }
+        return responseComming
     }
     
     @objc func handleActiveOrderTap(_ gesture: UITapGestureRecognizer) {
@@ -163,17 +273,16 @@ class OrderHistoryViewController: UIViewController {
 }
 
 extension OrderHistoryViewController : UITableViewDelegate{
-    
-    
 }
 
 extension OrderHistoryViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return allHistoryData?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = orderHistoryTable.dequeueReusableCell(withIdentifier: "orderHistoryIdentifier", for: indexPath) as! OrderTableViewCell
+        let cell = orderHistoryTable.dequeueReusableCell(withIdentifier: "0rderHistoryDetailsIdentifier", for: indexPath) as! CustomOrderHistoryTableViewCell
+//        cell.
         
         return cell
         

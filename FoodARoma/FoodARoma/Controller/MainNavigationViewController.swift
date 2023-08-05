@@ -15,5 +15,8 @@ class MainNavigationViewController: UINavigationController {
         // Do any additional setup after loading the view.
     }
 
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+     }
 
 }

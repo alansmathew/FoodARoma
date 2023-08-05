@@ -14,5 +14,9 @@ class ResturentNavigationView: UINavigationController {
 
         
     }
+    
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+     }
 
 }

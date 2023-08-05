@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class OrderHistoryDetailsViewController: UIViewController {
 
@@ -24,7 +26,8 @@ class OrderHistoryDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        acceptenceStausView.layer.cornerRadius = acceptenceStausView.frame.width/2
         orderHistioryDetailsTable.dataSource = self
         orderHistioryDetailsTable.delegate = self
         orderHistioryDetailsTable.register(UINib(nibName: "OrderTableViewCell", bundle: nil), forCellReuseIdentifier: "orderHistoryIdentifier")
@@ -36,13 +39,71 @@ class OrderHistoryDetailsViewController: UIViewController {
     func setupUIDEtails(){
         
         if let outputDateString = Date().convertTo12HourFormat(dateString: ActiveOrderData!.pickup_time) {
-            timeofOfPicup.text = "Time of Pickup" + outputDateString
+            timeofOfPicup.text = "Time of Pickup : " + outputDateString
         } else {
             print("Invalid date string")
         }
         pageTitle.text = "Active Order #12000\(ActiveOrderData!.OrderId)"
         
     }
+    
+    func cancalOrder(){
+        print("cancel Order Called")
+        
+        let alert = UIAlertController(title: "Cancel Order ?", message: "Are you sure that you want to cancel this order ? The special menu might be one in lifetime oppertunity to get enjoy, by clicking delete you opet out of this. ", preferredStyle: .actionSheet)
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
+            DispatchQueue.main.async {
+                if let activeOrder = self.ActiveOrderData {
+                    let param = [
+                        "Mode" : "DeleteOrder",
+                        "OrderId": "\(activeOrder.OrderId)"
+                    ]
+                    
+                    print(param)
+                    print("url --->" + Constants().BASEURL + Constants.APIPaths().AddOrder)
+                    
+                    AF.request( Constants().BASEURL + Constants.APIPaths().AddOrder, method: .post, parameters: param, encoder: .json).response{
+                        response in
+
+                     switch response.result {
+                      case .success(let responseData):
+                         if JSON(responseData)["Message"] == "success"{
+                             ActiveOrders = nil
+                             updateActiveOrderStatus()
+                             self.navigationController?.popViewController(animated: true)
+                         }
+                         else{
+                             self.showAlert(title: "Something went wrong!", content: "unfotunatly there was something wrong with the request. please try again later.")
+                             print(JSON(responseData))
+                         }
+
+                      case .failure(let error):
+                          print("error--->",error)
+                      }
+                  }
+                    
+                }
+            }
+        }
+
+        //Add the actions to the alert controller
+        alert.addAction(cancelAction)
+        alert.addAction(deleteAction)
+
+        //Present the alert controller
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func BottomAcceptButtonClick(_ sender: UIButton) {
+        if sender.titleLabel?.text == "Cancel order" {
+            cancalOrder()
+        }
+    }
+    
 
 }
 
