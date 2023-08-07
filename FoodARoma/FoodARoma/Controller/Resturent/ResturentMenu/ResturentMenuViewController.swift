@@ -42,9 +42,18 @@ class ResturentMenuViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
-        loading = customAnimation()
-        loadingProtocol(with: loading! ,true)
-        fetchAllMenu()
+        if let MenuDAta = AllMenuDatas {
+            AllMenuItems = MenuDAta
+            populateCollectionViews()
+            ResturentspecialCollectionVew.reloadData()
+            
+        }
+        else{
+            loading = customAnimation()
+            loadingProtocol(with: loading! ,true)
+            fetchAllMenu()
+        }
+
     }
     
     func populateCollectionViews(){
@@ -68,7 +77,7 @@ class ResturentMenuViewController: UIViewController {
         }
     }
     
-    private  func loadImageInCell(cellData : HomeMenuCollectionViewCell, cellImageName : String?){
+    private func loadImageInCell(cellData : HomeMenuCollectionViewCell, cellImageName : String?){
         print(cellImageName)
         if let imageName = cellImageName {
             AF.request( Constants().IMAGEURL+imageName,method: .get).response{ response in
@@ -186,7 +195,13 @@ extension ResturentMenuViewController : UICollectionViewDataSource {
                     cell1.ratingLabel.text = "4.5"
                     cell1.timeLabel.text = specialmenuitem[indexPath.row].menu_Time + " Min"
                     cell1.descLabel.text = specialmenuitem[indexPath.row].menu_Dec
-                    loadImageInCell(cellData: cell1, cellImageName: specialmenuitem[indexPath.row].menu_Photo)
+                    if let menuPhotoData = specialmenuitem[indexPath.row].menu_photo_Data {
+                        cell1.menuImageView.image = UIImage(data: menuPhotoData)
+                    }
+                    else{
+                        loadImageInCell(cellData: cell1, cellImageName: specialmenuitem[indexPath.row].menu_Photo)
+                        print("calling for update image")
+                    }
                 }
                 return cell1
                 
@@ -198,7 +213,13 @@ extension ResturentMenuViewController : UICollectionViewDataSource {
                     cell2.ratingLabel.text = "4.5"
                     cell2.timeLabel.text = regularMenu[indexPath.row].menu_Time + " Min"
                     cell2.descLabel.text = regularMenu[indexPath.row].menu_Dec
-                    loadImageInCell(cellData: cell2, cellImageName: regularMenu[indexPath.row].menu_Photo)
+                    if let menuPhotoData = regularMenu[indexPath.row].menu_photo_Data {
+                        cell2.menuImageView.image = UIImage(data: menuPhotoData)
+                    }
+                    else{
+                        loadImageInCell(cellData: cell2, cellImageName: regularMenu[indexPath.row].menu_Photo)
+                        print("calling for update image")
+                    }
                 }
                 
                 return cell2

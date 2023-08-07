@@ -14,6 +14,7 @@ class ResturentOrdersController: UIViewController {
 
     @IBOutlet weak var ResturentCurrentOrdersTable: UITableView!
     
+    private var defaultImageData = Data()
     private var loading : (NVActivityIndicatorView,UIView)?
     var AllActiveOrders : [OrderHistories]? = [OrderHistories]()
     
@@ -24,6 +25,11 @@ class ResturentOrdersController: UIViewController {
         ResturentCurrentOrdersTable.dataSource = self
         ResturentCurrentOrdersTable.register(UINib(nibName: "ResturentOrderscell", bundle: nil), forCellReuseIdentifier: "ResOrderIdentifier")
         ResturentCurrentOrdersTable.register(UINib(nibName: "EmptyTableViewCell", bundle: nil), forCellReuseIdentifier: "emptyCellIdentifier")
+        
+        if let image = UIImage(named: "customPizza") {
+            if let imageData = image.pngData(){
+                defaultImageData = imageData
+            }}
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,6 +64,7 @@ class ResturentOrdersController: UIViewController {
                                  }
                                  else{
                                      AllMenuDatas?.AllMenu[x].addImgeData(imageData: responseData!)
+                                     self.updateAllActiveOrderWithImages()
                                  }
                               case .failure(let error):
                                   print("error--->",error)
@@ -97,6 +104,7 @@ class ResturentOrdersController: UIViewController {
                     
 //                    self.ResturentCurrentOrdersTable.reloadData()
                     self.loadingProtocol(with: self.loading! ,false)
+                    self.updateAllActiveOrderWithImages()
 
                 }
                 catch{
@@ -115,10 +123,27 @@ class ResturentOrdersController: UIViewController {
     
     func updateAllActiveOrderWithImages(){
         for x in 0..<(AllActiveOrders?.count ?? 0){
-            for y in 0..<AllActiveOrders[x].Orders{
-                
+            
+            if let OrderData = AllActiveOrders{
+                for yy in 0..<OrderData.count{
+                    // ethu Active order enn akathatnu
+                    if let allMenu = AllMenuDatas?.AllMenu {
+                        for zz in allMenu{
+                            if AllActiveOrders?[x].Orders[yy].order_no == zz.menu_id {
+                                if let menuPhotData = zz.menu_photo_Data {
+                                    AllActiveOrders?[x].Orders[yy].updateOrderImage(orderImageData: menuPhotData)
+                                }
+                                else{
+                                    print("We dont have photo data")
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
+        ResturentCurrentOrdersTable.reloadData()
+        print("updated weith phto \(AllActiveOrders)")
         
     }
 
@@ -137,7 +162,72 @@ extension ResturentOrdersController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ResturentCurrentOrdersTable.dequeueReusableCell(withIdentifier: "ResOrderIdentifier", for: indexPath) as! ResturentOrderscell
         if let orders = AllActiveOrders, orders.count > 0 {
+            let currentOreder = orders[indexPath.row]
+            cell.orderPErsonName.text = currentOreder.user_name
+            cell.orderIDLabel.text = "ORDER ID #12000\(currentOreder.order_id)"
+            cell.itemsLAbel.text = "Comone"
+            cell.statusText.text = "\(currentOreder.is_accepted)"
+            if let outputDateString = Date().convertTo12HourFormat(dateString: currentOreder.datetime) {
+                cell.pickuptime.text = outputDateString
+            } else {
+                print("Invalid date string")
+            }
             
+            var tempitemNames = ""
+            var dataIterations = 0
+            for x in currentOreder.Orders {
+                tempitemNames += (x.order_name ?? "Special / Custom Order") + " Q \(x.order_qty)\n"
+                if dataIterations > 2 {
+                    tempitemNames += "more..."
+                    break
+                }
+                dataIterations += 1
+            }
+            cell.itemsLAbel.text = tempitemNames
+            
+            
+            cell.imageSet1.isHidden = true
+            cell.imageset2.isHidden = true
+            cell.imageset3.isHidden = true
+            cell.imageset3View.isHidden = true
+        
+            
+            switch currentOreder.Orders.count {
+            case 1:
+                cell.imageSet1.isHidden = false
+                cell.imageSet1.image = UIImage(data: currentOreder.Orders[0].order_photo_data ?? defaultImageData)
+                break
+            case 2:
+                cell.imageSet1.isHidden = false
+                cell.imageSet1.image = UIImage(data: currentOreder.Orders[0].order_photo_data ?? defaultImageData)
+                cell.imageset2.isHidden = false
+                cell.imageset2.image = UIImage(data: currentOreder.Orders[1].order_photo_data ?? defaultImageData)
+                break
+            case 3:
+                cell.imageSet1.isHidden = false
+                cell.imageSet1.image = UIImage(data: currentOreder.Orders[0].order_photo_data ?? defaultImageData)
+                cell.imageset2.isHidden = false
+                cell.imageset2.image = UIImage(data: currentOreder.Orders[1].order_photo_data ?? defaultImageData)
+                cell.imageset3.isHidden = false
+                cell.imageset3.image = UIImage(data: currentOreder.Orders[2].order_photo_data ?? defaultImageData)
+                break
+            case 4...currentOreder.Orders.count :
+                cell.imageSet1.isHidden = false
+                cell.imageSet1.image = UIImage(data: currentOreder.Orders[0].order_photo_data ?? defaultImageData)
+                cell.imageset2.isHidden = false
+                cell.imageset2.image = UIImage(data: currentOreder.Orders[1].order_photo_data ?? defaultImageData)
+                cell.imageset3.isHidden = false
+                cell.imageset3.image = UIImage(data: currentOreder.Orders[2].order_photo_data ?? defaultImageData)
+                cell.imageset3View.isHidden = false
+                cell.iamgeItemLAbel.text = "+ \(currentOreder.Orders.count - 3)"
+                break
+            default:
+                print("switch case problem")
+                break
+            }
+            
+            
+            cell.totalITemLabel.text = "\(currentOreder.Orders.count) Items"
         }
         else{
             print("cell empty")

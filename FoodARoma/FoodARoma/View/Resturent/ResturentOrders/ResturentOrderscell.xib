@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ResOrderIdentifier" rowHeight="168" id="KGk-i7-Jjw" customClass="ResturentOrderscell" customModule="FoodARoma" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ResOrderIdentifier" rowHeight="168" id="KGk-i7-Jjw" customClass="ResturentOrderscell" customModule="FoodARoma" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="385" height="168"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -20,14 +21,6 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ugf-ab-fkw">
                         <rect key="frame" x="0.0" y="10" width="385" height="163"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XEM-8w-L4f">
-                                <rect key="frame" x="10" y="21.5" width="93" height="90.5"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="93" id="LnH-BP-rxB"/>
-                                    <constraint firstAttribute="width" constant="93" id="sRz-qZ-mEF"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jone Doe Mathew" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85V-eu-dgc">
                                 <rect key="frame" x="133" y="15" width="232" height="26.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="22"/>
@@ -95,7 +88,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19n-aX-ska">
-                                <rect key="frame" x="133" y="59.5" width="35" height="14.5"/>
+                                <rect key="frame" x="133" y="59.5" width="40" height="14.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="3Ke-th-JLN"/>
+                                </constraints>
                                 <string key="text">Items: 
 </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -103,7 +99,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcS-kn-6Wb">
-                                <rect key="frame" x="173" y="61.5" width="96.5" height="24"/>
+                                <rect key="frame" x="178" y="61.5" width="96.5" height="24"/>
                                 <string key="text">Pepperoni Feast Q1
 Meatball Ricotta Q1</string>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
@@ -212,21 +208,25 @@ Meatball Ricotta Q1</string>
                                                     </imageView>
                                                     <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ytx-r1-6yF">
                                                         <rect key="frame" x="0.0" y="0.0" width="26" height="26"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eg2-iK-8cR">
+                                                                <rect key="frame" x="7.5" y="7.5" width="11.5" height="11"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                                                <color key="textColor" red="0.031568646430969238" green="0.018869223073124886" blue="0.056014865636825562" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="eg2-iK-8cR" firstAttribute="centerY" secondItem="Ytx-r1-6yF" secondAttribute="centerY" id="T3Q-pi-7K4"/>
+                                                            <constraint firstItem="eg2-iK-8cR" firstAttribute="centerX" secondItem="Ytx-r1-6yF" secondAttribute="centerX" id="TS7-HQ-OC7"/>
+                                                        </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eg2-iK-8cR">
-                                                        <rect key="frame" x="7.5" y="7.5" width="11.5" height="11"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
-                                                        <color key="textColor" red="0.031568646430969238" green="0.018869223073124886" blue="0.056014865636825562" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="eg2-iK-8cR" firstAttribute="centerY" secondItem="gqm-93-N8l" secondAttribute="centerY" id="K4j-dg-bH0"/>
                                                     <constraint firstAttribute="bottom" secondItem="gXU-2G-sFp" secondAttribute="bottom" id="LYb-Jq-D8m"/>
                                                     <constraint firstItem="gXU-2G-sFp" firstAttribute="top" secondItem="gqm-93-N8l" secondAttribute="top" id="Tx0-i7-IjG"/>
-                                                    <constraint firstItem="eg2-iK-8cR" firstAttribute="centerX" secondItem="gqm-93-N8l" secondAttribute="centerX" id="WWi-GM-1YF"/>
                                                     <constraint firstItem="Ytx-r1-6yF" firstAttribute="leading" secondItem="gqm-93-N8l" secondAttribute="leading" id="dc4-5N-Ls5"/>
                                                     <constraint firstAttribute="bottom" secondItem="Ytx-r1-6yF" secondAttribute="bottom" id="k0g-wS-a5f"/>
                                                     <constraint firstAttribute="trailing" secondItem="Ytx-r1-6yF" secondAttribute="trailing" id="mrf-Y3-E2Y"/>
@@ -247,6 +247,14 @@ Meatball Ricotta Q1</string>
                                     <constraint firstItem="EhC-F0-4Uy" firstAttribute="centerY" secondItem="h8D-HN-b7F" secondAttribute="centerY" id="zOX-Di-stp"/>
                                 </constraints>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="person" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XEM-8w-L4f">
+                                <rect key="frame" x="10" y="20.5" width="93" height="90.5"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="93" id="LnH-BP-rxB"/>
+                                    <constraint firstAttribute="width" constant="93" id="sRz-qZ-mEF"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.97649496790000001" green="0.97661572689999998" blue="0.96830314399999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -260,7 +268,7 @@ Meatball Ricotta Q1</string>
                             <constraint firstItem="pcS-kn-6Wb" firstAttribute="top" secondItem="6kb-Wj-dRQ" secondAttribute="bottom" constant="7" id="Eyu-0E-S2c"/>
                             <constraint firstAttribute="bottom" secondItem="bqj-pp-C0W" secondAttribute="bottom" id="F2h-8t-uZa"/>
                             <constraint firstItem="85V-eu-dgc" firstAttribute="leading" secondItem="XEM-8w-L4f" secondAttribute="trailing" constant="30" id="Kvn-R0-Hqf"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pcS-kn-6Wb" secondAttribute="trailing" constant="85" id="Mzr-IM-Q08"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pcS-kn-6Wb" secondAttribute="trailing" constant="10" id="Mzr-IM-Q08"/>
                             <constraint firstItem="pcS-kn-6Wb" firstAttribute="leading" secondItem="19n-aX-ska" secondAttribute="trailing" constant="5" id="NJO-ow-cTH"/>
                             <constraint firstItem="19n-aX-ska" firstAttribute="leading" secondItem="XEM-8w-L4f" secondAttribute="trailing" constant="30" id="NUp-A8-0X5"/>
                             <constraint firstItem="19n-aX-ska" firstAttribute="top" secondItem="6kb-Wj-dRQ" secondAttribute="bottom" constant="5" id="PBJ-8e-RDd"/>
@@ -289,27 +297,34 @@ Meatball Ricotta Q1</string>
             <connections>
                 <outlet property="arrivalStatusView" destination="Nd8-up-xXg" id="f7b-PO-tgV"/>
                 <outlet property="backgrounddView" destination="Ugf-ab-fkw" id="XAQ-h6-pKZ"/>
+                <outlet property="iamgeItemLAbel" destination="eg2-iK-8cR" id="3TL-wT-0I6"/>
                 <outlet property="imageSet1" destination="pe5-Uk-kPz" id="eAa-8V-QUq"/>
                 <outlet property="imageset2" destination="BvV-I2-wcS" id="Iy3-Be-6CM"/>
                 <outlet property="imageset3" destination="gXU-2G-sFp" id="MaU-1N-y2E"/>
                 <outlet property="imageset3View" destination="Ytx-r1-6yF" id="k5S-6S-Tss"/>
                 <outlet property="itemsBackgroundView" destination="bqj-pp-C0W" id="bGg-fR-3Vz"/>
+                <outlet property="itemsLAbel" destination="pcS-kn-6Wb" id="2ey-1Z-mYc"/>
                 <outlet property="mainImageView" destination="XEM-8w-L4f" id="L3R-ot-nF3"/>
+                <outlet property="orderIDLabel" destination="6kb-Wj-dRQ" id="3vz-nd-sW7"/>
+                <outlet property="orderPErsonName" destination="85V-eu-dgc" id="jAv-Q6-Ljw"/>
+                <outlet property="pickuptime" destination="fLh-oc-l3g" id="qBG-0W-Ozz"/>
+                <outlet property="statusText" destination="jgQ-lB-BLR" id="OJd-Ub-DKO"/>
+                <outlet property="totalITemLabel" destination="du2-Wo-c2b" id="UtE-Uq-SsX"/>
             </connections>
             <point key="canvasLocation" x="184.78260869565219" y="166.40625"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="clock" catalog="system" width="32" height="32"/>
-        <image name="mail" catalog="system" width="32" height="32"/>
-        <image name="person" catalog="system" width="32" height="32"/>
+        <image name="clock" catalog="system" width="128" height="123"/>
+        <image name="mail" catalog="system" width="128" height="93"/>
+        <image name="person" catalog="system" width="128" height="121"/>
         <image name="pizza1" width="150" height="150"/>
         <image name="pizza2" width="256" height="256"/>
         <namedColor name="Custom black">
             <color red="0.11400000005960464" green="0.11400000005960464" blue="0.11800000071525574" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="GreenColor">
-            <color red="0.074509803921568626" green="0.36470588235294116" blue="0.18431372549019609" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.075000002980232239" green="0.36500000953674316" blue="0.18400000035762787" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

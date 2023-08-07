@@ -9,6 +9,13 @@ import UIKit
 
 class ResturentOrderscell: UITableViewCell {
 
+    @IBOutlet weak var totalITemLabel: UILabel!
+    @IBOutlet weak var iamgeItemLAbel: UILabel!
+    @IBOutlet weak var pickuptime: UILabel!
+    @IBOutlet weak var statusText: UILabel!
+    @IBOutlet weak var itemsLAbel: UILabel!
+    @IBOutlet weak var orderIDLabel: UILabel!
+    @IBOutlet weak var orderPErsonName: UILabel!
     @IBOutlet weak var backgrounddView: UIView!
     @IBOutlet weak var itemsBackgroundView: UIView!
     @IBOutlet weak var imageSet1: UIImageView!
