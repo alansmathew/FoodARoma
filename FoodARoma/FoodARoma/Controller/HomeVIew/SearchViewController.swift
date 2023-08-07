@@ -129,7 +129,13 @@ extension SearchViewController : UITableViewDataSource{
             cell.menuRating.text = "4.5"
             cell.menuTime.text = menuitem[indexPath.row].menu_Time + " Min"
             cell.menuDec.text = menuitem[indexPath.row].menu_Dec
-            loadImageInCell(cellData: cell, cellImageName: menuitem[indexPath.row].menu_Photo)
+            if let photoData = menuitem[indexPath.row].menu_photo_Data {
+                cell.menuImage.image = UIImage(data: photoData, scale: 1)
+            }
+            else{
+                loadImageInCell(cellData: cell, cellImageName: menuitem[indexPath.row].menu_Photo)
+            }
+
         }
         return cell
     }
@@ -157,34 +163,14 @@ extension SearchViewController : UITableViewDelegate{
 
          modifyAction.image = UIImage(named: "delete")
          modifyAction.backgroundColor = .red
-
-         return UISwipeActionsConfiguration(actions: [modifyAction])
         
-//        let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
-            
-//            if self.search.text?.count ?? 0 > 1 {
-//                let x = self.searchMenuData![indexPath.row]
-//                if let menudata = self.AllMenuData {
-//                    var count = 0
-//                    for y in menudata {
-//                        if y.menu_Name == x.menu_Name {
-//                            self.AllMenuData?.remove(at: count)
-//                            self.searchMenuData = self.AllMenuData
-//                            self.search.text = ""
-//                            self.searchTableView.reloadData()
-//                        }
-//                        count += 1
-//                    }
-//                }
-//            }
-//            else{
-//                self.AllMenuData?.remove(at: indexPath.row)
-//                self.searchMenuData = self.AllMenuData
-//                self.searchTableView.reloadData()
-//                self.search.text = ""
-//            }
-//        }
-//        return UISwipeActionsConfiguration(actions: [action])
+        if let userType = UserDefaults.standard.string(forKey: "USERTYPE"){
+            if userType == "restaurant"{
+                return UISwipeActionsConfiguration(actions: [modifyAction])
+            }
+        }
+        return nil
+        
     }
 }
 

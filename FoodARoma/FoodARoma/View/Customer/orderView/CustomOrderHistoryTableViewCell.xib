@@ -183,7 +183,7 @@ Meatball Ricotta Q1</string>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="0.94749996362143007" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="0.85726756923246072" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Jdy-ft-stG" firstAttribute="leading" secondItem="4GG-ZV-TcO" secondAttribute="trailing" constant="5" id="0sl-w5-hfm"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Jdy-ft-stG" secondAttribute="trailing" constant="10" id="1fV-HL-mdF"/>
@@ -214,6 +214,7 @@ Meatball Ricotta Q1</string>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="backgrounddView" destination="Pse-I3-eZA" id="9JO-bs-Ieb"/>
                 <outlet property="bottomItemsView" destination="zFR-PA-a4m" id="Y7K-fn-WUd"/>
                 <outlet property="imageSet1" destination="gne-QW-HBY" id="UWD-3V-8RK"/>
                 <outlet property="imageSet2" destination="FXf-Kh-na1" id="Bwo-i1-Zz3"/>

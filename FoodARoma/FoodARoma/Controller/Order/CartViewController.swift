@@ -106,8 +106,6 @@ class CartViewController: UIViewController {
     }
     
     @IBAction func confirmOrderClick(_ sender: Any) {
-        
-        
 
         loading = customAnimation()
         loadingProtocol(with: loading! ,true)
@@ -165,7 +163,7 @@ class CartViewController: UIViewController {
                                 if (JSON(response.data)["Message"]=="success"){
                                     let orderID = Int("\(JSON(response.data)["OrderId"])")
                                     if let orderid = orderID{
-                                        ActiveOrders = ActiveOrderModel(OrderId: orderid, pickup_time: "\(self.pickuptime.date)", CartOrders: CartOrders!)
+                                        ActiveOrders = ActiveOrderModel(OrderId: orderid, pickup_time: "\(self.pickuptime.date)", is_accepted: "Not Accepted", CartOrders: CartOrders!)
                                         print(ActiveOrders)
                                         CartOrders?.removeAll()
                                         
@@ -209,6 +207,27 @@ class CartViewController: UIViewController {
             loadingProtocol(with: loading! ,false)
         }
 
+    }
+    
+    private func loadImageInCell(cellData : OrderTableViewCell, cellImageName : String?){
+        if let imageName = cellImageName {
+            AF.request( Constants().IMAGEURL+imageName,method: .get).response{ response in
+
+             switch response.result {
+              case .success(let responseData):
+                
+                 if (JSON(responseData)["message"]=="Internal server error"){
+                     print("NO data comming")
+                     cellData.orderimageView.image = UIImage(named: "imagebackground")
+                 }
+                 else{
+                     cellData.orderimageView.image = UIImage(data: responseData!, scale:1)
+                 }
+              case .failure(let error):
+                  print("error--->",error)
+              }
+          }
+        }
     }
     
 
@@ -261,14 +280,20 @@ extension CartViewController : UITableViewDataSource{
         
         if let orders = CartOrders, orders.count > 0{
             let cell = cartTableView.dequeueReusableCell(withIdentifier: "orderHistoryIdentifier", for: indexPath) as! OrderTableViewCell
-                cell.orderimageView.image = UIImage(data: orders[indexPath.row].menu_photo_Data!, scale:1)
-                cell.orderName.text = orders[indexPath.row].menu_Name
-                cell.orderPrice.text = "$ " + orders[indexPath.row].menu_Price
-                cell.orderQ.text = "Quantity : \(orders[indexPath.row].menu_quantity!)"
-                let price = Double(orders[indexPath.row].menu_Price) ?? 0.00
-                let qun =  Double(orders[indexPath.row].menu_quantity ?? 1)
-                totalprice += price * qun
-                totalData(price: totalprice)
+            if let menuPhotoData = orders[indexPath.row].menu_photo_Data {
+                cell.orderimageView.image = UIImage(data: menuPhotoData, scale:1)
+            }
+            else{
+                loadImageInCell(cellData: cell, cellImageName: orders[indexPath.row].menu_Photo)
+            }
+                
+            cell.orderName.text = orders[indexPath.row].menu_Name
+            cell.orderPrice.text = "$ " + orders[indexPath.row].menu_Price
+            cell.orderQ.text = "Quantity : \(orders[indexPath.row].menu_quantity!)"
+            let price = Double(orders[indexPath.row].menu_Price) ?? 0.00
+            let qun =  Double(orders[indexPath.row].menu_quantity ?? 1)
+            totalprice += price * qun
+            totalData(price: totalprice)
                 
             return cell
         }
