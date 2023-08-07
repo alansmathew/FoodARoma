@@ -86,6 +86,10 @@ class MoreViewController: UIViewController {
         UserDefaults.standard.removeObject(forKey: "USERID")
         UserDefaults.standard.removeObject(forKey: "USEREMAIL")
         UserDefaults.standard.removeObject(forKey: "NAME")
+        if let appDomain = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: appDomain)
+            UserDefaults.standard.synchronize()
+        }
         nouserView.isHidden = false
     }
     @IBAction func loginClick(_ sender: Any) {

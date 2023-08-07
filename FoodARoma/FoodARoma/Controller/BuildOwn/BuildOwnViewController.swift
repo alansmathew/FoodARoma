@@ -12,6 +12,7 @@ import Lottie
 
 class BuildOwnViewController: UIViewController {
 
+    @IBOutlet weak var topPriceLabel: UILabel!
     @IBOutlet weak var topTextLabel: UILabel!
     @IBOutlet weak var sideLabel: UILabel!
     @IBOutlet weak var sidebar: UIView!
@@ -28,12 +29,24 @@ class BuildOwnViewController: UIViewController {
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var animation_lottie: LottieAnimationView!
     
-    let topingNames = ["Size", "Cheddar", "Fontina" , "Chichen" ,"Beef", "Pepperoni", "Black olives", "Mushroom" ]
+    var basePrice = 21.99
+    var totalPriceData = 0.00
+    
+    let topingNames = ["Size", "Cheddar", "Pepperoni", "Black olives"]
     let toppingsSize = ["None", "Small", "Medium", "Large"]
+    let priceData = [0.00, 2.99, 3.50, 4.50]
+    
     var cellSellection = 0
     var topingDefault = 2
     
+    var base = "Medium"
     var topText = ""
+    var customDataModel : [CustomPizzaModel] = [CustomPizzaModel]()
+    
+    var didAdd3dobject = false
+    var objectrootPoint : SCNVector3?
+    
+    var alreadyHaveAr = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +69,7 @@ class BuildOwnViewController: UIViewController {
         topingsCollectionView.reloadData()
         let firstIndexPath = IndexPath(item: 0, section: 0)
         topingsCollectionView.selectItem(at: firstIndexPath, animated: true, scrollPosition: .centeredHorizontally)
+        dataPopulate()
         
         blurTopView.layer.cornerRadius = 14
         blurTopView.addBlurToView()
@@ -73,9 +87,21 @@ class BuildOwnViewController: UIViewController {
         
         topText = "Pizza Size \(toppingsSize[topingDefault])"
         topTextLabel.text = topText
+        
+        topingsCollectionView.register(UINib(nibName: "CustomOrdetCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "addtocartIdentifier")
+
     }
     
-    // Function to add lighting to the scene
+    override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+
+                sceneView.session.pause()
+                sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+                        node.removeFromParentNode()
+            }
+
+        }
+    
     private func addLighting() {
         // Create an ambient light source
         let ambientLight = SCNLight()
@@ -117,9 +143,239 @@ class BuildOwnViewController: UIViewController {
         }
         
         sideLabel.text = toppingsSize[topingDefault]
+        dataPopulate()
     }
     
-
+    private func updateBasePrice(){
+        var tempPrice = basePrice
+        for xdata in customDataModel{
+            if let indexData = toppingsSize.firstIndex(where: { $0 ==  xdata.Quantity}) {
+                tempPrice += priceData[indexData]
+            }
+        }
+        totalPriceData = tempPrice
+        topPriceLabel.text = "$ "+String(format: "%.2f", tempPrice)
+        
+    }
+    
+    private func dataPopulate(){
+        
+        var shouldAdd = true
+        var tempIndex = 0
+        for x in customDataModel{
+            if topingNames[cellSellection] == x.Name {
+                shouldAdd = false
+                break
+            }
+            tempIndex += 1
+        }
+        
+        if shouldAdd{
+            let tempModel = CustomPizzaModel(Name: topingNames[cellSellection], Quantity: toppingsSize[topingDefault], didtouched: true)
+            customDataModel.append(tempModel)
+        }
+        else{
+            let tempModel = CustomPizzaModel(Name: topingNames[cellSellection], Quantity: toppingsSize[topingDefault], didtouched: true)
+            customDataModel[tempIndex] = tempModel
+        }
+        
+        
+        var tempText = "Pizza "
+        var isfirst = true
+        for x in customDataModel{
+            if x.Quantity != "None" {
+                if isfirst {
+                    base = x.Quantity
+                    tempText += "\(x.Name) \(x.Quantity) with   "
+                }
+                else{
+                    tempText = String(tempText.dropLast(2))
+                    tempText += "\(x.Name) \(x.Quantity),   "
+                }
+            }
+            isfirst = false
+        }
+        updateBasePrice()
+        topTextLabel.text = String(tempText.dropLast(3))
+        
+        updateAr()
+    }
+    
+    func reselctToppings(){
+        sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+            if topingNames.contains(node.name ?? "blah balh") {
+                  node.removeFromParentNode()
+              }
+          }
+        var url = URL(string: "")
+        
+        if let ObjectRootPoint = objectrootPoint {
+            var newPosistion = ObjectRootPoint
+            
+            for xToppings in customDataModel{
+                sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+                    if node.name == xToppings.Name && node.name != topingNames[0] {
+                          node.removeFromParentNode()
+                      }
+                  }
+                 
+                let qual = xToppings.Quantity
+                
+                switch xToppings.Name {
+                    case "Size":
+                        if topingDefault == 1 {
+                            url = Bundle.main.url(forResource: "pizzasmall", withExtension: "usdz")
+                        }
+                        else if topingDefault == 2{
+                            url = Bundle.main.url(forResource: "pizzamedium", withExtension: "usdz")
+                        }
+                        else if topingDefault == 3 {
+                            url = Bundle.main.url(forResource: "pizzaLarge", withExtension: "usdz")
+                        }
+                        break
+                    case "Cheddar":
+                        if qual == toppingsSize[1] {
+                            url = Bundle.main.url(forResource: "cheeseSmall\(base)", withExtension: "usdz")
+                            newPosistion.y -= 0.00009
+                        }
+                        else if qual == toppingsSize[2]{
+                            url = Bundle.main.url(forResource: "cheeseSmall\(base)", withExtension: "usdz")
+                            
+                        }
+                        else if qual == toppingsSize[3] {
+                            url = Bundle.main.url(forResource: "cheeseSmall\(base)", withExtension: "usdz")
+                            newPosistion.y += 0.00005
+                        }
+                        break
+                    case "Pepperoni":
+                        if qual == toppingsSize[1] {
+                            url = Bundle.main.url(forResource: "PepperoniSmall\(base)", withExtension: "usdz")
+                        }
+                        else if qual == toppingsSize[2]{
+                            url = Bundle.main.url(forResource: "PepperoniMedium\(base)", withExtension: "usdz")
+                        }
+                        else if qual == toppingsSize[3] {
+                            url = Bundle.main.url(forResource: "PepperoniLarge\(base)", withExtension: "usdz")
+                        }
+                        break
+                        
+                    case "Black olives":
+                        if qual == toppingsSize[1] {
+                            url = Bundle.main.url(forResource: "blackolivesSmall\(base)", withExtension: "usdz")
+                        }
+                        else if qual == toppingsSize[2]{
+                            url = Bundle.main.url(forResource: "blackolivesMedium\(base)", withExtension: "usdz")
+                            
+                        }
+                        else if qual == toppingsSize[3] {
+                            url = Bundle.main.url(forResource: "blackolivesLarge\(base)", withExtension: "usdz")
+                        }
+                        break
+                        
+                        default:
+                        url = URL(string: "")
+                }
+                
+                
+                if let urlData = url{
+                    let scene = try? SCNScene(url: urlData)
+                    let newObject = scene!.rootNode.childNodes.first
+                    newObject?.position = newPosistion
+                    newObject?.name = xToppings.Name
+                    
+                    if let NewObject = newObject{
+                        sceneView.scene.rootNode.addChildNode(NewObject)
+                    }
+                }
+                
+            }
+            
+            
+        }
+    }
+    
+    func updateAr(){
+        
+        var url = URL(string: "")
+        
+        if let ObjectRootPoint = objectrootPoint {
+            var newPosistion = ObjectRootPoint
+            sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+                  if node.name == topingNames[cellSellection] {
+                      node.removeFromParentNode()
+                  }
+              }
+            
+            switch topingNames[cellSellection] {
+                case "Size":
+                    if topingDefault == 1 {
+                        url = Bundle.main.url(forResource: "pizzasmall", withExtension: "usdz")
+                    }
+                    else if topingDefault == 2{
+                        url = Bundle.main.url(forResource: "pizzamedium", withExtension: "usdz")
+                    }
+                    else if topingDefault == 3 {
+                        url = Bundle.main.url(forResource: "pizzaLarge", withExtension: "usdz")
+                    }
+                    reselctToppings()
+                    break
+                case "Cheddar":
+                    if topingDefault == 1 {
+                        url = Bundle.main.url(forResource: "cheeseSmall\(base)", withExtension: "usdz")
+                        newPosistion.y -= 0.00009
+                    }
+                    else if topingDefault == 2{
+                        url = Bundle.main.url(forResource: "cheeseSmall\(base)", withExtension: "usdz")
+                        
+                    }
+                    else if topingDefault == 3 {
+                        url = Bundle.main.url(forResource: "cheeseSmall\(base)", withExtension: "usdz")
+                        newPosistion.y += 0.00005
+                    }
+                    break
+                case "Pepperoni":
+                    if topingDefault == 1 {
+                        url = Bundle.main.url(forResource: "PepperoniSmall\(base)", withExtension: "usdz")
+                    }
+                    else if topingDefault == 2{
+                        url = Bundle.main.url(forResource: "PepperoniMedium\(base)", withExtension: "usdz")
+                        
+                    }
+                    else if topingDefault == 3 {
+                        url = Bundle.main.url(forResource: "PepperoniLarge\(base)", withExtension: "usdz")
+                    }
+                    break
+                    
+                case "Black olives":
+                    if topingDefault == 1 {
+                        url = Bundle.main.url(forResource: "blackolivesSmall\(base)", withExtension: "usdz")
+                    }
+                    else if topingDefault == 2{
+                        url = Bundle.main.url(forResource: "blackolivesMedium\(base)", withExtension: "usdz")
+                        
+                    }
+                    else if topingDefault == 3 {
+                        url = Bundle.main.url(forResource: "blackolivesLarge\(base)", withExtension: "usdz")
+                    }
+                    break
+                    
+                    default:
+                    url = URL(string: "")
+            }
+            
+            if let urlData = url{
+                let scene = try? SCNScene(url: urlData)
+                let newObject = scene!.rootNode.childNodes.first
+                newObject?.position = newPosistion
+                newObject?.name = topingNames[cellSellection]
+                
+                if let NewObject = newObject{
+                    sceneView.scene.rootNode.addChildNode(NewObject)
+                }
+            }
+        }
+        
+    }
 }
 
 extension BuildOwnViewController: ARSCNViewDelegate {
@@ -179,30 +435,43 @@ extension BuildOwnViewController: ARSCNViewDelegate {
 
 extension BuildOwnViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first, let result = sceneView.hitTest(touch.location(in: sceneView), types: [.existingPlaneUsingExtent]).first else { return }
+        if !didAdd3dobject {
+            guard let touch = touches.first, let result = sceneView.hitTest(touch.location(in: sceneView), types: [.existingPlaneUsingExtent]).first else { return }
 
-        let position = SCNVector3(result.worldTransform.columns.3.x, result.worldTransform.columns.3.y, result.worldTransform.columns.3.z)
-        let objectNode = createYour3DObject() // Create your 3D object node here
+            let position = SCNVector3(result.worldTransform.columns.3.x, result.worldTransform.columns.3.y, result.worldTransform.columns.3.z)
+            objectrootPoint = position
+            let objectNode = createYour3DObject()
+            
+            objectNode.position = position
+            objectNode.name = topingNames[cellSellection]
+            sceneView.scene.rootNode.addChildNode(objectNode)
+            
+            DispatchQueue.main.async {
+                if !self.alreadyHaveAr {
+                    self.topingsCollectionView.isHidden = false
+                    self.topContentView.isHidden = false
+                    self.sideOptions.isHidden = false
+                }
         
-        objectNode.position = position
-        sceneView.scene.rootNode.addChildNode(objectNode)
-        
-        DispatchQueue.main.async {
-            self.topingsCollectionView.isHidden = false
-            self.topContentView.isHidden = false
-            self.sideOptions.isHidden = false
+            }
+            
+            sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+                  if node.name == "planeNode" {
+                      node.removeFromParentNode()
+                  }
+              }
+            
+            didAdd3dobject = true
         }
         
-        sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
-              if node.name == "planeNode" {
-                  node.removeFromParentNode()
-              }
-          }
     }
     
     private func createYour3DObject() -> SCNNode {
         // Load the USDZ model
-        let url = Bundle.main.url(forResource: "title1", withExtension: "usdz")
+        var url = Bundle.main.url(forResource: "pizzamedium", withExtension: "usdz")
+        if alreadyHaveAr{
+            url = Bundle.main.url(forResource: "title1", withExtension: "usdz")
+        }
         let scene = try? SCNScene(url: url!)
         let objectNode = scene!.rootNode.childNodes.first
         return objectNode!
@@ -212,32 +481,58 @@ extension BuildOwnViewController {
 
 extension BuildOwnViewController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return topingNames.count
+        return topingNames.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = topingsCollectionView.dequeueReusableCell(withReuseIdentifier: "topingsCellIdentifier", for: indexPath) as! PizzaTopingsCustomCollectionViewCell
-        cell.topingsNameLabel.text = topingNames[indexPath.row]
-        cell.topingsImage.image = UIImage(named: topingNames[indexPath.row])
-        return cell
+        if indexPath.row < topingNames.count {
+            let cell = topingsCollectionView.dequeueReusableCell(withReuseIdentifier: "topingsCellIdentifier", for: indexPath) as! PizzaTopingsCustomCollectionViewCell
+            cell.topingsNameLabel.text = topingNames[indexPath.row]
+            cell.topingsImage.image = UIImage(named: topingNames[indexPath.row])
+            return cell
+        }
+        else{
+            let cell = topingsCollectionView.dequeueReusableCell(withReuseIdentifier: "addtocartIdentifier", for: indexPath) as! CustomOrdetCollectionViewCell
+            return cell
+        }
+  
     }
-    
 
 }
 
 extension BuildOwnViewController : UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
-//        collectionView.reloadData()
         
-        topingDefault = 2
-        sideLabel.text = toppingsSize[topingDefault]
-        
-        cellSellection = indexPath.row
-        
+        if indexPath.row < topingNames.count {
+            topingDefault = 2
+            
+            if customDataModel.count > indexPath.row{
+                if customDataModel[indexPath.row].didtouched {
+                    if let indexData = toppingsSize.firstIndex(where: { $0 ==  customDataModel[indexPath.row].Quantity}) {
+                        topingDefault = indexData
+                    }
+                }
+            }
+            
+            sideLabel.text = toppingsSize[topingDefault]
+            cellSellection = indexPath.row
+            dataPopulate()
+        }
+        else{
+            
+            if let image = UIImage(named: "customPizza") {
+                if let imageData = image.pngData(){
+                    var CustomOrder = allMenu(menu_id: -1000001, menu_Time: "20", menu_Cat: "Custom", menu_Price: String(format: "%.2f", totalPriceData), menu_Name: "Custom Pizza", menu_Dec: topTextLabel.text ?? "pizzaDiscription", avg_Rating: "0.00", total_Ratings: "0.00", menu_photo_Data : imageData,menu_quantity:1, ratings: [Ratings(comment: "", rating: "")])
+                    didAddNewItem = true
+                    CartOrders?.append(CustomOrder)
+                    saveFetchCartData(fetchData: false)
+                    tabBarController?.selectedIndex = 0
+                }
+            }
+        }
+            
     }
-    
-    
 }
 
 class PizzaTopingsCustomCollectionViewCell : UICollectionViewCell {
@@ -315,6 +610,4 @@ extension UIView {
       gradientLayer.frame = frame
       layer.insertSublayer(gradientLayer, at: 0)
    }
-
-    
 }

@@ -40,7 +40,7 @@ extension UIViewController {
     constr.append(parentView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor))
     constr.append(parentView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor))
         constr.append(parentView.bottomAnchor.constraint(equalTo: view.superview!.bottomAnchor))
-    constr.append(parentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor))
+    constr.append(parentView.topAnchor.constraint(equalTo: view.topAnchor))
     
     constr.append(actualAnimationView.heightAnchor.constraint(equalToConstant: 60))
     constr.append(actualAnimationView.widthAnchor.constraint(equalToConstant: 60))

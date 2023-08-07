@@ -15,6 +15,7 @@ struct Constants {
     struct APIPaths{
         let loginPath = "user/auth"
         let fetchMenu = "menu/add"
+        let AddOrder = "order/add"
     }
 
 }
