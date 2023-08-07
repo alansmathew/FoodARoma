@@ -34,6 +34,9 @@ class OrderDetailsViewController: UIViewController {
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var moreCommentsbutton: UIButton!
     
+    @IBOutlet weak var bottomResturentView: UIView!
+    
+    
     var SelectedOrder : allMenu?
     
     var quantity = 1
@@ -276,8 +279,12 @@ extension OrderDetailsViewController : UITableViewDataSource {
                 }
             }
             
-            cellHeight += cell.layer.frame.height
-            contentHeight.constant = cellHeight
+            let fittingSize = CGSize(width: tableView.bounds.width, height: UIView.layoutFittingCompressedSize.height)
+            let size = cell.contentView.systemLayoutSizeFitting(fittingSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+            let celllHeight = size.height
+            
+            cellHeight += size.height
+            contentHeight.constant = cellHeight + 60
             return cell
         }
         else{

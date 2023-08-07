@@ -11,5 +11,5 @@ struct ActiveOrderModel : Codable {
     let OrderId : Int
     let pickup_time : String
     let is_accepted : String?
-    let CartOrders : [allMenu]
+    var CartOrders : [allMenu]
 }

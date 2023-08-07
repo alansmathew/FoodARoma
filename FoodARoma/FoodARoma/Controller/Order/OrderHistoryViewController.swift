@@ -39,10 +39,13 @@ class OrderHistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(allHistoryData?.count)
+        
         orderHistoryTable.delegate = self
         orderHistoryTable.dataSource = self
         
         orderHistoryTable.register(UINib(nibName: "CustomOrderHistoryTableViewCell", bundle: nil), forCellReuseIdentifier: "0rderHistoryDetailsIdentifier")
+        orderHistoryTable.register(UINib(nibName: "EmptyTableViewCell", bundle: nil), forCellReuseIdentifier: "emptyCellIdentifier")
         setupUIOrder()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleActiveOrderTap(_:)))
@@ -56,8 +59,12 @@ class OrderHistoryViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print(ActiveOrders)
-        
+        updateActiveOrderUI()
+        fetchAllOrders()
+    }
+    
+    
+    private func updateActiveOrderUI(){
         if let ActiveOrder = ActiveOrders {
             
             currentOrderView.isHidden = false
@@ -70,29 +77,88 @@ class OrderHistoryViewController: UIViewController {
             switch ActiveOrder.CartOrders.count {
             case 1:
                 imageSet1.isHidden = false
-                imageSet1.image = UIImage(data: ActiveOrder.CartOrders[0].menu_photo_Data!)
+                if let imageData = ActiveOrder.CartOrders[0].menu_photo_Data{
+                    imageSet1.image = UIImage(data: imageData)
+                }
+                else{
+                    updateImageData(imageField: imageSet1, imageString: ActiveOrder.CartOrders[0].menu_Photo!, indexData: 0)
+                }
                 break
             case 2:
                 imageSet1.isHidden = false
-                imageSet1.image = UIImage(data: ActiveOrder.CartOrders[0].menu_photo_Data!)
                 imageSet2.isHidden = false
-                imageSet2.image = UIImage(data: ActiveOrder.CartOrders[1].menu_photo_Data!)
+                
+                if let imageData = ActiveOrder.CartOrders[0].menu_photo_Data{
+                    imageSet1.image = UIImage(data: imageData)
+                }
+                else{
+                    updateImageData(imageField: imageSet1, imageString: ActiveOrder.CartOrders[0].menu_Photo!, indexData: 0)
+                }
+                
+                if let imageData = ActiveOrder.CartOrders[1].menu_photo_Data{
+                    imageSet2.image = UIImage(data: imageData)
+                }
+                else{
+                    updateImageData(imageField: imageSet2, imageString: ActiveOrder.CartOrders[1].menu_Photo!, indexData: 1)
+                }
                 break
             case 3:
                 imageSet1.isHidden = false
-                imageSet1.image = UIImage(data: ActiveOrder.CartOrders[0].menu_photo_Data!)
                 imageSet2.isHidden = false
-                imageSet2.image = UIImage(data: ActiveOrder.CartOrders[1].menu_photo_Data!)
                 imageSet3.isHidden = false
-                imageSet3.image = UIImage(data: ActiveOrder.CartOrders[2].menu_photo_Data!)
+                
+                
+                if let imageData = ActiveOrder.CartOrders[0].menu_photo_Data{
+                    imageSet1.image = UIImage(data: imageData)
+                }
+                else{
+                    updateImageData(imageField: imageSet1, imageString: ActiveOrder.CartOrders[0].menu_Photo!, indexData: 0)
+                }
+                
+                if let imageData = ActiveOrder.CartOrders[1].menu_photo_Data{
+                    imageSet2.image = UIImage(data: imageData)
+                }
+                else{
+                    updateImageData(imageField: imageSet2, imageString: ActiveOrder.CartOrders[1].menu_Photo!, indexData: 1)
+                }
+                
+                if let imageData = ActiveOrder.CartOrders[2].menu_photo_Data{
+                    imageSet3.image = UIImage(data: imageData)
+                }
+                else{
+                    updateImageData(imageField: imageSet3, imageString: ActiveOrder.CartOrders[2].menu_Photo!, indexData: 2)
+                }
+                
                 break
+                
             case 4...ActiveOrder.CartOrders.count :
                 imageSet1.isHidden = false
-                imageSet1.image = UIImage(data: ActiveOrder.CartOrders[0].menu_photo_Data!)
                 imageSet2.isHidden = false
-                imageSet2.image = UIImage(data: ActiveOrder.CartOrders[1].menu_photo_Data!)
                 imageSet3.isHidden = false
-                imageSet3.image = UIImage(data: ActiveOrder.CartOrders[2].menu_photo_Data!)
+                
+                
+                
+                if let imageData = ActiveOrder.CartOrders[0].menu_photo_Data{
+                    imageSet1.image = UIImage(data: imageData)
+                }
+                else{
+                    updateImageData(imageField: imageSet1, imageString: ActiveOrder.CartOrders[0].menu_Photo!, indexData: 0)
+                }
+                
+                if let imageData = ActiveOrder.CartOrders[1].menu_photo_Data{
+                    imageSet2.image = UIImage(data: imageData)
+                }
+                else{
+                    updateImageData(imageField: imageSet2, imageString: ActiveOrder.CartOrders[1].menu_Photo!, indexData: 1)
+                }
+                
+                if let imageData = ActiveOrder.CartOrders[2].menu_photo_Data{
+                    imageSet3.image = UIImage(data: imageData)
+                }
+                else{
+                    updateImageData(imageField: imageSet3, imageString: ActiveOrder.CartOrders[2].menu_Photo!, indexData: 2)
+                }
+                
                 imageset3View.isHidden = false
                 restofItemslabel.text = "+ \(ActiveOrder.CartOrders.count - 3)"
                 break
@@ -124,89 +190,94 @@ class OrderHistoryViewController: UIViewController {
         else{
             currentOrderView.isHidden = true
         }
-        
-        fetchAllOrders()
     }
+    
     
     func fetchAllOrders(){
         
-        let params : [String : String] = [
-                "Mode" : "fetchOrder",
-                "RegId": "2"
-            ]
-        
-        loading = customAnimation()
-        loadingProtocol(with: loading! ,true)
+        if let userId = UserDefaults.standard.string(forKey: "USERID"){
+            
+            let params : [String : String] = [
+                    "Mode" : "fetchOrder",
+                    "RegId": "\(userId)"
+                ]
+            
+            loading = customAnimation()
+            loadingProtocol(with: loading! ,true)
 
-        AF.request((Constants().BASEURL + Constants.APIPaths().AddOrder), method: .post, parameters:params, encoder: .json).responseData { response in
-            switch response.result{
-            case .success(let data):
-                print(JSON(data))
-                let decoder = JSONDecoder()
-                do{
+            AF.request((Constants().BASEURL + Constants.APIPaths().AddOrder), method: .post, parameters:params, encoder: .json).responseData { response in
+                switch response.result{
+                case .success(let data):
+                    print(JSON(data))
+                    let decoder = JSONDecoder()
+                    do{
 
-                    let jsonData = try decoder.decode(OrderhistoryModel.self, from: data)
-                    self.allOrderHistories = jsonData
- 
-                    
-                    if let orders = self.allOrderHistories?.histories, let allMenuDAta = AllMenuDatas?.AllMenu{
+                        let jsonData = try decoder.decode(OrderhistoryModel.self, from: data)
+                        self.allOrderHistories = jsonData
+     
+                        
+                        if let orders = self.allOrderHistories?.histories, let allMenuDAta = AllMenuDatas?.AllMenu{
 
-                        for x in 0..<orders.count {
-                            for y in 0..<orders[x].Orders.count{
-                                for z in 0..<allMenuDAta.count {
-                                    if orders[x].Orders[y].order_no == AllMenuDatas?.AllMenu[z].menu_id{
-                                        self.allOrderHistories?.histories[x].Orders[y].updateOrderName(orderName: AllMenuDatas?.AllMenu[z].menu_Name ?? "have to work")
-                                        if let imageDAta = AllMenuDatas?.AllMenu[z].menu_photo_Data {
-                                            print("photo Data1 : \(imageDAta)")
-                                            self.allOrderHistories?.histories[x].Orders[y].updateOrderImage(orderImageData: imageDAta)
-                                        }
-                                        else{
-                                            print("photo Data2 : dosent have")
-                                            if let imageName = AllMenuDatas?.AllMenu[z].menu_Photo {
-                                                AF.request( Constants().IMAGEURL+imageName,method: .get).response{ response in
+                            for x in 0..<orders.count {
+                                for y in 0..<orders[x].Orders.count{
+                                    for z in 0..<allMenuDAta.count {
+                                        if orders[x].Orders[y].order_no == AllMenuDatas?.AllMenu[z].menu_id{
+                                            self.allOrderHistories?.histories[x].Orders[y].updateOrderName(orderName: AllMenuDatas?.AllMenu[z].menu_Name ?? "have to work")
+                                            if let imageDAta = AllMenuDatas?.AllMenu[z].menu_photo_Data {
+                                                print("photo Data1 : \(imageDAta)")
+                                                self.allOrderHistories?.histories[x].Orders[y].updateOrderImage(orderImageData: imageDAta)
+                                            }
+                                            else{
+                                                print("photo Data2 : dosent have")
+                                                if let imageName = AllMenuDatas?.AllMenu[z].menu_Photo {
+                                                    AF.request( Constants().IMAGEURL+imageName,method: .get).response{ response in
 
-                                                 switch response.result {
-                                                  case .success(let responseData):
-                                                    
-                                                     if (JSON(responseData)["message"]=="Internal server error"){
-                                                         print("NO data comming")
-                                                     }
-                                                     else{
-                                                         AllMenuDatas?.AllMenu[z].addImgeData(imageData: responseData!)
-                                                         self.allOrderHistories?.histories[x].Orders[y].updateOrderImage(orderImageData: responseData!)
-                                                         self.updateHIstoriesOrders()
-                                                     }
-                                                  case .failure(let error):
-                                                      print("error--->",error)
+                                                     switch response.result {
+                                                      case .success(let responseData):
+                                                        
+                                                         if (JSON(responseData)["message"]=="Internal server error"){
+                                                             print("NO data comming")
+                                                         }
+                                                         else{
+                                                             AllMenuDatas?.AllMenu[z].addImgeData(imageData: responseData!)
+                                                             self.allOrderHistories?.histories[x].Orders[y].updateOrderImage(orderImageData: responseData!)
+                                                             self.updateHIstoriesOrders()
+                                                         }
+                                                      case .failure(let error):
+                                                          print("error--->",error)
+                                                      }
                                                   }
-                                              }
+                                                }
                                             }
                                         }
                                     }
                                 }
+
                             }
-
                         }
+                        
+                        self.loadingProtocol(with: self.loading! ,false)
+
                     }
-                    
-                    self.loadingProtocol(with: self.loading! ,false)
+                    catch{
+                        print(response.result)
+                        self.loadingProtocol(with: self.loading! ,false)
+                        print("decoder error")
+                    }
 
-                }
-                catch{
-                    print(response.result)
+                case .failure(let error):
                     self.loadingProtocol(with: self.loading! ,false)
-                    print("decoder error")
+                    self.showAlert(title: "network intrepsion", content: "Something went wrong! please try again after some time")
+                    print(error)
                 }
-
-            case .failure(let error):
-                self.loadingProtocol(with: self.loading! ,false)
-                self.showAlert(title: "network intrepsion", content: "Something went wrong! please try again after some time")
-                print(error)
             }
+            
         }
+        
+
     }
     
-    func updateHIstoriesOrders(){
+    private func updateHIstoriesOrders(){
         self.allHistoryData?.removeAll()
         if let orders = self.allOrderHistories?.histories, let allMenuDAta = AllMenuDatas?.AllMenu{
             for x in 0..<orders.count {
@@ -217,15 +288,29 @@ class OrderHistoryViewController: UIViewController {
                 else{
                     if ActiveOrders?.OrderId != orders[x].order_id{
                         print("comming here")
-//                        if let menu = AllMenuDatas {
-//                            var tempArray : [allMenu]? = [allMenu]()
-//                            for x in menu.AllMenu {
-//                                x.
-//                            }
-//                            let currentOrder = ActiveOrderModel(OrderId: orders[x].order_id, pickup_time: orders[x].datetime, is_accepted: orders[x].is_accepted, CartOrders: <#T##[allMenu]#>)
-//                        }
+                        if let menu = AllMenuDatas {
+                            
+//                            print("AllMenu \(menu)")
+                            
+                            var tempArray : [allMenu]? = [allMenu]()
+                            for xx in orders[x].Orders{
+                                for y in menu.AllMenu{
+                                    if xx.order_no == y.menu_id {
+                                        var xdata = y
+                                        xdata.addMenuQuantity(qData: xx.order_qty)
+                                        tempArray?.append(xdata)
+                                    }
+                                }
+                            }
+                            print("temp order - > \(tempArray)")
+                            if let Aorders = tempArray{
+                                let currentOrder = ActiveOrderModel(OrderId: orders[x].order_id, pickup_time: orders[x].datetime, is_accepted: orders[x].is_accepted, CartOrders: Aorders)
+                                ActiveOrders = currentOrder
+                                updateActiveOrderStatus()
+                                updateActiveOrderUI()
+                            }
+                        }
                     }
-
                 }
             }
         }
@@ -281,6 +366,25 @@ class OrderHistoryViewController: UIViewController {
         imageset3View.layer.shadowRadius = 5;
     }
     
+    private func updateImageData(imageField : UIImageView, imageString : String, indexData : Int) {
+            AF.request( Constants().IMAGEURL+imageString,method: .get).response{ response in
+
+             switch response.result {
+              case .success(let responseData):
+
+                 if (JSON(responseData)["message"]=="Internal server error"){
+                     print("NO data comming")
+                 }
+                 else{
+                     imageField.image = UIImage(data: responseData!)
+                     ActiveOrders?.CartOrders[indexData].addImgeData(imageData:responseData!)
+                 }
+              case .failure(let error):
+                  print("error--->",error)
+              }
+          }
+    }
+    
     func convertDateString(_ dateString: String) -> String? {
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
@@ -300,12 +404,20 @@ extension OrderHistoryViewController : UITableViewDelegate{
 
 extension OrderHistoryViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allHistoryData?.count ?? 0
+        
+        if Int(allHistoryData?.count ?? 0) == 0 {
+            return 1
+        }else{
+            let caritems = allHistoryData?.count ?? 1
+            return Int(allHistoryData?.count ?? 0)
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = orderHistoryTable.dequeueReusableCell(withIdentifier: "0rderHistoryDetailsIdentifier", for: indexPath) as! CustomOrderHistoryTableViewCell
-        if let orderHistory = allHistoryData{
+        if let orderHistory = allHistoryData, orderHistory.count > 0{
             cell.orderIDLabel.text = "ORDER ID #12000\(orderHistory[indexPath.row].order_id)"
             var tempitemNames = ""
             var dataIterations = 0
@@ -369,6 +481,11 @@ extension OrderHistoryViewController : UITableViewDataSource {
             }
 
             
+        }
+        else{
+            print("cell empty")
+            let cell = orderHistoryTable.dequeueReusableCell(withIdentifier: "emptyCellIdentifier", for: indexPath) as! EmptyTableViewCell
+            return cell
         }
         
         return cell
