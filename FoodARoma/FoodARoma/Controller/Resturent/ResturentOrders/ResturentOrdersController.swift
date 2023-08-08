@@ -25,13 +25,12 @@ class ResturentOrdersController: UIViewController {
         ResturentCurrentOrdersTable.dataSource = self
         ResturentCurrentOrdersTable.register(UINib(nibName: "ResturentOrderscell", bundle: nil), forCellReuseIdentifier: "ResOrderIdentifier")
         ResturentCurrentOrdersTable.register(UINib(nibName: "EmptyTableViewCell", bundle: nil), forCellReuseIdentifier: "emptyCellIdentifier")
-        
+    
         if let image = UIImage(named: "customPizza") {
             if let imageData = image.pngData(){
                 defaultImageData = imageData
             }}
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         fetchAllOrders()
     }
@@ -125,7 +124,7 @@ class ResturentOrdersController: UIViewController {
         for x in 0..<(AllActiveOrders?.count ?? 0){
             
             if let OrderData = AllActiveOrders{
-                for yy in 0..<OrderData.count{
+                for yy in 0..<OrderData[x].Orders.count{
                     // ethu Active order enn akathatnu
                     if let allMenu = AllMenuDatas?.AllMenu {
                         for zz in allMenu{
@@ -176,12 +175,20 @@ extension ResturentOrdersController : UITableViewDataSource {
             var tempitemNames = ""
             var dataIterations = 0
             for x in currentOreder.Orders {
-                tempitemNames += (x.order_name ?? "Special / Custom Order") + " Q \(x.order_qty)\n"
-                if dataIterations > 2 {
-                    tempitemNames += "more..."
-                    break
+                if let allMEnu = AllMenuDatas?.AllMenu {
+                    for y in allMEnu {
+                        if x.order_no == y.menu_id{
+                            tempitemNames += y.menu_Name + " Q \(x.order_qty)\n"
+                            if dataIterations > 2 {
+                                tempitemNames += "more..."
+                                dataIterations += 1
+                                break
+                            }
+                           
+                        }
+                    }
                 }
-                dataIterations += 1
+
             }
             cell.itemsLAbel.text = tempitemNames
             
@@ -226,7 +233,6 @@ extension ResturentOrdersController : UITableViewDataSource {
                 break
             }
             
-            
             cell.totalITemLabel.text = "\(currentOreder.Orders.count) Items"
         }
         else{
@@ -240,4 +246,30 @@ extension ResturentOrdersController : UITableViewDataSource {
 }
 
 extension ResturentOrdersController : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        var tempArray : [allMenu]? = [allMenu]()
+        if let Order = AllActiveOrders?[indexPath.row].Orders, let menu = AllMenuDatas?.AllMenu{
+            for x in Order{
+                for y in menu{
+                    if x.order_no == y.menu_id{
+                        var xdata = y
+                        xdata.addMenuQuantity(qData: x.order_qty)
+                        tempArray?.append(xdata)
+                    }
+                }
+            }
+            if let orderData = AllActiveOrders?[indexPath.row], let tEMpORders = tempArray{
+                let currentOrder = ActiveOrderModel(OrderId: orderData.order_id, pickup_time: orderData.datetime, is_accepted: orderData.is_accepted, CartOrders: tEMpORders)
+                
+                let storyboard = UIStoryboard(name: "OrderStoryboard", bundle: nil)
+                let viewC = storyboard.instantiateViewController(withIdentifier: "OrderHistoryDetailsViewController") as! OrderHistoryDetailsViewController
+                viewC.ActiveOrderData = currentOrder
+                navigationController?.pushViewController(viewC, animated: true)
+            }
+        }
+  
+    
+
+    }
 }

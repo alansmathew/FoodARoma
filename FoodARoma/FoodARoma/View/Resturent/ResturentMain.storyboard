@@ -7,6 +7,7 @@
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -345,14 +346,40 @@
         <!--Statistics-->
         <scene sceneID="Que-FC-PVY">
             <objects>
-                <viewController id="xfX-OD-Vo6" sceneMemberID="viewController">
+                <viewController restorationIdentifier="StaticsViewController" storyboardIdentifier="StaticsViewController" id="xfX-OD-Vo6" customClass="StaticsViewController" customModule="FoodARoma" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wxI-lx-cNz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Statistics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZG-FS-0Ee">
+                                <rect key="frame" x="20" y="102" width="374" height="36"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jx4-v4-9e3" customClass="LineChartView" customModule="DGCharts">
+                                <rect key="frame" x="10" y="303" width="394" height="350"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="jN7-QH-2hD"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Qjk-Wz-nsq"/>
                         <color key="backgroundColor" name="homeBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="RZG-FS-0Ee" firstAttribute="leading" secondItem="Qjk-Wz-nsq" secondAttribute="leading" constant="20" id="3if-Vu-P2B"/>
+                            <constraint firstItem="RZG-FS-0Ee" firstAttribute="top" secondItem="Qjk-Wz-nsq" secondAttribute="top" constant="10" id="dFL-yC-eJn"/>
+                            <constraint firstItem="Jx4-v4-9e3" firstAttribute="leading" secondItem="Qjk-Wz-nsq" secondAttribute="leading" constant="10" id="hEk-ug-MTx"/>
+                            <constraint firstItem="Jx4-v4-9e3" firstAttribute="centerY" secondItem="wxI-lx-cNz" secondAttribute="centerY" constant="30" id="iew-mc-vAp"/>
+                            <constraint firstItem="Qjk-Wz-nsq" firstAttribute="trailing" secondItem="Jx4-v4-9e3" secondAttribute="trailing" constant="10" id="rcv-c2-Bt6"/>
+                            <constraint firstAttribute="trailing" secondItem="RZG-FS-0Ee" secondAttribute="trailing" constant="20" id="xp2-WX-eOA"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Statistics" image="chart.bar" catalog="system" selectedImage="chart.bar.fill" id="4fs-FR-eiQ"/>
+                    <connections>
+                        <outlet property="lineChartView" destination="Jx4-v4-9e3" id="hvI-oJ-dgU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10Y-rm-Uit" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -526,7 +553,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vhq-dz-tO9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1761" y="1041"/>
+            <point key="canvasLocation" x="1760.8695652173915" y="1040.625"/>
         </scene>
     </scenes>
     <resources>
@@ -553,5 +580,8 @@
         <namedColor name="homeBackgroundColor">
             <color red="0.90600001811981201" green="0.88700002431869507" blue="0.85500001907348633" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

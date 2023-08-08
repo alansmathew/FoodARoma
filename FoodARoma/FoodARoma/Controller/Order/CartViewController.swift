@@ -143,7 +143,7 @@ class CartViewController: UIViewController {
                         "user_id": id,
                         "user_name": name,
                         "pref_time" : "\(pickuptime.date)",
-                        "total_price": String(format: "%.2f", 100.0 * 1.13)
+                        "total_price": String(format: "%.2f", totalprice * 1.13)
                     ]
 
                     do {

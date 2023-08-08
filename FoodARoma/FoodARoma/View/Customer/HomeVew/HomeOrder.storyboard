@@ -504,6 +504,11 @@
                             <constraint firstItem="4DE-5v-cMb" firstAttribute="trailing" secondItem="vNe-g5-o3i" secondAttribute="trailing" id="wYW-FS-anr"/>
                             <constraint firstItem="mC1-Uv-e5I" firstAttribute="trailing" secondItem="4DE-5v-cMb" secondAttribute="trailing" id="wvU-aY-eem"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="mC1-Uv-e5I"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="RStar4" destination="cWZ-gE-UU2" id="oTg-bR-Igb"/>

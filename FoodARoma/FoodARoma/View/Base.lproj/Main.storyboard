@@ -679,7 +679,7 @@
             </objects>
             <point key="canvasLocation" x="828" y="137"/>
         </scene>
-        <!--Menu-->
+        <!--More-->
         <scene sceneID="JhW-Wh-xLZ">
             <objects>
                 <viewController id="iyj-PY-HBW" customClass="MoreViewController" customModule="FoodARoma" customModuleProvider="target" sceneMemberID="viewController">
@@ -872,7 +872,7 @@
                             <constraint firstItem="UEF-iL-OcO" firstAttribute="leading" secondItem="NC2-BN-4fE" secondAttribute="leading" constant="20" id="vUI-qw-q1X"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Menu" image="ellipsis" catalog="system" id="Cmf-ct-FJS"/>
+                    <tabBarItem key="tabBarItem" title="More" image="ellipsis" catalog="system" id="Cmf-ct-FJS"/>
                     <connections>
                         <outlet property="accounbackgroundView" destination="v0M-N1-BfV" id="EKg-Kv-0Ci"/>
                         <outlet property="arrowBackground" destination="Tvy-P8-6SW" id="sgS-nm-bYG"/>

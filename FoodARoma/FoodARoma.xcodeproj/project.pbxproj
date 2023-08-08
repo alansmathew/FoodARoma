@@ -37,6 +37,7 @@
 		E7377C142A5B5BC600F5C29F /* ResturentAddOrderStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7377C132A5B5BC600F5C29F /* ResturentAddOrderStoryboard.storyboard */; };
 		E7377C162A5B5EB700F5C29F /* ResturentSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7377C152A5B5EB700F5C29F /* ResturentSettingsViewController.swift */; };
 		E7377C192A5B609A00F5C29F /* MainNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7377C182A5B609A00F5C29F /* MainNavigationViewController.swift */; };
+		E74E95162A81EA0A000C638D /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = E74E95152A81EA0A000C638D /* DGCharts */; };
 		E75279332A44C7E000AF3EA2 /* customLoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75279322A44C7E000AF3EA2 /* customLoadingAnimation.swift */; };
 		E75279372A44C87200AF3EA2 /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = E75279362A44C87200AF3EA2 /* NVActivityIndicatorView */; };
 		E75279392A44C87200AF3EA2 /* NVActivityIndicatorViewExtended in Frameworks */ = {isa = PBXBuildFile; productRef = E75279382A44C87200AF3EA2 /* NVActivityIndicatorViewExtended */; };
@@ -101,6 +102,7 @@
 		E7FD8FE92A7D68CA00EC6E96 /* CustomOrderHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FD8FE72A7D68CA00EC6E96 /* CustomOrderHistoryTableViewCell.swift */; };
 		E7FD8FEA2A7D68CA00EC6E96 /* CustomOrderHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7FD8FE82A7D68CA00EC6E96 /* CustomOrderHistoryTableViewCell.xib */; };
 		E7FD8FEC2A7EA69100EC6E96 /* OrderHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FD8FEB2A7EA69100EC6E96 /* OrderHistoryModel.swift */; };
+		E7FD8FF42A81DC5400EC6E96 /* StaticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FD8FF32A81DC5400EC6E96 /* StaticsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -213,6 +215,7 @@
 		E7FD8FE72A7D68CA00EC6E96 /* CustomOrderHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOrderHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		E7FD8FE82A7D68CA00EC6E96 /* CustomOrderHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomOrderHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		E7FD8FEB2A7EA69100EC6E96 /* OrderHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryModel.swift; sourceTree = "<group>"; };
+		E7FD8FF32A81DC5400EC6E96 /* StaticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +228,7 @@
 				E7A226732A630D2800015015 /* AlamofireImage in Frameworks */,
 				E7A2096D2A55DFC5002FF49E /* SwiftyJSON in Frameworks */,
 				992ECBD72A3B662700B8745A /* Alamofire in Frameworks */,
+				E74E95162A81EA0A000C638D /* DGCharts in Frameworks */,
 				E76944A82A684BDD00F9904B /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,6 +274,7 @@
 				991C28E62A2D2DE000201DE7 /* FoodARomaTests */,
 				991C28F02A2D2DE000201DE7 /* FoodARomaUITests */,
 				991C28CE2A2D2DD900201DE7 /* Products */,
+				E74E95142A81EA0A000C638D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -396,6 +401,7 @@
 			isa = PBXGroup;
 			children = (
 				992ECBE72A3B8DCE00B8745A /* ResturentNavigationView.swift */,
+				E7FD8FF22A81DBDE00EC6E96 /* ResturentStat */,
 				992ECBE12A3B7F6600B8745A /* ResturentOrders */,
 				E7BD30AA2A5B425200FC288E /* ResturentMenu */,
 				E7377C172A5B5EBD00F5C29F /* ResturentSettings */,
@@ -450,6 +456,13 @@
 				E7377C152A5B5EB700F5C29F /* ResturentSettingsViewController.swift */,
 			);
 			path = ResturentSettings;
+			sourceTree = "<group>";
+		};
+		E74E95142A81EA0A000C638D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		E75279342A44C7E700AF3EA2 /* CustomFiles */ = {
@@ -576,6 +589,14 @@
 			path = Cheese;
 			sourceTree = "<group>";
 		};
+		E7FD8FF22A81DBDE00EC6E96 /* ResturentStat */ = {
+			isa = PBXGroup;
+			children = (
+				E7FD8FF32A81DC5400EC6E96 /* StaticsViewController.swift */,
+			);
+			path = ResturentStat;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -599,6 +620,7 @@
 				E7A2096C2A55DFC5002FF49E /* SwiftyJSON */,
 				E7A226722A630D2800015015 /* AlamofireImage */,
 				E76944A72A684BDD00F9904B /* Lottie */,
+				E74E95152A81EA0A000C638D /* DGCharts */,
 			);
 			productName = FoodARoma;
 			productReference = 991C28CD2A2D2DD900201DE7 /* FoodARoma.app */;
@@ -678,6 +700,7 @@
 				E7A2096B2A55DFC5002FF49E /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				E7A226712A630D2800015015 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				E76944A62A684BDD00F9904B /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				E7FD8FED2A81DB9A00EC6E96 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = 991C28CE2A2D2DD900201DE7 /* Products */;
 			projectDirPath = "";
@@ -771,6 +794,7 @@
 				991736BD2A37D16700824B14 /* MoreViewController.swift in Sources */,
 				E7F437782A53502800B3D4CD /* CommentTableViewCell.swift in Sources */,
 				E7D042F22A53A11300AEDC5E /* RatingsViewController.swift in Sources */,
+				E7FD8FF42A81DC5400EC6E96 /* StaticsViewController.swift in Sources */,
 				E79F8FD52A5BA23C00482CE1 /* ResturentAddNewOrderViewController.swift in Sources */,
 				991736B82A37CFF700824B14 /* LoginViewController.swift in Sources */,
 				E76933612A5E569700C31184 /* EmptyTableViewCell.swift in Sources */,
@@ -1187,6 +1211,14 @@
 				version = 4.2.0;
 			};
 		};
+		E7FD8FED2A81DB9A00EC6E96 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = exactVersion;
+				version = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1194,6 +1226,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 992ECBD52A3B662700B8745A /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		E74E95152A81EA0A000C638D /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E7FD8FED2A81DB9A00EC6E96 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
 		};
 		E75279362A44C87200AF3EA2 /* NVActivityIndicatorView */ = {
 			isa = XCSwiftPackageProductDependency;

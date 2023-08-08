@@ -57,8 +57,10 @@ class ResturentMenuViewController: UIViewController {
     }
     
     func populateCollectionViews(){
-//        print(AllMenuItems)
-//        print(regMenu)
+        specialMenu?.removeAll()
+        regMenu?.removeAll()
+        bevMenu?.removeAll()
+        
         if let allmenuitems = AllMenuItems {
             for x in allmenuitems.AllMenu{
                 if (x.menu_Cat == "special"){
