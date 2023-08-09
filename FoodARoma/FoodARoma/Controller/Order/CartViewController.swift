@@ -9,9 +9,11 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import NVActivityIndicatorView
+import PanModal
 
 class CartViewController: UIViewController {
 
+    @IBOutlet weak var paymentMethodView: PaddedTextField!
     @IBOutlet weak var ScrollView: UIScrollView!
     @IBOutlet weak var pickuptime: UIDatePicker!
     @IBOutlet weak var timeView: UIView!
@@ -26,9 +28,14 @@ class CartViewController: UIViewController {
     var contentHeight = 140.0
     private var loading : (NVActivityIndicatorView,UIView)?
     
+    let pickerView = UIPickerView()
+    let paymentMethods = ["Pay at Pick Up", "Debit / credit"]
+    var selectedPaymentMethod: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.hideKeyboardWhenTappedAround()
         cartTableView.delegate = self
         cartTableView.dataSource = self
         // Do any additional setup after loading the view.
@@ -46,14 +53,24 @@ class CartViewController: UIViewController {
         }
         contentHeight = cartTableView.frame.height
         navigationController?.navigationBar.isHidden = false
-//
-//        let bottomOffset = CGPoint(x: 0, y: ScrollView.contentSize.height - ScrollView.bounds.size.height)
-//        ScrollView.setContentOffset(bottomOffset, animated: true)
+    
+               
+       // Assign the data source and delegate of the UIPickerView
+        pickerView.dataSource = self
+        pickerView.delegate = self
+        paymentMethodView.text = paymentMethods[0]
+        paymentMethodView.tintColor = UIColor.clear
+        
+        paymentMethodView.inputView = pickerView
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         print(CartOrders)
+        if goingtoPay{
+            goingtoPay = false
+            self.navigationController?.popViewController(animated: true)
+        }
         pickuptime.minimumDate = Date.now
         pickuptime.date = Date.now
     }
@@ -94,6 +111,8 @@ class CartViewController: UIViewController {
                     self.totalprice = 0.00
                     self.cartTableView.reloadData()
                 }
+                let feedbackGenerator = UINotificationFeedbackGenerator()
+                feedbackGenerator.notificationOccurred(.success)
             }
         }
 
@@ -105,21 +124,26 @@ class CartViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    
     @IBAction func confirmOrderClick(_ sender: Any) {
+        
 
-        loading = customAnimation()
-        loadingProtocol(with: loading! ,true)
 
         if let userType = UserDefaults.standard.string(forKey: "USERTYPE"){
             let nameData =  UserDefaults.standard.string(forKey: "NAME")
             let userId = UserDefaults.standard.string(forKey: "USERID")
             if let id = userId, let name = nameData{
 
-
+                
                 var ordersDataTemp : [OrderData]? = [OrderData]()
                 if let orders = CartOrders {
                     for x in orders{
-                        ordersDataTemp?.append(OrderData(order_type: x.menu_Cat, order_dis: "gfjhg", order_no: x.menu_id, order_qty: x.menu_quantity!))
+                        if x.menu_id == -1000001{
+                            ordersDataTemp?.append(OrderData(order_type: x.menu_Cat, order_dis: x.menu_Dec, order_no: x.menu_id, order_qty: x.menu_quantity!))
+                        }
+                        else{
+                            ordersDataTemp?.append(OrderData(order_type: x.menu_Cat, order_dis: "gfjhg", order_no: x.menu_id, order_qty: x.menu_quantity!))
+                        }
                     }
 
 
@@ -143,61 +167,82 @@ class CartViewController: UIViewController {
                         "user_id": id,
                         "user_name": name,
                         "pref_time" : "\(pickuptime.date)",
+                        "transaction_id" : "",
                         "total_price": String(format: "%.2f", totalprice * 1.13)
                     ]
 
-                    do {
+                    print(params)
+                    
+                    
+                    if paymentMethodView.text == "Debit / credit"{
+                        let storyboard = UIStoryboard(name: "OrderStoryboard", bundle: nil)
+                        let viewC = storyboard.instantiateViewController(withIdentifier: "paymentViewController") as! paymentViewController
+                        viewC.parms = params
+                        viewC.price = totalprice
+                        self.presentPanModal(viewC)
+                        
+                    }else{
+                        
+                        do {
+                            loading = customAnimation()
+                            loadingProtocol(with: loading! ,true)
+                            let jsonData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+                            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                                print(jsonString)
+                            }
+                            print(Constants().BASEURL + Constants.APIPaths().AddOrder)
+                            AF.request(Constants().BASEURL + Constants.APIPaths().AddOrder, method: .post, parameters: params, encoding: JSONEncoding.default).responseData {
+                                (response) in
 
-                        let jsonData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-                        if let jsonString = String(data: jsonData, encoding: .utf8) {
-                            print(jsonString)
-                        }
-                        print(Constants().BASEURL + Constants.APIPaths().AddOrder)
-                        AF.request(Constants().BASEURL + Constants.APIPaths().AddOrder, method: .post, parameters: params, encoding: JSONEncoding.default).responseData {
-                            (response) in
-                            
-                            self.loadingProtocol(with: self.loading! ,false)
-                            
-                            switch (response.result) {
-                            case .success:
-                                if (JSON(response.data)["Message"]=="success"){
-                                    let orderID = Int("\(JSON(response.data)["OrderId"])")
-                                    if let orderid = orderID{
-                                        ActiveOrders = ActiveOrderModel(OrderId: orderid, pickup_time: "\(self.pickuptime.date)", is_accepted: "Not Accepted", CartOrders: CartOrders!)
-                                        print(ActiveOrders)
-                                        CartOrders?.removeAll()
-                                        
-                                        self.timeView.isHidden = true
-                                        self.bottomView.isHidden = true
-                                        self.totalprice = 0.00
-                                        saveFetchCartData(fetchData: false)
-                                        updateActiveOrderStatus()
-                                        self.cartTableView.reloadData()
-    
-                                        self.navigationController?.popViewController(animated: true)
+                                self.loadingProtocol(with: self.loading! ,false)
+
+                                switch (response.result) {
+                                case .success:
+                                    if (JSON(response.data)["Message"]=="success"){
+                                        let orderID = Int("\(JSON(response.data)["OrderId"])")
+                                        if let orderid = orderID{
+                                            ActiveOrders = ActiveOrderModel(OrderId: orderid, pickup_time: "\(self.pickuptime.date)", is_accepted: "Not Accepted", CartOrders: CartOrders!)
+                                            print(ActiveOrders)
+                                            CartOrders?.removeAll()
+
+                                            self.timeView.isHidden = true
+                                            self.bottomView.isHidden = true
+                                            self.totalprice = 0.00
+                                            saveFetchCartData(fetchData: false)
+                                            updateActiveOrderStatus()
+                                            self.cartTableView.reloadData()
+                                            let feedbackGenerator = UINotificationFeedbackGenerator()
+                                            feedbackGenerator.notificationOccurred(.success)
+
+                                            self.navigationController?.popViewController(animated: true)
+                                        }
+                                        else{
+                                            self.showAlert(title: "Something went wrong!", content: "unfotunatly there was something wrong with the request. please try again later.")
+                                            print("error in orderid or array")
+                                            let feedbackGenerator = UINotificationFeedbackGenerator()
+                                            feedbackGenerator.notificationOccurred(.error)
+
+                                        }
+
                                     }
                                     else{
                                         self.showAlert(title: "Something went wrong!", content: "unfotunatly there was something wrong with the request. please try again later.")
-                                        print("error in orderid or array")
-                                        
+                                        print(JSON(response.data!))
                                     }
-                                   
-                                }
-                                else{
-                                    self.showAlert(title: "Something went wrong!", content: "unfotunatly there was something wrong with the request. please try again later.")
-                                    print(JSON(response.data!))
-                                }
-//                                print(JSON(response.data!))
+    //                                print(JSON(response.data!))
 
-                            case .failure(let error):
-                                print("error --> \(error)")
+                                case .failure(let error):
+                                    print("error --> \(error)")
+                                }
                             }
-                        }
 
-                    } catch {
-                        print("Error converting params to JSON: \(error)")
-                        self.loadingProtocol(with: self.loading! ,false)
+                        } catch {
+                            print("Error converting params to JSON: \(error)")
+                            self.loadingProtocol(with: self.loading! ,false)
+                        }
                     }
+                    
+            
                 }
             }
 
@@ -206,7 +251,11 @@ class CartViewController: UIViewController {
             showAlert(title: "No User found", content: "In order to make a purchase, please make sure that you hava an accound and it is currently logged in !")
             loadingProtocol(with: loading! ,false)
         }
-
+    
+        
+        
+        
+        
     }
     
     private func loadImageInCell(cellData : OrderTableViewCell, cellImageName : String?){
@@ -239,6 +288,8 @@ extension CartViewController : UITableViewDelegate{
         if CartOrders?.count ?? 0 > 0{
             let modifyAction = UIContextualAction(style: .normal, title:  "Delete", handler: { (ac:UIContextualAction, view:UIView, success:(Bool) -> Void) in
                  DispatchQueue.main.async {
+                     let feedbackGenerator = UINotificationFeedbackGenerator()
+                     feedbackGenerator.notificationOccurred(.warning)
                      self.showDeleteWarning(for: indexPath)
                  }
                  success(true)
@@ -305,7 +356,26 @@ extension CartViewController : UITableViewDataSource{
     }
     
 }
+extension CartViewController : UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1 // We are using a single component in the picker view
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return paymentMethods.count // Return the number of categories
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return paymentMethods[row] // Return the category name for each row
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let selectedCategory = paymentMethods[row]
+        paymentMethodView.text = selectedCategory // Set the selected category in the text field
+    }
 
+}
 
 struct OrderData : Codable{
     let order_type,order_dis : String

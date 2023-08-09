@@ -51,7 +51,6 @@ class OrderHistoryViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleActiveOrderTap(_:)))
         currentOrderView.addGestureRecognizer(tapGesture)
         
-        
         if let image = UIImage(named: "customPizza") {
             if let imageData = image.pngData(){
                 defaultImageData = imageData
@@ -72,6 +71,14 @@ class OrderHistoryViewController: UIViewController {
             imageSet2.isHidden = true
             imageSet3.isHidden = true
             imageset3View.isHidden = true
+            
+            if let statusData = ActiveOrders?.is_accepted{
+                statusLabel.text = ActiveOrders?.is_accepted
+                arravingView.backgroundColor = UIColor(named: "GreenColor")
+                if ActiveOrders?.is_accepted == "Ready"{
+                    arravingView.backgroundColor = .blue
+                }
+            }
         
             
             switch ActiveOrder.CartOrders.count {
@@ -192,7 +199,6 @@ class OrderHistoryViewController: UIViewController {
         }
     }
     
-    
     func fetchAllOrders(){
         
         if let userId = UserDefaults.standard.string(forKey: "USERID"){
@@ -214,7 +220,7 @@ class OrderHistoryViewController: UIViewController {
 
                         let jsonData = try decoder.decode(OrderhistoryModel.self, from: data)
                         self.allOrderHistories = jsonData
-     
+                        print(self.allOrderHistories)
                         
                         if let orders = self.allOrderHistories?.histories, let allMenuDAta = AllMenuDatas?.AllMenu{
 
@@ -250,6 +256,13 @@ class OrderHistoryViewController: UIViewController {
                                                 }
                                             }
                                         }
+                                        else{
+                                            if orders[x].Orders[y].order_no == -1000001{
+                                                self.allOrderHistories?.histories[x].Orders[y].updateOrderName(orderName: "Special / Custom Order")
+                                                self.allOrderHistories?.histories[x].Orders[y].updateOrderImage(orderImageData: self.defaultImageData )
+//                                              print("commming here \(orders[x].Orders[y])")
+                                            }
+                                        }
                                     }
                                 }
 
@@ -274,7 +287,6 @@ class OrderHistoryViewController: UIViewController {
             
         }
         
-
     }
     
     private func updateHIstoriesOrders(){
@@ -286,22 +298,38 @@ class OrderHistoryViewController: UIViewController {
                     self.orderHistoryTable.reloadData()
                 }
                 else{
+                    var totprice = 0.00
                     if ActiveOrders?.OrderId != orders[x].order_id{
                         print("comming here")
                         if let menu = AllMenuDatas {
                             
-//                            print("AllMenu \(menu)")
-                            
                             var tempArray : [allMenu]? = [allMenu]()
+                            var customPissaDataTemp : [allMenu]? = [allMenu]()
                             for xx in orders[x].Orders{
-                                for y in menu.AllMenu{
-                                    if xx.order_no == y.menu_id {
-                                        var xdata = y
-                                        xdata.addMenuQuantity(qData: xx.order_qty)
-                                        tempArray?.append(xdata)
+                                if xx.order_no == -1000001{
+                                    let xCustom = allMenu(menu_id: -1000001, menu_Time: "", menu_Cat: "Custom", menu_Price: "10.99", menu_Name: "Custom / Special", menu_Dec: xx.order_dis, avg_Rating: "0", total_Ratings: "0", menu_photo_Data: defaultImageData, menu_quantity: xx.order_qty, ratings: [Ratings(comment: "0", rating: "0")])
+                                    customPissaDataTemp?.append(xCustom)
+                                }
+                                else{
+                                    for y in menu.AllMenu{
+                                        if xx.order_no == y.menu_id {
+                                            totprice += Double(y.menu_Price) ?? 0.00
+                                            var xdata = y
+                                            xdata.addMenuQuantity(qData: xx.order_qty)
+                                            tempArray?.append(xdata)
+                                        }
                                     }
                                 }
                             }
+                            //makeing custom pizza in orders
+                            if let cusData = customPissaDataTemp{
+                                var cusPrice = totprice/Double(cusData.count)
+                                for yyz in 0..<cusData.count{
+                                    customPissaDataTemp?[yyz].menu_Price = "\(cusPrice)"
+                                    tempArray?.append(customPissaDataTemp![yyz])
+                                }
+                            }
+                          
                             print("temp order - > \(tempArray)")
                             if let Aorders = tempArray{
                                 let currentOrder = ActiveOrderModel(OrderId: orders[x].order_id, pickup_time: orders[x].datetime, is_accepted: orders[x].is_accepted, CartOrders: Aorders)
@@ -311,10 +339,23 @@ class OrderHistoryViewController: UIViewController {
                             }
                         }
                     }
+                    else {
+//                        checkActiveorderUpdate()
+                        ActiveOrders?.updateOrderTime(TimeData: orders[x].datetime)
+                        ActiveOrders?.is_accepted = orders[x].is_accepted
+                        updateActiveOrderUI()
+                    
+                        print(" here Active done : \(ActiveOrders)")
+                    }
+//                    // else api all for order that gets time and update.
                 }
             }
         }
     }
+    
+//    private func checkActiveorderUpdate(){
+//
+//    }
     
     @objc func handleActiveOrderTap(_ gesture: UITapGestureRecognizer) {
         let storyboard = UIStoryboard(name: "OrderStoryboard", bundle: nil)

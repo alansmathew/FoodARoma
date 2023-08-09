@@ -8,7 +8,7 @@
 import Foundation
 
 
-
+var goingtoPay = false 
 var didAddNewItem = false
 var CartOrders : [allMenu]? = [allMenu]()
 

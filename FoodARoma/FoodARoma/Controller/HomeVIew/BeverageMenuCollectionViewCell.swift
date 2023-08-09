@@ -9,6 +9,8 @@ import UIKit
 
 class BeverageMenuCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var bevImageVew: UIImageView!
+    @IBOutlet weak var moneyLabel: UILabel!
     @IBOutlet weak var backgroundCellView: UIView!
     @IBOutlet weak var moneyView: UIView!
     override func awakeFromNib() {

@@ -92,7 +92,7 @@ class HomeViewController: UIViewController {
     
     func setupCartAnimation(){
         // Set up the label
-        messageLabel.text = "Order Added"
+        messageLabel.text = "Added to cart"
         messageLabel.textAlignment = .center
         messageLabel.font = UIFont.boldSystemFont(ofSize:19)
         messageLabel.textColor = .white
@@ -137,7 +137,7 @@ class HomeViewController: UIViewController {
                 else if (x.menu_Cat == "menu"){
                     regMenu?.append(x)
                 }
-                else if (x.menu_Cat == "bev"){
+                else if (x.menu_Cat == "beverage"){
                     bevMenu?.append(x)
                 }
             }
@@ -219,6 +219,32 @@ class HomeViewController: UIViewController {
                          self.regMenu?[indexOfloading].addImgeData(imageData: responseData!)
 //                         print(self.regMenu?[indexOfloading].menu_photo_Data)
                      }
+                     else if model == "bev"{
+                         self.bevMenu?[indexOfloading].addImgeData(imageData: responseData!)
+                     }
+                 }
+              case .failure(let error):
+                  print("error--->",error)
+              }
+          }
+        }
+    }
+    
+    func loadImageInCellbev(cellData : BeverageMenuCollectionViewCell, cellImageName : String?, indexOfloading : Int){
+        if let imageName = cellImageName {
+            AF.request( Constants().IMAGEURL+imageName,method: .get).response{ response in
+
+             switch response.result {
+              case .success(let responseData):
+                
+                 if (JSON(responseData)["message"]=="Internal server error"){
+                     print("NO data comming")
+                     cellData.bevImageVew.image = UIImage(named: "imagebackground")
+                     
+                 }
+                 else{
+                    cellData.bevImageVew.image = UIImage(data: responseData!, scale:1)
+                    self.bevMenu?[indexOfloading].addImgeData(imageData: responseData!)
                  }
               case .failure(let error):
                   print("error--->",error)
@@ -313,7 +339,20 @@ extension HomeViewController : UICollectionViewDataSource {
                 return cell2
             
             case BeverageCollctionView:
-                cell = BeverageCollctionView.dequeueReusableCell(withReuseIdentifier: "HomeBeverageIdentifier", for: indexPath) as! BeverageMenuCollectionViewCell
+                let cell3 = BeverageCollctionView.dequeueReusableCell(withReuseIdentifier: "HomeBeverageIdentifier", for: indexPath) as! BeverageMenuCollectionViewCell
+            
+                    if let bevmenu = bevMenu?[indexPath.row] {
+                        if let menuPhotoData = bevmenu.menu_photo_Data {
+                            cell3.bevImageVew.image = UIImage(data: menuPhotoData, scale:1)
+                        }
+                        else{
+                            loadImageInCellbev(cellData: cell3, cellImageName: bevmenu.menu_Photo, indexOfloading: indexPath.row)
+                        }
+                        cell3.moneyLabel.text = "$ "+(bevmenu.menu_Price)
+                    }
+                return cell3
+               
+            
             default:
                 cell = specialCollectionVew.dequeueReusableCell(withReuseIdentifier: "HomeMenuCelliIdentifier", for: indexPath) as! HomeMenuCollectionViewCell
         }
@@ -336,7 +375,7 @@ extension HomeViewController : UICollectionViewDelegate {
 //            still have to work on this
             let storyboard = UIStoryboard(name: "HomeOrder", bundle: nil)
             let viewC = storyboard.instantiateViewController(withIdentifier: "OrderDetailsViewController") as! OrderDetailsViewController
-//            viewC.SelectedOrder = regMenu![indexPath.row]
+            viewC.SelectedOrder = bevMenu![indexPath.row]
             navigationController?.pushViewController(viewC, animated: true)
             
         default:

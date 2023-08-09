@@ -9,6 +9,8 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import NVActivityIndicatorView
+import CoreLocation
+import MapKit
 
 class OrderHistoryDetailsViewController: UIViewController {
 
@@ -37,6 +39,7 @@ class OrderHistoryDetailsViewController: UIViewController {
         orderHistioryDetailsTable.delegate = self
         orderHistioryDetailsTable.register(UINib(nibName: "OrderTableViewCell", bundle: nil), forCellReuseIdentifier: "orderHistoryIdentifier")
         setupUIDEtails()
+        navigationController?.navigationBar.isHidden = false
         
         contentHeight = orderHistioryDetailsTable.frame.height
     }
@@ -49,6 +52,7 @@ class OrderHistoryDetailsViewController: UIViewController {
             print("Invalid date string")
         }
         pageTitle.text = "Active Order #12000\(ActiveOrderData!.OrderId)"
+        acceptenceLAbel.text = ActiveOrderData!.is_accepted
         
     }
     
@@ -125,10 +129,21 @@ class OrderHistoryDetailsViewController: UIViewController {
                         changetimeDate.date = date
                     }
                 }
-          
                 
                 instructionLabel.text = "You will be able to change the time above to let user know which time will the prodicts be available. After accepting the order, you wont be able to do so."
                 
+            }
+            else{
+                changetimeDate.isHidden = true
+                
+                if ActiveOrderData?.is_accepted != "not_accepted"{
+                    acceptenceStausView.backgroundColor = UIColor(red: 0.17, green: 0.36, blue: 0.20, alpha: 0.75)
+                    FinalButton.setTitle("Navigate", for: .normal)
+                    FinalButton.setTitleColor(UIColor.white, for: .normal)
+                    FinalButton.backgroundColor = UIColor(red: 0.17, green: 0.36, blue: 0.20, alpha: 0.75)
+                    FinalButton.layer.cornerRadius = 10
+                    FinalButton.layer.masksToBounds = true
+                }
             }
         }
     }
@@ -136,6 +151,44 @@ class OrderHistoryDetailsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
         updateUI()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        updateOrderStatus()
+    }
+    
+    private func updateOrderStatus() {
+        loadingProtocol(with: loading! ,true)
+        let params = [
+            "Mode" : "fetchActiveStatus",
+            "OrderId":"\(ActiveOrderData!.OrderId)"
+        ]
+        AF.request((Constants().BASEURL + Constants.APIPaths().AddOrder), method: .post, parameters:params, encoder: .json).responseData { response in
+            switch response.result{
+            case .success(let data):
+                print(JSON(data))
+                let decoder = JSONDecoder()
+                do{
+                    
+                    let jsonData = try decoder.decode(orderUpdatesModel.self, from: data)
+                    self.acceptenceLAbel.text = jsonData.is_accepted
+                
+                    
+//                    self.ResturentCurrentOrdersTable.reloadData()
+                    self.loadingProtocol(with: self.loading! ,false)
+
+                }
+                catch{
+                    print(response.result)
+                    self.loadingProtocol(with: self.loading! ,false)
+                    print("decoder error")
+                }
+
+            case .failure(let error):
+                self.loadingProtocol(with: self.loading! ,false)
+                self.showAlert(title: "network intrepsion", content: "Something went wrong! please try again after some time")
+                print(error)
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -236,15 +289,41 @@ class OrderHistoryDetailsViewController: UIViewController {
     @IBAction func BottomAcceptButtonClick(_ sender: UIButton) {
         if sender.titleLabel?.text == "Cancel order" {
             cancalOrder()
+            let feedbackGenerator = UINotificationFeedbackGenerator()
+            feedbackGenerator.notificationOccurred(.warning)
         }
         else if sender.titleLabel?.text == "Accept Order"{
             UpdateOrderStatus(status: "Accepted")
+            let feedbackGenerator = UINotificationFeedbackGenerator()
+            feedbackGenerator.notificationOccurred(.success)
         }
         else if sender.titleLabel?.text == "Ready for Pick Up"{
             UpdateOrderStatus(status: "Ready")
+            let feedbackGenerator = UINotificationFeedbackGenerator()
+            feedbackGenerator.notificationOccurred(.success)
         }
         else if sender.titleLabel?.text == "Complete Order"{
             UpdateOrderStatus(status: "Completed")
+            let feedbackGenerator = UINotificationFeedbackGenerator()
+            feedbackGenerator.notificationOccurred(.success)
+        }
+        else if sender.titleLabel?.text == "Navigate"
+        {
+            let latitude: Double = 43.479656572010285
+            let longitude: Double = -80.48429532738243
+            let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            let placemark = MKPlacemark(coordinate: coordinate)
+
+            let mapItem = MKMapItem(placemark: placemark)
+            mapItem.name = "Lancaster Smoke House" // Set your destination name here
+            if UIApplication.shared.canOpenURL(URL(string: "comgooglemaps://")!) {
+               let url = URL(string: "comgooglemaps://?daddr=\(latitude),\(longitude)&directionsmode=driving")!
+               UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+               mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
+            }
+            let feedbackGenerator = UINotificationFeedbackGenerator()
+            feedbackGenerator.notificationOccurred(.success)
         }
     }
     
@@ -310,4 +389,8 @@ extension OrderHistoryDetailsViewController : UITableViewDataSource {
 
 extension OrderHistoryDetailsViewController : UITableViewDelegate {
     
+}
+
+struct orderUpdatesModel : Codable {
+    let date_time, is_accepted : String
 }

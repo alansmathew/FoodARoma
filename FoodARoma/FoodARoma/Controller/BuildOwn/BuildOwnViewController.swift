@@ -526,6 +526,7 @@ extension BuildOwnViewController : UICollectionViewDelegate{
                     var CustomOrder = allMenu(menu_id: -1000001, menu_Time: "20", menu_Cat: "Custom", menu_Price: String(format: "%.2f", totalPriceData), menu_Name: "Custom Pizza", menu_Dec: topTextLabel.text ?? "pizzaDiscription", avg_Rating: "0.00", total_Ratings: "0.00", menu_photo_Data : imageData,menu_quantity:1, ratings: [Ratings(comment: "", rating: "")])
                     didAddNewItem = true
                     CartOrders?.append(CustomOrder)
+                    print(CartOrders)
                     saveFetchCartData(fetchData: false)
                     tabBarController?.selectedIndex = 0
                 }

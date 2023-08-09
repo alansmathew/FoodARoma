@@ -68,6 +68,8 @@
             <size key="customSize" width="119" height="169"/>
             <connections>
                 <outlet property="backgroundCellView" destination="IK8-5L-3s3" id="gFC-10-pNf"/>
+                <outlet property="bevImageVew" destination="x5K-yR-Ksb" id="2sc-ws-LaR"/>
+                <outlet property="moneyLabel" destination="hCY-zi-Wac" id="4cV-od-pbo"/>
                 <outlet property="moneyView" destination="bxj-T4-S5X" id="nYj-wZ-Aye"/>
             </connections>
             <point key="canvasLocation" x="187.68115942028987" y="149.66517857142856"/>

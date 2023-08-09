@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class OrderDetailsViewController: UIViewController {
 
+    @IBOutlet weak var bottomViewAddCart: UIView!
     @IBOutlet weak var pitzzaImageView: UIImageView!
     @IBOutlet weak var totalNumberReview: UILabel!
     @IBOutlet weak var RStar5: UIImageView!
@@ -33,8 +34,6 @@ class OrderDetailsViewController: UIViewController {
     @IBOutlet weak var bevCollectionView: UICollectionView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var moreCommentsbutton: UIButton!
-    
-    @IBOutlet weak var bottomResturentView: UIView!
     
     
     var SelectedOrder : allMenu?
@@ -82,6 +81,13 @@ class OrderDetailsViewController: UIViewController {
     }
     
     private func setupUI(){
+        if let userType = UserDefaults.standard.string(forKey: "USERTYPE"){
+            if userType == "restaurant"{
+                bottomViewAddCart.isHidden = true
+            }
+        }
+        
+        
         if let selectedOrder = SelectedOrder {
             menuName.text = selectedOrder.menu_Name
             menuDec.text = selectedOrder.menu_Dec
@@ -140,6 +146,8 @@ class OrderDetailsViewController: UIViewController {
     @IBAction func plusButton(_ sender: UIButton) {
         quantity += 1
         quantityLabel.text = "\(quantity)"
+        let feedbackGenerator = UINotificationFeedbackGenerator()
+        feedbackGenerator.notificationOccurred(.success)
         
     }
     
@@ -148,6 +156,8 @@ class OrderDetailsViewController: UIViewController {
             quantity -= 1
             quantityLabel.text = "\(quantity)"
         }
+        let feedbackGenerator = UINotificationFeedbackGenerator()
+        feedbackGenerator.notificationOccurred(.success)
     }
     
     @IBAction func AddCommentClick(_ sender: UIButton) {
@@ -167,7 +177,11 @@ class OrderDetailsViewController: UIViewController {
             var flags = false
             for x in cart{
                 if x.menu_id == SelectedOrder!.menu_id{
+                    
+                    let feedbackGenerator = UINotificationFeedbackGenerator()
+                    feedbackGenerator.notificationOccurred(.warning)
                     flags = true
+                    
                     let alert = UIAlertController(title: "Already in Cart", message: "The item that you wants to add is already in the cart. Do you want to replace the item or addthe quantity to the same product", preferredStyle: .alert)
                     
                     alert.addAction(UIAlertAction(title: "Replace", style: .destructive, handler: { _ in
@@ -176,6 +190,8 @@ class OrderDetailsViewController: UIViewController {
                         CartOrders?[tempIndex] = self.SelectedOrder!
                         didAddNewItem = true
                         saveFetchCartData(fetchData: false)
+                        let feedbackGenerator = UINotificationFeedbackGenerator()
+                        feedbackGenerator.notificationOccurred(.success)
                         self.navigationController?.popViewController(animated: true)
                     }))
                     
@@ -186,6 +202,8 @@ class OrderDetailsViewController: UIViewController {
                         self.SelectedOrder?.addMenuQuantity(qData: newQuantity)
                         CartOrders?[tempIndex] =  self.SelectedOrder!
                         saveFetchCartData(fetchData: false)
+                        let feedbackGenerator = UINotificationFeedbackGenerator()
+                        feedbackGenerator.notificationOccurred(.success)
                         self.navigationController?.popViewController(animated: true)
                     }))
                      
@@ -207,6 +225,8 @@ class OrderDetailsViewController: UIViewController {
                     CartOrders?.append(order)
                     saveFetchCartData(fetchData: false)
                     didAddNewItem = true
+                    let feedbackGenerator = UINotificationFeedbackGenerator()
+                    feedbackGenerator.notificationOccurred(.success)
                     self.navigationController?.popViewController(animated: true)
                 }
             }
@@ -218,6 +238,8 @@ class OrderDetailsViewController: UIViewController {
                 CartOrders?.append(order)
                 saveFetchCartData(fetchData: false)
                 didAddNewItem = true
+                let feedbackGenerator = UINotificationFeedbackGenerator()
+                feedbackGenerator.notificationOccurred(.success)
                 self.navigationController?.popViewController(animated: true)
             }
         }

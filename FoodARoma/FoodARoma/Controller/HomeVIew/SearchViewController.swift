@@ -126,7 +126,7 @@ extension SearchViewController : UITableViewDataSource{
         if let menuitem = searchMenuData, menuitem.count > indexPath.row {
             cell.menuName.text = menuitem[indexPath.row].menu_Name
             cell.menuPrice.text = "$ "+menuitem[indexPath.row].menu_Price
-            cell.menuRating.text = "4.5"
+            cell.menuRating.text = menuitem[indexPath.row].avg_Rating == "None" ? "0" : menuitem[indexPath.row].avg_Rating
             cell.menuTime.text = menuitem[indexPath.row].menu_Time + " Min"
             cell.menuDec.text = menuitem[indexPath.row].menu_Dec
             if let photoData = menuitem[indexPath.row].menu_photo_Data {

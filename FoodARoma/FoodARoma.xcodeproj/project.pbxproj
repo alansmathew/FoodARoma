@@ -92,6 +92,9 @@
 		E7F437782A53502800B3D4CD /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F437762A53502800B3D4CD /* CommentTableViewCell.swift */; };
 		E7F437792A53502800B3D4CD /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7F437772A53502800B3D4CD /* CommentTableViewCell.xib */; };
 		E7F458092A70828F00F2A912 /* CustomPizzaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F458082A70828F00F2A912 /* CustomPizzaModel.swift */; };
+		E7F5C3682A82F0A0005CE37B /* paymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F5C3672A82F0A0005CE37B /* paymentViewController.swift */; };
+		E7F5C36B2A82FDDA005CE37B /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = E7F5C36A2A82FDDA005CE37B /* PanModal */; };
+		E7F5C3702A831652005CE37B /* StripePayments in Frameworks */ = {isa = PBXBuildFile; productRef = E7F5C36F2A831652005CE37B /* StripePayments */; };
 		E7F6A2A12A72F774001025A8 /* pizzasmall.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E7F6A2A02A72F774001025A8 /* pizzasmall.usdz */; };
 		E7F6A2A32A72F8B6001025A8 /* pizzamedium.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E7F6A2A22A72F8B6001025A8 /* pizzamedium.usdz */; };
 		E7F6A2A52A72F8BD001025A8 /* pizzaLarge.usdz in Resources */ = {isa = PBXBuildFile; fileRef = E7F6A2A42A72F8BD001025A8 /* pizzaLarge.usdz */; };
@@ -205,6 +208,7 @@
 		E7F437762A53502800B3D4CD /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		E7F437772A53502800B3D4CD /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		E7F458082A70828F00F2A912 /* CustomPizzaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPizzaModel.swift; sourceTree = "<group>"; };
+		E7F5C3672A82F0A0005CE37B /* paymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = paymentViewController.swift; sourceTree = "<group>"; };
 		E7F6A2A02A72F774001025A8 /* pizzasmall.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = pizzasmall.usdz; sourceTree = "<group>"; };
 		E7F6A2A22A72F8B6001025A8 /* pizzamedium.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = pizzamedium.usdz; sourceTree = "<group>"; };
 		E7F6A2A42A72F8BD001025A8 /* pizzaLarge.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = pizzaLarge.usdz; sourceTree = "<group>"; };
@@ -223,10 +227,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7F5C3702A831652005CE37B /* StripePayments in Frameworks */,
 				E75279392A44C87200AF3EA2 /* NVActivityIndicatorViewExtended in Frameworks */,
 				E75279372A44C87200AF3EA2 /* NVActivityIndicatorView in Frameworks */,
 				E7A226732A630D2800015015 /* AlamofireImage in Frameworks */,
 				E7A2096D2A55DFC5002FF49E /* SwiftyJSON in Frameworks */,
+				E7F5C36B2A82FDDA005CE37B /* PanModal in Frameworks */,
 				992ECBD72A3B662700B8745A /* Alamofire in Frameworks */,
 				E74E95162A81EA0A000C638D /* DGCharts in Frameworks */,
 				E76944A82A684BDD00F9904B /* Lottie in Frameworks */,
@@ -525,6 +531,7 @@
 				E7FD8FE72A7D68CA00EC6E96 /* CustomOrderHistoryTableViewCell.swift */,
 				E75E4CA32A758B12006463EC /* CartViewController.swift */,
 				E7FD8FE52A7B2A2400EC6E96 /* OrderHistoryDetailsViewController.swift */,
+				E7F5C3672A82F0A0005CE37B /* paymentViewController.swift */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -621,6 +628,8 @@
 				E7A226722A630D2800015015 /* AlamofireImage */,
 				E76944A72A684BDD00F9904B /* Lottie */,
 				E74E95152A81EA0A000C638D /* DGCharts */,
+				E7F5C36A2A82FDDA005CE37B /* PanModal */,
+				E7F5C36F2A831652005CE37B /* StripePayments */,
 			);
 			productName = FoodARoma;
 			productReference = 991C28CD2A2D2DD900201DE7 /* FoodARoma.app */;
@@ -701,6 +710,8 @@
 				E7A226712A630D2800015015 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				E76944A62A684BDD00F9904B /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				E7FD8FED2A81DB9A00EC6E96 /* XCRemoteSwiftPackageReference "Charts" */,
+				E7F5C3692A82FDDA005CE37B /* XCRemoteSwiftPackageReference "PanModal" */,
+				E7F5C36C2A831651005CE37B /* XCRemoteSwiftPackageReference "stripe-ios" */,
 			);
 			productRefGroup = 991C28CE2A2D2DD900201DE7 /* Products */;
 			projectDirPath = "";
@@ -824,6 +835,7 @@
 				E7377C162A5B5EB700F5C29F /* ResturentSettingsViewController.swift in Sources */,
 				E7377C192A5B609A00F5C29F /* MainNavigationViewController.swift in Sources */,
 				991C29042A2D7B6C00201DE7 /* HomeViewController.swift in Sources */,
+				E7F5C3682A82F0A0005CE37B /* paymentViewController.swift in Sources */,
 				E7C4D1FB2A7ACC9C00913A06 /* ActiveOrderModel.swift in Sources */,
 				992ECBE52A3B7FBD00B8745A /* ResturentOrderscell.swift in Sources */,
 				E75E4CA02A75880F006463EC /* Globals.swift in Sources */,
@@ -1211,6 +1223,22 @@
 				version = 4.2.0;
 			};
 		};
+		E7F5C3692A82FDDA005CE37B /* XCRemoteSwiftPackageReference "PanModal" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/slackhq/PanModal.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		E7F5C36C2A831651005CE37B /* XCRemoteSwiftPackageReference "stripe-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stripe/stripe-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 23.0.0;
+			};
+		};
 		E7FD8FED2A81DB9A00EC6E96 /* XCRemoteSwiftPackageReference "Charts" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/danielgindi/Charts.git";
@@ -1256,6 +1284,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E7A226712A630D2800015015 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
 			productName = AlamofireImage;
+		};
+		E7F5C36A2A82FDDA005CE37B /* PanModal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E7F5C3692A82FDDA005CE37B /* XCRemoteSwiftPackageReference "PanModal" */;
+			productName = PanModal;
+		};
+		E7F5C36F2A831652005CE37B /* StripePayments */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E7F5C36C2A831651005CE37B /* XCRemoteSwiftPackageReference "stripe-ios" */;
+			productName = StripePayments;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
