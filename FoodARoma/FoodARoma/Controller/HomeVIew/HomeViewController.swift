@@ -9,16 +9,18 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import NVActivityIndicatorView
+import CoreLocation
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var roundedcartButton: UIView!
     @IBOutlet weak var specialCollectionVew: UICollectionView!
     @IBOutlet weak var regularMenuCollectionVew: UICollectionView!
     @IBOutlet weak var BeverageCollctionView: UICollectionView!
     
     private var loading : (NVActivityIndicatorView,UIView)?
-    
+    let locationManager = CLLocationManager()
     let animationDuration: TimeInterval = 0.93
     let messageLabel = UILabel()
     let tickImageView = UIImageView(image: UIImage(systemName: "checkmark.seal"))
@@ -31,6 +33,11 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // location
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
         
         self.hideKeyboardWhenTappedAround()
 
@@ -47,7 +54,7 @@ class HomeViewController: UIViewController {
         BeverageCollctionView.register(UINib(nibName: "BeverageMenuCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "HomeBeverageIdentifier")
         
         setupCartAnimation()
-        
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,6 +93,53 @@ class HomeViewController: UIViewController {
                         didAddNewItem = !didAddNewItem
                     })
                 }
+            }
+        }
+        if !arrivaldismissed {
+            checkAvtiveOrderArrival()
+        }
+    }
+    
+    private func checkAvtiveOrderArrival(){
+        if let userType = UserDefaults.standard.string(forKey: "USERTYPE"){
+            if userType == "customer"{
+//                home
+//                let latitude = 43.47653453726806
+//                let longitude = -80.53817017597704
+                
+                // collage
+//                let latitude = 43.48054744327771
+//                let longitude = -80.51884224725556
+                
+//                let targetLatitude = 37.7755
+//                let targetLongitude = -122.4190
+                
+                getCurrentLocation { coordinate in
+                    if let coordinate = coordinate {
+                        let distanceThreshold: CLLocationDistance = 100.0
+                        
+                        let isWithinDistance = isLocationWithinDistance(latitude: llatitude, longitude: llongitude, targetLocation: CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude), distance: distanceThreshold)
+
+                        if isWithinDistance {
+                            if let activeOrder = ActiveOrders {
+                                if activeOrder.is_accepted != "not_accepted"{
+                                    print("present view")
+                                    let storyboard = UIStoryboard(name: "OrderStoryboard", bundle: nil)
+                                    let viewC = storyboard.instantiateViewController(withIdentifier: "ArrivalViewController") as! ArrivalViewController
+//                                    viewC.parms = params
+//                                    viewC.price = totalprice
+                                    self.presentPanModal(viewC)
+                                }
+                            }
+                            print("Location is within 100 meters.")
+                        } else {
+                            print("Location is more than 100 meters away.")
+                        }
+                    } else {
+                        print("Unable to retrieve current location.")
+                    }
+                }
+       
             }
         }
     }
@@ -141,6 +195,7 @@ class HomeViewController: UIViewController {
                     bevMenu?.append(x)
                 }
             }
+            bevMenuGlobal = bevMenu
             specialCollectionVew.reloadData()
             regularMenuCollectionVew.reloadData()
             BeverageCollctionView.reloadData()
@@ -284,7 +339,6 @@ class HomeViewController: UIViewController {
 
 }
 
-
 extension HomeViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
@@ -389,4 +443,73 @@ extension HomeViewController : UICollectionViewDelegate {
     }
 }
 
+extension HomeViewController : CLLocationManagerDelegate{
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("getiig location")
+           guard let location = locations.last else { return }
+           
+        print(1)
+           // Perform reverse geocoding to get address details
+           let geocoder = CLGeocoder()
+           geocoder.reverseGeocodeLocation(location) { placemarks, error in
+               if let error = error {
+                   print("Reverse geocoding error: \(error)")
+                   return
+               }
+               
+               if let placemark = placemarks?.first {
+                   let city = placemark.locality ?? ""
+                   let province = placemark.administrativeArea ?? ""
+                   let country = placemark.country ?? ""
+                   
+                   // Update the label with the location information
+                   let locationInfo = "\(city), \(province), \(country)"
+                   self.locationLabel.text = locationInfo
+               }
+           }
+           
+           locationManager.stopUpdatingLocation()
+       }
+    
+    func getCurrentLocation(completion: @escaping (CLLocationCoordinate2D?) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let locationManager = CLLocationManager()
+            
+            // Check the authorization status
+            let status = CLLocationManager.authorizationStatus()
+            if status == .notDetermined {
+                // Request location authorization if not determined
+                locationManager.requestWhenInUseAuthorization()
+                return // Wait for the callback
+            } else if status != .authorizedWhenInUse && status != .authorizedAlways {
+                // Handle denied or restricted authorization
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+                return
+            }
+            
+            if CLLocationManager.locationServicesEnabled() {
+                locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+                locationManager.startUpdatingLocation()
+                
+                if let location = locationManager.location {
+                    DispatchQueue.main.async {
+                        completion(location.coordinate)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        completion(nil)
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            }
+        }
+    }
+
+
+}
 

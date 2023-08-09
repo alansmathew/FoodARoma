@@ -11,6 +11,7 @@ import SwiftyJSON
 import NVActivityIndicatorView
 import CoreLocation
 import MapKit
+import CoreLocation
 
 class OrderHistoryDetailsViewController: UIViewController {
 
@@ -42,6 +43,7 @@ class OrderHistoryDetailsViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
         
         contentHeight = orderHistioryDetailsTable.frame.height
+        arrivaldismissed = false
     }
 
     func setupUIDEtails(){
@@ -154,6 +156,45 @@ class OrderHistoryDetailsViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         updateOrderStatus()
+        if !arrivaldismissed {
+            checkAvtiveOrderArrival()
+        }
+    }
+    
+    private func checkAvtiveOrderArrival(){
+        if let userType = UserDefaults.standard.string(forKey: "USERTYPE"){
+            if userType == "customer"{
+//                let targetLatitude = 37.7755
+//                let targetLongitude = -122.4190
+                
+                getCurrentLocation { coordinate in
+                    if let coordinate = coordinate {
+                        let distanceThreshold: CLLocationDistance = 100.0
+                        
+                        let isWithinDistance = isLocationWithinDistance(latitude: llatitude, longitude: llongitude, targetLocation: CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude), distance: distanceThreshold)
+
+                        if isWithinDistance {
+                            if let activeOrder = ActiveOrders {
+                                if activeOrder.is_accepted != "not_accepted"{
+                                    print("present view")
+                                    let storyboard = UIStoryboard(name: "OrderStoryboard", bundle: nil)
+                                    let viewC = storyboard.instantiateViewController(withIdentifier: "ArrivalViewController") as! ArrivalViewController
+//                                    viewC.parms = params
+//                                    viewC.price = totalprice
+                                    self.presentPanModal(viewC)
+                                }
+                            }
+                            print("Location is within 100 meters.")
+                        } else {
+                            print("Location is more than 100 meters away.")
+                        }
+                    } else {
+                        print("Unable to retrieve current location.")
+                    }
+                }
+       
+            }
+        }
     }
     
     private func updateOrderStatus() {
@@ -389,6 +430,49 @@ extension OrderHistoryDetailsViewController : UITableViewDataSource {
 
 extension OrderHistoryDetailsViewController : UITableViewDelegate {
     
+}
+
+extension OrderHistoryDetailsViewController : CLLocationManagerDelegate {
+    func getCurrentLocation(completion: @escaping (CLLocationCoordinate2D?) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let locationManager = CLLocationManager()
+            
+            // Check the authorization status
+            let status = CLLocationManager.authorizationStatus()
+            if status == .notDetermined {
+                // Request location authorization if not determined
+                locationManager.requestWhenInUseAuthorization()
+                return // Wait for the callback
+            } else if status != .authorizedWhenInUse && status != .authorizedAlways {
+                // Handle denied or restricted authorization
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+                return
+            }
+            
+            if CLLocationManager.locationServicesEnabled() {
+                locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+                locationManager.startUpdatingLocation()
+                
+                if let location = locationManager.location {
+                    DispatchQueue.main.async {
+                        completion(location.coordinate)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        completion(nil)
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            }
+        }
+    }
+
+
 }
 
 struct orderUpdatesModel : Codable {

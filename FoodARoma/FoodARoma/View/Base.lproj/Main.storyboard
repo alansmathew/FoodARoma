@@ -646,6 +646,7 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="BeverageCollctionView" destination="JIm-Uh-ncm" id="IU9-0R-2gb"/>
+                        <outlet property="locationLabel" destination="bgP-Mk-gG1" id="68N-b5-z5X"/>
                         <outlet property="regularMenuCollectionVew" destination="Lj2-Ik-SDv" id="LmU-Re-mcP"/>
                         <outlet property="roundedcartButton" destination="rXG-U7-TjB" id="miO-Nt-ama"/>
                         <outlet property="specialCollectionVew" destination="iqC-RA-Jsd" id="LuL-8K-8FH"/>

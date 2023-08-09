@@ -92,6 +92,7 @@
 		E7F437782A53502800B3D4CD /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F437762A53502800B3D4CD /* CommentTableViewCell.swift */; };
 		E7F437792A53502800B3D4CD /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7F437772A53502800B3D4CD /* CommentTableViewCell.xib */; };
 		E7F458092A70828F00F2A912 /* CustomPizzaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F458082A70828F00F2A912 /* CustomPizzaModel.swift */; };
+		E7F560AD2A841CE30066C2A9 /* ArrivalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F560AC2A841CE30066C2A9 /* ArrivalViewController.swift */; };
 		E7F5C3682A82F0A0005CE37B /* paymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F5C3672A82F0A0005CE37B /* paymentViewController.swift */; };
 		E7F5C36B2A82FDDA005CE37B /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = E7F5C36A2A82FDDA005CE37B /* PanModal */; };
 		E7F5C3702A831652005CE37B /* StripePayments in Frameworks */ = {isa = PBXBuildFile; productRef = E7F5C36F2A831652005CE37B /* StripePayments */; };
@@ -208,6 +209,7 @@
 		E7F437762A53502800B3D4CD /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		E7F437772A53502800B3D4CD /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		E7F458082A70828F00F2A912 /* CustomPizzaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPizzaModel.swift; sourceTree = "<group>"; };
+		E7F560AC2A841CE30066C2A9 /* ArrivalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalViewController.swift; sourceTree = "<group>"; };
 		E7F5C3672A82F0A0005CE37B /* paymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = paymentViewController.swift; sourceTree = "<group>"; };
 		E7F6A2A02A72F774001025A8 /* pizzasmall.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = pizzasmall.usdz; sourceTree = "<group>"; };
 		E7F6A2A22A72F8B6001025A8 /* pizzamedium.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = pizzamedium.usdz; sourceTree = "<group>"; };
@@ -532,6 +534,7 @@
 				E75E4CA32A758B12006463EC /* CartViewController.swift */,
 				E7FD8FE52A7B2A2400EC6E96 /* OrderHistoryDetailsViewController.swift */,
 				E7F5C3672A82F0A0005CE37B /* paymentViewController.swift */,
+				E7F560AC2A841CE30066C2A9 /* ArrivalViewController.swift */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -832,6 +835,7 @@
 				996089AD2A3FFA3100C89866 /* RegistrationModel.swift in Sources */,
 				992781DB2A311C8A00F10E5D /* HomeMenuCollectionViewCell.swift in Sources */,
 				E75E4C9A2A757FC8006463EC /* OrderTableViewCell.swift in Sources */,
+				E7F560AD2A841CE30066C2A9 /* ArrivalViewController.swift in Sources */,
 				E7377C162A5B5EB700F5C29F /* ResturentSettingsViewController.swift in Sources */,
 				E7377C192A5B609A00F5C29F /* MainNavigationViewController.swift in Sources */,
 				991C29042A2D7B6C00201DE7 /* HomeViewController.swift in Sources */,

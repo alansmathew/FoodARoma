@@ -143,6 +143,29 @@ class OrderDetailsViewController: UIViewController {
         }
     }
     
+    func loadImageInCellbev(cellData : BeverageMenuCollectionViewCell, cellImageName : String?, indexOfloading : Int){
+        if let imageName = cellImageName {
+            AF.request( Constants().IMAGEURL+imageName,method: .get).response{ response in
+
+             switch response.result {
+              case .success(let responseData):
+                
+                 if (JSON(responseData)["message"]=="Internal server error"){
+                     print("NO data comming")
+                     cellData.bevImageVew.image = UIImage(named: "imagebackground")
+                     
+                 }
+                 else{
+                    cellData.bevImageVew.image = UIImage(data: responseData!, scale:1)
+                     bevMenuGlobal?[indexOfloading].addImgeData(imageData: responseData!)
+                 }
+              case .failure(let error):
+                  print("error--->",error)
+              }
+          }
+        }
+    }
+    
     @IBAction func plusButton(_ sender: UIButton) {
         quantity += 1
         quantityLabel.text = "\(quantity)"
@@ -258,19 +281,34 @@ class OrderDetailsViewController: UIViewController {
 
 extension OrderDetailsViewController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return bevMenuGlobal?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = bevCollectionView.dequeueReusableCell(withReuseIdentifier: "HomeBeverageIdentifier", for: indexPath) as! BeverageMenuCollectionViewCell
+        if let bevmenu = bevMenuGlobal?[indexPath.row] {
+            if let menuPhotoData = bevmenu.menu_photo_Data {
+                cell.bevImageVew.image = UIImage(data: menuPhotoData, scale:1)
+            }
+            else{
+                loadImageInCellbev(cellData: cell, cellImageName: bevmenu.menu_Photo, indexOfloading: indexPath.row)
+            }
+            cell.moneyLabel.text = "$ "+(bevmenu.menu_Price)
+        }
         return cell
     }
-    
     
 }
 
 extension OrderDetailsViewController : UICollectionViewDelegate{
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("selected")
+        let storyboard = UIStoryboard(name: "HomeOrder", bundle: nil)
+        let viewC = storyboard.instantiateViewController(withIdentifier: "OrderDetailsViewController") as! OrderDetailsViewController
+        viewC.SelectedOrder = bevMenuGlobal?[indexPath.row]
+        navigationController?.pushViewController(viewC, animated: true)
+    }
+    
 }
 
 extension OrderDetailsViewController : UITableViewDataSource {
@@ -322,5 +360,4 @@ extension OrderDetailsViewController : UITableViewDataSource {
 }
 
 extension OrderDetailsViewController : UITableViewDelegate {
-    
 }

@@ -6,11 +6,23 @@
 //
 
 import Foundation
+import CoreLocation
 
 
+//                home
+let llatitude = 43.47653453726806
+let llongitude = -80.53817017597704
+
+// collage
+//let llatitude = 43.48054744327771
+//let llongitude = -80.51884224725556
+
+
+var arrivaldismissed = false
 var goingtoPay = false 
 var didAddNewItem = false
 var CartOrders : [allMenu]? = [allMenu]()
+var bevMenuGlobal : [allMenu]? = [allMenu]()
 
 var AllMenuDatas : AllMenuModel?
 var ActiveOrders : ActiveOrderModel?
@@ -79,4 +91,12 @@ func updateActiveOrderStatus(saveData : Bool = true){
         }
   
     }
+}
+
+func isLocationWithinDistance(latitude: Double, longitude: Double, targetLocation: CLLocation, distance: CLLocationDistance) -> Bool {
+    let sourceLocation = CLLocation(latitude: latitude, longitude: longitude)
+    let targetLocation = targetLocation
+    
+    let distanceInMeters = sourceLocation.distance(from: targetLocation)
+    return distanceInMeters <= distance
 }
