@@ -801,6 +801,9 @@
                                     <color key="baseForegroundColor" name="GreenColor"/>
                                     <color key="baseBackgroundColor" name="GreenColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="confirmArrival:" destination="3Kb-Qu-wzi" eventType="touchUpInside" id="JbT-WJ-Iuc"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Gac-6Q-s7D"/>

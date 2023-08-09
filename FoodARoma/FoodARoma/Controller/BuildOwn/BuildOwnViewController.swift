@@ -52,6 +52,29 @@ class BuildOwnViewController: UIViewController {
         super.viewDidLoad()
         
         sceneView.delegate = self
+        
+        topingsCollectionView.dataSource = self
+        topingsCollectionView.delegate = self
+        
+        topingsCollectionView.register(UINib(nibName: "CustomOrdetCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "addtocartIdentifier")
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        createAgain()
+    }
+    
+    private func createAgain(){
+        didAdd3dobject = false
+        basePrice = 21.99
+        totalPriceData = 0.00
+        cellSellection = 0
+        topingDefault = 2
+        base = "Medium"
+        topText = ""
+        customDataModel.removeAll()
+        
+        objectrootPoint = nil
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = .horizontal
         sceneView.session.run(configuration)
@@ -62,11 +85,9 @@ class BuildOwnViewController: UIViewController {
         animation_lottie.loopMode = .loop
         animation_lottie.play()
         
-        topingsCollectionView.dataSource = self
-        topingsCollectionView.delegate = self
         topingsCollectionView.isHidden = true
-        
         topingsCollectionView.reloadData()
+        
         let firstIndexPath = IndexPath(item: 0, section: 0)
         topingsCollectionView.selectItem(at: firstIndexPath, animated: true, scrollPosition: .centeredHorizontally)
         dataPopulate()
@@ -87,9 +108,6 @@ class BuildOwnViewController: UIViewController {
         
         topText = "Pizza Size \(toppingsSize[topingDefault])"
         topTextLabel.text = topText
-        
-        topingsCollectionView.register(UINib(nibName: "CustomOrdetCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "addtocartIdentifier")
-
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -380,15 +398,20 @@ class BuildOwnViewController: UIViewController {
 
 extension BuildOwnViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
+        if let _ = objectrootPoint {
+            print("comming here ")
+        }else{
+            guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
 
-        let planeNode = createPlaneNode(anchor: planeAnchor)
-        node.addChildNode(planeNode)
-        
-        DispatchQueue.main.async {
-            self.animation_lottie.stop()
-            self.animation_lottie.isHidden = true
+            let planeNode = createPlaneNode(anchor: planeAnchor)
+            node.addChildNode(planeNode)
+            
+            DispatchQueue.main.async {
+                self.animation_lottie.stop()
+                self.animation_lottie.isHidden = true
+            }
         }
+  
     }
     
     private func createPlaneNode(anchor: ARPlaneAnchor) -> SCNNode {
@@ -452,15 +475,12 @@ extension BuildOwnViewController {
                     self.topContentView.isHidden = false
                     self.sideOptions.isHidden = false
                 }
-        
             }
-            
             sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
                   if node.name == "planeNode" {
                       node.removeFromParentNode()
                   }
               }
-            
             didAdd3dobject = true
         }
         

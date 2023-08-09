@@ -116,7 +116,6 @@ class HomeViewController: UIViewController {
                 
                 getCurrentLocation { coordinate in
                     if let coordinate = coordinate {
-                        let distanceThreshold: CLLocationDistance = 100.0
                         
                         let isWithinDistance = isLocationWithinDistance(latitude: llatitude, longitude: llongitude, targetLocation: CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude), distance: distanceThreshold)
 

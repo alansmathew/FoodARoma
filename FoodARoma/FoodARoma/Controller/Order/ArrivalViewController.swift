@@ -18,7 +18,10 @@ class ArrivalViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         arrivaldismissed = true
     }
-
+    @IBAction func confirmArrival(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
 
 }
 
