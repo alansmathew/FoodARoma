@@ -45,7 +45,7 @@ class ResturentOrdersController: UIViewController {
         AF.request((Constants().BASEURL + Constants.APIPaths().fetchMenu), method: .post, parameters:params, encoder: .json).responseData { response in
             switch response.result{
             case .success(let data):
-//                                    print(JSON(data))
+                print("fetched Menus --> \(JSON(data))")
                 let decoder = JSONDecoder()
                 do{
                     let jsonData = try decoder.decode(AllMenuModel.self, from: data)
@@ -94,10 +94,9 @@ class ResturentOrdersController: UIViewController {
         AF.request((Constants().BASEURL + Constants.APIPaths().AddOrder), method: .post, parameters:paramss, encoder: .json).responseData { response in
             switch response.result{
             case .success(let data):
-                print(JSON(data))
+                print("Active Orders == > \(JSON(data))")
                 let decoder = JSONDecoder()
                 do{
-                    
                     let jsonData = try decoder.decode(OrderhistoryModel.self, from: data)
                     self.AllActiveOrders = jsonData.histories
                     
@@ -121,19 +120,25 @@ class ResturentOrdersController: UIViewController {
     }
     
     func updateAllActiveOrderWithImages(){
-        for x in 0..<(AllActiveOrders?.count ?? 0){
-            
-            if let OrderData = AllActiveOrders{
+        if let OrderData = AllActiveOrders{
+        for x in 0..<(OrderData.count){
                 for yy in 0..<OrderData[x].Orders.count{
-                    // ethu Active order enn akathatnu
-                    if let allMenu = AllMenuDatas?.AllMenu {
-                        for zz in allMenu{
-                            if AllActiveOrders?[x].Orders[yy].order_no == zz.menu_id {
-                                if let menuPhotData = zz.menu_photo_Data {
-                                    AllActiveOrders?[x].Orders[yy].updateOrderImage(orderImageData: menuPhotData)
-                                }
-                                else{
-                                    print("We dont have photo data")
+                    if OrderData[x].Orders[yy].order_no == -1000001 {
+                        AllActiveOrders?[x].Orders[yy].updateOrderImage(orderImageData: defaultImageData)
+                        AllActiveOrders?[x].Orders[yy].updateOrderName(orderName: "Special / Custom Order")
+                    }
+                    else{
+                        // ethu Active order enn akathatnu
+                        if let allMenu = AllMenuDatas?.AllMenu {
+                            for zz in allMenu{
+                                if AllActiveOrders?[x].Orders[yy].order_no == zz.menu_id {
+                                    if let menuPhotData = zz.menu_photo_Data {
+                                        AllActiveOrders?[x].Orders[yy].updateOrderImage(orderImageData: menuPhotData)
+                                        AllActiveOrders?[x].Orders[yy].updateOrderName(orderName: zz.menu_Name)
+                                    }
+                                    else{
+                                        print("We dont have photo data")
+                                    }
                                 }
                             }
                         }
@@ -174,22 +179,34 @@ extension ResturentOrdersController : UITableViewDataSource {
             
             var tempitemNames = ""
             var dataIterations = 0
+//            for x in currentOreder.Orders {
+//                if let allMEnu = AllMenuDatas?.AllMenu {
+//                    for y in allMEnu {
+//                        if x.order_no == y.menu_id{
+//                            tempitemNames += y.menu_Name + " Q \(x.order_qty)\n"
+//                            if dataIterations > 2 {
+//                                tempitemNames += "more..."
+//                                dataIterations += 1
+//                                break
+//                            }
+//
+//                        }
+//                    }
+//                }
+//
+//            }
+            
             for x in currentOreder.Orders {
-                if let allMEnu = AllMenuDatas?.AllMenu {
-                    for y in allMEnu {
-                        if x.order_no == y.menu_id{
-                            tempitemNames += y.menu_Name + " Q \(x.order_qty)\n"
-                            if dataIterations > 2 {
-                                tempitemNames += "more..."
-                                dataIterations += 1
-                                break
-                            }
-                           
-                        }
-                    }
+                tempitemNames += (x.order_name ?? "Special / Custom Order") + " Q \(x.order_qty)\n"
+                if dataIterations > 2 {
+                    tempitemNames += "more..."
+                    break
                 }
-
+                dataIterations += 1
             }
+
+            
+            
             cell.itemsLAbel.text = tempitemNames
             
             
@@ -249,16 +266,38 @@ extension ResturentOrdersController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         var tempArray : [allMenu]? = [allMenu]()
+        
+        var tempPrice = 0.00
+        var orgPrice = Double(AllActiveOrders?[indexPath.row].total_price ?? "0.00") ?? 0.00
+        orgPrice *= 0.87
+        var customPissaDataTemp : [allMenu]? = [allMenu]()
         if let Order = AllActiveOrders?[indexPath.row].Orders, let menu = AllMenuDatas?.AllMenu{
             for x in Order{
-                for y in menu{
-                    if x.order_no == y.menu_id{
-                        var xdata = y
-                        xdata.addMenuQuantity(qData: x.order_qty)
-                        tempArray?.append(xdata)
+                if x.order_no ==  -1000001 {
+                    let tempMEu = allMenu( menu_id: x.order_no, menu_Time: "20min", menu_Cat: "Special / custom", menu_Price: "", menu_Name: "Special / Custom", menu_Dec: x.order_dis, avg_Rating: "", total_Ratings: "", menu_Photo: "", menu_photo_Data: defaultImageData, menu_quantity:x.order_qty, ratings: [Ratings(comment: "", rating: "")])
+                    customPissaDataTemp?.append(tempMEu)
+                }else{
+                    for y in menu{
+                        if x.order_no == y.menu_id{
+                            var xdata = y
+                            xdata.addMenuQuantity(qData: x.order_qty)
+                            let tempPriceDAta = Double(y.menu_Price) ?? 0.00
+                            tempPrice += tempPriceDAta * Double(x.order_qty)
+                            tempArray?.append(xdata)
+                        }
                     }
                 }
             }
+            
+            if let customPizza = customPissaDataTemp{
+                var custPriceLeft = orgPrice - tempPrice
+                for y in 0..<customPizza.count {
+                    customPissaDataTemp?[y].menu_Price =  String(format: "%.2f", (custPriceLeft / Double(customPizza[y].menu_quantity ?? 1)))
+                    tempArray?.append(customPissaDataTemp![y])
+                }
+            }
+          
+            
             if let orderData = AllActiveOrders?[indexPath.row], let tEMpORders = tempArray{
                 let currentOrder = ActiveOrderModel(OrderId: orderData.order_id, pickup_time: orderData.datetime, is_accepted: orderData.is_accepted, CartOrders: tEMpORders)
                 

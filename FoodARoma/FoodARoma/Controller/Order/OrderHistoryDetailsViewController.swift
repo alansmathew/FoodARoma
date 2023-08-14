@@ -45,6 +45,14 @@ class OrderHistoryDetailsViewController: UIViewController {
         contentHeight = orderHistioryDetailsTable.frame.height
         arrivaldismissed = false
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        updateOrderStatus()
+    }
 
     func setupUIDEtails(){
         
@@ -54,17 +62,39 @@ class OrderHistoryDetailsViewController: UIViewController {
             print("Invalid date string")
         }
         pageTitle.text = "Active Order #12000\(ActiveOrderData!.OrderId)"
-        acceptenceLAbel.text = ActiveOrderData!.is_accepted
         
+        let inputString = ActiveOrderData!.is_accepted!
+        var components = inputString.components(separatedBy: ",")
+
+        if components.count == 2 {
+            let sDAta = components[0] + ", Customer \(components[1])"
+            acceptenceLAbel.text = sDAta
+        } else {
+            acceptenceLAbel.text = ActiveOrderData!.is_accepted
+        }
     }
     
     private func updateUI(){
         if let userType = UserDefaults.standard.string(forKey: "USERTYPE"){
-            print(userType)
+            print("IS Accepted : \(ActiveOrderData?.is_accepted)")
             if userType == "restaurant"{
+                
+                let inputString = ActiveOrderData!.is_accepted!
+                var components = inputString.components(separatedBy: ",")
+
+                if components.count == 2 {
+                    let firstString = components[0]  // "Accepted"
+                    let secondString = components[1] // "Arrived"
+                    
+                    print("First string: \(firstString)")
+                    print("Second string: \(secondString)")
+                } else {
+                    components.removeAll()
+                    components.append(ActiveOrderData!.is_accepted!)
+                }
 
                 
-                switch ActiveOrderData?.is_accepted {
+                switch components[0] {
                 case "not_accepted":
                     FinalButton.setTitle("Accept Order", for: .normal)
                     FinalButton.setTitleColor(UIColor.white, for: .normal)
@@ -88,7 +118,17 @@ class OrderHistoryDetailsViewController: UIViewController {
                     FinalButton.backgroundColor = UIColor(red: 0.17, green: 0.36, blue: 0.20, alpha: 0.75)
                     FinalButton.layer.cornerRadius = 10
                     FinalButton.layer.masksToBounds = true
-                    acceptenceLAbel.text = "Accepted"
+                    
+                    let inputString = ActiveOrderData!.is_accepted!
+                    var components = inputString.components(separatedBy: ",")
+
+                    if components.count == 2 {
+                        let sDAta = "Accepted, Customer \(components[1])"
+                        acceptenceLAbel.text = sDAta
+                    } else {
+                        acceptenceLAbel.text = ActiveOrderData!.is_accepted
+                    }
+                    
                     if let outputDateString = Date().convertTo12HourFormat(dateString: ActiveOrderData!.pickup_time) {
                         timeofOfPicup.text = "Time of Pickup : " + outputDateString
                     } else {
@@ -103,7 +143,17 @@ class OrderHistoryDetailsViewController: UIViewController {
                     FinalButton.backgroundColor = UIColor(red: 0.17, green: 0.36, blue: 0.20, alpha: 1)
                     FinalButton.layer.cornerRadius = 10
                     FinalButton.layer.masksToBounds = true
-                    acceptenceLAbel.text = "Ready for pick up"
+                    
+                    let inputString = ActiveOrderData!.is_accepted!
+                    var components = inputString.components(separatedBy: ",")
+
+                    if components.count == 2 {
+                        let sDAta = "Ready for pick up, Customer \(components[1])"
+                        acceptenceLAbel.text = sDAta
+                    } else {
+                        acceptenceLAbel.text = ActiveOrderData!.is_accepted
+                    }
+                    
                     if let outputDateString = Date().convertTo12HourFormat(dateString: ActiveOrderData!.pickup_time) {
                         timeofOfPicup.text = "Time of Pickup : " + outputDateString
                     } else {
@@ -138,7 +188,19 @@ class OrderHistoryDetailsViewController: UIViewController {
             else{
                 changetimeDate.isHidden = true
                 
-                if ActiveOrderData?.is_accepted != "not_accepted"{
+                var getInCondition = true
+            
+                if ActiveOrderData?.is_accepted == "Not Accepted" || ActiveOrderData?.is_accepted == "not_accepted"{
+                    getInCondition = false
+                }
+            
+                if ActiveOrderData?.is_accepted == "Completed"{
+                    ActiveOrders = nil
+                    navigationController?.popViewController(animated: true)
+                    getInCondition = false
+                }
+            
+                if getInCondition{
                     acceptenceStausView.backgroundColor = UIColor(red: 0.17, green: 0.36, blue: 0.20, alpha: 0.75)
                     FinalButton.setTitle("Navigate", for: .normal)
                     FinalButton.setTitleColor(UIColor.white, for: .normal)
@@ -149,17 +211,7 @@ class OrderHistoryDetailsViewController: UIViewController {
             }
         }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = false
-        updateUI()
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        updateOrderStatus()
-        if !arrivaldismissed {
-            checkAvtiveOrderArrival()
-        }
-    }
+
     
     private func checkAvtiveOrderArrival(){
         if let userType = UserDefaults.standard.string(forKey: "USERTYPE"){
@@ -175,12 +227,16 @@ class OrderHistoryDetailsViewController: UIViewController {
 
                         if isWithinDistance {
                             if let activeOrder = ActiveOrders {
-                                if activeOrder.is_accepted != "not_accepted"{
+                                var getINCondition = true
+                                
+                                if activeOrder.is_accepted == "Not Accepted" || activeOrder.is_accepted == "not_accepted"{
+                                    getINCondition = false
+                                }
+                                
+                                if getINCondition{
                                     print("present view")
                                     let storyboard = UIStoryboard(name: "OrderStoryboard", bundle: nil)
                                     let viewC = storyboard.instantiateViewController(withIdentifier: "ArrivalViewController") as! ArrivalViewController
-//                                    viewC.parms = params
-//                                    viewC.price = totalprice
                                     self.presentPanModal(viewC)
                                 }
                             }
@@ -198,6 +254,7 @@ class OrderHistoryDetailsViewController: UIViewController {
     }
     
     private func updateOrderStatus() {
+        loading = customAnimation()
         loadingProtocol(with: loading! ,true)
         let params = [
             "Mode" : "fetchActiveStatus",
@@ -211,11 +268,30 @@ class OrderHistoryDetailsViewController: UIViewController {
                 do{
                     
                     let jsonData = try decoder.decode(orderUpdatesModel.self, from: data)
-                    self.acceptenceLAbel.text = jsonData.is_accepted
+                    
+                    ActiveOrders?.updateOrderStatusinModel(Status: jsonData.is_accepted)
+                    ActiveOrders?.updateOrderTime(TimeData: jsonData.date_time)
+                    self.ActiveOrderData?.updateOrderStatusinModel(Status: jsonData.is_accepted)
+                    self.ActiveOrderData?.updateOrderTime(TimeData: jsonData.date_time)
+                    
+                    let inputString = jsonData.is_accepted
+                    let components = inputString.components(separatedBy: ",")
+
+                    if components.count == 2 {
+                        let sDAta = components[0] + ", Customer \(components[1])"
+                        self.acceptenceLAbel.text = sDAta
+                    } else {
+                        self.acceptenceLAbel.text = jsonData.is_accepted
+                    }
                 
+                    self.updateUI()
                     
 //                    self.ResturentCurrentOrdersTable.reloadData()
                     self.loadingProtocol(with: self.loading! ,false)
+                    
+                    if !arrivaldismissed {
+                        self.checkAvtiveOrderArrival()
+                    }
 
                 }
                 catch{
@@ -231,11 +307,7 @@ class OrderHistoryDetailsViewController: UIViewController {
             }
         }
     }
-    
-    override func viewDidLayoutSubviews() {
-        loading = customAnimation()
-        loadingProtocol(with: loading! ,false)
-    }
+
     
     func cancalOrder(){
         print("cancel Order Called")
@@ -429,7 +501,13 @@ extension OrderHistoryDetailsViewController : UITableViewDataSource {
 }
 
 extension OrderHistoryDetailsViewController : UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "HomeOrder", bundle: nil)
+        let viewC = storyboard.instantiateViewController(withIdentifier: "OrderDetailsViewController") as! OrderDetailsViewController
+        viewC.SelectedOrder =  ActiveOrderData?.CartOrders[indexPath.row]
+        navigationController?.pushViewController(viewC, animated: true)
+    }
+   
 }
 
 extension OrderHistoryDetailsViewController : CLLocationManagerDelegate {

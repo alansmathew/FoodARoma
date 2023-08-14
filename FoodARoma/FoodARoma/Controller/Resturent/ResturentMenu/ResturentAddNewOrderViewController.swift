@@ -48,25 +48,11 @@ class ResturentAddNewOrderViewController: UIViewController {
         discriptionView.textColor = UIColor.lightGray
         
         self.hideKeyboardWhenTappedAround()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
-    }
-
-    @objc func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-            self.view.frame.origin.y = 0
-            self.view.frame.origin.y -= keyboardFrame.size.height
-        }
-    }
-    
-    @objc func keyboardWillHide(_ notification: Notification) {
-        self.view.frame.origin.y = 0
     }
     
     

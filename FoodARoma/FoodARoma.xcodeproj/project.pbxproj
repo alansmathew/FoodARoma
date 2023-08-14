@@ -34,6 +34,7 @@
 		996089AD2A3FFA3100C89866 /* RegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996089AC2A3FFA3100C89866 /* RegistrationModel.swift */; };
 		99A623B32A3239D6003BF199 /* BeverageMenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A623B12A3239D6003BF199 /* BeverageMenuCollectionViewCell.swift */; };
 		99A623B42A3239D6003BF199 /* BeverageMenuCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99A623B22A3239D6003BF199 /* BeverageMenuCollectionViewCell.xib */; };
+		E70684752A89D5A900C3D2BF /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E70684742A89D5A900C3D2BF /* IQKeyboardManagerSwift */; };
 		E7377C142A5B5BC600F5C29F /* ResturentAddOrderStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7377C132A5B5BC600F5C29F /* ResturentAddOrderStoryboard.storyboard */; };
 		E7377C162A5B5EB700F5C29F /* ResturentSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7377C152A5B5EB700F5C29F /* ResturentSettingsViewController.swift */; };
 		E7377C192A5B609A00F5C29F /* MainNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7377C182A5B609A00F5C29F /* MainNavigationViewController.swift */; };
@@ -234,6 +235,7 @@
 				E75279372A44C87200AF3EA2 /* NVActivityIndicatorView in Frameworks */,
 				E7A226732A630D2800015015 /* AlamofireImage in Frameworks */,
 				E7A2096D2A55DFC5002FF49E /* SwiftyJSON in Frameworks */,
+				E70684752A89D5A900C3D2BF /* IQKeyboardManagerSwift in Frameworks */,
 				E7F5C36B2A82FDDA005CE37B /* PanModal in Frameworks */,
 				992ECBD72A3B662700B8745A /* Alamofire in Frameworks */,
 				E74E95162A81EA0A000C638D /* DGCharts in Frameworks */,
@@ -633,6 +635,7 @@
 				E74E95152A81EA0A000C638D /* DGCharts */,
 				E7F5C36A2A82FDDA005CE37B /* PanModal */,
 				E7F5C36F2A831652005CE37B /* StripePayments */,
+				E70684742A89D5A900C3D2BF /* IQKeyboardManagerSwift */,
 			);
 			productName = FoodARoma;
 			productReference = 991C28CD2A2D2DD900201DE7 /* FoodARoma.app */;
@@ -715,6 +718,7 @@
 				E7FD8FED2A81DB9A00EC6E96 /* XCRemoteSwiftPackageReference "Charts" */,
 				E7F5C3692A82FDDA005CE37B /* XCRemoteSwiftPackageReference "PanModal" */,
 				E7F5C36C2A831651005CE37B /* XCRemoteSwiftPackageReference "stripe-ios" */,
+				E70684732A89D5A900C3D2BF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 991C28CE2A2D2DD900201DE7 /* Products */;
 			projectDirPath = "";
@@ -1195,6 +1199,14 @@
 				version = 5.7.1;
 			};
 		};
+		E70684732A89D5A900C3D2BF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		E75279352A44C87200AF3EA2 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView.git";
@@ -1258,6 +1270,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 992ECBD52A3B662700B8745A /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		E70684742A89D5A900C3D2BF /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E70684732A89D5A900C3D2BF /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 		E74E95152A81EA0A000C638D /* DGCharts */ = {
 			isa = XCSwiftPackageProductDependency;

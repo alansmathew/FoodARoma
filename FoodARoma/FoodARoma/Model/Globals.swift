@@ -10,12 +10,12 @@ import CoreLocation
 
 
 //                home
-//let llatitude = 43.47653453726806
-//let llongitude = -80.53817017597704
+let llatitude = 43.47653453726806
+let llongitude = -80.53817017597704
 
 // collage
-let llatitude = 43.48054744327771
-let llongitude = -80.51884224725556
+//let llatitude = 43.48054744327771
+//let llongitude = -80.51884224725556
 let distanceThreshold: CLLocationDistance = 200.0
 
 

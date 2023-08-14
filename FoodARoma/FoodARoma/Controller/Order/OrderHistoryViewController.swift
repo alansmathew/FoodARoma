@@ -73,7 +73,15 @@ class OrderHistoryViewController: UIViewController {
             imageset3View.isHidden = true
             
             if let statusData = ActiveOrders?.is_accepted{
-                statusLabel.text = ActiveOrders?.is_accepted
+                let inputString = statusData
+                var components = inputString.components(separatedBy: ",")
+
+                if components.count == 2 {
+                    let sDAta = "\(components[0])"
+                    statusLabel.text = sDAta
+                } else {
+                    statusLabel.text = statusData
+                }
                 arravingView.backgroundColor = UIColor(named: "GreenColor")
                 if ActiveOrders?.is_accepted == "Ready"{
                     arravingView.backgroundColor = .blue

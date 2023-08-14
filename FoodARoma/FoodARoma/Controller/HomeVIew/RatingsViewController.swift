@@ -38,11 +38,7 @@ class RatingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Register for keyboard notifications
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
+    
         reviewTextView.delegate = self
         
         self.hideKeyboardWhenTappedAround()
@@ -154,17 +150,6 @@ class RatingsViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    
-    @objc func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-            self.view.frame.origin.y -= keyboardFrame.size.height
-        }
-    }
-    
-    @objc func keyboardWillHide(_ notification: Notification) {
-        self.view.frame.origin.y = 0
     }
     
     

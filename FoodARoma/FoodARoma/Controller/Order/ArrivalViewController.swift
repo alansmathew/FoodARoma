@@ -7,6 +7,8 @@
 
 import UIKit
 import PanModal
+import Alamofire
+import SwiftyJSON
 
 class ArrivalViewController: UIViewController {
 
@@ -19,6 +21,34 @@ class ArrivalViewController: UIViewController {
         arrivaldismissed = true
     }
     @IBAction func confirmArrival(_ sender: Any) {
+        
+        var datetime = ActiveOrders!.pickup_time
+        var status = ActiveOrders!.is_accepted! + ",Arrived"
+        let param = [
+            "Mode" : "UpdateOrder",
+            "OrderId":"\(ActiveOrders!.OrderId)",
+            "is_accepted": status,
+            "pickup_time" : datetime
+        ]
+        
+        AF.request( Constants().BASEURL + Constants.APIPaths().AddOrder, method: .post, parameters: param, encoder: .json).response{
+            response in
+
+         switch response.result {
+          case .success(let responseData):
+             if JSON(responseData)["Message"] == "success"{
+                 self.dismiss(animated: true)
+             }
+             else{
+                 self.showAlert(title: "Something went wrong!", content: "unfotunatly there was something wrong with the request. please try again later.")
+                 print(JSON(responseData))
+             }
+
+          case .failure(let error):
+              print("error--->",error)
+        }
+      }
+
         self.dismiss(animated: true)
     }
     

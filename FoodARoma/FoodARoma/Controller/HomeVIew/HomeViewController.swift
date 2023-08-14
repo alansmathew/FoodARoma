@@ -103,16 +103,6 @@ class HomeViewController: UIViewController {
     private func checkAvtiveOrderArrival(){
         if let userType = UserDefaults.standard.string(forKey: "USERTYPE"){
             if userType == "customer"{
-//                home
-//                let latitude = 43.47653453726806
-//                let longitude = -80.53817017597704
-                
-                // collage
-//                let latitude = 43.48054744327771
-//                let longitude = -80.51884224725556
-                
-//                let targetLatitude = 37.7755
-//                let targetLongitude = -122.4190
                 
                 getCurrentLocation { coordinate in
                     if let coordinate = coordinate {
@@ -121,7 +111,14 @@ class HomeViewController: UIViewController {
 
                         if isWithinDistance {
                             if let activeOrder = ActiveOrders {
-                                if activeOrder.is_accepted != "not_accepted"{
+                                
+                                var getINCondition = true
+                                
+                                if activeOrder.is_accepted == "Not Accepted" || activeOrder.is_accepted == "not_accepted"{
+                                    getINCondition = false
+                                }
+                                
+                                if getINCondition{
                                     print("present view")
                                     let storyboard = UIStoryboard(name: "OrderStoryboard", bundle: nil)
                                     let viewC = storyboard.instantiateViewController(withIdentifier: "ArrivalViewController") as! ArrivalViewController

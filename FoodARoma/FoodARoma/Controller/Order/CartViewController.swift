@@ -134,116 +134,121 @@ class CartViewController: UIViewController {
             let userId = UserDefaults.standard.string(forKey: "USERID")
             if let id = userId, let name = nameData{
 
-                
-                var ordersDataTemp : [OrderData]? = [OrderData]()
-                if let orders = CartOrders {
-                    for x in orders{
-                        if x.menu_id == -1000001{
-                            ordersDataTemp?.append(OrderData(order_type: x.menu_Cat, order_dis: x.menu_Dec, order_no: x.menu_id, order_qty: x.menu_quantity!))
-                        }
-                        else{
-                            ordersDataTemp?.append(OrderData(order_type: x.menu_Cat, order_dis: "gfjhg", order_no: x.menu_id, order_qty: x.menu_quantity!))
-                        }
-                    }
-
-
-                    // Convert the array of OrderData to an array of dictionaries
-                    var ordersArray: [[String: Any]] = []
-                    for orderData in ordersDataTemp! {
-                        let orderDict: [String: Any] = [
-                            "order_type": orderData.order_type,
-                            "order_dis": orderData.order_dis,
-                            "order_no": orderData.order_no,
-                            "order_qty": orderData.order_qty
-                        ]
-                        ordersArray.append(orderDict)
-                    }
-
-                    let params: [String: Any] = [
-                        "Mode": "AddOrder",
-                        "Orders": ordersArray,
-                        "special_note": "dfgh",
-                        "is_accepted": "not_accepted",
-                        "user_id": id,
-                        "user_name": name,
-                        "pref_time" : "\(pickuptime.date)",
-                        "transaction_id" : "",
-                        "total_price": String(format: "%.2f", totalprice * 1.13)
-                    ]
-
-                    print(params)
-                    
-                    
-                    if paymentMethodView.text == "Debit / credit"{
-                        let storyboard = UIStoryboard(name: "OrderStoryboard", bundle: nil)
-                        let viewC = storyboard.instantiateViewController(withIdentifier: "paymentViewController") as! paymentViewController
-                        viewC.parms = params
-                        viewC.price = totalprice
-                        self.presentPanModal(viewC)
-                        
-                    }else{
-                        
-                        do {
-                            loading = customAnimation()
-                            loadingProtocol(with: loading! ,true)
-                            let jsonData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-                            if let jsonString = String(data: jsonData, encoding: .utf8) {
-                                print(jsonString)
+                if let aOrder = ActiveOrders {
+                    showAlert(title: "Order Already exist", content: "An orde already exist, so you wont be able to make this order at this time, please make sure that you complete the current order and come back again.")
+                }
+                else{
+                    var ordersDataTemp : [OrderData]? = [OrderData]()
+                    if let orders = CartOrders {
+                        for x in orders{
+                            if x.menu_id == -1000001{
+                                ordersDataTemp?.append(OrderData(order_type: x.menu_Cat, order_dis: x.menu_Dec, order_no: x.menu_id, order_qty: x.menu_quantity!))
                             }
-                            print(Constants().BASEURL + Constants.APIPaths().AddOrder)
-                            AF.request(Constants().BASEURL + Constants.APIPaths().AddOrder, method: .post, parameters: params, encoding: JSONEncoding.default).responseData {
-                                (response) in
-
-                                self.loadingProtocol(with: self.loading! ,false)
-
-                                switch (response.result) {
-                                case .success:
-                                    if (JSON(response.data)["Message"]=="success"){
-                                        let orderID = Int("\(JSON(response.data)["OrderId"])")
-                                        if let orderid = orderID{
-                                            ActiveOrders = ActiveOrderModel(OrderId: orderid, pickup_time: "\(self.pickuptime.date)", is_accepted: "Not Accepted", CartOrders: CartOrders!)
-                                            print(ActiveOrders)
-                                            CartOrders?.removeAll()
-
-                                            self.timeView.isHidden = true
-                                            self.bottomView.isHidden = true
-                                            self.totalprice = 0.00
-                                            saveFetchCartData(fetchData: false)
-                                            updateActiveOrderStatus()
-                                            self.cartTableView.reloadData()
-                                            let feedbackGenerator = UINotificationFeedbackGenerator()
-                                            feedbackGenerator.notificationOccurred(.success)
-
-                                            self.navigationController?.popViewController(animated: true)
+                            else{
+                                ordersDataTemp?.append(OrderData(order_type: x.menu_Cat, order_dis: x.menu_Dec, order_no: x.menu_id, order_qty: x.menu_quantity!))
+                            }
+                        }
+                        
+                        
+                        // Convert the array of OrderData to an array of dictionaries
+                        var ordersArray: [[String: Any]] = []
+                        for orderData in ordersDataTemp! {
+                            let orderDict: [String: Any] = [
+                                "order_type": orderData.order_type,
+                                "order_dis": orderData.order_dis,
+                                "order_no": orderData.order_no,
+                                "order_qty": orderData.order_qty
+                            ]
+                            ordersArray.append(orderDict)
+                        }
+                        
+                        let params: [String: Any] = [
+                            "Mode": "AddOrder",
+                            "Orders": ordersArray,
+                            "special_note": "dfgh",
+                            "is_accepted": "not_accepted",
+                            "user_id": id,
+                            "user_name": name,
+                            "pref_time" : "\(pickuptime.date)",
+                            "transaction_id" : "",
+                            "total_price": String(format: "%.2f", totalprice * 1.13)
+                        ]
+                        
+                        print(params)
+                        
+                        
+                        if paymentMethodView.text == "Debit / credit"{
+                            let storyboard = UIStoryboard(name: "OrderStoryboard", bundle: nil)
+                            let viewC = storyboard.instantiateViewController(withIdentifier: "paymentViewController") as! paymentViewController
+                            viewC.parms = params
+                            viewC.price = totalprice
+                            self.presentPanModal(viewC)
+                            
+                        }else{
+                            
+                            do {
+                                loading = customAnimation()
+                                loadingProtocol(with: loading! ,true)
+                                let jsonData = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+                                if let jsonString = String(data: jsonData, encoding: .utf8) {
+                                    print(jsonString)
+                                }
+                                print(Constants().BASEURL + Constants.APIPaths().AddOrder)
+                                AF.request(Constants().BASEURL + Constants.APIPaths().AddOrder, method: .post, parameters: params, encoding: JSONEncoding.default).responseData {
+                                    (response) in
+                                    
+                                    self.loadingProtocol(with: self.loading! ,false)
+                                    
+                                    switch (response.result) {
+                                    case .success:
+                                        if (JSON(response.data)["Message"]=="success"){
+                                            let orderID = Int("\(JSON(response.data)["OrderId"])")
+                                            if let orderid = orderID{
+                                                ActiveOrders = ActiveOrderModel(OrderId: orderid, pickup_time: "\(self.pickuptime.date)", is_accepted: "Not Accepted", CartOrders: CartOrders!)
+                                                print(ActiveOrders)
+                                                CartOrders?.removeAll()
+                                                
+                                                self.timeView.isHidden = true
+                                                self.bottomView.isHidden = true
+                                                self.totalprice = 0.00
+                                                saveFetchCartData(fetchData: false)
+                                                updateActiveOrderStatus()
+                                                self.cartTableView.reloadData()
+                                                let feedbackGenerator = UINotificationFeedbackGenerator()
+                                                feedbackGenerator.notificationOccurred(.success)
+                                                
+                                                self.navigationController?.popViewController(animated: true)
+                                            }
+                                            else{
+                                                self.showAlert(title: "Something went wrong!", content: "unfotunatly there was something wrong with the request. please try again later.")
+                                                print("error in orderid or array")
+                                                let feedbackGenerator = UINotificationFeedbackGenerator()
+                                                feedbackGenerator.notificationOccurred(.error)
+                                                
+                                            }
+                                            
                                         }
                                         else{
                                             self.showAlert(title: "Something went wrong!", content: "unfotunatly there was something wrong with the request. please try again later.")
-                                            print("error in orderid or array")
-                                            let feedbackGenerator = UINotificationFeedbackGenerator()
-                                            feedbackGenerator.notificationOccurred(.error)
-
+                                            print(JSON(response.data!))
                                         }
-
+                                        //                                print(JSON(response.data!))
+                                        
+                                    case .failure(let error):
+                                        print("error --> \(error)")
                                     }
-                                    else{
-                                        self.showAlert(title: "Something went wrong!", content: "unfotunatly there was something wrong with the request. please try again later.")
-                                        print(JSON(response.data!))
-                                    }
-    //                                print(JSON(response.data!))
-
-                                case .failure(let error):
-                                    print("error --> \(error)")
                                 }
+                                
+                            } catch {
+                                print("Error converting params to JSON: \(error)")
+                                self.loadingProtocol(with: self.loading! ,false)
                             }
-
-                        } catch {
-                            print("Error converting params to JSON: \(error)")
-                            self.loadingProtocol(with: self.loading! ,false)
                         }
+                        
+                        
                     }
-                    
-            
                 }
+
             }
 
         }
