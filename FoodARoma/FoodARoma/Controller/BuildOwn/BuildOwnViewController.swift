@@ -485,7 +485,9 @@ extension BuildOwnViewController {
                   }
               }
             
-            reselctToppings()
+            if alreadyHaveAr && ArString.count > 0  {
+                reselctToppings()
+            }
             didAdd3dobject = true
      
         }

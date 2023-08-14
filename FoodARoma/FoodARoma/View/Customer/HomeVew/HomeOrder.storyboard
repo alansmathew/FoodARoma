@@ -234,6 +234,18 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6XA-hI-SaF">
+                                                        <rect key="frame" x="313" y="0.0" width="75" height="35"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="35" id="I1X-TN-dLA"/>
+                                                            <constraint firstAttribute="width" constant="75" id="apA-ZX-jqg"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain"/>
+                                                        <connections>
+                                                            <action selector="showAllclicked:" destination="MVM-ha-jve" eventType="touchUpInside" id="gvh-kl-tFT"/>
+                                                        </connections>
+                                                    </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show All" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRi-SG-kmL">
                                                         <rect key="frame" x="325.66666666666669" y="7.9999999999999991" width="52.333333333333314" height="15.666666666666664"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
@@ -259,10 +271,12 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="SUW-vd-AZ9" secondAttribute="trailing" id="5ii-5l-3yh"/>
+                                                    <constraint firstAttribute="trailing" secondItem="6XA-hI-SaF" secondAttribute="trailing" constant="5" id="AlM-ql-l03"/>
                                                     <constraint firstItem="SUW-vd-AZ9" firstAttribute="top" secondItem="zIV-3o-l3B" secondAttribute="bottom" constant="10" id="F7y-Oc-blh"/>
                                                     <constraint firstAttribute="height" constant="250" id="PXb-lh-Ewd"/>
                                                     <constraint firstItem="zIV-3o-l3B" firstAttribute="top" secondItem="6TI-oe-E8E" secondAttribute="top" id="SwM-zd-utJ"/>
                                                     <constraint firstItem="zIV-3o-l3B" firstAttribute="leading" secondItem="6TI-oe-E8E" secondAttribute="leading" constant="15" id="UTQ-67-j2T"/>
+                                                    <constraint firstItem="6XA-hI-SaF" firstAttribute="top" secondItem="6TI-oe-E8E" secondAttribute="top" id="VC6-hh-F1g"/>
                                                     <constraint firstItem="qRi-SG-kmL" firstAttribute="top" secondItem="6TI-oe-E8E" secondAttribute="top" constant="8" id="aW6-TT-9Tc"/>
                                                     <constraint firstItem="SUW-vd-AZ9" firstAttribute="leading" secondItem="6TI-oe-E8E" secondAttribute="leading" id="in0-iR-1kV"/>
                                                     <constraint firstAttribute="trailing" secondItem="qRi-SG-kmL" secondAttribute="trailing" constant="15" id="u9v-Md-MKx"/>

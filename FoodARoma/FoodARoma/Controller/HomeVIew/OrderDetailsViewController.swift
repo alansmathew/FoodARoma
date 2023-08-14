@@ -72,8 +72,6 @@ class OrderDetailsViewController: UIViewController {
 //        print(cellHeight)
         setupUI()
     
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -142,6 +140,16 @@ class OrderDetailsViewController: UIViewController {
             }
         }
     }
+    
+    
+    @IBAction func showAllclicked(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "HomeOrder", bundle: nil)
+        let viewC = storyboard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
+        viewC.commingPlatform = "Beverages"
+        viewC.AllMenuData = bevMenuGlobal
+        navigationController?.pushViewController(viewC, animated: true)
+    }
+    
     
     func loadImageInCellbev(cellData : BeverageMenuCollectionViewCell, cellImageName : String?, indexOfloading : Int){
         if let imageName = cellImageName {
