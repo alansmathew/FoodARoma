@@ -134,7 +134,7 @@ class ResturentOrdersController: UIViewController {
                 for yy in 0..<OrderData[x].Orders.count{
                     if OrderData[x].Orders[yy].order_no == -1000001 {
                         AllActiveOrders?[x].Orders[yy].updateOrderImage(orderImageData: defaultImageData)
-                        AllActiveOrders?[x].Orders[yy].updateOrderName(orderName: "Special / Custom Order")
+                        AllActiveOrders?[x].Orders[yy].updateOrderName(orderName: "Custom Pizza")
                     }
                     else{
                         // ethu Active order enn akathatnu
@@ -206,7 +206,7 @@ extension ResturentOrdersController : UITableViewDataSource {
 //            }
             
             for x in currentOreder.Orders {
-                tempitemNames += (x.order_name ?? "Special / Custom Order") + " Q \(x.order_qty)\n"
+                tempitemNames += (x.order_name ?? "Custom Pizza") + " Q \(x.order_qty)\n"
                 if dataIterations > 2 {
                     tempitemNames += "more..."
                     break
@@ -222,40 +222,45 @@ extension ResturentOrdersController : UITableViewDataSource {
             cell.imageset3.isHidden = true
             cell.imageset3View.isHidden = true
         
+            print(currentOreder.Orders.count)
             
-            switch currentOreder.Orders.count {
-            case 1:
-                cell.imageSet1.isHidden = false
-                cell.imageSet1.image = UIImage(data: currentOreder.Orders[0].order_photo_data ?? defaultImageData)
-                break
-            case 2:
-                cell.imageSet1.isHidden = false
-                cell.imageSet1.image = UIImage(data: currentOreder.Orders[0].order_photo_data ?? defaultImageData)
-                cell.imageset2.isHidden = false
-                cell.imageset2.image = UIImage(data: currentOreder.Orders[1].order_photo_data ?? defaultImageData)
-                break
-            case 3:
-                cell.imageSet1.isHidden = false
-                cell.imageSet1.image = UIImage(data: currentOreder.Orders[0].order_photo_data ?? defaultImageData)
-                cell.imageset2.isHidden = false
-                cell.imageset2.image = UIImage(data: currentOreder.Orders[1].order_photo_data ?? defaultImageData)
-                cell.imageset3.isHidden = false
-                cell.imageset3.image = UIImage(data: currentOreder.Orders[2].order_photo_data ?? defaultImageData)
-                break
-            case 4...currentOreder.Orders.count :
-                cell.imageSet1.isHidden = false
-                cell.imageSet1.image = UIImage(data: currentOreder.Orders[0].order_photo_data ?? defaultImageData)
-                cell.imageset2.isHidden = false
-                cell.imageset2.image = UIImage(data: currentOreder.Orders[1].order_photo_data ?? defaultImageData)
-                cell.imageset3.isHidden = false
-                cell.imageset3.image = UIImage(data: currentOreder.Orders[2].order_photo_data ?? defaultImageData)
-                cell.imageset3View.isHidden = false
-                cell.iamgeItemLAbel.text = "+ \(currentOreder.Orders.count - 3)"
-                break
-            default:
-                print("switch case problem")
-                break
+            if currentOreder.Orders.count > 0{
+                switch currentOreder.Orders.count {
+                case 1:
+                    cell.imageSet1.isHidden = false
+                    cell.imageSet1.image = UIImage(data: currentOreder.Orders[0].order_photo_data ?? defaultImageData)
+                    break
+                case 2:
+                    cell.imageSet1.isHidden = false
+                    cell.imageSet1.image = UIImage(data: currentOreder.Orders[0].order_photo_data ?? defaultImageData)
+                    cell.imageset2.isHidden = false
+                    cell.imageset2.image = UIImage(data: currentOreder.Orders[1].order_photo_data ?? defaultImageData)
+                    break
+                case 3:
+                    cell.imageSet1.isHidden = false
+                    cell.imageSet1.image = UIImage(data: currentOreder.Orders[0].order_photo_data ?? defaultImageData)
+                    cell.imageset2.isHidden = false
+                    cell.imageset2.image = UIImage(data: currentOreder.Orders[1].order_photo_data ?? defaultImageData)
+                    cell.imageset3.isHidden = false
+                    cell.imageset3.image = UIImage(data: currentOreder.Orders[2].order_photo_data ?? defaultImageData)
+                    break
+                case 4...currentOreder.Orders.count :
+                    cell.imageSet1.isHidden = false
+                    cell.imageSet1.image = UIImage(data: currentOreder.Orders[0].order_photo_data ?? defaultImageData)
+                    cell.imageset2.isHidden = false
+                    cell.imageset2.image = UIImage(data: currentOreder.Orders[1].order_photo_data ?? defaultImageData)
+                    cell.imageset3.isHidden = false
+                    cell.imageset3.image = UIImage(data: currentOreder.Orders[2].order_photo_data ?? defaultImageData)
+                    cell.imageset3View.isHidden = false
+                    cell.iamgeItemLAbel.text = "+ \(currentOreder.Orders.count - 3)"
+                    break
+                default:
+                    print("switch case problem")
+                    break
+                }
             }
+            
+       
             
             cell.totalITemLabel.text = "\(currentOreder.Orders.count) Items"
         }
@@ -281,7 +286,7 @@ extension ResturentOrdersController : UITableViewDelegate {
         if let Order = AllActiveOrders?[indexPath.row].Orders, let menu = AllMenuDatas?.AllMenu{
             for x in Order{
                 if x.order_no ==  -1000001 {
-                    let tempMEu = allMenu( menu_id: x.order_no, menu_Time: "20min", menu_Cat: "Special / custom", menu_Price: "", menu_Name: "Special / Custom", menu_Dec: x.order_dis, avg_Rating: "", total_Ratings: "", menu_Photo: "", menu_photo_Data: defaultImageData, menu_quantity:x.order_qty, ratings: [Ratings(comment: "", rating: "")])
+                    let tempMEu = allMenu( menu_id: x.order_no, menu_Time: "20min", menu_Cat: "Special / custom", menu_Price: "", menu_Name: "Custom Pizza", menu_Dec: x.order_dis, avg_Rating: "", total_Ratings: "", menu_Photo: "", menu_photo_Data: defaultImageData, menu_quantity:x.order_qty, ratings: [Ratings(comment: "", rating: "")])
                     customPissaDataTemp?.append(tempMEu)
                 }else{
                     for y in menu{

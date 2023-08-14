@@ -88,99 +88,102 @@ class OrderHistoryViewController: UIViewController {
                 }
             }
         
-            
-            switch ActiveOrder.CartOrders.count {
-            case 1:
-                imageSet1.isHidden = false
-                if let imageData = ActiveOrder.CartOrders[0].menu_photo_Data{
-                    imageSet1.image = UIImage(data: imageData)
+            if ActiveOrder.CartOrders.count > 0 {
+                switch ActiveOrder.CartOrders.count {
+                case 1:
+                    imageSet1.isHidden = false
+                    if let imageData = ActiveOrder.CartOrders[0].menu_photo_Data{
+                        imageSet1.image = UIImage(data: imageData)
+                    }
+                    else{
+                        updateImageData(imageField: imageSet1, imageString: ActiveOrder.CartOrders[0].menu_Photo!, indexData: 0)
+                    }
+                    break
+                case 2:
+                    imageSet1.isHidden = false
+                    imageSet2.isHidden = false
+                    
+                    if let imageData = ActiveOrder.CartOrders[0].menu_photo_Data{
+                        imageSet1.image = UIImage(data: imageData)
+                    }
+                    else{
+                        updateImageData(imageField: imageSet1, imageString: ActiveOrder.CartOrders[0].menu_Photo!, indexData: 0)
+                    }
+                    
+                    if let imageData = ActiveOrder.CartOrders[1].menu_photo_Data{
+                        imageSet2.image = UIImage(data: imageData)
+                    }
+                    else{
+                        updateImageData(imageField: imageSet2, imageString: ActiveOrder.CartOrders[1].menu_Photo!, indexData: 1)
+                    }
+                    break
+                case 3:
+                    imageSet1.isHidden = false
+                    imageSet2.isHidden = false
+                    imageSet3.isHidden = false
+                    
+                    
+                    if let imageData = ActiveOrder.CartOrders[0].menu_photo_Data{
+                        imageSet1.image = UIImage(data: imageData)
+                    }
+                    else{
+                        updateImageData(imageField: imageSet1, imageString: ActiveOrder.CartOrders[0].menu_Photo!, indexData: 0)
+                    }
+                    
+                    if let imageData = ActiveOrder.CartOrders[1].menu_photo_Data{
+                        imageSet2.image = UIImage(data: imageData)
+                    }
+                    else{
+                        updateImageData(imageField: imageSet2, imageString: ActiveOrder.CartOrders[1].menu_Photo!, indexData: 1)
+                    }
+                    
+                    if let imageData = ActiveOrder.CartOrders[2].menu_photo_Data{
+                        imageSet3.image = UIImage(data: imageData)
+                    }
+                    else{
+                        updateImageData(imageField: imageSet3, imageString: ActiveOrder.CartOrders[2].menu_Photo!, indexData: 2)
+                    }
+                    
+                    break
+                    
+                case 4...ActiveOrder.CartOrders.count :
+                    imageSet1.isHidden = false
+                    imageSet2.isHidden = false
+                    imageSet3.isHidden = false
+                    
+                    
+                    
+                    if let imageData = ActiveOrder.CartOrders[0].menu_photo_Data{
+                        imageSet1.image = UIImage(data: imageData)
+                    }
+                    else{
+                        updateImageData(imageField: imageSet1, imageString: ActiveOrder.CartOrders[0].menu_Photo!, indexData: 0)
+                    }
+                    
+                    if let imageData = ActiveOrder.CartOrders[1].menu_photo_Data{
+                        imageSet2.image = UIImage(data: imageData)
+                    }
+                    else{
+                        updateImageData(imageField: imageSet2, imageString: ActiveOrder.CartOrders[1].menu_Photo!, indexData: 1)
+                    }
+                    
+                    if let imageData = ActiveOrder.CartOrders[2].menu_photo_Data{
+                        imageSet3.image = UIImage(data: imageData)
+                    }
+                    else{
+                        updateImageData(imageField: imageSet3, imageString: ActiveOrder.CartOrders[2].menu_Photo!, indexData: 2)
+                    }
+                    
+                    imageset3View.isHidden = false
+                    restofItemslabel.text = "+ \(ActiveOrder.CartOrders.count - 3)"
+                    break
+                default:
+                    print("switch case problem")
+                    break
                 }
-                else{
-                    updateImageData(imageField: imageSet1, imageString: ActiveOrder.CartOrders[0].menu_Photo!, indexData: 0)
-                }
-                break
-            case 2:
-                imageSet1.isHidden = false
-                imageSet2.isHidden = false
-                
-                if let imageData = ActiveOrder.CartOrders[0].menu_photo_Data{
-                    imageSet1.image = UIImage(data: imageData)
-                }
-                else{
-                    updateImageData(imageField: imageSet1, imageString: ActiveOrder.CartOrders[0].menu_Photo!, indexData: 0)
-                }
-                
-                if let imageData = ActiveOrder.CartOrders[1].menu_photo_Data{
-                    imageSet2.image = UIImage(data: imageData)
-                }
-                else{
-                    updateImageData(imageField: imageSet2, imageString: ActiveOrder.CartOrders[1].menu_Photo!, indexData: 1)
-                }
-                break
-            case 3:
-                imageSet1.isHidden = false
-                imageSet2.isHidden = false
-                imageSet3.isHidden = false
-                
-                
-                if let imageData = ActiveOrder.CartOrders[0].menu_photo_Data{
-                    imageSet1.image = UIImage(data: imageData)
-                }
-                else{
-                    updateImageData(imageField: imageSet1, imageString: ActiveOrder.CartOrders[0].menu_Photo!, indexData: 0)
-                }
-                
-                if let imageData = ActiveOrder.CartOrders[1].menu_photo_Data{
-                    imageSet2.image = UIImage(data: imageData)
-                }
-                else{
-                    updateImageData(imageField: imageSet2, imageString: ActiveOrder.CartOrders[1].menu_Photo!, indexData: 1)
-                }
-                
-                if let imageData = ActiveOrder.CartOrders[2].menu_photo_Data{
-                    imageSet3.image = UIImage(data: imageData)
-                }
-                else{
-                    updateImageData(imageField: imageSet3, imageString: ActiveOrder.CartOrders[2].menu_Photo!, indexData: 2)
-                }
-                
-                break
-                
-            case 4...ActiveOrder.CartOrders.count :
-                imageSet1.isHidden = false
-                imageSet2.isHidden = false
-                imageSet3.isHidden = false
-                
-                
-                
-                if let imageData = ActiveOrder.CartOrders[0].menu_photo_Data{
-                    imageSet1.image = UIImage(data: imageData)
-                }
-                else{
-                    updateImageData(imageField: imageSet1, imageString: ActiveOrder.CartOrders[0].menu_Photo!, indexData: 0)
-                }
-                
-                if let imageData = ActiveOrder.CartOrders[1].menu_photo_Data{
-                    imageSet2.image = UIImage(data: imageData)
-                }
-                else{
-                    updateImageData(imageField: imageSet2, imageString: ActiveOrder.CartOrders[1].menu_Photo!, indexData: 1)
-                }
-                
-                if let imageData = ActiveOrder.CartOrders[2].menu_photo_Data{
-                    imageSet3.image = UIImage(data: imageData)
-                }
-                else{
-                    updateImageData(imageField: imageSet3, imageString: ActiveOrder.CartOrders[2].menu_Photo!, indexData: 2)
-                }
-                
-                imageset3View.isHidden = false
-                restofItemslabel.text = "+ \(ActiveOrder.CartOrders.count - 3)"
-                break
-            default:
-                print("switch case problem")
-                break
             }
+            
+            
             
             OrderIdLabel.text = "ORDER ID #12000\(ActiveOrder.OrderId)"
             orderNumberOfitemsLabel.text = "\(ActiveOrder.CartOrders.count) Items"
@@ -266,7 +269,7 @@ class OrderHistoryViewController: UIViewController {
                                         }
                                         else{
                                             if orders[x].Orders[y].order_no == -1000001{
-                                                self.allOrderHistories?.histories[x].Orders[y].updateOrderName(orderName: "Special / Custom Order")
+                                                self.allOrderHistories?.histories[x].Orders[y].updateOrderName(orderName: "Custom Pizza")
                                                 self.allOrderHistories?.histories[x].Orders[y].updateOrderImage(orderImageData: self.defaultImageData )
 //                                              print("commming here \(orders[x].Orders[y])")
                                             }
@@ -471,7 +474,7 @@ extension OrderHistoryViewController : UITableViewDataSource {
             var tempitemNames = ""
             var dataIterations = 0
             for x in orderHistory[indexPath.row].Orders {
-                tempitemNames += (x.order_name ?? "Special / Custom Order") + " Q \(x.order_qty)\n"
+                tempitemNames += (x.order_name ?? "Custom Pizza") + " Q \(x.order_qty)\n"
                 if dataIterations > 2 {
                     tempitemNames += "more..."
                     break
