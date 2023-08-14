@@ -51,6 +51,15 @@ class ResturentOrdersController: UIViewController {
                     let jsonData = try decoder.decode(AllMenuModel.self, from: data)
                     AllMenuDatas = jsonData
                     
+                    bevMenuGlobal?.removeAll()
+                    if let allmenuitems = AllMenuDatas {
+                        for x in allmenuitems.AllMenu{
+                            if (x.menu_Cat == "beverage"){
+                                bevMenuGlobal?.append(x)
+                            }
+                        }
+                    }
+                    
                     for x in 0..<(AllMenuDatas?.AllMenu.count ?? 0){
                         if let imageName = AllMenuDatas?.AllMenu[x].menu_Photo {
                             AF.request( Constants().IMAGEURL+imageName,method: .get).response{ response in
@@ -204,8 +213,6 @@ extension ResturentOrdersController : UITableViewDataSource {
                 }
                 dataIterations += 1
             }
-
-            
             
             cell.itemsLAbel.text = tempitemNames
             

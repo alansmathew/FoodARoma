@@ -273,6 +273,13 @@ class OrderDetailsViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewC = storyboard.instantiateViewController(withIdentifier: "BuildOwnViewController") as! BuildOwnViewController
         viewC.alreadyHaveAr = true
+        if let sel = SelectedOrder {
+            if sel.menu_Name == "Custom Pizza"{
+                print("wohaaa")
+                viewC.ArString = sel.menu_Dec
+            }
+        }
+
         navigationController?.pushViewController(viewC, animated: true)
     }
     

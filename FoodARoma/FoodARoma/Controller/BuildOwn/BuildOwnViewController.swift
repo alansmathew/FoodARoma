@@ -32,7 +32,7 @@ class BuildOwnViewController: UIViewController {
     var basePrice = 21.99
     var totalPriceData = 0.00
     
-    let topingNames = ["Size", "Cheddar", "Pepperoni", "Black olives"]
+    let topingNames = ["Size", "Cheddar", "Pepperoni", "Black_olives"]
     let toppingsSize = ["None", "Small", "Medium", "Large"]
     let priceData = [0.00, 2.99, 3.50, 4.50]
     
@@ -47,6 +47,7 @@ class BuildOwnViewController: UIViewController {
     var objectrootPoint : SCNVector3?
     
     var alreadyHaveAr = false
+    var ArString = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -233,22 +234,24 @@ class BuildOwnViewController: UIViewController {
             for xToppings in customDataModel{
                 sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
                     if node.name == xToppings.Name && node.name != topingNames[0] {
-                          node.removeFromParentNode()
-                      }
-                  }
-                 
+                        node.removeFromParentNode()
+                    }
+                }
                 let qual = xToppings.Quantity
                 
                 switch xToppings.Name {
                     case "Size":
                         if topingDefault == 1 {
                             url = Bundle.main.url(forResource: "pizzasmall", withExtension: "usdz")
+                            print(1)
                         }
                         else if topingDefault == 2{
                             url = Bundle.main.url(forResource: "pizzamedium", withExtension: "usdz")
+                            print(2)
                         }
                         else if topingDefault == 3 {
                             url = Bundle.main.url(forResource: "pizzaLarge", withExtension: "usdz")
+                            print(3)
                         }
                         break
                     case "Cheddar":
@@ -277,7 +280,7 @@ class BuildOwnViewController: UIViewController {
                         }
                         break
                         
-                    case "Black olives":
+                    case "Black_olives":
                         if qual == toppingsSize[1] {
                             url = Bundle.main.url(forResource: "blackolivesSmall\(base)", withExtension: "usdz")
                         }
@@ -364,7 +367,7 @@ class BuildOwnViewController: UIViewController {
                     }
                     break
                     
-                case "Black olives":
+                case "Black_olives":
                     if topingDefault == 1 {
                         url = Bundle.main.url(forResource: "blackolivesSmall\(base)", withExtension: "usdz")
                     }
@@ -481,7 +484,10 @@ extension BuildOwnViewController {
                       node.removeFromParentNode()
                   }
               }
+            
+            reselctToppings()
             didAdd3dobject = true
+     
         }
         
     }
@@ -491,6 +497,60 @@ extension BuildOwnViewController {
         var url = Bundle.main.url(forResource: "pizzamedium", withExtension: "usdz")
         if alreadyHaveAr{
             url = Bundle.main.url(forResource: "title1", withExtension: "usdz")
+            if ArString.count > 0 {
+                customDataModel.removeAll()
+                print(ArString)
+                let inputString = ArString
+                var components = inputString.components(separatedBy: "with")
+                
+                let firstTEmoinputString = components[0].trimmingCharacters(in: .whitespacesAndNewlines)
+                let firstsize = firstTEmoinputString.components(separatedBy: " ")
+                let firstsizeString = firstsize.last!
+                
+                if firstsizeString == "Small" {
+                    url = Bundle.main.url(forResource: "pizzasmall", withExtension: "usdz")
+                    topingDefault = 1
+                    base = "Small"
+                    customDataModel.append(CustomPizzaModel(Name: "Size", Quantity: "Small", didtouched: true))
+                }
+                else if firstsizeString == "Medium" {
+                    url = Bundle.main.url(forResource: "pizzamedium", withExtension: "usdz")
+                    topingDefault = 2
+                    base = "Medium"
+                    customDataModel.append(CustomPizzaModel(Name: "Size", Quantity: "Medium", didtouched: true))
+                }
+                else if firstsizeString == "Large" {
+                    url = Bundle.main.url(forResource: "pizzaLarge", withExtension: "usdz")
+                    topingDefault = 3
+                    base = "Large"
+                    customDataModel.append(CustomPizzaModel(Name: "Size", Quantity: "Large", didtouched: true))
+                }
+                
+                print("size \(firstsizeString)")
+                components.remove(at: 0)
+                let tempStrig = components[0]
+                components = tempStrig.components(separatedBy: ",")
+                
+                print(components)
+                
+                for x in components{
+                    if x.count > 0 {
+                        let wholeToppings = x.trimmingCharacters(in: .whitespacesAndNewlines)
+                        let wholeToppingComp = wholeToppings.components(separatedBy: " ")
+                        let firstPart = wholeToppingComp[0]
+                        var secondPart = wholeToppingComp[1]
+                        
+                        if secondPart.hasSuffix(",") {
+                            secondPart = String(secondPart.dropLast())
+                        }
+                        
+                        customDataModel.append(CustomPizzaModel(Name: firstPart, Quantity: secondPart, didtouched: true))
+
+                    }
+                }
+                print(customDataModel)
+                
+            }
         }
         let scene = try? SCNScene(url: url!)
         let objectNode = scene!.rootNode.childNodes.first
@@ -540,6 +600,7 @@ extension BuildOwnViewController : UICollectionViewDelegate{
             dataPopulate()
         }
         else{
+            print(customDataModel)
             
             if let image = UIImage(named: "customPizza") {
                 if let imageData = image.pngData(){
