@@ -15,7 +15,7 @@ Build your own pizza using AR (iOS)
 - 3d model with images -Restaurants can upload images and users will be able to see the 3d model of special menus in there AR view.
 
 ## Demo
-![Demo GIF](demo.gif)
+![Demo GIF](video/demo.gif)
 
 ## Installation
 
