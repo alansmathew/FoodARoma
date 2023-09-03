@@ -22,6 +22,6 @@ Build your own pizza using AR (iOS)
 Explain how to install and set up your project.
 
 ```bash
-git clone https://github.com/yourusername/your-project.git
-cd your-project
-npm install
+git clone https://github.com/alansmathew/FoodARoma
+cd FoodARoma
+open in xCode
